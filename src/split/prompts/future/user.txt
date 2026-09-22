@@ -1,0 +1,14 @@
+Task Description:
+{{user_query}}
+
+Execution History After the Current Window:
+{{future_trajectory}}
+
+Maximum Summary Length:
+{{max_future_summary_tokens}} tokens
+
+Summarize what the agent subsequently did, discovered, and accomplished.
+
+Include important outcomes and the final execution state when available.
+
+Output only one concise sentence.

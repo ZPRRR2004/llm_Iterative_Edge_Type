@@ -1,0 +1,10 @@
+# 前后摘要
+max_previous_summary_tokens: 100
+max_future_summary_tokens: 100
+
+# 当前分析的轨迹
+max_window_tokens: 6000
+max_window_events: 5
+
+# 重叠上下文
+overlap_events: 1

@@ -1,0 +1,14 @@
+Task Description:
+{{user_query}}
+
+Execution History Before the Current Window:
+{{previous_trajectory}}
+
+Maximum Summary Length:
+{{max_previous_summary_tokens}} tokens
+
+Summarize what the agent did, discovered, and accomplished before the current window.
+
+Include important unresolved issues and the execution state at the end of the provided history when relevant.
+
+Output only one concise sentence.

@@ -5,7 +5,7 @@ import json
 from collections import Counter
 from pathlib import Path
 
-from .deepseek_client import save
+from ..deepseek_client import save
 from .validate import alignment_assignments, require, root_query, strict_json, string
 from .profile import EXPECTED_AGENT, EXPECTED_SCHEMA, NAME as ADAPTER_NAME
 

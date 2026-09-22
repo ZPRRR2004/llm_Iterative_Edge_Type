@@ -46,5 +46,5 @@ save("runs/preprocess/example/normalized_trace.json", result)
 ## 文件布局
 
 `normalize.py` 是处理主逻辑，`profile.py` 是输入版本约束，`validate.py` 只保留预处理校验，
-`deepseek_client.py` 负责模型请求。六个提示词位于模块内的 `src/preprocess/prompts/`，按文件位置加载，
+共享的 `src/deepseek_client.py` 负责模型请求。六个提示词位于模块内的 `src/preprocess/prompts/`，按文件位置加载，
 不依赖调用时的工作目录。没有迁入标注、任务归并、依赖建图或可视化模块。

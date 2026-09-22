@@ -1,9 +1,5 @@
 """Strict structural and source-evidence validation, independent of the model."""
-import json
-
-
-class Invalid(ValueError):
-    pass
+from ..deepseek_client import Invalid, strict_json
 
 
 def require(condition, message):
@@ -23,18 +19,6 @@ def string(value):
 def flags(value):
     require(isinstance(value, list) and all(isinstance(x, str) for x in value),
             "review_flags must be an array of strings")
-
-
-def strict_json(text):
-    def pairs(items):
-        result = {}
-        for key, value in items:
-            require(key not in result, f"Duplicate JSON key: {key}")
-            result[key] = value
-        return result
-    def constant(value):
-        raise Invalid(f"Invalid JSON constant: {value}")
-    return json.loads(text, object_pairs_hook=pairs, parse_constant=constant)
 
 
 def root_query(value):

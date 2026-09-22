@@ -1,4 +1,4 @@
-"""Standard-library DeepSeek transport, auditable prompts and validated cache."""
+"""Shared standard-library DeepSeek transport and validated response cache."""
 import hashlib
 import json
 import os
@@ -8,7 +8,26 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-from .validate import Invalid, strict_json
+
+
+class Invalid(ValueError):
+    pass
+
+
+def strict_json(text):
+    """Parse JSON while rejecting duplicate keys and non-finite constants."""
+    def pairs(items):
+        result = {}
+        for key, value in items:
+            if key in result:
+                raise Invalid(f'Duplicate JSON key: {key}')
+            result[key] = value
+        return result
+
+    def constant(value):
+        raise Invalid(f'Invalid JSON constant: {value}')
+
+    return json.loads(text, object_pairs_hook=pairs, parse_constant=constant)
 
 
 def encoded(value):
@@ -24,7 +43,7 @@ def save(path, value):
 
 
 def prompt(name):
-    path = Path(__file__).resolve().parent / 'prompts' / (name + '.md')
+    path = Path(__file__).resolve().parent / 'preprocess' / 'prompts' / (name + '.md')
     return path.read_text(encoding='utf-8').strip()
 
 
