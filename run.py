@@ -1,9 +1,10 @@
-"""Preprocess repository trajectories, then split them into analysis windows."""
+"""Preprocess trajectories, split them into windows, then build edge types."""
 import os
 import re
 from datetime import datetime
 from pathlib import Path
 
+from src.build_edges.main import main as process_build_edges
 from src.preprocess import Client, load, normalize, save
 from src.split.main import load_config as load_split_config
 from src.split.main import process_directory as process_split_directory
@@ -138,12 +139,42 @@ def main():
         print(f'Split stage failed: {detail}')
     save(run_directory / 'summary.json', summary)
 
+    build_edges_output = run_directory / 'build_edges'
+    summary['build_edges'] = {
+        'output': build_edges_output.relative_to(run_directory).as_posix(),
+        'status': 'running',
+        'exit_code': None,
+    }
+    save(run_directory / 'summary.json', summary)
+    print(f'Building edge types from split windows into: {build_edges_output}')
+    try:
+        build_edges_exit_code = process_build_edges([
+            '--input-dir', str(split_output),
+            '--output-dir', str(build_edges_output),
+            '--config', str(ROOT / 'src' / 'build_edges' / 'config.yaml'),
+        ])
+    except Exception as error:
+        detail = client.redactor.hide(str(error))
+        build_edges_exit_code = 1
+        summary['build_edges'].update(
+            status='failed', exit_code=build_edges_exit_code, error=detail)
+        print(f'Build Edges stage failed: {detail}')
+    else:
+        summary['build_edges'].update(
+            status='succeeded' if build_edges_exit_code == 0 else 'failed',
+            exit_code=build_edges_exit_code)
+    save(run_directory / 'summary.json', summary)
+
     print(f'Preprocess: {summary["succeeded"]} succeeded, {summary["failed"]} failed.')
     print(f'Split: {summary["split"]["windows"]} windows, '
           f'{summary["split"]["failed"]} failures.')
+    print(f'Build Edges: {summary["build_edges"]["status"]} '
+          f'(exit code {summary["build_edges"]["exit_code"]}).')
     print(f'Processed trajectories: {processed}')
     print(f'Split windows: {split_output}')
-    return 1 if summary['failed'] or split_failed else 0
+    print(f'Build Edges output: {build_edges_output}')
+    return 1 if (summary['failed'] or split_failed or
+                 build_edges_exit_code != 0) else 0
 
 
 if __name__ == '__main__':
