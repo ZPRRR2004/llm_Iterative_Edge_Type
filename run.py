@@ -1,10 +1,13 @@
-"""Batch preprocess trajectory/*/agent/trajectory.json from this repository."""
+"""Preprocess repository trajectories, then split them into analysis windows."""
 import os
 import re
 from datetime import datetime
 from pathlib import Path
 
 from src.preprocess import Client, load, normalize, save
+from src.split.main import load_config as load_split_config
+from src.split.main import process_directory as process_split_directory
+from src.split.summary_generator import SummaryGenerator
 
 
 ROOT = Path(__file__).resolve().parent
@@ -67,6 +70,11 @@ def main():
     if not os.environ.get('DEEPSEEK_API_KEY', '').strip():
         print('Set DEEPSEEK_API_KEY in src/.env or the environment before running.')
         return 1
+    try:
+        split_config = load_split_config(ROOT / 'src' / 'split' / 'config.yaml')
+    except (OSError, ValueError) as error:
+        print(f'Split configuration error: {error}')
+        return 1
 
     run_directory = create_run_directory(ROOT / 'runs')
     processed = run_directory / 'processed_trajectory'
@@ -100,9 +108,42 @@ def main():
         summary['cases'].append(record)
         save(run_directory / 'summary.json', summary)
 
-    print(f'Done: {summary["succeeded"]} succeeded, {summary["failed"]} failed.')
-    print(f'Results: {processed}')
-    return 1 if summary['failed'] else 0
+    split_output = run_directory / 'split_windows'
+    split_output.mkdir()
+    print(f'Splitting processed trajectories into: {split_output}')
+    try:
+        summary_generator = SummaryGenerator(
+            run_directory,
+            model=model,
+            base_url=base_url,
+        )
+        window_count, empty_count, split_failed = process_split_directory(
+            processed, split_output, split_config, summary_generator)
+        summary['split'] = {
+            'output': split_output.relative_to(run_directory).as_posix(),
+            'windows': window_count,
+            'empty_trajectories': empty_count,
+            'failed': split_failed,
+        }
+    except Exception as error:
+        detail = client.redactor.hide(str(error))
+        split_failed = 1
+        summary['split'] = {
+            'output': split_output.relative_to(run_directory).as_posix(),
+            'windows': 0,
+            'empty_trajectories': 0,
+            'failed': split_failed,
+            'error': detail,
+        }
+        print(f'Split stage failed: {detail}')
+    save(run_directory / 'summary.json', summary)
+
+    print(f'Preprocess: {summary["succeeded"]} succeeded, {summary["failed"]} failed.')
+    print(f'Split: {summary["split"]["windows"]} windows, '
+          f'{summary["split"]["failed"]} failures.')
+    print(f'Processed trajectories: {processed}')
+    print(f'Split windows: {split_output}')
+    return 1 if summary['failed'] or split_failed else 0
 
 
 if __name__ == '__main__':

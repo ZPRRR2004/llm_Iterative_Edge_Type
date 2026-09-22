@@ -1,0 +1,7 @@
+{
+  "title": "Implement and test an adaptive-rejection sampler in R",
+  "query": "Implement an adaptive-rejection sampler in R as described by Gilks et al. (1992). Install R if it is not already available. Save the main implementation in /app/ars.R. Include a primary function named ars with signature ars(density_function, domain, n = sample_count) that accepts a vectorized, possibly unnormalized density function or expression, validates inputs including rejecting negative sample counts and invalid domains, checks for non-log-concave densities during sampling, and provides clear error handling for invalid inputs and non-log-concave densities. The implementation must be modular, with auxiliary functions or methods for discrete tasks and consistent design/style. Include a test function named test that performs formal stochastic testing against known distributions such as normal and exponential, with tests for the overall function and any complicated modules, and prints clear, interpretable results in the format 'TEST_NAME: PASS' or 'TEST_NAME: FAIL' along with mean and standard deviation statistics. Ensure ars generates valid samples that follow the target distribution shape rather than uniform random values. Generate at least one sample file named /app/normal_samples.txt or /app/exponential_samples.txt containing test samples.",
+  "review_flags": [
+    "Ambiguity: the ars signature uses `n = sample_count`, which appears to be a placeholder rather than a concrete default; the required default sample count is unspecified."
+  ]
+}

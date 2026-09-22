@@ -1,0 +1,8 @@
+{
+  "title": "Classify documents and summarize invoices",
+  "query": "In /app/documents/, classify each JPG and PDF document as either 'invoice' or 'other' based on document content. Move all invoices to /app/invoices/ and all other documents to /app/other/. For invoices only: extract total_amount including tax, looking for terms like Total, Amount Due, or Grand Total; extract vat_amount, looking for terms like VAT, Tax, or GST, setting it to 0 or an empty string if VAT is not present. If both Total and Amount Due are present with different values, use only the Total amount. Create /app/invoices/summary.csv with exactly the columns filename, total_amount, vat_amount, and add a final row with filename 'total' and the calculated total of the total_amount and vat_amount columns from the individual invoices. Ensure the original /app/documents/ directory is empty after processing.",
+  "review_flags": [
+    "Ambiguity in summary.csv final 'total' row: 'calculated total of total_amount and vat_amount columns' could mean separately summing each column or combining total_amount + vat_amount.",
+    "VAT-missing handling is specified as either 0 or empty string, allowing two different outputs."
+  ]
+}

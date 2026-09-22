@@ -1,0 +1,5 @@
+{
+  "title": "Create filter-resistant auto-alert HTML",
+  "query": "Create /app/out.html such that, even after /app/filter.py processes it in place, opening the resulting HTML file in a browser still automatically triggers a JavaScript alert() without any user interaction. You can run /app/test_outputs.py to verify.",
+  "review_flags": []
+}
