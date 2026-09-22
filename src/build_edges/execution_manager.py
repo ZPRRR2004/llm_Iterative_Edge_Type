@@ -1,13 +1,15 @@
-"""Coordinate stage calls, commits, batches, prompt editing, and resume."""
+"""Coordinate stage calls, commits, batch feedback, and resume."""
 import copy
 
 from .comparison import run_comparison
 from .discovery import run_discovery
 from .llm_client import StageCallError
-from .registry import update_registry
+from .registry import apply_registry_revision, update_registry
+from .registry_revision import run_registry_revision
 from .review import run_review
 from .storage import utc_now
 from .validator import (validate_comparison, validate_discovery,
+                        validate_registry_revision_plan,
                         validate_registry_update, validate_review)
 from .window_loader import serialize_context_window
 
@@ -142,19 +144,46 @@ def process_window(*, record, registry, llm_client, prompt_bundle,
     }
 
 
-def wait_for_prompt_edit(*, batch_index, completed_windows, total_windows,
-                         batch_new_types, registry, prompt_manager,
-                         output_dir, input_func=input):
+def _feedback_mode_label(mode):
+    return 'Manual Prompt' if mode == 'manual_prompt' else 'Registry Feedback'
+
+
+def print_startup(*, total_windows, config, prompt_version, registry):
+    print('\n' + '=' * 60)
+    print('【Build Edges】启动')
+    print('=' * 60)
+    print(f'\nContext Window 数量：{total_windows}')
+    print(f'人工反馈间隔：每 {config["human_feedback_interval"]} 个 Window')
+    print(f'反馈模式：{_feedback_mode_label(config["feedback_mode"])}')
+    print(f'当前 Prompt 版本：{prompt_version}')
+    print(f'当前 Registry：{len(registry)} 个边类型')
+    print('\n开始处理...')
+
+
+def _print_batch_summary(*, batch_index, completed_windows, total_windows,
+                         batch_new_types, registry, prompt_version,
+                         feedback_mode, output_dir):
     print('\n' + '=' * 60)
     print(f'【Build Edges】第 {batch_index} 批处理完成')
     print('=' * 60)
     print(f'\n处理进度：{completed_windows} / {total_windows} 个 Window')
     print(f'本批新增边类型：{batch_new_types} 个')
     print(f'当前边类型总数：{len(registry)} 个')
-    print(f'当前 Prompt 版本：{prompt_manager.current_version}')
-    print(f'\n边类型库：\n  {output_dir / "edge_type_registry.json"}')
+    print(f'当前 Prompt 版本：{prompt_version}')
+    print(f'反馈模式：{_feedback_mode_label(feedback_mode)}')
+    print(f'\n当前 Registry：\n  {output_dir / "edge_type_registry.json"}')
     packet = output_dir / 'batches' / f'batch_{batch_index:04d}' / 'review_packet.md'
     print(f'\n本批结果：\n  {packet}')
+
+
+def wait_for_prompt_edit(*, batch_index, completed_windows, total_windows,
+                         batch_new_types, registry, prompt_manager,
+                         output_dir, input_func=input):
+    _print_batch_summary(
+        batch_index=batch_index, completed_windows=completed_windows,
+        total_windows=total_windows, batch_new_types=batch_new_types,
+        registry=registry, prompt_version=prompt_manager.current_version,
+        feedback_mode='manual_prompt', output_dir=output_dir)
     print('\n可修改的 Prompt 文件：\n')
     for path in prompt_manager.editable_prompt_paths:
         print(f'  {path}')
@@ -174,31 +203,232 @@ def wait_for_prompt_edit(*, batch_index, completed_windows, total_windows,
             print(f'\nPrompt 内容未发生变化，已保存下一批 Prompt 快照：{version}。')
         print(f'\n当前 Registry 已保留，共 {len(registry)} 个边类型。')
         print(f'开始处理第 {batch_index + 1} 批 Window...')
-        return version
+        return version, changed
+
+
+def read_human_feedback(input_func=input):
+    print('\n请查看当前边类型发现结果。')
+    print('\n请输入你对当前 Edge Type Registry 的自然语言反馈。')
+    print('支持输入多行内容。')
+    print('输入完成后，请单独输入 END 并按 Enter。\n')
+    lines = []
+    while True:
+        line = input_func('> ')
+        if line.strip() == 'END':
+            break
+        lines.append(line)
+    return '\n'.join(lines).strip()
+
+
+def _revision_counts(revision_plan):
+    counts = {name: 0 for name in ('KEEP', 'DELETE', 'REVISE', 'MERGE')}
+    for item in revision_plan['revisions']:
+        counts[item['operation']] += 1
+    return counts
+
+
+def print_registry_revision_summary(*, registry_before, revision_plan,
+                                    registry_after, output_dir, batch_index):
+    counts = _revision_counts(revision_plan)
+    print('\n' + '=' * 60)
+    print('【Registry Revision】完成')
+    print('=' * 60)
+    print(f'\n反馈前边类型数量：{len(registry_before)}')
+    print(f'反馈后边类型数量：{len(registry_after)}')
+    print('\n本轮操作统计：\n')
+    print(f'  保留 KEEP：      {counts["KEEP"]}')
+    print(f'  删除 DELETE：    {counts["DELETE"]}')
+    print(f'  修订 REVISE：    {counts["REVISE"]}')
+    print(f'  合并 MERGE：     {counts["MERGE"]}')
+    directory = output_dir / 'batches' / f'batch_{batch_index:04d}'
+    print(f'\nRevision Plan：\n  {directory / "registry_revision_plan.json"}')
+    print(f'\n修改后 Registry：\n  {output_dir / "edge_type_registry.json"}')
+
+    revised = [item for item in revision_plan['revisions']
+               if item['operation'] == 'REVISE']
+    merged = [item for item in revision_plan['revisions']
+              if item['operation'] == 'MERGE']
+    deleted = [item for item in revision_plan['revisions']
+               if item['operation'] == 'DELETE']
+    if revised:
+        print('\n【REVISE】\n')
+        for item in revised:
+            print(f'{item["original_name"]}\n  → {item["revised_edge_type"]["name"]}\n')
+    if merged:
+        print('【MERGE】\n')
+        for item in merged:
+            print(f'{item["original_name"]}\n  → {item["merge_into"]}\n')
+    if deleted:
+        print('【DELETE】\n')
+        for item in deleted:
+            print(item['original_name'])
+
+
+def handle_manual_prompt_feedback(*, batch_index, completed_windows,
+                                  total_windows, batch_new_types, registry,
+                                  prompt_manager, storage, input_func):
+    version, changed = wait_for_prompt_edit(
+        batch_index=batch_index, completed_windows=completed_windows,
+        total_windows=total_windows, batch_new_types=batch_new_types,
+        registry=registry, prompt_manager=prompt_manager,
+        output_dir=storage.output_dir, input_func=input_func)
+    storage.save_registry_after_feedback(batch_index, registry)
+    storage.update_batch_metadata(
+        batch_index, feedback_completed=True, feedback_applied=changed,
+        feedback_completed_at=utc_now())
+    return {'registry': registry, 'prompt_version': version}
+
+
+def handle_registry_feedback(*, batch_index, completed_windows,
+                             total_windows, batch_new_types, registry,
+                             prompt_manager, llm_client, storage,
+                             state, input_func):
+    metadata = storage.load_batch_metadata(batch_index)
+    if metadata.get('feedback_completed'):
+        return {
+            'registry': storage.load_registry_after_feedback(batch_index),
+            'prompt_version': prompt_manager.current_version,
+        }
+
+    stage = state.get('pending_feedback_stage') or 'collecting_feedback'
+    if stage == 'collecting_feedback':
+        _print_batch_summary(
+            batch_index=batch_index, completed_windows=completed_windows,
+            total_windows=total_windows, batch_new_types=batch_new_types,
+            registry=registry, prompt_version=prompt_manager.current_version,
+            feedback_mode='registry_feedback', output_dir=storage.output_dir)
+        feedback = read_human_feedback(input_func)
+        storage.save_human_feedback(batch_index, feedback)
+        if not feedback:
+            storage.save_registry_after_feedback(batch_index, registry)
+            storage.save_registry(registry)
+            storage.update_batch_metadata(
+                batch_index, feedback_completed=True, feedback_applied=False,
+                feedback_completed_at=utc_now())
+            print('\n【Registry Feedback】')
+            print('\n本轮未输入修改意见。')
+            print('当前 Registry 保持不变。')
+            print(f'\n开始处理第 {batch_index + 1} 批 Window...')
+            return {
+                'registry': registry,
+                'prompt_version': prompt_manager.current_version,
+            }
+        state.update({
+            'pending_feedback_stage': 'revising_registry',
+            'status': 'running',
+        })
+        storage.save_state(state)
+    else:
+        feedback = storage.load_human_feedback(batch_index)
+
+    if state['pending_feedback_stage'] == 'revising_registry':
+        plan_path = (storage.batch_dir(batch_index) /
+                     'registry_revision_plan.json')
+        if plan_path.is_file():
+            revision_plan = storage.load_registry_revision_plan(batch_index)
+            validate_registry_revision_plan(revision_plan, registry)
+        else:
+            try:
+                revision_plan, call_record = run_registry_revision(
+                    feedback, registry, llm_client, prompt_manager,
+                    batch_name=f'batch_{batch_index:04d}',
+                    prompt_version=prompt_manager.current_version,
+                    return_call_record=True)
+            except StageCallError as exc:
+                storage.save_registry_revision_call(batch_index, exc.record)
+                storage.save_registry_revision_error(batch_index, exc)
+                raise
+            except Exception as exc:
+                storage.save_registry_revision_error(batch_index, exc)
+                raise
+            storage.save_registry_revision_call(batch_index, call_record)
+            storage.save_registry_revision_plan(batch_index, revision_plan)
+        state.update({
+            'pending_feedback_stage': 'applying_revision',
+            'status': 'running',
+        })
+        storage.save_state(state)
+    else:
+        revision_plan = storage.load_registry_revision_plan(batch_index)
+
+    validate_registry_revision_plan(revision_plan, registry)
+    revised_registry = apply_registry_revision(registry, revision_plan)
+    storage.save_registry_after_feedback(batch_index, revised_registry)
+    storage.save_registry(revised_registry)
+    counts = _revision_counts(revision_plan)
+    storage.update_batch_metadata(
+        batch_index, feedback_completed=True, feedback_applied=True,
+        registry_size_after_feedback=len(revised_registry),
+        revision_operation_counts=counts, feedback_completed_at=utc_now())
+    print_registry_revision_summary(
+        registry_before=registry, revision_plan=revision_plan,
+        registry_after=revised_registry, output_dir=storage.output_dir,
+        batch_index=batch_index)
+    print(f'\n开始处理第 {batch_index + 1} 批 Window...')
+    return {
+        'registry': revised_registry,
+        'prompt_version': prompt_manager.current_version,
+    }
+
+
+def handle_batch_feedback(*, feedback_mode, batch_index, completed_windows,
+                          total_windows, batch_new_types, registry,
+                          prompt_manager, llm_client, storage, state,
+                          input_func=input):
+    if feedback_mode == 'manual_prompt':
+        return handle_manual_prompt_feedback(
+            batch_index=batch_index, completed_windows=completed_windows,
+            total_windows=total_windows, batch_new_types=batch_new_types,
+            registry=registry, prompt_manager=prompt_manager,
+            storage=storage, input_func=input_func)
+    if feedback_mode == 'registry_feedback':
+        return handle_registry_feedback(
+            batch_index=batch_index, completed_windows=completed_windows,
+            total_windows=total_windows, batch_new_types=batch_new_types,
+            registry=registry, prompt_manager=prompt_manager,
+            llm_client=llm_client, storage=storage, state=state,
+            input_func=input_func)
+    raise ValueError(f'未知 feedback_mode：{feedback_mode}')
 
 
 def _continue_after_feedback(state, registry, records, config,
-                             prompt_manager, storage, input_func):
+                             prompt_manager, llm_client, storage, input_func):
     batch_start = state['completed_windows'] - state['completed_windows_in_batch']
     registry_before = storage.reconstruct_registry(records, batch_start, save=False)
     batch_new_types = len(registry) - len(registry_before)
-    version = wait_for_prompt_edit(
-        batch_index=state['current_batch_index'],
-        completed_windows=state['completed_windows'],
-        total_windows=len(records),
-        batch_new_types=batch_new_types,
-        registry=registry,
-        prompt_manager=prompt_manager,
-        output_dir=storage.output_dir,
-        input_func=input_func)
+    try:
+        result = handle_batch_feedback(
+            feedback_mode=state['feedback_mode'],
+            batch_index=state['current_batch_index'],
+            completed_windows=state['completed_windows'],
+            total_windows=len(records), batch_new_types=batch_new_types,
+            registry=registry, prompt_manager=prompt_manager,
+            llm_client=llm_client, storage=storage, state=state,
+            input_func=input_func)
+    except Exception as exc:
+        state['status'] = 'failed'
+        storage.save_state(state)
+        if state['feedback_mode'] == 'registry_feedback':
+            storage.save_registry_revision_error(
+                state['current_batch_index'], exc)
+            print('\n【Registry Revision 未完成】')
+            print(f'\n原因：{exc}')
+            print('\n当前 Registry 已保持原状态。')
+            error_path = (storage.batch_dir(state['current_batch_index']) /
+                          'registry_revision_error.json')
+            print(f'Revision 失败记录已保存：\n\n  {error_path}')
+            print('\n使用 --resume 继续。')
+        raise
     state.update({
         'current_batch_index': state['current_batch_index'] + 1,
         'completed_windows_in_batch': 0,
-        'prompt_version': version,
+        'prompt_version': result['prompt_version'],
         'next_stage': 'discovery',
         'status': 'running',
+        'pending_feedback_stage': None,
     })
     storage.save_state(state)
+    return result['registry']
 
 
 def process_all_windows(*, records, manifest, config, prompt_manager,
@@ -206,20 +436,15 @@ def process_all_windows(*, records, manifest, config, prompt_manager,
     if resume:
         storage.verify_manifest(manifest)
         state = storage.load_state()
-        if state['config'] != config:
+        saved_config = copy.deepcopy(state['config'])
+        saved_config.setdefault('feedback_mode', state['feedback_mode'])
+        if saved_config != config or state['feedback_mode'] != config['feedback_mode']:
             raise ValueError('恢复失败：当前 Config 与首次运行时的 Config 不一致')
+        state['config'] = saved_config
         registry = storage.reconstruct_registry(records, state['completed_windows'])
-        prompt_manager.resume(state['prompt_version'])
-        if state['status'] == 'completed':
-            print('该输出目录中的所有 Context Window 已处理完成。')
-            return registry
-        if state['status'] == 'waiting_for_enter':
-            _continue_after_feedback(
-                state, registry, records, config,
-                prompt_manager, storage, input_func)
-        elif state['status'] == 'failed':
-            state['status'] = 'running'
-            storage.save_state(state)
+        prompt_manager.resume(
+            state['prompt_version'],
+            allow_source_fallback=state['feedback_mode'] == 'manual_prompt')
     else:
         storage.initialize(manifest)
         version = prompt_manager.initialize()
@@ -230,11 +455,28 @@ def process_all_windows(*, records, manifest, config, prompt_manager,
             'completed_windows_in_batch': 0,
             'prompt_version': version,
             'next_stage': 'discovery',
+            'feedback_mode': config['feedback_mode'],
+            'pending_feedback_stage': None,
             'status': 'running',
             'config': copy.deepcopy(config),
         }
         storage.save_state(state)
         registry = []
+
+    print_startup(
+        total_windows=len(records), config=config,
+        prompt_version=prompt_manager.current_version, registry=registry)
+    if state['status'] == 'completed':
+        print('该输出目录中的所有 Context Window 已处理完成。')
+        return registry
+    if state['status'] == 'failed':
+        state['status'] = 'running'
+        storage.save_state(state)
+    if (state['status'] == 'waiting_for_enter' or
+            state['pending_feedback_stage'] is not None):
+        registry = _continue_after_feedback(
+            state, registry, records, config, prompt_manager,
+            llm_client, storage, input_func)
 
     interval = config['human_feedback_interval']
     batch_start_count = state['completed_windows'] - state['completed_windows_in_batch']
@@ -266,6 +508,7 @@ def process_all_windows(*, records, manifest, config, prompt_manager,
             'completed_windows_in_batch': state['completed_windows_in_batch'] + 1,
             'next_stage': 'discovery',
             'status': 'running',
+            'pending_feedback_stage': None,
         })
         storage.save_state(state)
 
@@ -279,16 +522,30 @@ def process_all_windows(*, records, manifest, config, prompt_manager,
                 end_window=state['completed_windows'],
                 prompt_version=prompt_manager.current_version,
                 registry_before=batch_registry_before,
-                registry_after=registry)
+                registry_after=registry,
+                feedback_mode=state['feedback_mode'],
+                feedback_required=not all_finished)
             if all_finished:
-                state.update({'status': 'completed', 'next_stage': 'discovery'})
+                state.update({
+                    'status': 'completed', 'next_stage': 'discovery',
+                    'pending_feedback_stage': None,
+                })
                 storage.save_state(state)
                 break
-            state['status'] = 'waiting_for_enter'
+            if state['feedback_mode'] == 'manual_prompt':
+                state.update({
+                    'status': 'waiting_for_enter',
+                    'pending_feedback_stage': None,
+                })
+            else:
+                state.update({
+                    'status': 'running',
+                    'pending_feedback_stage': 'collecting_feedback',
+                })
             storage.save_state(state)
-            _continue_after_feedback(
-                state, registry, records, config,
-                prompt_manager, storage, input_func)
+            registry = _continue_after_feedback(
+                state, registry, records, config, prompt_manager,
+                llm_client, storage, input_func)
             batch_registry_before = copy.deepcopy(registry)
 
     print('\n全部 Context Window 处理完成。')

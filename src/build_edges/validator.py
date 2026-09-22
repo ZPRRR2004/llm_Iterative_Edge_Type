@@ -1,4 +1,4 @@
-"""Strict validators for edge types and all three LLM response schemas."""
+"""Strict validators for Edge Types, stage responses, and revision plans."""
 import re
 
 
@@ -116,3 +116,81 @@ def validate_registry_update(registry_snapshot, accepted_types):
     if conflicts:
         raise ValidationError(f'新增类型名称与 Registry 冲突：{conflicts}')
     return True
+
+
+REVISION_OPERATIONS = {'KEEP', 'DELETE', 'REVISE', 'MERGE'}
+
+
+def validate_registry_revision_plan(revision_plan, existing_registry):
+    """Validate one order-independent operation for every Registry type."""
+    validate_registry(existing_registry)
+    _exact_keys(revision_plan, {'revisions'}, 'Registry Revision 输出')
+    revisions = revision_plan['revisions']
+    if not isinstance(revisions, list):
+        raise ValidationError('revisions 必须是数组')
+
+    registry_names = {item['name'] for item in existing_registry}
+    revision_by_name = {}
+    for index, item in enumerate(revisions):
+        label = f'revisions[{index}]'
+        if not isinstance(item, dict):
+            raise ValidationError(f'{label} 必须是对象')
+        original_name = item.get('original_name')
+        operation = item.get('operation')
+        if not isinstance(original_name, str) or not original_name.strip():
+            raise ValidationError(f'{label}.original_name 必须是非空字符串')
+        if operation not in REVISION_OPERATIONS:
+            raise ValidationError(
+                f'{label}.operation 必须是 KEEP、DELETE、REVISE 或 MERGE')
+        if original_name not in registry_names:
+            raise ValidationError(f'{label} 引用了未知原始类型：{original_name}')
+        if original_name in revision_by_name:
+            raise ValidationError(f'原始类型被重复处理：{original_name}')
+
+        if operation in {'KEEP', 'DELETE'}:
+            _exact_keys(item, {'original_name', 'operation'}, label)
+        elif operation == 'REVISE':
+            _exact_keys(
+                item, {'original_name', 'operation', 'revised_edge_type'}, label)
+            validate_edge_type(item['revised_edge_type'],
+                               f'{label}.revised_edge_type')
+        else:
+            _exact_keys(item, {'original_name', 'operation', 'merge_into'}, label)
+            merge_into = item['merge_into']
+            if not isinstance(merge_into, str) or not merge_into.strip():
+                raise ValidationError(f'{label}.merge_into 必须是非空字符串')
+            if merge_into == original_name:
+                raise ValidationError(f'{label} 不能合并到自身')
+            if merge_into not in registry_names:
+                raise ValidationError(
+                    f'{label}.merge_into 引用了未知原始类型：{merge_into}')
+        revision_by_name[original_name] = item
+
+    planned_names = set(revision_by_name)
+    if planned_names != registry_names:
+        missing = sorted(registry_names - planned_names)
+        extra = sorted(planned_names - registry_names)
+        raise ValidationError(
+            f'Revision Plan 未完整覆盖 Registry；缺失={missing}，额外={extra}')
+
+    for original_name, item in revision_by_name.items():
+        if item['operation'] != 'MERGE':
+            continue
+        target = item['merge_into']
+        target_operation = revision_by_name[target]['operation']
+        if target_operation not in {'KEEP', 'REVISE'}:
+            raise ValidationError(
+                f'{original_name} 的 MERGE 目标 {target} 必须执行 KEEP 或 REVISE')
+
+    final_names = []
+    for edge in existing_registry:
+        revision = revision_by_name[edge['name']]
+        if revision['operation'] == 'KEEP':
+            final_names.append(edge['name'])
+        elif revision['operation'] == 'REVISE':
+            final_names.append(revision['revised_edge_type']['name'])
+    if len(final_names) != len(set(final_names)):
+        duplicates = sorted(
+            name for name in set(final_names) if final_names.count(name) > 1)
+        raise ValidationError(f'Revision 后类型名称不唯一：{duplicates}')
+    return revision_plan

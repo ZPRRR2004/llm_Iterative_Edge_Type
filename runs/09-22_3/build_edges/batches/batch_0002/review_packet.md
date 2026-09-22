@@ -1,0 +1,442 @@
+# 第 2 批 Edge Type Discovery 结果
+
+## 一、批次信息
+
+处理 Window：11–20
+Prompt 版本：v0001
+本批新增边类型：12
+当前边类型总数：31
+
+## 二、本批新增边类型
+
+### DERIVES_TASK_RELEVANT_INFORMATION_FROM_OBSERVATION
+
+name: DERIVES_TASK_RELEVANT_INFORMATION_FROM_OBSERVATION
+
+definition: An agent interprets an earlier observation of task content to extract task-relevant information such as classification labels, field values, or content meaning.
+
+source_description: An earlier observation containing raw or extracted task content produced by a tool call.
+
+target_description: A subsequent agent analysis or decision that derives task-relevant information from that observation.
+
+### REQUESTS_OMITTED_CONTENT_FROM_PARTIAL_OBSERVATION
+
+name: REQUESTS_OMITTED_CONTENT_FROM_PARTIAL_OBSERVATION
+
+definition: An earlier observation exposes only a partial view of available content, prompting a subsequent retrieval action that requests the omitted or more detailed content needed for task processing.
+
+source_description: An earlier observation that provides incomplete content, such as only a limited portion of one or more files.
+
+target_description: A subsequent retrieval action that requests the remaining, fuller, or more detailed content.
+
+### CONTINUES_WITH_REMAINING_ITEMS_AFTER_PARTIAL_PROCESSING
+
+name: CONTINUES_WITH_REMAINING_ITEMS_AFTER_PARTIAL_PROCESSING
+
+definition: After an observation or analysis indicates that only a subset of a collection has been processed or examined, the agent proceeds to process the remaining unprocessed items.
+
+source_description: An observation or analysis indicating that only part of a collection has been examined or processed.
+
+target_description: A subsequent action targeting the remaining unprocessed items in that collection.
+
+### RESOLVES_FIELD_VALUE_CONFLICT_PER_INSTRUCTION
+
+name: RESOLVES_FIELD_VALUE_CONFLICT_PER_INSTRUCTION
+
+definition: An observed document or record presents multiple conflicting candidate values for a field, and the agent decides which value to use according to an explicit user instruction.
+
+source_description: An observation containing conflicting field values from a document or record.
+
+target_description: A subsequent agent decision selecting the value prescribed by the user instruction.
+
+### CATEGORIZATION_DECISION_DRIVES_ITEM_OPERATION
+
+name: CATEGORIZATION_DECISION_DRIVES_ITEM_OPERATION
+
+definition: A prior categorization decision is used to select and execute an operation on the items, applying different handling depending on the assigned category.
+
+source_description: A decision that determines the category of the processed items.
+
+target_description: A subsequent action that operates on the items according to their assigned category.
+
+### INTERMEDIATE_ARTIFACT_REMOVED_AFTER_USE
+
+name: INTERMEDIATE_ARTIFACT_REMOVED_AFTER_USE
+
+definition: Temporary artifacts created during intermediate processing are deleted once they are no longer needed for the final deliverable.
+
+source_description: A state or decision indicating intermediate processing is finished and temporary artifacts are no longer required.
+
+target_description: An action that removes the temporary intermediate artifacts.
+
+### IDENTIFIES_COMPONENT_FROM_TASK_CONSTRAINT
+
+name: IDENTIFIES_COMPONENT_FROM_TASK_CONSTRAINT
+
+definition: An agent interprets a task specification or constraint to infer or select a specific component that satisfies that constraint.
+
+source_description: A task specification or constraint describing a required property or behavior.
+
+target_description: An agent inference or decision identifying a component that satisfies the constraint.
+
+### PLANS_FROM_OBSERVED_INFORMATION
+
+name: PLANS_FROM_OBSERVED_INFORMATION
+
+definition: An agent formulates a subsequent plan or next-step strategy based on information obtained from an earlier observation.
+
+source_description: An earlier observation that provides information relevant to the task.
+
+target_description: A subsequent agent plan or decision specifying next actions.
+
+### CONSTRUCTS_ARTIFACT_BY_ASSEMBLING_COMPONENTS
+
+name: CONSTRUCTS_ARTIFACT_BY_ASSEMBLING_COMPONENTS
+
+definition: A subsequent agent action constructs a composite artifact by combining multiple previously obtained or derived component data or specifications into a single output according to required ordering and composition constraints.
+
+source_description: Earlier observations that provide the individual components (data, sequences, values, or specifications) required to build the composite artifact.
+
+target_description: A subsequent agent action that combines those components into a single composite artifact following the specified ordering and composition constraints.
+
+### GENERATES_ARTIFACT
+
+name: GENERATES_ARTIFACT
+
+definition: An agent execution action, command, or script produces a persistent output artifact (such as a generated file) that can be consumed or inspected by later steps.
+
+source_description: An agent action, command, or script that performs a processing or generation step.
+
+target_description: The persistent output artifact or file produced by that action.
+
+### APPLIES_OBSERVED_DATA_FORMAT_TO_PROCESSING
+
+name: APPLIES_OBSERVED_DATA_FORMAT_TO_PROCESSING
+
+definition: A subsequent data-processing action or code is constructed so that it interprets input data according to the format, schema, or encoding revealed by an earlier observation.
+
+source_description: An earlier observation that reveals the format, schema, or encoding of input data (e.g., field separators, decimal conventions, column layout).
+
+target_description: A subsequent data-processing action or code that parses or processes the data according to that observed format.
+
+### CONSTRUCTS_ACTION_FROM_OBSERVED_INFORMATION
+
+name: CONSTRUCTS_ACTION_FROM_OBSERVED_INFORMATION
+
+definition: A subsequent agent action is constructed using information obtained from an earlier execution observation, such as derived parameters, discovered values, or structural insight.
+
+source_description: An earlier execution observation containing information that the agent relies on.
+
+target_description: A subsequent agent action that incorporates or is based on that information.
+
+## 三、当前完整 Registry
+
+### USES_OUTPUT_OF_PRIOR_ACTION
+
+name: USES_OUTPUT_OF_PRIOR_ACTION
+
+definition: A subsequent agent action consumes, as an input argument or dependency, an artifact or output that was generated by an earlier agent action.
+
+source_description: An earlier agent action that generated an artifact, file, or value.
+
+target_description: A subsequent agent action that references or consumes that generated artifact as input.
+
+### VERIFIES_OUTPUT_OF_PRIOR_ACTION
+
+name: VERIFIES_OUTPUT_OF_PRIOR_ACTION
+
+definition: A subsequent agent action is executed in order to test or validate the correctness of an artifact produced by an earlier agent action.
+
+source_description: An earlier agent action that produced an artifact whose correctness must be validated.
+
+target_description: A subsequent agent action intended to verify or validate the correctness of that artifact.
+
+### CORROBORATES_PRIOR_OBSERVATION
+
+name: CORROBORATES_PRIOR_OBSERVATION
+
+definition: A later execution observation reports evidence consistent with and thereby corroborates a condition, result, or state reported by an earlier observation.
+
+source_description: An earlier execution observation of a condition, result, or state.
+
+target_description: A subsequent independent observation that provides consistent evidence supporting the earlier observation.
+
+### ATTEMPTS_TO_REPAIR_FAILURE
+
+name: ATTEMPTS_TO_REPAIR_FAILURE
+
+definition: A subsequent agent action attempts to resolve an identified execution failure or problem.
+
+source_description: An earlier observed execution failure or problem whose resolution is attempted.
+
+target_description: A subsequent agent action intended to resolve that failure or problem.
+
+### USES_DIAGNOSTIC_OBSERVATION_TO_SELECT_ACTION
+
+name: USES_DIAGNOSTIC_OBSERVATION_TO_SELECT_ACTION
+
+definition: A diagnostic observation about the execution environment or system state is used to determine which subsequent command or action is appropriate.
+
+source_description: A diagnostic observation about the execution environment or system state.
+
+target_description: A subsequently selected action chosen based on that diagnostic observation.
+
+### DECLARES_COMPLETION_BASED_ON_VERIFIED_RESULTS
+
+name: DECLARES_COMPLETION_BASED_ON_VERIFIED_RESULTS
+
+definition: A completion declaration is asserted and grounded in previously verified successful execution results or validated output evidence.
+
+source_description: A previously verified successful execution result or validated output evidence.
+
+target_description: A subsequent agent declaration that the task is complete.
+
+### INVESTIGATES_FAILURE_CAUSE
+
+name: INVESTIGATES_FAILURE_CAUSE
+
+definition: An execution failure whose cause is not yet understood is followed by a diagnostic action that inspects environment or tool state (e.g., versions, logs, installed packages) in order to explain the failure before attempting a repair.
+
+source_description: An earlier observed execution failure whose cause is not yet understood.
+
+target_description: A subsequent diagnostic action that inspects environment or tool state to determine the cause of the failure.
+
+### VERIFIES_PREREQUISITE_AVAILABILITY_BEFORE_USE
+
+name: VERIFIES_PREREQUISITE_AVAILABILITY_BEFORE_USE
+
+definition: Before relying on a required prerequisite, capability, or resource, the agent performs an explicit check that it is available.
+
+source_description: An agent decision to rely on a required prerequisite, capability, or resource.
+
+target_description: A subsequent query or check that confirms whether that prerequisite, capability, or resource is available.
+
+### MONITORS_ASYNC_LONG_RUNNING_OPERATION
+
+name: MONITORS_ASYNC_LONG_RUNNING_OPERATION
+
+definition: An action that launches a long-running or background operation (such as a package build or installation) is followed by a separate action that waits for and inspects the progress or completion status of that operation.
+
+source_description: An agent action that starts a long-running or background operation.
+
+target_description: A subsequent action that polls or inspects the status or output of that operation.
+
+### ESTABLISHES_PREREQUISITE_FOR_SUBSEQUENT_ACTION
+
+name: ESTABLISHES_PREREQUISITE_FOR_SUBSEQUENT_ACTION
+
+definition: An earlier successful setup or environment-preparation step establishes a prerequisite, capability, or resource required by a subsequent agent action, thereby enabling that action.
+
+source_description: An earlier successful setup or environment-preparation step that establishes a prerequisite, capability, or resource.
+
+target_description: A subsequent agent action that depends on or invokes that established prerequisite, capability, or resource.
+
+### INVESTIGATES_INCONSISTENCY_FROM_RESULT
+
+name: INVESTIGATES_INCONSISTENCY_FROM_RESULT
+
+definition: A subsequent diagnostic or investigative action is performed in response to an earlier execution result that reveals conflicting, ambiguous, or inconsistent evidence, in order to resolve the inconsistency.
+
+source_description: An earlier execution result or observation that reveals conflicting, ambiguous, or inconsistent evidence.
+
+target_description: A subsequent diagnostic or investigative action intended to resolve that inconsistency.
+
+### SELECTS_CANDIDATE_FROM_EVALUATION
+
+name: SELECTS_CANDIDATE_FROM_EVALUATION
+
+definition: A subsequent agent decision or action adopts one among multiple candidate alternatives based on the outcome of an earlier evaluation, scoring, or comparison of those alternatives.
+
+source_description: An earlier execution result that evaluates, scores, or compares candidate alternatives.
+
+target_description: A subsequent agent decision or action that adopts the selected alternative.
+
+### INFERS_MECHANISM_PROPERTY_FROM_OBSERVATION
+
+name: INFERS_MECHANISM_PROPERTY_FROM_OBSERVATION
+
+definition: An observed behavior or implementation of a target mechanism or processing procedure is used to infer a relevant property or characteristic of that mechanism.
+
+source_description: An observation of a target mechanism's implementation or execution behavior.
+
+target_description: The agent's inferred conclusion about a relevant property or characteristic of that mechanism.
+
+### DESIGNS_CANDIDATE_FROM_INFERRED_MECHANISM_PROPERTY
+
+name: DESIGNS_CANDIDATE_FROM_INFERRED_MECHANISM_PROPERTY
+
+definition: An agent designs or constructs a candidate artifact or approach based on a previously inferred property of a target mechanism or processing procedure.
+
+source_description: A previously inferred property or characteristic of a target mechanism or processing procedure.
+
+target_description: A subsequent agent action that creates or designs a candidate artifact or approach based on that inferred property.
+
+### GUIDES_SOLUTION_CONSTRUCTION_BY_EVALUATION_CRITERIA
+
+name: GUIDES_SOLUTION_CONSTRUCTION_BY_EVALUATION_CRITERIA
+
+definition: An observation or understanding of evaluation logic, acceptance criteria, or a specification is used to guide subsequent construction of a candidate solution.
+
+source_description: An observation of evaluation logic, acceptance criteria, or a specification that defines how a solution will be assessed.
+
+target_description: A subsequent agent action or strategy that constructs a solution in accordance with those criteria.
+
+### ADOPTS_CANDIDATE_BASED_ON_EXPERIMENTAL_RESULT
+
+name: ADOPTS_CANDIDATE_BASED_ON_EXPERIMENTAL_RESULT
+
+definition: An observed result from testing or probing a single candidate approach provides evidence supporting that candidate, leading the agent to adopt or apply it.
+
+source_description: An observation from a test, probe, or experiment performed on a candidate approach.
+
+target_description: A subsequent agent decision or action that adopts or applies that candidate approach.
+
+### SILENT_FAILURE_CAUSES_DOWNSTREAM_FAILURE
+
+name: SILENT_FAILURE_CAUSES_DOWNSTREAM_FAILURE
+
+definition: An earlier action's failure that produced no visible error indication causes a later observable execution failure.
+
+source_description: An earlier execution step whose failure was suppressed or not surfaced as an error.
+
+target_description: A later observed execution failure attributable to that earlier silent failure.
+
+### REISSUES_ACTION_IN_RESPONSE_TO_CONFIRMATION_REQUEST
+
+name: REISSUES_ACTION_IN_RESPONSE_TO_CONFIRMATION_REQUEST
+
+definition: A subsequent agent action repeats a previously issued operation because a tool observation withheld execution and explicitly requested confirmation or re-submission of that operation.
+
+source_description: A tool observation that declines to execute a pending action and asks the agent to confirm or repeat the request.
+
+target_description: A subsequent agent action that re-invokes the same pending operation to satisfy the confirmation request.
+
+### ESCALATES_VERIFICATION_SCOPE_AFTER_TARGETED_SUCCESS
+
+name: ESCALATES_VERIFICATION_SCOPE_AFTER_TARGETED_SUCCESS
+
+definition: After a successful targeted or local verification, the agent performs a broader-coverage verification to check additional functionality or cases beyond the specific case just verified.
+
+source_description: A successful targeted or local verification.
+
+target_description: A subsequent broader-coverage verification action.
+
+### DERIVES_TASK_RELEVANT_INFORMATION_FROM_OBSERVATION
+
+name: DERIVES_TASK_RELEVANT_INFORMATION_FROM_OBSERVATION
+
+definition: An agent interprets an earlier observation of task content to extract task-relevant information such as classification labels, field values, or content meaning.
+
+source_description: An earlier observation containing raw or extracted task content produced by a tool call.
+
+target_description: A subsequent agent analysis or decision that derives task-relevant information from that observation.
+
+### REQUESTS_OMITTED_CONTENT_FROM_PARTIAL_OBSERVATION
+
+name: REQUESTS_OMITTED_CONTENT_FROM_PARTIAL_OBSERVATION
+
+definition: An earlier observation exposes only a partial view of available content, prompting a subsequent retrieval action that requests the omitted or more detailed content needed for task processing.
+
+source_description: An earlier observation that provides incomplete content, such as only a limited portion of one or more files.
+
+target_description: A subsequent retrieval action that requests the remaining, fuller, or more detailed content.
+
+### CONTINUES_WITH_REMAINING_ITEMS_AFTER_PARTIAL_PROCESSING
+
+name: CONTINUES_WITH_REMAINING_ITEMS_AFTER_PARTIAL_PROCESSING
+
+definition: After an observation or analysis indicates that only a subset of a collection has been processed or examined, the agent proceeds to process the remaining unprocessed items.
+
+source_description: An observation or analysis indicating that only part of a collection has been examined or processed.
+
+target_description: A subsequent action targeting the remaining unprocessed items in that collection.
+
+### RESOLVES_FIELD_VALUE_CONFLICT_PER_INSTRUCTION
+
+name: RESOLVES_FIELD_VALUE_CONFLICT_PER_INSTRUCTION
+
+definition: An observed document or record presents multiple conflicting candidate values for a field, and the agent decides which value to use according to an explicit user instruction.
+
+source_description: An observation containing conflicting field values from a document or record.
+
+target_description: A subsequent agent decision selecting the value prescribed by the user instruction.
+
+### CATEGORIZATION_DECISION_DRIVES_ITEM_OPERATION
+
+name: CATEGORIZATION_DECISION_DRIVES_ITEM_OPERATION
+
+definition: A prior categorization decision is used to select and execute an operation on the items, applying different handling depending on the assigned category.
+
+source_description: A decision that determines the category of the processed items.
+
+target_description: A subsequent action that operates on the items according to their assigned category.
+
+### INTERMEDIATE_ARTIFACT_REMOVED_AFTER_USE
+
+name: INTERMEDIATE_ARTIFACT_REMOVED_AFTER_USE
+
+definition: Temporary artifacts created during intermediate processing are deleted once they are no longer needed for the final deliverable.
+
+source_description: A state or decision indicating intermediate processing is finished and temporary artifacts are no longer required.
+
+target_description: An action that removes the temporary intermediate artifacts.
+
+### IDENTIFIES_COMPONENT_FROM_TASK_CONSTRAINT
+
+name: IDENTIFIES_COMPONENT_FROM_TASK_CONSTRAINT
+
+definition: An agent interprets a task specification or constraint to infer or select a specific component that satisfies that constraint.
+
+source_description: A task specification or constraint describing a required property or behavior.
+
+target_description: An agent inference or decision identifying a component that satisfies the constraint.
+
+### PLANS_FROM_OBSERVED_INFORMATION
+
+name: PLANS_FROM_OBSERVED_INFORMATION
+
+definition: An agent formulates a subsequent plan or next-step strategy based on information obtained from an earlier observation.
+
+source_description: An earlier observation that provides information relevant to the task.
+
+target_description: A subsequent agent plan or decision specifying next actions.
+
+### CONSTRUCTS_ARTIFACT_BY_ASSEMBLING_COMPONENTS
+
+name: CONSTRUCTS_ARTIFACT_BY_ASSEMBLING_COMPONENTS
+
+definition: A subsequent agent action constructs a composite artifact by combining multiple previously obtained or derived component data or specifications into a single output according to required ordering and composition constraints.
+
+source_description: Earlier observations that provide the individual components (data, sequences, values, or specifications) required to build the composite artifact.
+
+target_description: A subsequent agent action that combines those components into a single composite artifact following the specified ordering and composition constraints.
+
+### GENERATES_ARTIFACT
+
+name: GENERATES_ARTIFACT
+
+definition: An agent execution action, command, or script produces a persistent output artifact (such as a generated file) that can be consumed or inspected by later steps.
+
+source_description: An agent action, command, or script that performs a processing or generation step.
+
+target_description: The persistent output artifact or file produced by that action.
+
+### APPLIES_OBSERVED_DATA_FORMAT_TO_PROCESSING
+
+name: APPLIES_OBSERVED_DATA_FORMAT_TO_PROCESSING
+
+definition: A subsequent data-processing action or code is constructed so that it interprets input data according to the format, schema, or encoding revealed by an earlier observation.
+
+source_description: An earlier observation that reveals the format, schema, or encoding of input data (e.g., field separators, decimal conventions, column layout).
+
+target_description: A subsequent data-processing action or code that parses or processes the data according to that observed format.
+
+### CONSTRUCTS_ACTION_FROM_OBSERVED_INFORMATION
+
+name: CONSTRUCTS_ACTION_FROM_OBSERVED_INFORMATION
+
+definition: A subsequent agent action is constructed using information obtained from an earlier execution observation, such as derived parameters, discovered values, or structural insight.
+
+source_description: An earlier execution observation containing information that the agent relies on.
+
+target_description: A subsequent agent action that incorporates or is based on that information.

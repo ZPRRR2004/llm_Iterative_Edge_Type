@@ -1,0 +1,13 @@
+{
+  "batch_index": 2,
+  "start_window": 11,
+  "end_window": 20,
+  "prompt_version": "v0001",
+  "new_edge_type_count": 12,
+  "registry_size": 31,
+  "feedback_mode": "registry_feedback",
+  "feedback_required": false,
+  "feedback_completed": false,
+  "feedback_applied": false,
+  "saved_at": "2026-09-22T09:24:27.028199+00:00"
+}

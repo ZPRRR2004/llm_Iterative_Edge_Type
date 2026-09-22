@@ -1,4 +1,4 @@
-"""Three-stage JSON LLM calls with validation retries and auditable records."""
+"""Validated JSON LLM calls with stage retries and auditable records."""
 import time
 from datetime import datetime, timezone
 
@@ -9,6 +9,7 @@ STAGE_LABELS = {
     'discovery': 'Step 1 - Blind Discovery',
     'comparison': 'Step 2 - Type Comparison',
     'review': 'Step 3 - Type Review',
+    'registry_revision': 'Registry Revision',
 }
 
 
@@ -113,7 +114,9 @@ class BuildEdgesLLM:
                     attempts, True, parsed)
                 return parsed, record
 
-            print('\n【LLM 调用失败】')
+            heading = ('Registry Revision 失败'
+                       if stage == 'registry_revision' else 'LLM 调用失败')
+            print(f'\n【{heading}】')
             print(f'当前 Window：{window_name}')
             print(f'当前阶段：{STAGE_LABELS.get(stage, stage)}')
             print(f'失败原因：{error}')

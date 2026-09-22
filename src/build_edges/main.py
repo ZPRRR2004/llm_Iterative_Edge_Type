@@ -20,7 +20,9 @@ else:
     from .window_loader import load_windows, manifest
 
 
-CONFIG_KEYS = {'human_feedback_interval', 'max_llm_retries'}
+INTEGER_CONFIG_KEYS = {'human_feedback_interval', 'max_llm_retries'}
+CONFIG_KEYS = INTEGER_CONFIG_KEYS | {'feedback_mode'}
+VALID_FEEDBACK_MODES = {'manual_prompt', 'registry_feedback'}
 
 
 def load_env(path):
@@ -56,12 +58,16 @@ def load_config(path):
             continue
         key, separator, raw_value = line.partition(':')
         key, raw_value = key.strip(), raw_value.strip()
-        if (not separator or key not in CONFIG_KEYS or
-                not re.fullmatch(r'[+-]?\d+', raw_value)):
-            raise ValueError(f'{path}:{number}: 必须是支持的整数配置')
+        if not separator or key not in CONFIG_KEYS:
+            raise ValueError(f'{path}:{number}: 包含不支持的配置')
         if key in values:
             raise ValueError(f'{path}:{number}: 重复配置 {key}')
-        values[key] = int(raw_value)
+        if key in INTEGER_CONFIG_KEYS:
+            if not re.fullmatch(r'[+-]?\d+', raw_value):
+                raise ValueError(f'{path}:{number}: {key} 必须是整数')
+            values[key] = int(raw_value)
+        else:
+            values[key] = raw_value
     missing = CONFIG_KEYS - set(values)
     if missing:
         raise ValueError(f'{path}: 缺少配置 {sorted(missing)}')
@@ -69,6 +75,9 @@ def load_config(path):
         raise ValueError('human_feedback_interval 必须大于 0')
     if values['max_llm_retries'] < 0:
         raise ValueError('max_llm_retries 必须是非负整数')
+    if values['feedback_mode'] not in VALID_FEEDBACK_MODES:
+        raise ValueError(
+            'feedback_mode 必须是 manual_prompt 或 registry_feedback')
     return values
 
 

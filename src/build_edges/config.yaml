@@ -1,5 +1,15 @@
-# 每处理多少个 Window 进行一次人工 Prompt 修改
+# 每处理多少个 Window 进行一次 Human Feedback
 human_feedback_interval: 10
+
+# Human Feedback 模式
+#
+# manual_prompt:
+#   用户查看结果后手动修改 Prompt，按 Enter 后重新加载 Prompt。
+#
+# registry_feedback:
+#   用户输入自然语言 Feedback，LLM 根据 Feedback 对当前完整
+#   Registry 执行 KEEP / DELETE / REVISE / MERGE。
+feedback_mode: registry_feedback
 
 # LLM 调用或输出解析失败后的最大重试次数
 max_llm_retries: 3

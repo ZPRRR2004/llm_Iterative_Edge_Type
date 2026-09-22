@@ -183,30 +183,35 @@ src/build_edges/config.yaml
 
 ```yaml
 human_feedback_interval: 10
+feedback_mode: registry_feedback
 max_llm_retries: 3
 ```
 
 含义：
 
-- 每完成 10 个 Window，保存批次结果并进入人工 Prompt 检查点。
+- 每完成 10 个 Window 且后面还有 Window，保存批次结果并进入 Human Feedback。
+- `registry_feedback` 下，用户输入多行自然语言意见并用单独一行 `END` 结束；Revision LLM 对完整 Registry 执行 KEEP、DELETE、REVISE、MERGE。
+- 把 `feedback_mode` 改为 `manual_prompt` 可以继续使用原来的人工修改 Prompt 并按 Enter 的流程。
 - 单个 LLM 阶段首次失败后最多额外重试 3 次，即同一阶段最多请求 4 次。
 
-到达人工检查点后，程序会在原终端等待 Enter。此时可以查看：
+默认到达人工检查点后，程序会在原终端等待自然语言 Feedback。此时可以查看：
 
 ```text
 build_edges/batches/batch_NNNN/review_packet.md
 build_edges/edge_type_registry.json
 ```
 
-并按需修改：
+输入示例：
 
 ```text
-src/build_edges/prompts/
+> verification 类型拆得太细，请合并成通用验证关系。
+> ATTEMPTS_TO_REPAIR 的定义需要覆盖一般故障修复。
+> END
 ```
 
-按 Enter 后，程序重新校验 Prompt、保存下一版本快照并继续下一批。最后一批处理完后直接结束，不再等待 Enter。
+非空 Feedback 会与当前完整 Registry、固定 Revision Prompt 和公共粒度正反例一起发送给 DeepSeek。空 Feedback（直接输入 `END`）跳过这次 Revision，并让 Registry 保持不变。最后一批处理完后直接结束，不再要求反馈。
 
-Build Edges 使用非流式 DeepSeek 请求，成功调用开始和结束时默认不打印逐阶段日志。因此终端可能在请求期间长时间没有新输出。20 个 Window 正常需要串行完成 60 次阶段调用。
+Build Edges 使用非流式 DeepSeek 请求，成功调用开始和结束时默认不打印逐阶段日志。因此终端可能在请求期间长时间没有新输出。20 个 Window 的三阶段发现需要串行完成 60 次调用；默认 `registry_feedback` 下，每个非最终完整批次的非空反馈还会增加一次 Registry Revision 调用。
 
 完整输入契约、三阶段 Schema、Prompt 版本、审计文件和恢复规则见 [Build Edges README](src/build_edges/README.md)。
 
@@ -268,10 +273,16 @@ runs/
         └── batches/
             ├── batch_0001/
             │   ├── registry_before.json
+            │   ├── registry_after_windows.json
             │   ├── registry_after.json
             │   ├── newly_accepted_edge_types.json
             │   ├── batch_metadata.json
-            │   └── review_packet.md
+            │   ├── review_packet.md
+            │   ├── human_feedback.txt
+            │   ├── registry_revision_request.json
+            │   ├── registry_revision_response.json
+            │   ├── registry_revision_plan.json
+            │   └── registry_after_feedback.json
             └── ...
 ```
 

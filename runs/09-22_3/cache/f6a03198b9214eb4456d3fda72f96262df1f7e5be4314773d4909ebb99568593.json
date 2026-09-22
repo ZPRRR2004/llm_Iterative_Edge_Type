@@ -1,0 +1,5 @@
+{
+  "title": "Build and install pyknotid with NumPy 2.3 compatibility",
+  "query": "Compile the Cython extensions (chelpers, ccomplexity, and cinvariants) and install pyknotid 0.5.3 from source into the system's global Python environment, fixing NumPy >=2.0 compatibility issues so it works with the existing NumPy 2.3.0. Clone the source with `git clone --depth 1 --branch 0.5.3 https://github.com/SPOCKnots/pyknotid.git` to `/app/pyknotid`, without changing the original package structure. Ensure the README example using `pyknotid`, `chelpers`, `ccomplexity`, `cinvariants`, `k = sp.Knot(mk.three_twist(num_points=100))`, and `k.alexander_polynomial(-1)` runs without errors. The repository tests should still pass after compatibility fixes, except for `/app/pyknotid/tests/test_random_curves.py` (dead code) and `/app/pyknotid/tests/test_catalogue.py`. The compiled extensions must work in their original Python-side context.",
+  "review_flags": []
+}

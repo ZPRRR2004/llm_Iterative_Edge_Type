@@ -1,0 +1,74 @@
+[
+  {
+    "name": "DERIVES_TASK_RELEVANT_INFORMATION_FROM_OBSERVATION",
+    "definition": "An agent interprets an earlier observation of task content to extract task-relevant information such as classification labels, field values, or content meaning.",
+    "source_description": "An earlier observation containing raw or extracted task content produced by a tool call.",
+    "target_description": "A subsequent agent analysis or decision that derives task-relevant information from that observation."
+  },
+  {
+    "name": "REQUESTS_OMITTED_CONTENT_FROM_PARTIAL_OBSERVATION",
+    "definition": "An earlier observation exposes only a partial view of available content, prompting a subsequent retrieval action that requests the omitted or more detailed content needed for task processing.",
+    "source_description": "An earlier observation that provides incomplete content, such as only a limited portion of one or more files.",
+    "target_description": "A subsequent retrieval action that requests the remaining, fuller, or more detailed content."
+  },
+  {
+    "name": "CONTINUES_WITH_REMAINING_ITEMS_AFTER_PARTIAL_PROCESSING",
+    "definition": "After an observation or analysis indicates that only a subset of a collection has been processed or examined, the agent proceeds to process the remaining unprocessed items.",
+    "source_description": "An observation or analysis indicating that only part of a collection has been examined or processed.",
+    "target_description": "A subsequent action targeting the remaining unprocessed items in that collection."
+  },
+  {
+    "name": "RESOLVES_FIELD_VALUE_CONFLICT_PER_INSTRUCTION",
+    "definition": "An observed document or record presents multiple conflicting candidate values for a field, and the agent decides which value to use according to an explicit user instruction.",
+    "source_description": "An observation containing conflicting field values from a document or record.",
+    "target_description": "A subsequent agent decision selecting the value prescribed by the user instruction."
+  },
+  {
+    "name": "CATEGORIZATION_DECISION_DRIVES_ITEM_OPERATION",
+    "definition": "A prior categorization decision is used to select and execute an operation on the items, applying different handling depending on the assigned category.",
+    "source_description": "A decision that determines the category of the processed items.",
+    "target_description": "A subsequent action that operates on the items according to their assigned category."
+  },
+  {
+    "name": "INTERMEDIATE_ARTIFACT_REMOVED_AFTER_USE",
+    "definition": "Temporary artifacts created during intermediate processing are deleted once they are no longer needed for the final deliverable.",
+    "source_description": "A state or decision indicating intermediate processing is finished and temporary artifacts are no longer required.",
+    "target_description": "An action that removes the temporary intermediate artifacts."
+  },
+  {
+    "name": "IDENTIFIES_COMPONENT_FROM_TASK_CONSTRAINT",
+    "definition": "An agent interprets a task specification or constraint to infer or select a specific component that satisfies that constraint.",
+    "source_description": "A task specification or constraint describing a required property or behavior.",
+    "target_description": "An agent inference or decision identifying a component that satisfies the constraint."
+  },
+  {
+    "name": "PLANS_FROM_OBSERVED_INFORMATION",
+    "definition": "An agent formulates a subsequent plan or next-step strategy based on information obtained from an earlier observation.",
+    "source_description": "An earlier observation that provides information relevant to the task.",
+    "target_description": "A subsequent agent plan or decision specifying next actions."
+  },
+  {
+    "name": "CONSTRUCTS_ARTIFACT_BY_ASSEMBLING_COMPONENTS",
+    "definition": "A subsequent agent action constructs a composite artifact by combining multiple previously obtained or derived component data or specifications into a single output according to required ordering and composition constraints.",
+    "source_description": "Earlier observations that provide the individual components (data, sequences, values, or specifications) required to build the composite artifact.",
+    "target_description": "A subsequent agent action that combines those components into a single composite artifact following the specified ordering and composition constraints."
+  },
+  {
+    "name": "GENERATES_ARTIFACT",
+    "definition": "An agent execution action, command, or script produces a persistent output artifact (such as a generated file) that can be consumed or inspected by later steps.",
+    "source_description": "An agent action, command, or script that performs a processing or generation step.",
+    "target_description": "The persistent output artifact or file produced by that action."
+  },
+  {
+    "name": "APPLIES_OBSERVED_DATA_FORMAT_TO_PROCESSING",
+    "definition": "A subsequent data-processing action or code is constructed so that it interprets input data according to the format, schema, or encoding revealed by an earlier observation.",
+    "source_description": "An earlier observation that reveals the format, schema, or encoding of input data (e.g., field separators, decimal conventions, column layout).",
+    "target_description": "A subsequent data-processing action or code that parses or processes the data according to that observed format."
+  },
+  {
+    "name": "CONSTRUCTS_ACTION_FROM_OBSERVED_INFORMATION",
+    "definition": "A subsequent agent action is constructed using information obtained from an earlier execution observation, such as derived parameters, discovered values, or structural insight.",
+    "source_description": "An earlier execution observation containing information that the agent relies on.",
+    "target_description": "A subsequent agent action that incorporates or is based on that information."
+  }
+]

@@ -14,7 +14,10 @@ PROMPT_FILES = (
     'comparison/user.txt',
     'review/system.txt',
     'review/user.txt',
+    'registry_revision/system.txt',
+    'registry_revision/user.txt',
 )
+MANUAL_EDITABLE_PROMPT_FILES = PROMPT_FILES[:7]
 REQUIRED_VARIABLES = {
     'discovery/user.txt': {'context_window'},
     'comparison/user.txt': {'candidate_edge_types', 'existing_registry'},
@@ -22,6 +25,7 @@ REQUIRED_VARIABLES = {
         'context_window', 'candidate_edge_types',
         'comparison_results', 'existing_registry',
     },
+    'registry_revision/user.txt': {'human_feedback', 'existing_registry'},
 }
 PLACEHOLDER = re.compile(r'{{([a-z_]+)}}')
 
@@ -39,7 +43,8 @@ class PromptManager:
 
     @property
     def editable_prompt_paths(self):
-        return [self.prompt_dir / relative for relative in PROMPT_FILES]
+        return [self.prompt_dir / relative
+                for relative in MANUAL_EDITABLE_PROMPT_FILES]
 
     def load_from_disk(self):
         prompts = {}
@@ -98,14 +103,25 @@ class PromptManager:
         self.active = prompts
         return self.current_version
 
-    def resume(self, version):
+    def resume(self, version, allow_source_fallback=False):
         prompts = {}
         for relative in PROMPT_FILES:
             path = self._version_dir(version) / relative
             try:
                 prompts[relative] = path.read_text(encoding='utf-8').strip()
             except OSError as exc:
-                raise PromptError(f'历史 Prompt {path} 读取失败：{exc}') from exc
+                if (allow_source_fallback and
+                        relative.startswith('registry_revision/')):
+                    source = self.prompt_dir / relative
+                    try:
+                        prompts[relative] = source.read_text(
+                            encoding='utf-8').strip()
+                    except OSError:
+                        raise PromptError(
+                            f'历史 Prompt {path} 读取失败：{exc}') from exc
+                else:
+                    raise PromptError(
+                        f'历史 Prompt {path} 读取失败：{exc}') from exc
         self.validate(prompts)
         self.current_version = version
         self.active = prompts

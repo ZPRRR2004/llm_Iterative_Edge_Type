@@ -1,0 +1,12 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_0_1",
+      "start_anchor": "New Terminal Output:\nroot@157a56ea-3acd-478c-aec0-66971ff88c54:/app# ls -la /app"
+    },
+    {
+      "tool_call_id": "call_0_2",
+      "start_anchor": "root@157a56ea-3acd-478c-aec0-66971ff88c54:/app# python3 -c 'import numpy, scipy; print(\"ok\")'"
+    }
+  ]
+}
