@@ -1,0 +1,101 @@
+{
+  "window_file": "trajectory2__window_0002.json",
+  "trajectory_id": "trajectory2",
+  "window_id": "window_0002",
+  "global_index": 3,
+  "prompt_version": "v0001",
+  "registry_snapshot": [
+    {
+      "name": "USES_PREVIOUSLY_PRODUCED_ARTIFACT",
+      "definition": "A subsequent execution command consumes, loads, or invokes an artifact (such as a source file or script) that was produced by an earlier agent action within the same trajectory.",
+      "source_description": "An earlier agent action that created a persistent artifact.",
+      "target_description": "A later command that loads or executes the previously created artifact."
+    },
+    {
+      "name": "REVEALS_MISSING_PREREQUISITE",
+      "definition": "A preliminary environment probe performed by the agent returns evidence that a required tool or runtime is not available for the upcoming task.",
+      "source_description": "An agent probe action that checks for the availability of a required tool or runtime.",
+      "target_description": "An observation reporting that the probed prerequisite is absent from the environment."
+    },
+    {
+      "name": "MISSING_PREREQUISITE_CAUSES_EXECUTION_FAILURE",
+      "definition": "A later execution attempt fails to run because it depends on the same prerequisite that an earlier observation reported as missing.",
+      "source_description": "An earlier observation indicating that a required prerequisite is missing.",
+      "target_description": "A subsequent command execution that fails because that prerequisite is unavailable."
+    },
+    {
+      "name": "PLANS_REMEDIATION_FOR_MISSING_PREREQUISITE",
+      "definition": "The agent's plan or decision includes a conditional follow-up step to install or obtain a prerequisite in case an availability check reveals it is missing.",
+      "source_description": "Evidence or anticipation that a required prerequisite may be missing from the environment.",
+      "target_description": "An agent plan or decision to install or obtain the missing prerequisite."
+    },
+    {
+      "name": "ATTEMPTS_TO_REPAIR",
+      "definition": "A subsequent agent action attempts to resolve a failure or missing prerequisite identified by an earlier execution step so that the blocked operation can proceed.",
+      "source_description": "An earlier observed execution failure or error caused by a missing prerequisite (e.g., a required tool or program not being available).",
+      "target_description": "A subsequent agent action intended to provide the missing prerequisite or otherwise resolve that failure."
+    },
+    {
+      "name": "VERIFIES_PRODUCED_OUTPUT",
+      "definition": "A subsequent agent action independently inspects or validates an artifact whose production was reported by an earlier execution step, in order to confirm the reported output actually exists and is well-formed.",
+      "source_description": "An earlier execution result that reports or claims that an output artifact was produced.",
+      "target_description": "A subsequent action that independently checks the existence, content, size, or validity of that reported artifact."
+    },
+    {
+      "name": "DECIDES_TASK_COMPLETION_FROM_VERIFIED_RESULTS",
+      "definition": "Based on verified successful results for the required deliverables, the agent concludes that the task is complete and finalizes execution.",
+      "source_description": "Verified execution results confirming that the required deliverables exist and behave correctly.",
+      "target_description": "The agent's decision to mark the task as complete and terminate further execution."
+    },
+    {
+      "name": "INVESTIGATES_FAILURE_CAUSE",
+      "definition": "A subsequent diagnostic action gathers information about the cause or environment of an earlier observed failure or blocker.",
+      "source_description": "An earlier observed execution failure, error, or blocker.",
+      "target_description": "A subsequent diagnostic action that inspects system state, constraints, or capabilities to determine the cause of that failure."
+    },
+    {
+      "name": "DIAGNOSTIC_RESULT_GUIDES_REPAIR",
+      "definition": "A diagnostic observation revealing an environmental constraint or incompatibility directs the selection of a specific corrective action.",
+      "source_description": "A diagnostic observation that identifies a constraint, incompatibility, or capability gap.",
+      "target_description": "A subsequent repair action selected to satisfy or work around that diagnostic finding."
+    },
+    {
+      "name": "SUCCESSFUL_SETUP_ENABLES_SUBSEQUENT_USE",
+      "definition": "A successful installation or environment-setup action makes a capability available that the agent subsequently relies on.",
+      "source_description": "A successful setup or installation action result.",
+      "target_description": "A subsequent action that uses the capability made available by that setup."
+    },
+    {
+      "name": "VERIFIES_OUTCOME_OF_PREVIOUS_ACTION",
+      "definition": "A subsequent agent action checks the completion status or result of an earlier action whose outcome is uncertain or asynchronous.",
+      "source_description": "An earlier agent action whose outcome is uncertain, asynchronous, or needs confirmation.",
+      "target_description": "A subsequent check or inspection that determines whether the earlier action completed or produced the expected result."
+    }
+  ],
+  "completed_stages": [
+    "discovery",
+    "comparison",
+    "review"
+  ],
+  "accepted_edge_types": [
+    {
+      "name": "CONFLICTING_RESULTS_TRIGGER_DISAMBIGUATING_ANALYSIS",
+      "definition": "Multiple mutually inconsistent outputs produced by alternative methods applied to the same problem prompt the agent to perform additional targeted analysis to determine which result is correct.",
+      "source_description": "A set of divergent or mutually inconsistent results produced by alternative methods or analyses of the same problem.",
+      "target_description": "A follow-up analysis action designed to discriminate among the divergent results and select the correct one."
+    },
+    {
+      "name": "REUSES_PRIOR_RESULT_AS_INPUT",
+      "definition": "A result that was previously derived, evaluated, or selected is supplied as an input to a subsequent action.",
+      "source_description": "An earlier derived, evaluated, or selected result such as a chosen structure or computed value.",
+      "target_description": "A later action that consumes that earlier result as an input or parameter."
+    }
+  ],
+  "status": "completed",
+  "created_at": "2026-09-22T07:21:51.687947+00:00",
+  "updated_at": "2026-09-22T07:23:14.442077+00:00",
+  "failed_stage": null,
+  "error": null,
+  "registry_size_after": 13,
+  "completed_at": "2026-09-22T07:23:14.442077+00:00"
+}

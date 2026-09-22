@@ -1,6 +1,7 @@
 """Load, validate, sort, and serialize Split context windows."""
 import hashlib
 import json
+import re
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -21,7 +22,8 @@ class WindowRecord:
 
     @property
     def run_name(self):
-        return f'{self.trajectory_id}__{self.window_id}'
+        raw = f'{self.trajectory_id}__{self.window_id}'
+        return re.sub(r'[^A-Za-z0-9._-]+', '_', raw).strip('._') or 'window'
 
 
 def _text(value, label):
@@ -96,14 +98,19 @@ def load_windows(input_dir):
         raise WindowError(f'输入目录中没有 Context Window JSON：{input_dir}')
     loaded.sort(key=lambda item: (item[0], item[1], item[2], item[3].name))
     seen = set()
+    seen_run_names = set()
     records = []
     for global_index, (trajectory_id, window_index, window_id, path, value, digest) in enumerate(loaded):
         identity = (trajectory_id, window_index)
         if identity in seen:
             raise WindowError(f'重复 Window：trajectory_id={trajectory_id}, index={window_index}')
         seen.add(identity)
-        records.append(WindowRecord(path, value, trajectory_id, window_id,
-                                    window_index, global_index, digest))
+        record = WindowRecord(path, value, trajectory_id, window_id,
+                              window_index, global_index, digest)
+        if record.run_name in seen_run_names:
+            raise WindowError(f'Window 运行目录名称冲突：{record.run_name}')
+        seen_run_names.add(record.run_name)
+        records.append(record)
     return records
 
 
@@ -129,6 +136,7 @@ def manifest(records, input_dir):
                 'trajectory_id': record.trajectory_id,
                 'window_id': record.window_id,
                 'window_index': record.window_index,
+                'run_name': record.run_name,
                 'sha256': record.sha256,
             }
             for record in records

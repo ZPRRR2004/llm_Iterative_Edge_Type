@@ -1,0 +1,149 @@
+{
+  "window_file": "trajectory4__window_0001.json",
+  "trajectory_id": "trajectory4",
+  "window_id": "window_0001",
+  "global_index": 7,
+  "prompt_version": "v0001",
+  "registry_snapshot": [
+    {
+      "name": "USES_PREVIOUSLY_PRODUCED_ARTIFACT",
+      "definition": "A subsequent execution command consumes, loads, or invokes an artifact (such as a source file or script) that was produced by an earlier agent action within the same trajectory.",
+      "source_description": "An earlier agent action that created a persistent artifact.",
+      "target_description": "A later command that loads or executes the previously created artifact."
+    },
+    {
+      "name": "REVEALS_MISSING_PREREQUISITE",
+      "definition": "A preliminary environment probe performed by the agent returns evidence that a required tool or runtime is not available for the upcoming task.",
+      "source_description": "An agent probe action that checks for the availability of a required tool or runtime.",
+      "target_description": "An observation reporting that the probed prerequisite is absent from the environment."
+    },
+    {
+      "name": "MISSING_PREREQUISITE_CAUSES_EXECUTION_FAILURE",
+      "definition": "A later execution attempt fails to run because it depends on the same prerequisite that an earlier observation reported as missing.",
+      "source_description": "An earlier observation indicating that a required prerequisite is missing.",
+      "target_description": "A subsequent command execution that fails because that prerequisite is unavailable."
+    },
+    {
+      "name": "PLANS_REMEDIATION_FOR_MISSING_PREREQUISITE",
+      "definition": "The agent's plan or decision includes a conditional follow-up step to install or obtain a prerequisite in case an availability check reveals it is missing.",
+      "source_description": "Evidence or anticipation that a required prerequisite may be missing from the environment.",
+      "target_description": "An agent plan or decision to install or obtain the missing prerequisite."
+    },
+    {
+      "name": "ATTEMPTS_TO_REPAIR",
+      "definition": "A subsequent agent action attempts to resolve a failure or missing prerequisite identified by an earlier execution step so that the blocked operation can proceed.",
+      "source_description": "An earlier observed execution failure or error caused by a missing prerequisite (e.g., a required tool or program not being available).",
+      "target_description": "A subsequent agent action intended to provide the missing prerequisite or otherwise resolve that failure."
+    },
+    {
+      "name": "VERIFIES_PRODUCED_OUTPUT",
+      "definition": "A subsequent agent action independently inspects or validates an artifact whose production was reported by an earlier execution step, in order to confirm the reported output actually exists and is well-formed.",
+      "source_description": "An earlier execution result that reports or claims that an output artifact was produced.",
+      "target_description": "A subsequent action that independently checks the existence, content, size, or validity of that reported artifact."
+    },
+    {
+      "name": "DECIDES_TASK_COMPLETION_FROM_VERIFIED_RESULTS",
+      "definition": "Based on verified successful results for the required deliverables, the agent concludes that the task is complete and finalizes execution.",
+      "source_description": "Verified execution results confirming that the required deliverables exist and behave correctly.",
+      "target_description": "The agent's decision to mark the task as complete and terminate further execution."
+    },
+    {
+      "name": "INVESTIGATES_FAILURE_CAUSE",
+      "definition": "A subsequent diagnostic action gathers information about the cause or environment of an earlier observed failure or blocker.",
+      "source_description": "An earlier observed execution failure, error, or blocker.",
+      "target_description": "A subsequent diagnostic action that inspects system state, constraints, or capabilities to determine the cause of that failure."
+    },
+    {
+      "name": "DIAGNOSTIC_RESULT_GUIDES_REPAIR",
+      "definition": "A diagnostic observation revealing an environmental constraint or incompatibility directs the selection of a specific corrective action.",
+      "source_description": "A diagnostic observation that identifies a constraint, incompatibility, or capability gap.",
+      "target_description": "A subsequent repair action selected to satisfy or work around that diagnostic finding."
+    },
+    {
+      "name": "SUCCESSFUL_SETUP_ENABLES_SUBSEQUENT_USE",
+      "definition": "A successful installation or environment-setup action makes a capability available that the agent subsequently relies on.",
+      "source_description": "A successful setup or installation action result.",
+      "target_description": "A subsequent action that uses the capability made available by that setup."
+    },
+    {
+      "name": "VERIFIES_OUTCOME_OF_PREVIOUS_ACTION",
+      "definition": "A subsequent agent action checks the completion status or result of an earlier action whose outcome is uncertain or asynchronous.",
+      "source_description": "An earlier agent action whose outcome is uncertain, asynchronous, or needs confirmation.",
+      "target_description": "A subsequent check or inspection that determines whether the earlier action completed or produced the expected result."
+    },
+    {
+      "name": "CONFLICTING_RESULTS_TRIGGER_DISAMBIGUATING_ANALYSIS",
+      "definition": "Multiple mutually inconsistent outputs produced by alternative methods applied to the same problem prompt the agent to perform additional targeted analysis to determine which result is correct.",
+      "source_description": "A set of divergent or mutually inconsistent results produced by alternative methods or analyses of the same problem.",
+      "target_description": "A follow-up analysis action designed to discriminate among the divergent results and select the correct one."
+    },
+    {
+      "name": "REUSES_PRIOR_RESULT_AS_INPUT",
+      "definition": "A result that was previously derived, evaluated, or selected is supplied as an input to a subsequent action.",
+      "source_description": "An earlier derived, evaluated, or selected result such as a chosen structure or computed value.",
+      "target_description": "A later action that consumes that earlier result as an input or parameter."
+    },
+    {
+      "name": "USES_TEST_SPECIFICATION_TO_GUIDE_SOLUTION",
+      "definition": "An agent examines an existing test harness or evaluation specification to understand how success is measured, and uses that understanding to direct or constrain subsequent solution construction.",
+      "source_description": "An observation or analysis of a test harness, evaluation script, or acceptance criteria.",
+      "target_description": "A subsequent agent plan or action aimed at satisfying the identified success criteria."
+    },
+    {
+      "name": "CONFIRMS_PROPOSED_MECHANISM",
+      "definition": "An observed result of an experiment performed to evaluate a proposed mechanism provides evidence that the mechanism behaves as hypothesized, validating the mechanism for subsequent adoption.",
+      "source_description": "An experiment or probe execution performed by the agent to evaluate a proposed mechanism, approach, or prediction.",
+      "target_description": "An observed execution result that provides evidence supporting the expected behavior of the proposed mechanism."
+    },
+    {
+      "name": "RESPONDS_TO_FAILED_ATTEMPT_WITH_ALTERNATIVE",
+      "definition": "After an execution attempt fails to accomplish its intended goal (no effect, error, or unavailable tool or module), the agent selects a different action to accomplish the same goal by an alternative mechanism, rather than fixing the condition that caused the failure.",
+      "source_description": "An execution attempt that failed to accomplish its intended goal or produced no usable result.",
+      "target_description": "An alternative agent action intended to accomplish the same goal by a different mechanism."
+    },
+    {
+      "name": "RESPONDS_TO_CONFIRMATION_REQUEST",
+      "definition": "A subsequent agent action provides the explicit confirmation demanded by a tool observation that refused to execute a final, irreversible, or high-impact operation until the agent reconfirmed its intent.",
+      "source_description": "A tool observation that prompts for confirmation before executing a final or high-impact operation instead of carrying it out.",
+      "target_description": "A subsequent agent action that confirms the operation, typically by re-issuing the original tool call with explicit confirmation."
+    },
+    {
+      "name": "REAFFIRMS_PRIOR_CONCLUSION",
+      "definition": "A later agent reasoning step restates a conclusion or justification that was already established by an earlier reasoning step, without adding new evidence or changing the conclusion.",
+      "source_description": "An earlier agent thought or analysis that states a conclusion or justification.",
+      "target_description": "A subsequent agent thought or analysis that repeats the same conclusion or justification."
+    }
+  ],
+  "completed_stages": [
+    "discovery",
+    "comparison",
+    "review"
+  ],
+  "accepted_edge_types": [
+    {
+      "name": "PROBES_ENVIRONMENT_FOR_PREREQUISITES",
+      "definition": "An agent action inspects the runtime environment to determine whether the tools, libraries, or versions required for a planned or in-progress task step are available.",
+      "source_description": "A planned or in-progress task step whose execution depends on external prerequisites such as tools, libraries, or specific versions.",
+      "target_description": "A diagnostic action that reports the presence, versions, or availability status of those prerequisites."
+    },
+    {
+      "name": "SCANS_SOURCE_FOR_INCOMPATIBLE_USAGE",
+      "definition": "An agent action systematically searches the source tree to enumerate code locations that use patterns known to be deprecated, removed, or otherwise incompatible with the constraints of the current environment.",
+      "source_description": "An observation establishing a compatibility constraint or requirement, such as a required dependency version or target runtime present in the environment.",
+      "target_description": "A search action that enumerates candidate source locations requiring modification to satisfy that constraint."
+    },
+    {
+      "name": "INSPECTS_BUILD_CONFIGURATION",
+      "definition": "An agent action reads a build or packaging configuration artifact to determine the components, extensions, or dependencies that the build or installation process must handle.",
+      "source_description": "A task step that requires building, compiling, or installing a package from source.",
+      "target_description": "An inspection of the build or packaging configuration that defines the required components, extensions, or dependencies."
+    }
+  ],
+  "status": "completed",
+  "created_at": "2026-09-22T07:28:46.005790+00:00",
+  "updated_at": "2026-09-22T07:30:04.437183+00:00",
+  "failed_stage": null,
+  "error": null,
+  "registry_size_after": 21,
+  "completed_at": "2026-09-22T07:30:04.437183+00:00"
+}

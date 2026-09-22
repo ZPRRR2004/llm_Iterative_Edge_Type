@@ -1,0 +1,23 @@
+Compare the candidate edge types against the existing edge type registry.
+
+Classify every candidate into exactly one of the following categories:
+
+EXISTING: An existing type adequately covers the candidate's semantic relationship.
+
+NEW: The candidate expresses a distinct semantic relationship not adequately covered by the registry.
+
+UNCERTAIN: The candidate partially overlaps with an existing type and requires further review.
+
+Compare the relationship definitions, applicability conditions, source roles, target roles, and relationship directions.
+
+Apply the supplied granularity rules and positive and negative examples.
+
+Candidate Edge Types:
+
+{{candidate_edge_types}}
+
+Existing Edge Type Registry:
+
+{{existing_registry}}
+
+Return the comparison results using the required JSON schema.

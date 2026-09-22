@@ -1,0 +1,82 @@
+{
+  "stage": "comparison",
+  "window_file": "trajectory1__window_0001.json",
+  "prompt_version": "v0001",
+  "model": "deepseek-flash",
+  "succeeded": true,
+  "completed_at": "2026-09-22T07:18:21.566563+00:00",
+  "duration_seconds": 7.078,
+  "attempt_count": 1,
+  "attempts": [
+    {
+      "attempt": 1,
+      "started_at": "2026-09-22T07:18:21.566563+00:00",
+      "duration_seconds": 7.078,
+      "raw_response": {
+        "id": "2c293de2-6abe-4646-b8d9-56ef5ae3a47c",
+        "object": "chat.completion",
+        "created": 1790061501,
+        "model": "deepseek-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"existing\": [], \"new\": [{\"name\": \"USES_PREVIOUSLY_PRODUCED_ARTIFACT\", \"definition\": \"A subsequent execution command consumes, loads, or invokes an artifact (such as a source file or script) that was produced by an earlier agent action within the same trajectory.\", \"source_description\": \"An earlier agent action that created a persistent artifact.\", \"target_description\": \"A later command that loads or executes the previously created artifact.\"}, {\"name\": \"REVEALS_MISSING_PREREQUISITE\", \"definition\": \"A preliminary environment probe performed by the agent returns evidence that a required tool or runtime is not available for the upcoming task.\", \"source_description\": \"An agent probe action that checks for the availability of a required tool or runtime.\", \"target_description\": \"An observation reporting that the probed prerequisite is absent from the environment.\"}, {\"name\": \"MISSING_PREREQUISITE_CAUSES_EXECUTION_FAILURE\", \"definition\": \"A later execution attempt fails to run because it depends on the same prerequisite that an earlier observation reported as missing.\", \"source_description\": \"An earlier observation indicating that a required prerequisite is missing.\", \"target_description\": \"A subsequent command execution that fails because that prerequisite is unavailable.\"}, {\"name\": \"PLANS_REMEDIATION_FOR_MISSING_PREREQUISITE\", \"definition\": \"The agent's plan or decision includes a conditional follow-up step to install or obtain a prerequisite in case an availability check reveals it is missing.\", \"source_description\": \"Evidence or anticipation that a required prerequisite may be missing from the environment.\", \"target_description\": \"An agent plan or decision to install or obtain the missing prerequisite.\"}], \"uncertain\": []}",
+              "reasoning_content": "The existing registry is empty. So all candidates are NEW. Need to account for every candidate exactly once. Since registry is empty, no EXISTING matches, no UNCERTAIN overlap. All four go to NEW.\n\nLet me produce the JSON."
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 1781,
+          "completion_tokens": 415,
+          "total_tokens": 2196,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 50
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 1781
+        },
+        "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+      },
+      "response_content": "{\"existing\": [], \"new\": [{\"name\": \"USES_PREVIOUSLY_PRODUCED_ARTIFACT\", \"definition\": \"A subsequent execution command consumes, loads, or invokes an artifact (such as a source file or script) that was produced by an earlier agent action within the same trajectory.\", \"source_description\": \"An earlier agent action that created a persistent artifact.\", \"target_description\": \"A later command that loads or executes the previously created artifact.\"}, {\"name\": \"REVEALS_MISSING_PREREQUISITE\", \"definition\": \"A preliminary environment probe performed by the agent returns evidence that a required tool or runtime is not available for the upcoming task.\", \"source_description\": \"An agent probe action that checks for the availability of a required tool or runtime.\", \"target_description\": \"An observation reporting that the probed prerequisite is absent from the environment.\"}, {\"name\": \"MISSING_PREREQUISITE_CAUSES_EXECUTION_FAILURE\", \"definition\": \"A later execution attempt fails to run because it depends on the same prerequisite that an earlier observation reported as missing.\", \"source_description\": \"An earlier observation indicating that a required prerequisite is missing.\", \"target_description\": \"A subsequent command execution that fails because that prerequisite is unavailable.\"}, {\"name\": \"PLANS_REMEDIATION_FOR_MISSING_PREREQUISITE\", \"definition\": \"The agent's plan or decision includes a conditional follow-up step to install or obtain a prerequisite in case an availability check reveals it is missing.\", \"source_description\": \"Evidence or anticipation that a required prerequisite may be missing from the environment.\", \"target_description\": \"An agent plan or decision to install or obtain the missing prerequisite.\"}], \"uncertain\": []}",
+      "error": null
+    }
+  ],
+  "parsed_response": {
+    "existing": [],
+    "new": [
+      {
+        "name": "USES_PREVIOUSLY_PRODUCED_ARTIFACT",
+        "definition": "A subsequent execution command consumes, loads, or invokes an artifact (such as a source file or script) that was produced by an earlier agent action within the same trajectory.",
+        "source_description": "An earlier agent action that created a persistent artifact.",
+        "target_description": "A later command that loads or executes the previously created artifact."
+      },
+      {
+        "name": "REVEALS_MISSING_PREREQUISITE",
+        "definition": "A preliminary environment probe performed by the agent returns evidence that a required tool or runtime is not available for the upcoming task.",
+        "source_description": "An agent probe action that checks for the availability of a required tool or runtime.",
+        "target_description": "An observation reporting that the probed prerequisite is absent from the environment."
+      },
+      {
+        "name": "MISSING_PREREQUISITE_CAUSES_EXECUTION_FAILURE",
+        "definition": "A later execution attempt fails to run because it depends on the same prerequisite that an earlier observation reported as missing.",
+        "source_description": "An earlier observation indicating that a required prerequisite is missing.",
+        "target_description": "A subsequent command execution that fails because that prerequisite is unavailable."
+      },
+      {
+        "name": "PLANS_REMEDIATION_FOR_MISSING_PREREQUISITE",
+        "definition": "The agent's plan or decision includes a conditional follow-up step to install or obtain a prerequisite in case an availability check reveals it is missing.",
+        "source_description": "Evidence or anticipation that a required prerequisite may be missing from the environment.",
+        "target_description": "An agent plan or decision to install or obtain the missing prerequisite."
+      }
+    ],
+    "uncertain": []
+  },
+  "previous_calls": []
+}

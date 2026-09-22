@@ -1,0 +1,68 @@
+[
+  {
+    "name": "NON_FATAL_WARNINGS_ACCEPTED_WITHOUT_REPAIR",
+    "definition": "Non-fatal warnings reported during an otherwise successful execution step are treated as non-blocking, and the agent continues the workflow without modifying anything to address those warnings.",
+    "source_description": "An execution observation that reports warnings while indicating the step completed successfully.",
+    "target_description": "A subsequent agent action that continues the workflow without attempting to resolve the reported warnings."
+  },
+  {
+    "name": "USES_OBSERVED_RESOURCE_AS_INPUT",
+    "definition": "A subsequent agent action consumes, operates on, or passes as arguments resources or entities that were enumerated in an earlier observation of the environment.",
+    "source_description": "An earlier observation that enumerates available resources, files, or other environment entities (e.g., a directory listing or inventory of identifiers).",
+    "target_description": "A subsequent agent action that operates on, passes, or otherwise consumes those enumerated resources as inputs."
+  },
+  {
+    "name": "CONFLICTING_FIELDS_TRIGGER_RULE_BASED_SELECTION",
+    "definition": "An observation of multiple differing candidate values for the same required field within a source document or record triggers the application of a specified precedence rule to select one value.",
+    "source_description": "An observation showing multiple conflicting candidate values for the same required field in a document or record.",
+    "target_description": "An agent decision that selects one of the conflicting values according to a predefined precedence rule."
+  },
+  {
+    "name": "MISSING_REQUIRED_FIELD_TRIGGERS_DEFAULT_ASSIGNMENT",
+    "definition": "An observation that a required field is absent from source content triggers the assignment of a task-specified default value, such as zero or an empty string.",
+    "source_description": "An observation of source content that lacks a required field.",
+    "target_description": "An agent decision assigning the specified default value to the missing field."
+  },
+  {
+    "name": "DERIVES_DECISION_FROM_OBSERVATION",
+    "definition": "An agent derives an interpretation, classification, or status decision by reading the content returned in an earlier tool observation, such as extracted document text or command output.",
+    "source_description": "An earlier tool observation whose content provides the raw evidence needed for interpretation.",
+    "target_description": "The agent's subsequent decision, classification, or interpretation derived from that observed content."
+  },
+  {
+    "name": "CLEANS_UP_INTERMEDIATE_ARTIFACTS",
+    "definition": "After the primary deliverables have been produced, the agent removes temporary or intermediate resources that were created during earlier execution steps.",
+    "source_description": "Intermediate resources or artifacts created during earlier execution steps and no longer needed once the main task is complete.",
+    "target_description": "A cleanup action that deletes or disposes of those intermediate resources."
+  },
+  {
+    "name": "SUCCESSFUL_PROBE_ENABLES_BROADER_APPLICATION",
+    "definition": "A subsequent agent action generalizes or scales up a method that an earlier, smaller-scale probe first confirmed to work, applying it across multiple inputs or a larger scope.",
+    "source_description": "An earlier execution result confirming that a method or capability works on a single test input or small-scale probe.",
+    "target_description": "A subsequent agent action that applies the same confirmed method across multiple inputs or at a larger scale."
+  },
+  {
+    "name": "EXTRACTS_REQUIRED_DATA_FROM_RESOURCE",
+    "definition": "An agent inspects a provided resource (such as a file supplied with the task) and derives from its content a specific piece of required data or component that is retained for subsequent task execution.",
+    "source_description": "An agent action that inspects or reads a provided resource to obtain task-relevant content.",
+    "target_description": "The specific required data or component extracted from that resource and retained for later use in the task."
+  },
+  {
+    "name": "CONSULTS_ALTERNATE_REFERENCE_TO_RESOLVE_DATA_ANOMALY",
+    "definition": "After an observed data artifact is found to contain an ambiguous, incomplete, or invalid placeholder value, the agent queries an independent reference source to determine the correct value to use.",
+    "source_description": "An earlier observed data artifact whose content contains an anomaly, placeholder, or unresolvable value.",
+    "target_description": "A subsequent agent action that queries an independent reference source to resolve that anomaly and obtain the correct value."
+  },
+  {
+    "name": "ASSEMBLES_GATHERED_COMPONENTS_INTO_COMPOSITE_ARTIFACT",
+    "definition": "The agent constructs a single composite output by combining, in a specified arrangement, multiple distinct components that were previously identified or collected during the run.",
+    "source_description": "A set of separately gathered or identified components that must be combined into one output.",
+    "target_description": "An agent action that combines those components into a single composite artifact."
+  },
+  {
+    "name": "PROMPTS_FURTHER_INVESTIGATION",
+    "definition": "An observation whose interpretation is ambiguous, whose structure is unclear, or which leaves the agent with insufficient understanding is followed by a subsequent investigative action that gathers additional diagnostic detail to resolve that ambiguity.",
+    "source_description": "An earlier observation whose meaning, structure, or interpretation is unclear or incomplete.",
+    "target_description": "A subsequent investigative action that probes the data or environment further to resolve the ambiguity."
+  }
+]

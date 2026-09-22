@@ -1,0 +1,9 @@
+{
+  "batch_index": 2,
+  "start_window": 11,
+  "end_window": 20,
+  "prompt_version": "v0002",
+  "new_edge_type_count": 11,
+  "registry_size": 33,
+  "saved_at": "2026-09-22T07:52:01.326282+00:00"
+}

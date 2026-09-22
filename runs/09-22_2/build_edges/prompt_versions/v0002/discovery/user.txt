@@ -1,0 +1,13 @@
+Analyze the following agent execution context window.
+
+Independently discover reusable semantic edge types supported by the trajectory.
+
+Focus on relationships involving the Core Events, including relationships between Overlap Events and Core Events.
+
+Apply the supplied granularity rules and positive and negative examples.
+
+Context Window:
+
+{{context_window}}
+
+Return the candidate edge types using the required JSON schema.

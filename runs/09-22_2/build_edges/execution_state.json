@@ -1,0 +1,13 @@
+{
+  "next_window_index": 20,
+  "completed_windows": 20,
+  "current_batch_index": 2,
+  "completed_windows_in_batch": 10,
+  "prompt_version": "v0002",
+  "next_stage": "discovery",
+  "status": "completed",
+  "config": {
+    "human_feedback_interval": 10,
+    "max_llm_retries": 3
+  }
+}

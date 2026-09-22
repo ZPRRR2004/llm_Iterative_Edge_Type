@@ -1,0 +1,46 @@
+{
+  "window_file": "trajectory1__window_0001.json",
+  "trajectory_id": "trajectory1",
+  "window_id": "window_0001",
+  "global_index": 0,
+  "prompt_version": "v0001",
+  "registry_snapshot": [],
+  "completed_stages": [
+    "discovery",
+    "comparison",
+    "review"
+  ],
+  "accepted_edge_types": [
+    {
+      "name": "USES_PREVIOUSLY_PRODUCED_ARTIFACT",
+      "definition": "A subsequent execution command consumes, loads, or invokes an artifact (such as a source file or script) that was produced by an earlier agent action within the same trajectory.",
+      "source_description": "An earlier agent action that created a persistent artifact.",
+      "target_description": "A later command that loads or executes the previously created artifact."
+    },
+    {
+      "name": "REVEALS_MISSING_PREREQUISITE",
+      "definition": "A preliminary environment probe performed by the agent returns evidence that a required tool or runtime is not available for the upcoming task.",
+      "source_description": "An agent probe action that checks for the availability of a required tool or runtime.",
+      "target_description": "An observation reporting that the probed prerequisite is absent from the environment."
+    },
+    {
+      "name": "MISSING_PREREQUISITE_CAUSES_EXECUTION_FAILURE",
+      "definition": "A later execution attempt fails to run because it depends on the same prerequisite that an earlier observation reported as missing.",
+      "source_description": "An earlier observation indicating that a required prerequisite is missing.",
+      "target_description": "A subsequent command execution that fails because that prerequisite is unavailable."
+    },
+    {
+      "name": "PLANS_REMEDIATION_FOR_MISSING_PREREQUISITE",
+      "definition": "The agent's plan or decision includes a conditional follow-up step to install or obtain a prerequisite in case an availability check reveals it is missing.",
+      "source_description": "Evidence or anticipation that a required prerequisite may be missing from the environment.",
+      "target_description": "An agent plan or decision to install or obtain the missing prerequisite."
+    }
+  ],
+  "status": "completed",
+  "created_at": "2026-09-22T07:17:39.892083+00:00",
+  "updated_at": "2026-09-22T07:19:03.304807+00:00",
+  "failed_stage": null,
+  "error": null,
+  "registry_size_after": 4,
+  "completed_at": "2026-09-22T07:19:03.304807+00:00"
+}
