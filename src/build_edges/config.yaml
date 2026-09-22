@@ -1,0 +1,5 @@
+# 每处理多少个 Window 进行一次人工 Prompt 修改
+human_feedback_interval: 10
+
+# LLM 调用或输出解析失败后的最大重试次数
+max_llm_retries: 3
