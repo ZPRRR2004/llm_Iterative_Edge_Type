@@ -1,0 +1,5 @@
+{
+  "title": "Recover DAG and run causal intervention on Bayesian network sample",
+  "query": "Using the dataset /app/bn_sample_10k.csv, recover the underlying DAG. The original DAG has six total edges, and node U has no parents. If directionality is unclear for edges not involving U, assume the node whose letter comes first alphabetically is the child and the node whose letter comes second is the parent. Save the recovered DAG edges to /app/learned_dag.csv in the format to,from (e.g. A,B). Then learn a Bayesian Network from the data using the recovered DAG, perform a causal intervention on Y setting its value to 0.0 (or, if exact value intervention is unsupported, use an extremely small variance of 10e-9 around 0.0), save the edges of the intervened BN to /app/intervened_dag.csv in the same to,from format, sample 10k points from the intervened BN, and save the result to /app/final_bn_sample.csv with the same column names as the original data.",
+  "review_flags": []
+}

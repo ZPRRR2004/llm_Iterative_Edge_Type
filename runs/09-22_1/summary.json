@@ -1,0 +1,37 @@
+{
+  "total": 5,
+  "succeeded": 5,
+  "failed": 0,
+  "cases": [
+    {
+      "case": "adaptive-rejection-sampler__yPngRa6",
+      "input": "trajectory/adaptive-rejection-sampler__yPngRa6/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory1.json"
+    },
+    {
+      "case": "bn-fit-modify__6yRKJGL",
+      "input": "trajectory/bn-fit-modify__6yRKJGL/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory2.json"
+    },
+    {
+      "case": "break-filter-js-from-html__uMZWSCx",
+      "input": "trajectory/break-filter-js-from-html__uMZWSCx/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory3.json"
+    },
+    {
+      "case": "build-cython-ext__FFaGgtD",
+      "input": "trajectory/build-cython-ext__FFaGgtD/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory4.json"
+    },
+    {
+      "case": "build-pmars__kc8Q9mF",
+      "input": "trajectory/build-pmars__kc8Q9mF/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory5.json"
+    }
+  ]
+}

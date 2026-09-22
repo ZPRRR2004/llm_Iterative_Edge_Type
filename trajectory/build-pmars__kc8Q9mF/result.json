@@ -1,0 +1,160 @@
+{
+  "id": "7d5a9f9d-ae23-47c5-af9b-6a8ec0ff2d52",
+  "task_name": "terminal-bench/build-pmars",
+  "trial_name": "build-pmars__kc8Q9mF",
+  "trial_uri": "file:///home/alex/.cursor/worktrees/harbor__SSH__tbench-gcp_/txv1/jobs/tbench-2-1-fable-5__high-fallback/build-pmars__kc8Q9mF",
+  "task_id": {
+    "org": "terminal-bench",
+    "name": "build-pmars",
+    "ref": "sha256:63f0449b276f081986740c941ea9372068b310a02b062c1e5e3400f575241893"
+  },
+  "source": "terminal-bench/terminal-bench-2-1",
+  "task_checksum": "d8b362b978357ecfe110604103166aeb7c1379bf97da88fd66ea200db54c6a37",
+  "config": {
+    "task": {
+      "path": null,
+      "git_url": null,
+      "git_commit_id": null,
+      "name": "terminal-bench/build-pmars",
+      "ref": "sha256:63f0449b276f081986740c941ea9372068b310a02b062c1e5e3400f575241893",
+      "overwrite": false,
+      "download_dir": null,
+      "source": "terminal-bench/terminal-bench-2-1"
+    },
+    "trial_name": "build-pmars__kc8Q9mF",
+    "trials_dir": "jobs/tbench-2-1-fable-5__high-fallback",
+    "timeout_multiplier": 1.0,
+    "agent_timeout_multiplier": null,
+    "verifier_timeout_multiplier": null,
+    "agent_setup_timeout_multiplier": null,
+    "environment_build_timeout_multiplier": null,
+    "agent": {
+      "name": "terminus-2",
+      "import_path": null,
+      "model_name": "anthropic/claude-fable-5",
+      "skills": [],
+      "override_timeout_sec": null,
+      "override_setup_timeout_sec": null,
+      "max_timeout_sec": null,
+      "extra_allowed_hosts": [],
+      "kwargs": {
+        "model_info": {
+          "supports_adaptive_thinking": true,
+          "supports_reasoning": true,
+          "supports_max_reasoning_effort": true,
+          "supports_xhigh_reasoning_effort": true
+        },
+        "temperature": 1,
+        "llm_kwargs": {
+          "extra_headers": {
+            "anthropic-beta": "server-side-fallback-2026-06-02"
+          }
+        },
+        "llm_call_kwargs": {
+          "max_tokens": 128000,
+          "allowed_openai_params": [
+            "thinking",
+            "fallback"
+          ],
+          "thinking": {
+            "type": "adaptive"
+          },
+          "output_config": {
+            "effort": "high"
+          },
+          "fallback": [
+            {
+              "model": "claude-opus-4-8"
+            }
+          ]
+        },
+        "reasoning_effort": "high"
+      },
+      "env": {},
+      "mcp_servers": []
+    },
+    "environment": {
+      "type": "daytona",
+      "import_path": null,
+      "force_build": false,
+      "delete": true,
+      "cpu_enforcement_policy": "auto",
+      "memory_enforcement_policy": "auto",
+      "override_cpus": null,
+      "override_memory_mb": null,
+      "override_storage_mb": null,
+      "override_gpus": null,
+      "override_tpu": null,
+      "mounts": null,
+      "extra_docker_compose": [],
+      "env": {},
+      "kwargs": {},
+      "extra_allowed_hosts": []
+    },
+    "verifier": {
+      "override_timeout_sec": null,
+      "max_timeout_sec": null,
+      "env": {},
+      "disable": false
+    },
+    "artifacts": [],
+    "extra_instruction_paths": [],
+    "job_id": "17f04e4f-1a75-4204-9b75-d042ef0333ec"
+  },
+  "agent_info": {
+    "name": "terminus-2",
+    "version": "2.0.0",
+    "model_info": {
+      "name": "claude-fable-5",
+      "provider": "anthropic"
+    }
+  },
+  "agent_result": {
+    "n_input_tokens": 53533,
+    "n_cache_tokens": 43304,
+    "n_output_tokens": 3705,
+    "cost_usd": null,
+    "rollout_details": [],
+    "metadata": {
+      "n_episodes": 10,
+      "api_request_times_msec": [
+        10645.113468170166,
+        11996.042251586914,
+        7866.992235183716,
+        7827.170610427856,
+        11536.864519119263,
+        12326.531887054443,
+        9304.022312164307,
+        9303.022623062134,
+        8128.011465072632,
+        8069.397449493408
+      ],
+      "summarization_count": 0
+    }
+  },
+  "verifier_result": {
+    "rewards": {
+      "reward": 1.0
+    }
+  },
+  "exception_info": null,
+  "started_at": "2026-06-04T23:28:35.650993Z",
+  "finished_at": "2026-06-04T23:34:47.523175Z",
+  "environment_setup": {
+    "started_at": "2026-06-04T23:28:35.653259Z",
+    "finished_at": "2026-06-04T23:28:37.401157Z"
+  },
+  "agent_setup": {
+    "started_at": "2026-06-04T23:28:37.401198Z",
+    "finished_at": "2026-06-04T23:28:42.322709Z"
+  },
+  "agent_execution": {
+    "started_at": "2026-06-04T23:28:42.322825Z",
+    "finished_at": "2026-06-04T23:34:35.029852Z"
+  },
+  "verifier": {
+    "started_at": "2026-06-04T23:34:37.755149Z",
+    "finished_at": "2026-06-04T23:34:46.994464Z"
+  },
+  "step_results": null
+}

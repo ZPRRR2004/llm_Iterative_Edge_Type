@@ -1,0 +1,5 @@
+{
+  "title": "Create XSS payload surviving /app/filter.py",
+  "query": "Create /app/out.html such that, even after being processed in-place by /app/filter.py, opening it in a browser automatically triggers a JavaScript alert() without requiring any user interaction. The filter script takes an HTML file as a command-line argument, modifies it in-place, and can be verified by running /app/test_outputs.py.",
+  "review_flags": []
+}

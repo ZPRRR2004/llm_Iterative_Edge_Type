@@ -1,0 +1,9 @@
+{
+  "stage": "normalizing",
+  "source": {
+    "filename": "trajectory.json",
+    "sha256": "acea57900bbfe3833f5cbe3709537e8b80fb4745f47e5198096120b85d11e3ed",
+    "adapter": "terminal-bench-2.0"
+  },
+  "last_step_id": 11
+}

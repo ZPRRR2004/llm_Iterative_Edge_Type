@@ -1,0 +1,5 @@
+{
+  "title": "Install and fix pyknotid for NumPy 2.3.0",
+  "query": "Clone pyknotid version 0.5.3 from https://github.com/SPOCKnots/pyknotid.git into /app/pyknotid, compile its Cython extensions (chelpers, ccomplexity, cinvariants), and install it from source into the system's global Python environment. Fix NumPy compatibility issues so the package works with the existing NumPy 2.3.0 without changing the original package structure. Verify that the README example runs without errors, including importing pyknotid, pyknotid.spacecurves.chelpers, pyknotid.spacecurves.ccomplexity, pyknotid.cinvariants, pyknotid.make, and pyknotid.spacecurves, constructing a Knot from mk.three_twist(num_points=100), and calling k.alexander_polynomial(-1). Also ensure the repository tests pass, except for /app/pyknotid/tests/test_random_curves.py (dead code) and /app/pyknotid/tests/test_catalogue.py, using error messages to guide fixes.",
+  "review_flags": []
+}
