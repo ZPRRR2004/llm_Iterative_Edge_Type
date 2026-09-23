@@ -246,7 +246,7 @@ Registry、Discovery 的候选、Comparison 的 `new`/`uncertain` 和 Review 的
 - 合法名称示例：`ATTEMPTS_TO_REPAIR`、`VERIFY_2_RESULTS`。
 - 非法名称示例：`attempts_to_repair`、`ATTEMPTS-TO-REPAIR`、`_VERIFY`。
 - 同一个 Edge Type 数组中不能出现重复名称。
-- 新接受类型的名称不能与当前 Registry 中已有名称冲突。
+- 更新后的完整 Registry 不能有重复名称；如果已有类型在本轮修订时改名，新类型可以使用它让出的原名称。
 - 响应 Object 不允许多余字段。
 
 ## 三阶段执行细节
@@ -963,7 +963,7 @@ Prompt 版本先写入 `vNNNN.tmp/` staging 目录，全部文件成功后再整
 
 ### Review 一直重试
 
-查看 Review attempt 的本地校验错误。常见原因是输出包含多余字段、Edge Type 名称格式错误、接受列表内部重名，或者接受了 Registry 中已有名称。
+查看 Review attempt 的本地校验错误。常见原因是输出包含多余字段、Edge Type 名称格式错误、接受列表内部重名，或者修订与新增应用后 Registry 出现重名。已有类型在本轮改名后，新增类型可以使用它让出的原名称。
 
 ### Registry Revision 一直重试
 
@@ -979,11 +979,11 @@ Prompt 版本先写入 `vNNNN.tmp/` staging 目录，全部文件成功后再整
 
 ### `--resume` 提示 Config 不一致
 
-使用首次运行时相同的 `human_feedback_interval` 和 `max_llm_retries`。如果需要改变配置，应新建输出目录重新开始一轮。
+使用首次运行时相同的 `human_feedback_interval`、`feedback_mode` 和 `max_llm_retries`。如果需要改变配置，应新建输出目录重新开始一轮。
 
-### 终端停在第 10、20、30 个 Window
+### 终端停在批次边界
 
-当还有后续 Window 时，这是人工 Prompt 检查点。查看终端给出的 Registry 和 Review Packet，必要时修改 Prompt，然后在原终端按 Enter。
+当本批达到 `human_feedback_interval` 且后面还有 Window 时，程序会等待人工反馈。查看终端给出的 Registry 和 Review Packet：`manual_prompt` 模式下按需修改 Prompt 后，在原终端按 Enter；`registry_feedback` 模式下输入多行意见，以单独一行 `END` 结束。最后一批不会等待反馈；若没有出现反馈提示，请结合 `execution_state.json` 判断是否仍在等待模型响应。
 
 ### 终端无输出但进程仍在
 

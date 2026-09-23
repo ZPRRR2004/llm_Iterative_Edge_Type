@@ -235,7 +235,7 @@ runs/09-22_3/
 
 ## 完整输出结构
 
-一次正常完成的运行目录如下：
+一次运行可能产生的文件如下；具体文件取决于反馈模式、反馈内容和是否到达人工检查点：
 
 ```text
 runs/
@@ -259,7 +259,7 @@ runs/
         ├── window_manifest.json
         ├── prompt_versions/
         │   ├── v0001/
-        │   └── v0002/
+        │   └── v0002/                    # 仅 manual_prompt 模式跨过检查点后生成
         ├── runs/
         │   ├── trajectory1__window_0001/
         │   │   ├── metadata.json
@@ -278,15 +278,15 @@ runs/
             │   ├── newly_accepted_edge_types.json
             │   ├── batch_metadata.json
             │   ├── review_packet.md
-            │   ├── human_feedback.txt
-            │   ├── registry_revision_request.json
-            │   ├── registry_revision_response.json
-            │   ├── registry_revision_plan.json
-            │   └── registry_after_feedback.json
+            │   ├── human_feedback.txt    # registry_feedback 的非最终批次
+            │   ├── registry_revision_request.json   # 非空反馈时
+            │   ├── registry_revision_response.json  # 非空反馈时
+            │   ├── registry_revision_plan.json      # 非空反馈且校验成功时
+            │   └── registry_after_feedback.json     # 已完成反馈的非最终批次
             └── ...
 ```
 
-部分预处理辅助文件只在相关调用实际发生时生成，因此具体运行目录中可能没有 `preprocess_calls.jsonl`、`checkpoint.json` 或 `cache/`。
+部分预处理辅助文件只在相关调用实际发生时生成，因此具体运行目录中可能没有 `preprocess_calls.jsonl`、`checkpoint.json` 或 `cache/`。默认的 `registry_feedback` 模式只使用 `v0001`；最终批次只保存基础批次文件，不生成反馈文件。空反馈会生成 `human_feedback.txt` 和 `registry_after_feedback.json`，但不会调用 Revision LLM。
 
 ## `summary.json`
 
