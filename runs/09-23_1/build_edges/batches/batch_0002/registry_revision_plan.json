@@ -1,0 +1,121 @@
+{
+  "revisions": [
+    {
+      "original_name": "USES_PRIOR_RESULT_TO_GUIDE_ACTION",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "USES_PRIOR_RESULT_TO_GUIDE_ACTION",
+        "definition": "A subsequent agent action, decision, or derived result uses a prior result, observation, plan, or confirmed evidence produced or observed during earlier execution as an input, basis, or justification.",
+        "source_description": "A prior result, artifact, observation, plan, or confirmed finding produced or observed during earlier execution.",
+        "target_description": "A subsequent agent action, decision, or derived result that consumes, applies, or is based on that prior result."
+      }
+    },
+    {
+      "original_name": "ATTEMPTS_TO_REPAIR",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "VERIFIES_OUTCOME_OR_PREREQUISITE",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "VERIFIES_OUTCOME_OR_PREREQUISITE",
+        "definition": "A subsequent agent action independently checks, validates, or confirms whether a previously produced artifact, repaired state, candidate, derived output, or identified prerequisite satisfies its intended requirement, exists, or is available.",
+        "source_description": "A prior agent action or state that produced, identified, or repaired an artifact, candidate, output, or prerequisite whose status, correctness, or fidelity must be confirmed.",
+        "target_description": "A subsequent verification or validation action that inspects, executes, probes, compares, or otherwise checks that prior artifact, candidate, output, repair, or prerequisite."
+      }
+    },
+    {
+      "original_name": "COMPLETES_TASK_AFTER_VERIFICATION",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "SELECTS_APPROACH_BASED_ON_EVIDENCE",
+      "operation": "MERGE",
+      "merge_into": "USES_PRIOR_RESULT_TO_GUIDE_ACTION"
+    },
+    {
+      "original_name": "MONITORS_ASYNCHRONOUS_OPERATION",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "MONITORS_OR_WAITS_FOR_ASYNCHRONOUS_OPERATION",
+        "definition": "A long-running or asynchronous operation launched earlier by the agent is subsequently monitored or waited for by a separate action that inspects its output or log, or pauses or polls until it has finished, to determine progress or outcome.",
+        "source_description": "An agent action that launches a long-running or asynchronous operation in the background without waiting for it to finish.",
+        "target_description": "A subsequent action that inspects the launched operation's output or log, or pauses or polls until it has finished, to determine progress or outcome."
+      }
+    },
+    {
+      "original_name": "DIAGNOSES_ISSUE_TO_INFORM_ACTION",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "INVESTIGATES_OR_RESOLVES_PROBLEMATIC_OBSERVATION",
+        "definition": "A subsequent agent action investigates, diagnoses, disambiguates, retrieves missing content for, or otherwise resolves an earlier observation that is problematic due to failure, error, unexpected result, ambiguity, incompleteness, or conflicting values, in order to understand it or determine the next step.",
+        "source_description": "An earlier observation that is problematic, such as a failure, error, unexpected or incompatible result, ambiguous or incomplete content, or conflicting candidate values.",
+        "target_description": "A subsequent diagnostic, investigative, information-gathering, or resolution action intended to understand, clarify, disambiguate, complete, or resolve that observation."
+      }
+    },
+    {
+      "original_name": "WAITS_FOR_OPERATION_COMPLETION",
+      "operation": "MERGE",
+      "merge_into": "MONITORS_ASYNCHRONOUS_OPERATION"
+    },
+    {
+      "original_name": "PERFORMS_ADDITIONAL_VERIFICATION_FOR_UNCHECKED_REQUIREMENT",
+      "operation": "MERGE",
+      "merge_into": "VERIFIES_OUTCOME_OR_PREREQUISITE"
+    },
+    {
+      "original_name": "PROCEEDS_AFTER_SUCCESS_CONFIRMATION",
+      "operation": "MERGE",
+      "merge_into": "USES_PRIOR_RESULT_TO_GUIDE_ACTION"
+    },
+    {
+      "original_name": "PLAN_IMPLEMENTED_BY_TOOL_CALL",
+      "operation": "MERGE",
+      "merge_into": "USES_PRIOR_RESULT_TO_GUIDE_ACTION"
+    },
+    {
+      "original_name": "USES_OBSERVED_CONTENT_AS_EVIDENCE_FOR_CLASSIFICATION",
+      "operation": "MERGE",
+      "merge_into": "USES_PRIOR_RESULT_TO_GUIDE_ACTION"
+    },
+    {
+      "original_name": "EXTRACTS_FIELD_VALUES_FROM_OBSERVED_CONTENT",
+      "operation": "MERGE",
+      "merge_into": "USES_PRIOR_RESULT_TO_GUIDE_ACTION"
+    },
+    {
+      "original_name": "OBSERVED_CONFLICTING_VALUES_TRIGGER_PRECEDENCE_RULE",
+      "operation": "MERGE",
+      "merge_into": "DIAGNOSES_ISSUE_TO_INFORM_ACTION"
+    },
+    {
+      "original_name": "PARTIAL_OBSERVATION_TRIGGERS_FOLLOW_UP_INSPECTION",
+      "operation": "MERGE",
+      "merge_into": "DIAGNOSES_ISSUE_TO_INFORM_ACTION"
+    },
+    {
+      "original_name": "CLEANS_UP_TEMPORARY_RESOURCES",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "GENERALIZES_VERIFIED_METHOD_TO_BATCH",
+      "operation": "MERGE",
+      "merge_into": "USES_PRIOR_RESULT_TO_GUIDE_ACTION"
+    },
+    {
+      "original_name": "RESOLVES_AMBIGUOUS_VALUE_WITH_REFERENCE_SOURCE",
+      "operation": "MERGE",
+      "merge_into": "DIAGNOSES_ISSUE_TO_INFORM_ACTION"
+    },
+    {
+      "original_name": "VALIDATES_AGAINST_EXPECTED_REFERENCE",
+      "operation": "MERGE",
+      "merge_into": "VERIFIES_OUTCOME_OR_PREREQUISITE"
+    },
+    {
+      "original_name": "INVESTIGATES_AMBIGUOUS_OBSERVATION",
+      "operation": "MERGE",
+      "merge_into": "DIAGNOSES_ISSUE_TO_INFORM_ACTION"
+    }
+  ]
+}

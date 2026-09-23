@@ -1,0 +1,67 @@
+{
+  "window_file": "trajectory8__window_0002.json",
+  "trajectory_id": "trajectory8",
+  "window_id": "window_0002",
+  "global_index": 20,
+  "prompt_version": "v0001",
+  "registry_snapshot": [
+    {
+      "name": "USES_PRIOR_RESULT_TO_GUIDE_ACTION",
+      "definition": "A subsequent agent action, decision, or derived result uses a prior result, observation, plan, or confirmed evidence produced or observed during earlier execution as an input, basis, or justification.",
+      "source_description": "A prior result, artifact, observation, plan, or confirmed finding produced or observed during earlier execution.",
+      "target_description": "A subsequent agent action, decision, or derived result that consumes, applies, or is based on that prior result."
+    },
+    {
+      "name": "ATTEMPTS_TO_REPAIR",
+      "definition": "A subsequent agent action attempts to resolve a failure or unmet prerequisite identified during an earlier execution step, for example by retrying with a revised artifact or alternative approach, or by installing or otherwise providing a missing component.",
+      "source_description": "An earlier observed execution failure or a prerequisite reported as missing or unavailable.",
+      "target_description": "A subsequent agent action intended to resolve that failure or unmet prerequisite."
+    },
+    {
+      "name": "VERIFIES_OUTCOME_OR_PREREQUISITE",
+      "definition": "A subsequent agent action independently checks, validates, or confirms whether a previously produced artifact, repaired state, candidate, derived output, or identified prerequisite satisfies its intended requirement, exists, or is available.",
+      "source_description": "A prior agent action or state that produced, identified, or repaired an artifact, candidate, output, or prerequisite whose status, correctness, or fidelity must be confirmed.",
+      "target_description": "A subsequent verification or validation action that inspects, executes, probes, compares, or otherwise checks that prior artifact, candidate, output, repair, or prerequisite."
+    },
+    {
+      "name": "COMPLETES_TASK_AFTER_VERIFICATION",
+      "definition": "The agent concludes the task, either by declaring completion or by reasoning that cites successful verification evidence, after execution results have been verified as satisfying the task requirements.",
+      "source_description": "Successful verification, test, or execution results confirming that the task objective or requirements have been met.",
+      "target_description": "A task-completion declaration or completion reasoning that ends the workflow."
+    },
+    {
+      "name": "MONITORS_OR_WAITS_FOR_ASYNCHRONOUS_OPERATION",
+      "definition": "A long-running or asynchronous operation launched earlier by the agent is subsequently monitored or waited for by a separate action that inspects its output or log, or pauses or polls until it has finished, to determine progress or outcome.",
+      "source_description": "An agent action that launches a long-running or asynchronous operation in the background without waiting for it to finish.",
+      "target_description": "A subsequent action that inspects the launched operation's output or log, or pauses or polls until it has finished, to determine progress or outcome."
+    },
+    {
+      "name": "INVESTIGATES_OR_RESOLVES_PROBLEMATIC_OBSERVATION",
+      "definition": "A subsequent agent action investigates, diagnoses, disambiguates, retrieves missing content for, or otherwise resolves an earlier observation that is problematic due to failure, error, unexpected result, ambiguity, incompleteness, or conflicting values, in order to understand it or determine the next step.",
+      "source_description": "An earlier observation that is problematic, such as a failure, error, unexpected or incompatible result, ambiguous or incomplete content, or conflicting candidate values.",
+      "target_description": "A subsequent diagnostic, investigative, information-gathering, or resolution action intended to understand, clarify, disambiguate, complete, or resolve that observation."
+    },
+    {
+      "name": "CLEANS_UP_TEMPORARY_RESOURCES",
+      "definition": "After the main task objective has been achieved and its outcome confirmed, a subsequent agent action removes temporary or intermediate resources that were created during execution and are no longer needed.",
+      "source_description": "A state or confirmation indicating that the main task objective has been completed.",
+      "target_description": "A subsequent cleanup action that deletes temporary or intermediate resources created during execution."
+    }
+  ],
+  "completed_stages": [
+    "discovery",
+    "comparison",
+    "review"
+  ],
+  "accepted_edge_types": [],
+  "revised_existing_edge_types": [],
+  "accepted_edge_type_count": 0,
+  "revised_existing_edge_type_count": 0,
+  "status": "completed",
+  "created_at": "2026-09-23T02:21:02.501764+00:00",
+  "updated_at": "2026-09-23T02:22:03.516951+00:00",
+  "failed_stage": null,
+  "error": null,
+  "registry_size_after": 7,
+  "completed_at": "2026-09-23T02:22:03.516951+00:00"
+}

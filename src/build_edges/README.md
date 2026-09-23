@@ -8,9 +8,9 @@
 
 1. **Blind Discovery**：只根据当前 Context Window 独立提出候选类型。
 2. **Type Comparison**：把候选类型与进入当前 Window 时的 Registry 快照比较。
-3. **Type Review**：结合 Window、候选、比较结果和 Registry 快照，决定最终接受哪些新类型。
+3. **Type Review**：结合 Window、候选、比较结果和 Registry 快照，决定新增类型，并修订本轮 `existing` 匹配到的已有类型。
 
-只有 Review 接受且通过本地严格校验的类型才会追加到 Registry。一个 Window 的三个阶段始终使用同一个 Prompt 版本和同一份 Registry 快照。
+Review 的新增和修订通过本地严格校验后，在一次 Registry 更新中生效。一个 Window 的三个阶段始终使用同一个 Prompt 版本和同一份 Registry 快照。
 
 每完成一个非最终的完整批次，程序根据 `feedback_mode` 执行一种人工反馈流程：
 
@@ -31,7 +31,7 @@ src/build_edges/
 ├── registry_revision.py    # Human Feedback 驱动的完整 Registry Revision
 ├── llm_client.py           # DeepSeek 请求、retry 和调用记录
 ├── validator.py            # Window 之外的严格响应/Registry 校验
-├── registry.py             # Registry 追加及 Revision Plan 应用
+├── registry.py             # Window Review 更新及批次 Revision Plan 应用
 ├── prompt_loader.py        # Prompt 校验、渲染和版本管理
 ├── execution_manager.py    # 阶段编排、批次、人工检查和恢复
 ├── storage.py              # 原子写入、审计记录和 Registry 重建
@@ -344,31 +344,44 @@ Discovery 不接收当前 Registry，目的是避免现有类型限制独立发�
       "source_description": "...",
       "target_description": "..."
     }
+  ],
+  "revised_existing_edge_types": [
+    {
+      "original_name": "REPAIRS_FAILURE",
+      "revised_edge_type": {
+        "name": "ATTEMPTS_TO_REPAIR",
+        "definition": "...",
+        "source_description": "...",
+        "target_description": "..."
+      }
+    }
   ]
 }
 ```
 
 本地校验保证：
 
-- 顶层必须且只能包含 `accepted_edge_types`。
+- 顶层必须且只能包含 `accepted_edge_types` 和 `revised_existing_edge_types`，两者都必须是数组。
 - 接受列表中的每项必须满足完整 Edge Type 结构。
 - 接受列表内部不能有重复名称。
-- 接受类型名称不能已存在于 Registry 快照。
-- Discovery 候选为空时，Review 不能接受任何新类型。
+- `revised_existing_edge_types` 中每项必须且只能包含 `original_name` 和完整四字段 `revised_edge_type`。
+- `original_name` 必须出现在本轮 Comparison 的 `existing.matched_existing_name` 中，也必须存在于 Window 开始时的 Registry 快照；同一个原类型最多修订一次。
+- 对“修订后的全部已有类型 + 新增类型”统一检查名称唯一性。已有类型改名后，原名称可以由另一个新类型使用。
+- Discovery 候选为空时，两个输出数组都必须为空。
 
-Review 可以拒绝全部候选，此时返回空数组。
+Review 会重新评估三个 Comparison 分类：先前判为 `existing` 的候选也可能作为真正的新关系被接受；对应的已有类型只有在含义相同但定义需要改进时才修订。Review 可以同时返回新增和修订，也可以让两个数组都为空。候选与已有类型的语义一致性由 Prompt 复核；本地校验只检查可以确定的结构与名称约束。
 
 ### Commit
 
 Review 通过后，程序执行本地 Commit：
 
-1. 再次校验 Registry 快照和 `accepted_edge_types`。
-2. 按 Review 返回顺序把接受类型追加到 Registry 末尾。
-3. 把 Window `metadata.json` 标记为 `completed`。
-4. 原子保存新的 `edge_type_registry.json`。
-5. 增加 `completed_windows` 和 `next_window_index`。
+1. 再次校验完整 Review Result。
+2. 按 `original_name` 在快照中原位替换已有类型；其余已有类型原样保留。
+3. 按 Review 返回顺序把接受的新类型追加到 Registry 末尾。
+4. 校验更新后的完整 Registry，再把 Window `metadata.json` 标记为 `completed`。
+5. 原子保存新的 `edge_type_registry.json`，增加 `completed_windows` 和 `next_window_index`。
 
-Registry 不会按名称重新排序，顺序就是类型被接受和提交的顺序。
+Registry 不会按名称重新排序。已有类型修订保留原位置，新类型按本轮接受顺序追加。逐 Window 的已有类型修订与批次级 `registry_feedback` 独立，适用于两种反馈模式。
 
 ## Registry Feedback 与 Revision Plan
 
@@ -605,7 +618,7 @@ python -m src.build_edges `
 
 ## 运行期间为什么可能长时间没有终端输出
 
-当前实现不使用流式响应，也不打印每个成功阶段的“开始/完成”日志。成功请求进行期间，终端可以长时间没有任何新内容。
+当前实现不使用流式响应，也不打印每个成功阶段的“开始/完成”日志。成功请求进行期间，终端可以长时间没有任何新内容。每个 Window 完整提交后会打印 Discovery、Comparison、Review 数量及已有类型改名明细。
 
 例如，20 个 Window 的三阶段发现会串行执行 60 个 DeepSeek 请求：
 
@@ -834,6 +847,8 @@ build_edges/
 - Window 开始时复制的完整 `registry_snapshot`。
 - `completed_stages`。
 - 最终 `accepted_edge_types`。
+- `revised_existing_edge_types`：每项包含 `original_name`、完整 `original_edge_type` 和完整 `revised_edge_type`。
+- `accepted_edge_type_count` 和 `revised_existing_edge_type_count`。
 - `registry_size_after`。
 - `status`、`failed_stage` 和 `error`。
 - 创建、更新和完成时间。
@@ -863,16 +878,16 @@ build_edges/
 - 通过校验后的 `parsed_response`。
 - 恢复或重跑同阶段时保存的 `previous_calls`。
 
-这些文件用于审计实际 Prompt、模型原始返回和本地校验结果。文件可能较大，因为 `raw_response` 和实际消息会完整保留；已识别的凭证会被 Redactor 替换。
+Review 的 `parsed_response` 同时保存 `accepted_edge_types` 和 `revised_existing_edge_types` 两个完整数组。这些文件用于审计实际 Prompt、模型原始返回和本地校验结果。文件可能较大，因为 `raw_response` 和实际消息会完整保留；已识别的凭证会被 Redactor 替换。
 
 ### `batches/batch_NNNN/`
 
 - `registry_before.json`：本批开始前的 Registry。
 - `registry_after_windows.json`：本批全部 Window 提交后、Human Feedback 应用前的 Registry，也是 Revision LLM 的实际输入。
 - `registry_after.json`：为兼容原有 `manual_prompt` 输出保留的 `registry_after_windows.json` 同内容别名。
-- `newly_accepted_edge_types.json`：按名称比较前后 Registry 得到的本批新增类型。
-- `batch_metadata.json`：批次范围、Prompt 版本、反馈模式、是否要求/完成/应用反馈、操作统计和保存时间。
-- `review_packet.md`：便于人工阅读的批次信息、新增类型和当前完整 Registry。
+- `newly_accepted_edge_types.json`：从本批各 Window 的 Review 元数据汇总的新增类型；已有类型改名不会计入新增。
+- `batch_metadata.json`：批次范围、Prompt 版本、新增和已有类型修订次数、反馈模式、是否要求/完成/应用反馈、操作统计和保存时间。
+- `review_packet.md`：便于人工阅读的批次信息、新增类型、本批已有类型修订前后完整定义及当前完整 Registry。同一已有类型在不同 Window 中分别修订会计为多次。
 - `human_feedback.txt`：终端输入并去掉首尾空白后的原始多行 Feedback；空反馈时是空文件。
 - `registry_revision_request.json`：实际 System/User Message、Prompt 版本、模型和请求设置。
 - `registry_revision_response.json`：所有 attempts、Provider 原始响应、解析结果、错误和历史失败调用。
@@ -888,7 +903,7 @@ build_edges/
 
 1. 校验当前输入 manifest 与首次运行完全一致。
 2. 校验当前 config 与首次运行完全一致。
-3. 按 Window 顺序重放前 `completed_windows` 个 `metadata.json` 中的接受类型。
+3. 按 Window 顺序，以每份 `metadata.json` 的 Registry 快照为基准，先重放已有类型修订，再追加接受的新类型；校验修订前定义和更新后大小。
 4. 每到一个 `feedback_completed: true` 的批次边界，先校验重建值等于 `registry_after_windows.json`，再用 `registry_after_feedback.json` 替换当前重建值。
 5. 重建结果会覆盖 `edge_type_registry.json`，修正 Registry 已写但全局状态尚未推进等中断情况。
 6. 从 `prompt_versions/{prompt_version}` 加载历史 Prompt。
@@ -903,7 +918,7 @@ build_edges/
 - `completed`：打印已经完成并直接返回，不重复请求。
 - `running`：按最后保存的 Window 和阶段继续，适用于 Ctrl+C 或进程异常退出。
 
-Registry 以每个已提交 Window 的 `accepted_edge_types` 和每个已完成反馈批次的 `registry_after_feedback.json` 为共同事实来源。这样 DELETE、REVISE 和 MERGE 不会在恢复时被旧 Window 接受记录撤销。重建时若发现 Window 未完整提交、反馈前 Registry 不一致、结构错误或当前 Registry 内名称重复，会拒绝继续。
+Registry 以每个已提交 Window 的新增与修订记录，以及每个已完成反馈批次的 `registry_after_feedback.json` 为共同事实来源。这样逐 Window 改名和批次级 DELETE、REVISE、MERGE 在恢复时都会保留。重建时若发现 Window 未完整提交、快照或修订前定义不一致、反馈前 Registry 不一致、结构错误或当前 Registry 内名称重复，会拒绝继续。
 
 ## 原子写入
 

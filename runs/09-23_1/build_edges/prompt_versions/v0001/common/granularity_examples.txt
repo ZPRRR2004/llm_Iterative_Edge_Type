@@ -1,0 +1,132 @@
+## Edge Type Granularity Rules
+
+An edge type represents a reusable semantic relationship between two components of an agent execution trajectory.
+
+Determine edge type granularity according to the underlying semantic meaning, applicability conditions, and source and target roles.
+
+Each edge type should describe a clear and distinguishable semantic relationship.
+
+Use reusable abstractions across different tools, commands, files, resources, and task-specific operations when the underlying relationship is the same.
+
+Preserve genuinely different semantic relationships, including relationships that occur in similar execution contexts.
+
+
+## Positive Example 1: Generalize Across Concrete Operations
+
+Scenario A:
+A tool reports that a software build failed because a required dependency is missing. The agent subsequently installs the missing dependency to address the failure.
+
+Scenario B:
+A test reports a failure caused by incompatible source code. The agent subsequently modifies the source code to address the failure.
+
+Appropriate edge type:
+
+{
+  "name": "ATTEMPTS_TO_REPAIR",
+  "definition": "A subsequent agent action attempts to resolve a failure identified during an earlier execution step.",
+  "source_description": "An earlier observed execution failure.",
+  "target_description": "A subsequent agent action intended to resolve that failure."
+}
+
+Reason:
+The repair methods differ, but both situations express the same underlying semantic relationship.
+
+
+## Negative Example 1: Overly Specific Types
+
+Inappropriate edge types:
+
+INSTALLS_DEPENDENCY_TO_FIX_BUILD_ERROR
+
+MODIFIES_SOURCE_TO_FIX_TEST_FAILURE
+
+Reason:
+These names encode concrete repair methods and task-specific circumstances.
+
+A reusable repair relationship represents the common semantic meaning of both situations.
+
+
+## Positive Example 2: Preserve Different Semantic Relationships
+
+Scenario A:
+The agent examines diagnostic information to investigate the cause of an earlier failure.
+
+Scenario B:
+The agent takes an action intended to correct an earlier failure.
+
+Scenario C:
+The agent performs a subsequent check to determine whether an earlier repair succeeded.
+
+These situations may justify distinct edge types.
+
+Reason:
+Investigating a failure, attempting to repair it, and verifying whether the repair succeeded express different semantic relationships and applicability conditions.
+
+
+## Negative Example 2: Overly Broad Types
+
+Inappropriate edge types:
+
+RELATED_TO
+
+ASSOCIATED_WITH
+
+RELATED_TO_FAILURE
+
+Reason:
+These labels provide insufficient information about the semantic relationship between their endpoints.
+
+A suitable edge type specifies the relationship in a way that can be evaluated from the execution trajectory.
+
+
+## Positive Example 3: Distinguish Using and Verifying a Result
+
+Scenario A:
+An agent uses a previously retrieved file path as an argument in a subsequent command.
+
+Scenario B:
+An agent performs a separate check to determine whether a previously produced file contains the expected content.
+
+These situations may represent distinct semantic relationships.
+
+Reason:
+Using a result as an input and verifying the correctness of a result have different meanings and applicability conditions.
+
+
+## Negative Example 3: Overly Specific Resource-Based Types
+
+Inappropriate edge types:
+
+USES_PREVIOUS_FILE_PATH
+
+USES_PREVIOUS_DATABASE_ID
+
+USES_PREVIOUS_URL
+
+Reason:
+These types distinguish concrete resource categories while describing the same underlying result-usage relationship.
+
+
+## Semantic Distinction Rules
+
+1. Compare the underlying semantic meaning of relationship types.
+
+2. Compare their applicability conditions.
+
+3. Compare their source and target roles.
+
+4. Generalize concrete execution situations that instantiate the same underlying relationship.
+
+5. Preserve relationships with genuinely different meanings or applicability conditions.
+
+6. Prefer reusable edge types with clear, operationally meaningful definitions.
+
+7. Derive the number of candidate types from the relationships supported by the current trajectory.
+
+8. Accept an empty candidate list when the current trajectory provides no suitable new candidate.
+
+The examples illustrate the desired level of abstraction.
+
+They are illustrative examples rather than a predefined taxonomy.
+
+Discover and evaluate all relevant relationship types supported by the actual trajectory.

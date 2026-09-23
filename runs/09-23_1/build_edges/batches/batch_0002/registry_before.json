@@ -1,0 +1,44 @@
+[
+  {
+    "name": "USES_PRIOR_RESULT_TO_GUIDE_ACTION",
+    "definition": "A later agent action uses a previously produced artifact, observation, or confirmed result as an input or basis for constructing or applying a subsequent action.",
+    "source_description": "A prior result, artifact, observation, or confirmed finding produced or observed during earlier execution.",
+    "target_description": "A subsequent agent action that consumes, applies, or otherwise bases itself on that prior result."
+  },
+  {
+    "name": "ATTEMPTS_TO_REPAIR",
+    "definition": "A subsequent agent action attempts to resolve a failure or unmet prerequisite identified during an earlier execution step, for example by retrying with a revised artifact or alternative approach, or by installing or otherwise providing a missing component.",
+    "source_description": "An earlier observed execution failure or a prerequisite reported as missing or unavailable.",
+    "target_description": "A subsequent agent action intended to resolve that failure or unmet prerequisite."
+  },
+  {
+    "name": "VERIFIES_OUTCOME_OR_PREREQUISITE",
+    "definition": "A subsequent agent action independently checks whether a previously produced artifact, repaired state, candidate, or identified prerequisite satisfies its intended requirement, exists, or is available.",
+    "source_description": "A prior agent action or state that produced or identified an artifact, candidate, repair, or prerequisite whose status or correctness must be confirmed.",
+    "target_description": "A subsequent verification action that inspects, executes, probes, or otherwise checks that prior artifact, candidate, repair, or prerequisite."
+  },
+  {
+    "name": "COMPLETES_TASK_AFTER_VERIFICATION",
+    "definition": "The agent concludes the task, either by declaring completion or by reasoning that cites successful verification evidence, after execution results have been verified as satisfying the task requirements.",
+    "source_description": "Successful verification, test, or execution results confirming that the task objective or requirements have been met.",
+    "target_description": "A task-completion declaration or completion reasoning that ends the workflow."
+  },
+  {
+    "name": "SELECTS_APPROACH_BASED_ON_EVIDENCE",
+    "definition": "After evaluating available evidence, such as a blocked or unavailable approach, capability probe results, comparative evaluation outcomes, or diagnostic findings, the agent selects or adopts a tool, candidate solution, or strategy to pursue the task.",
+    "source_description": "Evidence from prior observations, probes, evaluations, or diagnostics that constrains or informs the available choices.",
+    "target_description": "A subsequent agent action or selection that adopts an alternative tool, candidate, or strategy based on that evidence."
+  },
+  {
+    "name": "MONITORS_ASYNCHRONOUS_OPERATION",
+    "definition": "A long-running operation that an earlier action launched in the background without waiting for completion is subsequently monitored by a separate action that inspects its output or log to determine progress or outcome.",
+    "source_description": "An agent action that launches a long-running operation in the background without waiting for it to finish.",
+    "target_description": "A subsequent action that inspects the launched operation's output or log file to determine whether it has completed and with what result."
+  },
+  {
+    "name": "DIAGNOSES_ISSUE_TO_INFORM_ACTION",
+    "definition": "An agent diagnostic or investigative step examines an observed failure, ambiguous result, incompatibility, or constraint in order to identify its cause, resolve ambiguity, or determine appropriate subsequent action.",
+    "source_description": "An observed failure, ambiguous or conflicting result, or environmental or compatibility constraint that requires investigation.",
+    "target_description": "A subsequent diagnostic, investigative, or information-gathering step, such as reasoning, code search, or analysis, performed to identify the cause or inform subsequent action."
+  }
+]

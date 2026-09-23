@@ -1,0 +1,5 @@
+{
+  "title": "Create Automatic JavaScript Alert Payload Surviving filter.py",
+  "query": "Create /app/out.html that still triggers a JavaScript alert() when opened in a browser after being processed by /app/filter.py. The alert must trigger automatically without any interaction with the webpage. You can run /app/test_outputs.py to verify.",
+  "review_flags": []
+}

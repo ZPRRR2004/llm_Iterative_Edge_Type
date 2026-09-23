@@ -21,6 +21,21 @@ def update_registry(registry_snapshot, accepted_types):
     return copy.deepcopy(registry_snapshot) + copy.deepcopy(accepted_types)
 
 
+def apply_review_result(registry_snapshot, review_result):
+    """Replace matched types in place, then append accepted new types."""
+    revisions = {
+        item['original_name']: item['revised_edge_type']
+        for item in review_result['revised_existing_edge_types']
+    }
+    updated_registry = [
+        copy.deepcopy(revisions.get(edge['name'], edge))
+        for edge in registry_snapshot
+    ]
+    updated_registry.extend(copy.deepcopy(review_result['accepted_edge_types']))
+    validate_registry(updated_registry)
+    return updated_registry
+
+
 def apply_registry_revision(existing_registry, revision_plan):
     """Apply a validated revision plan without depending on plan array order."""
     validate_registry_revision_plan(revision_plan, existing_registry)

@@ -1,0 +1,12 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_10_1",
+      "start_anchor": "New Terminal Output:\n\nroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/tmp# pip install pytest 2>&1 | tail -1\n"
+    },
+    {
+      "tool_call_id": "call_10_2",
+      "start_anchor": "root@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/tmp# cd /app/pyknotid && python3 -m pytest tests/ --ignore=tests/test_random_curves.py --ignore=tests/test_catalogue.\n"
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "window_file": "trajectory3__window_0001.json",
+  "trajectory_id": "trajectory3",
+  "window_id": "window_0001",
+  "global_index": 4,
+  "prompt_version": "v0001",
+  "registry_snapshot": [
+    {
+      "name": "USES_PREVIOUSLY_PRODUCED_ARTIFACT_AS_INPUT",
+      "definition": "A later agent action consumes an artifact that was produced by an earlier agent action, using that previously produced artifact as an input, for example by loading, sourcing, or executing a file or module created earlier.",
+      "source_description": "An agent action that creates or produces an artifact, such as writing a source file to disk.",
+      "target_description": "A later agent action that loads, sources, executes, or otherwise consumes the previously produced artifact as an input."
+    },
+    {
+      "name": "EXECUTION_BLOCKED_BY_PREVIOUSLY_OBSERVED_MISSING_DEPENDENCY",
+      "definition": "A subsequent agent action is attempted even though an earlier observation already reported that a required tool, interpreter, or dependency is unavailable, and the action consequently fails on account of that missing dependency.",
+      "source_description": "An observation reporting that a required tool, interpreter, or dependency is missing or unavailable in the environment.",
+      "target_description": "A later agent action that requires the missing dependency and fails because of it, for example with a command-not-found error."
+    },
+    {
+      "name": "ATTEMPTS_TO_REPAIR",
+      "definition": "A subsequent agent action attempts to resolve a failure or unmet prerequisite identified during an earlier execution step, for example by installing or otherwise providing the missing component so that the failed step can be retried successfully.",
+      "source_description": "An earlier observed execution failure or a prerequisite reported as missing or unavailable.",
+      "target_description": "A subsequent agent action intended to resolve that failure."
+    },
+    {
+      "name": "PLANNED_CONTINGENCY_CONFIRMED_BY_OBSERVATION",
+      "definition": "An agent's plan states a contingency or explicit expectation about a possible execution condition, and a later observation confirms that the anticipated condition holds, so the planned contingency applies.",
+      "source_description": "An agent plan or reasoning step that states a contingency or expectation about a possible execution condition.",
+      "target_description": "A subsequent observation or execution result that confirms the anticipated condition actually holds."
+    },
+    {
+      "name": "INVESTIGATES_BEFORE_REMEDIATION",
+      "definition": "An agent action gathers information about the execution environment in order to determine how to address a previously observed failure or unmet prerequisite.",
+      "source_description": "A previously observed execution failure or unmet prerequisite that must be addressed.",
+      "target_description": "A subsequent information-gathering action performed to select an appropriate remediation strategy."
+    },
+    {
+      "name": "VERIFIES_PRODUCED_ARTIFACT",
+      "definition": "A subsequent agent action independently inspects the existence or content of an artifact that an earlier agent action produced or reported producing, in order to confirm the reported result.",
+      "source_description": "An earlier agent action that produced or reported creating an artifact or output.",
+      "target_description": "A later action that independently inspects or validates the existence and content of that artifact."
+    },
+    {
+      "name": "TERMINATES_WORKFLOW_AFTER_VERIFIED_SUCCESS",
+      "definition": "The agent declares the task complete after execution results have been verified as satisfying all task requirements.",
+      "source_description": "Verified successful execution results that confirm the task requirements are satisfied.",
+      "target_description": "A task-completion declaration that ends the workflow."
+    },
+    {
+      "name": "RESPONDS_TO_CONFIRMATION_PROMPT",
+      "definition": "An agent action repeats or reaffirms a previously issued decision in response to an explicit confirmation request emitted by the environment.",
+      "source_description": "A confirmation request emitted by the environment in response to an earlier agent action.",
+      "target_description": "A repeated agent action that reaffirms the earlier decision."
+    },
+    {
+      "name": "SELECTS_ALTERNATIVE_APPROACH",
+      "definition": "After an earlier intended approach or tool is observed to be blocked, unavailable, or otherwise infeasible in the environment, the agent abandons that approach and adopts a different tool or strategy to pursue the same overall goal.",
+      "source_description": "An observation that an earlier intended approach or tool is blocked, unavailable, or otherwise infeasible in the environment.",
+      "target_description": "A subsequent agent action that employs an alternative tool or strategy in place of the abandoned approach."
+    },
+    {
+      "name": "CAPABILITY_PROBE_INFORMS_TOOL_SELECTION",
+      "definition": "The result of an environment or tooling probe is used to determine which available capability or tool should be applied in a subsequent action.",
+      "source_description": "An observation reporting the availability or configuration of environment capabilities, such as present interpreters, installed packages, or tool versions.",
+      "target_description": "A subsequent agent action that leverages a capability revealed by that probe to carry out the task."
+    },
+    {
+      "name": "MONITORS_ASYNCHRONOUS_OPERATION",
+      "definition": "A long-running operation that an earlier action launched in the background without waiting for completion is subsequently monitored by a separate action that inspects its output or log to determine progress or outcome.",
+      "source_description": "An agent action that launches a long-running operation in the background without waiting for it to finish.",
+      "target_description": "A subsequent action that inspects the launched operation's output or log file to determine whether it has completed and with what result."
+    },
+    {
+      "name": "RESOLVES_AMBIGUITY_IN_PRIOR_RESULT",
+      "definition": "A subsequent analytical or diagnostic step is performed to investigate and disambiguate an earlier result that is ambiguous, conflicting, or inconsistent with known constraints, in order to determine which interpretation or outcome is correct.",
+      "source_description": "An earlier agent result that is ambiguous, conflicting, or inconsistent with known constraints (for example, multiple analysis methods yielding different structures).",
+      "target_description": "A subsequent analytical or diagnostic step performed to disambiguate or investigate that earlier result."
+    },
+    {
+      "name": "SELECTS_CANDIDATE_BASED_ON_EVALUATION",
+      "definition": "The agent selects one among several competing candidate solutions, structures, or configurations on the basis of comparative evaluation evidence, such as scores or test outcomes, produced during earlier steps.",
+      "source_description": "Comparative evaluation evidence, such as scores, metrics, or statistical test outcomes, that distinguishes competing candidates.",
+      "target_description": "The candidate solution, structure, or configuration selected on the basis of that comparative evaluation evidence."
+    }
+  ],
+  "completed_stages": [
+    "discovery",
+    "comparison",
+    "review"
+  ],
+  "accepted_edge_types": [
+    {
+      "name": "DERIVES_BYPASS_FROM_IMPLEMENTATION_OBSERVATION",
+      "definition": "An agent uses observed details of a mechanism's implementation to construct an action that exploits a discrepancy between that mechanism's behavior and the behavior of the system the mechanism is intended to model.",
+      "source_description": "An observation that reveals the implementation details or parsing behavior of a mechanism, such as the source code of a filter or checker.",
+      "target_description": "A subsequent agent action that constructs an artifact designed to pass or bypass that mechanism by exploiting the observed discrepancy."
+    },
+    {
+      "name": "VALIDATES_CANDIDATE_AGAINST_TRANSFORMATION",
+      "definition": "An agent subjects a candidate artifact it produced to the transformation the candidate must survive, and inspects the resulting output to judge whether the candidate retained the required property.",
+      "source_description": "A candidate artifact produced by the agent, such as a crafted payload written to a file.",
+      "target_description": "An execution that applies the transformation to the candidate, whose resulting output is inspected to judge whether the candidate survived."
+    },
+    {
+      "name": "DIAGNOSES_FAILURE_CAUSE",
+      "definition": "An agent's reasoning examines an observed failing execution result to identify why it failed and to derive constraints that a subsequent attempt must satisfy.",
+      "source_description": "An observed execution result that failed to meet the objective, such as a candidate artifact whose required property was removed or altered.",
+      "target_description": "Agent reasoning that identifies the cause of the failure and articulates the constraints for the next attempt."
+    }
+  ],
+  "revised_existing_edge_types": [
+    {
+      "original_name": "ATTEMPTS_TO_REPAIR",
+      "original_edge_type": {
+        "name": "ATTEMPTS_TO_REPAIR",
+        "definition": "A subsequent agent action attempts to resolve a failure or unmet prerequisite identified during an earlier execution step, for example by installing or otherwise providing the missing component so that the failed step can be retried successfully.",
+        "source_description": "An earlier observed execution failure or a prerequisite reported as missing or unavailable.",
+        "target_description": "A subsequent agent action intended to resolve that failure."
+      },
+      "revised_edge_type": {
+        "name": "ATTEMPTS_TO_REPAIR",
+        "definition": "A subsequent agent action attempts to resolve a failure or unmet prerequisite identified during an earlier execution step, for example by retrying with a revised artifact or alternative approach, or by installing or otherwise providing a missing component.",
+        "source_description": "An earlier observed execution failure or a prerequisite reported as missing or unavailable.",
+        "target_description": "A subsequent agent action intended to resolve that failure or unmet prerequisite."
+      }
+    }
+  ],
+  "accepted_edge_type_count": 3,
+  "revised_existing_edge_type_count": 1,
+  "status": "completed",
+  "created_at": "2026-09-23T01:38:40.250129+00:00",
+  "updated_at": "2026-09-23T01:39:41.016504+00:00",
+  "failed_stage": null,
+  "error": null,
+  "registry_size_after": 16,
+  "completed_at": "2026-09-23T01:39:41.016504+00:00"
+}

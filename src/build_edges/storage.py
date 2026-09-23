@@ -7,6 +7,7 @@ from pathlib import Path
 
 from src.deepseek_client import encoded
 
+from .registry import apply_review_result
 from .validator import validate_edge_type_list, validate_registry
 
 
@@ -156,10 +157,27 @@ class Storage:
 
     def save_batch(self, *, batch_index, start_window, end_window,
                    prompt_version, registry_before, registry_after,
-                   feedback_mode, feedback_required):
+                   feedback_mode, feedback_required, window_records=None):
         directory = self.output_dir / 'batches' / f'batch_{batch_index:04d}'
-        before_names = {item['name'] for item in registry_before}
-        new_types = [item for item in registry_after if item['name'] not in before_names]
+        if window_records is None:
+            before_names = {item['name'] for item in registry_before}
+            new_types = [item for item in registry_after
+                         if item['name'] not in before_names]
+            revisions = []
+        else:
+            new_types = []
+            revisions = []
+            for record in window_records:
+                window_metadata = self.load_window_metadata(record)
+                if not window_metadata or window_metadata.get('status') != 'completed':
+                    raise ValueError(
+                        f'第 {batch_index} 批缺少已提交的 Window：{record.run_name}')
+                new_types.extend(window_metadata['accepted_edge_types'])
+                for item in window_metadata.get('revised_existing_edge_types', []):
+                    revisions.append({
+                        'window': record.run_name,
+                        **item,
+                    })
         atomic_save_json(directory / 'registry_before.json', registry_before)
         atomic_save_json(
             directory / 'registry_after_windows.json', registry_after)
@@ -172,6 +190,7 @@ class Storage:
             'end_window': end_window,
             'prompt_version': prompt_version,
             'new_edge_type_count': len(new_types),
+            'revised_existing_edge_type_count': len(revisions),
             'registry_size': len(registry_after),
             'feedback_mode': feedback_mode,
             'feedback_required': feedback_required,
@@ -181,7 +200,8 @@ class Storage:
         }
         atomic_save_json(directory / 'batch_metadata.json', metadata)
         atomic_write_text(directory / 'review_packet.md',
-                          self._review_packet(metadata, new_types, registry_after))
+                          self._review_packet(
+                              metadata, new_types, revisions, registry_after))
         return directory / 'review_packet.md', new_types
 
     def batch_dir(self, batch_index):
@@ -283,13 +303,14 @@ class Storage:
             })
 
     @staticmethod
-    def _review_packet(metadata, new_types, registry):
+    def _review_packet(metadata, new_types, revisions, registry):
         lines = [
             f'# 第 {metadata["batch_index"]} 批 Edge Type Discovery 结果', '',
             '## 一、批次信息', '',
             f'处理 Window：{metadata["start_window"]}–{metadata["end_window"]}',
             f'Prompt 版本：{metadata["prompt_version"]}',
             f'本批新增边类型：{len(new_types)}',
+            f'本批已有类型修订：{len(revisions)}',
             f'当前边类型总数：{len(registry)}', '',
             '## 二、本批新增边类型', '',
         ]
@@ -298,7 +319,22 @@ class Storage:
         else:
             for item in new_types:
                 lines.extend(Storage._edge_markdown(item))
-        lines.extend(['## 三、当前完整 Registry', ''])
+        lines.extend(['## 三、本批已有类型修订', ''])
+        if not revisions:
+            lines.extend(['本批没有修订已有边类型。', ''])
+        else:
+            for item in revisions:
+                before, after = (item['original_edge_type'],
+                                 item['revised_edge_type'])
+                lines.extend([
+                    f'### {item["original_name"]} → {after["name"]}', '',
+                    f'Window：{item["window"]}', '',
+                    '修订前：', '',
+                    *Storage._edge_markdown(before),
+                    '修订后：', '',
+                    *Storage._edge_markdown(after),
+                ])
+        lines.extend(['## 四、当前完整 Registry', ''])
         if not registry:
             lines.append('Registry 当前为空。')
         else:
@@ -318,7 +354,6 @@ class Storage:
 
     def reconstruct_registry(self, records, completed_windows, save=True):
         registry = []
-        names = set()
         feedback_boundaries = {}
         batches_root = self.output_dir / 'batches'
         if batches_root.is_dir():
@@ -342,14 +377,34 @@ class Storage:
             metadata = self.load_window_metadata(record)
             if not metadata or metadata.get('status') != 'completed':
                 raise ValueError(f'恢复失败：Window {record.run_name} 未完整提交')
+            if metadata.get('registry_snapshot') != registry:
+                raise ValueError(
+                    f'恢复失败：Window {record.run_name} 的 Registry 快照不一致')
             accepted = metadata.get('accepted_edge_types')
             validate_edge_type_list(
                 accepted, f'{record.run_name}.accepted_edge_types')
-            for item in accepted:
-                if item['name'] in names:
-                    raise ValueError(f'恢复失败：重复 Registry 类型 {item["name"]}')
-                names.add(item['name'])
-                registry.append(item)
+            revision_history = metadata.get('revised_existing_edge_types', [])
+            if not isinstance(revision_history, list):
+                raise ValueError(
+                    f'恢复失败：Window {record.run_name} 的修订记录无效')
+            by_name = {edge['name']: edge for edge in registry}
+            for item in revision_history:
+                original_name = item.get('original_name')
+                if (original_name not in by_name or
+                        item.get('original_edge_type') != by_name[original_name]):
+                    raise ValueError(
+                        f'恢复失败：Window {record.run_name} 的修订前定义不一致')
+            registry = apply_review_result(registry, {
+                'accepted_edge_types': accepted,
+                'revised_existing_edge_types': [
+                    {'original_name': item['original_name'],
+                     'revised_edge_type': item['revised_edge_type']}
+                    for item in revision_history
+                ],
+            })
+            if metadata.get('registry_size_after') != len(registry):
+                raise ValueError(
+                    f'恢复失败：Window {record.run_name} 的 Registry 大小不一致')
             completed_count = record.global_index + 1
             directory = feedback_boundaries.get(completed_count)
             if directory is not None:
@@ -362,7 +417,6 @@ class Storage:
                 registry = load_json(
                     directory / 'registry_after_feedback.json')
                 validate_registry(registry)
-                names = {item['name'] for item in registry}
         validate_registry(registry)
         if save:
             self.save_registry(registry)

@@ -1,4 +1,4 @@
-"""Step 3: review candidates and select genuinely new reusable types."""
+"""Step 3: review new candidates and revise matched Registry types."""
 
 from src.deepseek_client import encoded
 
@@ -19,4 +19,4 @@ def run_review(*, context_window, candidate_types, comparison_result,
         stage='review', window_name=window_name,
         prompt_version=prompt_version, system=system, user=user,
         validator=lambda value: validate_review(
-            value, candidate_types, existing_registry))
+            value, candidate_types, comparison_result, existing_registry))

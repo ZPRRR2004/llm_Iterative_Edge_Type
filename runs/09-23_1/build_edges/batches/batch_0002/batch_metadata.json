@@ -1,0 +1,22 @@
+{
+  "batch_index": 2,
+  "start_window": 11,
+  "end_window": 20,
+  "prompt_version": "v0001",
+  "new_edge_type_count": 13,
+  "revised_existing_edge_type_count": 1,
+  "registry_size": 20,
+  "feedback_mode": "registry_feedback",
+  "feedback_required": true,
+  "feedback_completed": true,
+  "feedback_applied": true,
+  "saved_at": "2026-09-23T02:10:21.894355+00:00",
+  "registry_size_after_feedback": 7,
+  "revision_operation_counts": {
+    "KEEP": 3,
+    "DELETE": 0,
+    "REVISE": 4,
+    "MERGE": 13
+  },
+  "feedback_completed_at": "2026-09-23T02:21:02.498728+00:00"
+}

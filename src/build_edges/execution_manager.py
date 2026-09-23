@@ -4,13 +4,13 @@ import copy
 from .comparison import run_comparison
 from .discovery import run_discovery
 from .llm_client import StageCallError
-from .registry import apply_registry_revision, update_registry
+from .registry import apply_registry_revision, apply_review_result
 from .registry_revision import run_registry_revision
 from .review import run_review
 from .storage import utc_now
 from .validator import (validate_comparison, validate_discovery,
                         validate_registry_revision_plan,
-                        validate_registry_update, validate_review)
+                        validate_review)
 from .window_loader import serialize_context_window
 
 
@@ -56,6 +56,9 @@ def process_window(*, record, registry, llm_client, prompt_bundle,
             'registry_snapshot': registry_snapshot,
             'completed_stages': [],
             'accepted_edge_types': [],
+            'revised_existing_edge_types': [],
+            'accepted_edge_type_count': 0,
+            'revised_existing_edge_type_count': 0,
             'status': 'running',
             'created_at': utc_now(),
             'updated_at': utc_now(),
@@ -121,16 +124,29 @@ def process_window(*, record, registry, llm_client, prompt_bundle,
             raise
     else:
         review = storage.load_stage_result(record, 'review')
-        validate_review(review, candidates, registry_snapshot)
+        validate_review(review, candidates, comparison, registry_snapshot)
 
     accepted_types = review['accepted_edge_types']
-    validate_registry_update(registry_snapshot, accepted_types)
-    updated_registry = update_registry(registry_snapshot, accepted_types)
+    validate_review(review, candidates, comparison, registry_snapshot)
+    updated_registry = apply_review_result(registry_snapshot, review)
+    registry_by_name = {edge['name']: edge for edge in registry_snapshot}
+    revision_history = [
+        {
+            'original_name': item['original_name'],
+            'original_edge_type': copy.deepcopy(
+                registry_by_name[item['original_name']]),
+            'revised_edge_type': copy.deepcopy(item['revised_edge_type']),
+        }
+        for item in review['revised_existing_edge_types']
+    ]
     metadata.update({
         'status': 'completed',
         'failed_stage': None,
         'error': None,
         'accepted_edge_types': accepted_types,
+        'revised_existing_edge_types': revision_history,
+        'accepted_edge_type_count': len(accepted_types),
+        'revised_existing_edge_type_count': len(revision_history),
         'registry_size_after': len(updated_registry),
         'completed_at': utc_now(),
         'updated_at': utc_now(),
@@ -142,6 +158,27 @@ def process_window(*, record, registry, llm_client, prompt_bundle,
         'review': review,
         'updated_registry': updated_registry,
     }
+
+
+def print_window_summary(record, result):
+    comparison = result['comparison']
+    review = result['review']
+    revisions = review['revised_existing_edge_types']
+    print(f'\n【Build Edges】Window {record.global_index + 1} 处理完成')
+    print(f'\nDiscovery 候选类型：{len(result["discovery"]["candidate_edge_types"])}')
+    print('Comparison：')
+    for key in ('existing', 'new', 'uncertain'):
+        print(f'  {key.upper()}：{len(comparison[key])}')
+    print('\nReview：')
+    print(f'  接受新增类型：{len(review["accepted_edge_types"])}')
+    print(f'  修订已有类型：{len(revisions)}')
+    print(f'\n当前 Registry 类型总数：{len(result["updated_registry"])}')
+    renamed = [item for item in revisions
+               if item['original_name'] != item['revised_edge_type']['name']]
+    if renamed:
+        print('\n【本轮已有类型修订】\n')
+        for item in renamed:
+            print(f'{item["original_name"]}\n    → {item["revised_edge_type"]["name"]}')
 
 
 def _feedback_mode_label(mode):
@@ -511,6 +548,7 @@ def process_all_windows(*, records, manifest, config, prompt_manager,
             'pending_feedback_stage': None,
         })
         storage.save_state(state)
+        print_window_summary(record, result)
 
         all_finished = state['completed_windows'] == len(records)
         batch_finished = state['completed_windows_in_batch'] == interval
@@ -523,6 +561,7 @@ def process_all_windows(*, records, manifest, config, prompt_manager,
                 prompt_version=prompt_manager.current_version,
                 registry_before=batch_registry_before,
                 registry_after=registry,
+                window_records=records[batch_start - 1:state['completed_windows']],
                 feedback_mode=state['feedback_mode'],
                 feedback_required=not all_finished)
             if all_finished:

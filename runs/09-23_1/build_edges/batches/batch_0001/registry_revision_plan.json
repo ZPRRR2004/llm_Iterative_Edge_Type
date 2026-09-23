@@ -1,0 +1,138 @@
+{
+  "revisions": [
+    {
+      "original_name": "USES_PREVIOUSLY_PRODUCED_ARTIFACT_AS_INPUT",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "USES_PRIOR_RESULT_TO_GUIDE_ACTION",
+        "definition": "A later agent action uses a previously produced artifact, observation, or confirmed result as an input or basis for constructing or applying a subsequent action.",
+        "source_description": "A prior result, artifact, observation, or confirmed finding produced or observed during earlier execution.",
+        "target_description": "A subsequent agent action that consumes, applies, or otherwise bases itself on that prior result."
+      }
+    },
+    {
+      "original_name": "EXECUTION_BLOCKED_BY_PREVIOUSLY_OBSERVED_MISSING_DEPENDENCY",
+      "operation": "DELETE"
+    },
+    {
+      "original_name": "ATTEMPTS_TO_REPAIR",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "PLANNED_CONTINGENCY_CONFIRMED_BY_OBSERVATION",
+      "operation": "DELETE"
+    },
+    {
+      "original_name": "INVESTIGATES_BEFORE_REMEDIATION",
+      "operation": "MERGE",
+      "merge_into": "DIAGNOSES_FAILURE_CAUSE"
+    },
+    {
+      "original_name": "VERIFIES_PRODUCED_ARTIFACT",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "VERIFIES_OUTCOME_OR_PREREQUISITE",
+        "definition": "A subsequent agent action independently checks whether a previously produced artifact, repaired state, candidate, or identified prerequisite satisfies its intended requirement, exists, or is available.",
+        "source_description": "A prior agent action or state that produced or identified an artifact, candidate, repair, or prerequisite whose status or correctness must be confirmed.",
+        "target_description": "A subsequent verification action that inspects, executes, probes, or otherwise checks that prior artifact, candidate, repair, or prerequisite."
+      }
+    },
+    {
+      "original_name": "TERMINATES_WORKFLOW_AFTER_VERIFIED_SUCCESS",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "COMPLETES_TASK_AFTER_VERIFICATION",
+        "definition": "The agent concludes the task, either by declaring completion or by reasoning that cites successful verification evidence, after execution results have been verified as satisfying the task requirements.",
+        "source_description": "Successful verification, test, or execution results confirming that the task objective or requirements have been met.",
+        "target_description": "A task-completion declaration or completion reasoning that ends the workflow."
+      }
+    },
+    {
+      "original_name": "RESPONDS_TO_CONFIRMATION_PROMPT",
+      "operation": "DELETE"
+    },
+    {
+      "original_name": "SELECTS_ALTERNATIVE_APPROACH",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "SELECTS_APPROACH_BASED_ON_EVIDENCE",
+        "definition": "After evaluating available evidence, such as a blocked or unavailable approach, capability probe results, comparative evaluation outcomes, or diagnostic findings, the agent selects or adopts a tool, candidate solution, or strategy to pursue the task.",
+        "source_description": "Evidence from prior observations, probes, evaluations, or diagnostics that constrains or informs the available choices.",
+        "target_description": "A subsequent agent action or selection that adopts an alternative tool, candidate, or strategy based on that evidence."
+      }
+    },
+    {
+      "original_name": "CAPABILITY_PROBE_INFORMS_TOOL_SELECTION",
+      "operation": "MERGE",
+      "merge_into": "SELECTS_ALTERNATIVE_APPROACH"
+    },
+    {
+      "original_name": "MONITORS_ASYNCHRONOUS_OPERATION",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "RESOLVES_AMBIGUITY_IN_PRIOR_RESULT",
+      "operation": "MERGE",
+      "merge_into": "DIAGNOSES_FAILURE_CAUSE"
+    },
+    {
+      "original_name": "SELECTS_CANDIDATE_BASED_ON_EVALUATION",
+      "operation": "MERGE",
+      "merge_into": "SELECTS_ALTERNATIVE_APPROACH"
+    },
+    {
+      "original_name": "DERIVES_BYPASS_FROM_IMPLEMENTATION_OBSERVATION",
+      "operation": "MERGE",
+      "merge_into": "USES_PREVIOUSLY_PRODUCED_ARTIFACT_AS_INPUT"
+    },
+    {
+      "original_name": "VALIDATES_CANDIDATE_AGAINST_TRANSFORMATION",
+      "operation": "MERGE",
+      "merge_into": "VERIFIES_PRODUCED_ARTIFACT"
+    },
+    {
+      "original_name": "DIAGNOSES_FAILURE_CAUSE",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "DIAGNOSES_ISSUE_TO_INFORM_ACTION",
+        "definition": "An agent diagnostic or investigative step examines an observed failure, ambiguous result, incompatibility, or constraint in order to identify its cause, resolve ambiguity, or determine appropriate subsequent action.",
+        "source_description": "An observed failure, ambiguous or conflicting result, or environmental or compatibility constraint that requires investigation.",
+        "target_description": "A subsequent diagnostic, investigative, or information-gathering step, such as reasoning, code search, or analysis, performed to identify the cause or inform subsequent action."
+      }
+    },
+    {
+      "original_name": "USES_CONFIRMED_RESULT_TO_APPLY_SOLUTION",
+      "operation": "MERGE",
+      "merge_into": "USES_PREVIOUSLY_PRODUCED_ARTIFACT_AS_INPUT"
+    },
+    {
+      "original_name": "USES_DIAGNOSIS_TO_SELECT_REPAIR_ACTION",
+      "operation": "MERGE",
+      "merge_into": "SELECTS_ALTERNATIVE_APPROACH"
+    },
+    {
+      "original_name": "JUSTIFIES_TASK_COMPLETION_WITH_VERIFICATION_EVIDENCE",
+      "operation": "MERGE",
+      "merge_into": "TERMINATES_WORKFLOW_AFTER_VERIFIED_SUCCESS"
+    },
+    {
+      "original_name": "EXPLAINS_MECHANISM_OF_VERIFIED_SOLUTION",
+      "operation": "DELETE"
+    },
+    {
+      "original_name": "VERIFIES_PREREQUISITE_AVAILABILITY",
+      "operation": "MERGE",
+      "merge_into": "VERIFIES_PRODUCED_ARTIFACT"
+    },
+    {
+      "original_name": "SEARCHES_CODEBASE_FOR_CONSTRAINT_VIOLATIONS",
+      "operation": "MERGE",
+      "merge_into": "DIAGNOSES_FAILURE_CAUSE"
+    },
+    {
+      "original_name": "VERIFIES_PRIOR_REPAIR",
+      "operation": "MERGE",
+      "merge_into": "VERIFIES_PRODUCED_ARTIFACT"
+    }
+  ]
+}

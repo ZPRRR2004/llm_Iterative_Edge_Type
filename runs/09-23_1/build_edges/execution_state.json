@@ -1,0 +1,16 @@
+{
+  "next_window_index": 21,
+  "completed_windows": 21,
+  "current_batch_index": 3,
+  "completed_windows_in_batch": 1,
+  "prompt_version": "v0001",
+  "next_stage": "discovery",
+  "feedback_mode": "registry_feedback",
+  "pending_feedback_stage": null,
+  "status": "completed",
+  "config": {
+    "human_feedback_interval": 10,
+    "feedback_mode": "registry_feedback",
+    "max_llm_retries": 3
+  }
+}

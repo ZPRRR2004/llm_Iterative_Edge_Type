@@ -1,0 +1,194 @@
+{
+  "input_directory": "E:\\agent解释性\\llm_Iterative_Edge_Type\\runs\\09-23_1\\split_windows",
+  "windows": [
+    {
+      "global_index": 0,
+      "filename": "trajectory1__window_0001.json",
+      "trajectory_id": "trajectory1",
+      "window_id": "window_0001",
+      "window_index": 1,
+      "run_name": "trajectory1__window_0001",
+      "sha256": "c5ead0875a569a01fde64b4fc8659aa8ee9e70d542374b7b43988632f36d5d0e"
+    },
+    {
+      "global_index": 1,
+      "filename": "trajectory1__window_0002.json",
+      "trajectory_id": "trajectory1",
+      "window_id": "window_0002",
+      "window_index": 2,
+      "run_name": "trajectory1__window_0002",
+      "sha256": "07c0ab9419e0b581dc413b5a2721ed8dafa589270a8188930557bc8732449649"
+    },
+    {
+      "global_index": 2,
+      "filename": "trajectory2__window_0001.json",
+      "trajectory_id": "trajectory2",
+      "window_id": "window_0001",
+      "window_index": 1,
+      "run_name": "trajectory2__window_0001",
+      "sha256": "a82b6127cf79bf8ab58094f014031eb6127814fa2de651254be4d058a8ba1dc3"
+    },
+    {
+      "global_index": 3,
+      "filename": "trajectory2__window_0002.json",
+      "trajectory_id": "trajectory2",
+      "window_id": "window_0002",
+      "window_index": 2,
+      "run_name": "trajectory2__window_0002",
+      "sha256": "bd26cda854974e930abef6435bb6f0ee066492d61f5bb55471b0754991d0a495"
+    },
+    {
+      "global_index": 4,
+      "filename": "trajectory3__window_0001.json",
+      "trajectory_id": "trajectory3",
+      "window_id": "window_0001",
+      "window_index": 1,
+      "run_name": "trajectory3__window_0001",
+      "sha256": "99b3ebfce7266cd27795d2089248446e61ce677478449a9107df5f2e59722d5c"
+    },
+    {
+      "global_index": 5,
+      "filename": "trajectory3__window_0002.json",
+      "trajectory_id": "trajectory3",
+      "window_id": "window_0002",
+      "window_index": 2,
+      "run_name": "trajectory3__window_0002",
+      "sha256": "03fa5ea40ab831c67924502e59cbda031e08a088011943cdd066439b28125179"
+    },
+    {
+      "global_index": 6,
+      "filename": "trajectory3__window_0003.json",
+      "trajectory_id": "trajectory3",
+      "window_id": "window_0003",
+      "window_index": 3,
+      "run_name": "trajectory3__window_0003",
+      "sha256": "3555fe54ec41acd7e79187bf2ed45818ea85f131c53d8428ec2e99369ecc8bd8"
+    },
+    {
+      "global_index": 7,
+      "filename": "trajectory4__window_0001.json",
+      "trajectory_id": "trajectory4",
+      "window_id": "window_0001",
+      "window_index": 1,
+      "run_name": "trajectory4__window_0001",
+      "sha256": "cdf03d16a9a0b32aed226c5c1e2615882f1c42e760d5f40f6303fd0fd3b2bf39"
+    },
+    {
+      "global_index": 8,
+      "filename": "trajectory4__window_0002.json",
+      "trajectory_id": "trajectory4",
+      "window_id": "window_0002",
+      "window_index": 2,
+      "run_name": "trajectory4__window_0002",
+      "sha256": "d95e27c8fbd49d3a584e89b7d129b3356b42ba0cfe9739001606048804a5c696"
+    },
+    {
+      "global_index": 9,
+      "filename": "trajectory4__window_0003.json",
+      "trajectory_id": "trajectory4",
+      "window_id": "window_0003",
+      "window_index": 3,
+      "run_name": "trajectory4__window_0003",
+      "sha256": "80a4d1978549c203eb05db7d1b8d625cc351f2d645c21984daa1a72e77f3ef12"
+    },
+    {
+      "global_index": 10,
+      "filename": "trajectory5__window_0001.json",
+      "trajectory_id": "trajectory5",
+      "window_id": "window_0001",
+      "window_index": 1,
+      "run_name": "trajectory5__window_0001",
+      "sha256": "4661ba07db6badf140a9605822d6e184f2cdfa7605bce67a93476421675362e9"
+    },
+    {
+      "global_index": 11,
+      "filename": "trajectory5__window_0002.json",
+      "trajectory_id": "trajectory5",
+      "window_id": "window_0002",
+      "window_index": 2,
+      "run_name": "trajectory5__window_0002",
+      "sha256": "501bf92cb972d53d8be37352befbb07d447a48b0857f98b608a7d1dc37758b44"
+    },
+    {
+      "global_index": 12,
+      "filename": "trajectory6__window_0001.json",
+      "trajectory_id": "trajectory6",
+      "window_id": "window_0001",
+      "window_index": 1,
+      "run_name": "trajectory6__window_0001",
+      "sha256": "af9426dd28723e3d9bfd03b6e5d273dc940db731feb3f4d9ec376bef960597e8"
+    },
+    {
+      "global_index": 13,
+      "filename": "trajectory6__window_0002.json",
+      "trajectory_id": "trajectory6",
+      "window_id": "window_0002",
+      "window_index": 2,
+      "run_name": "trajectory6__window_0002",
+      "sha256": "82d77c23436676b3278a614d933bbc237d204be515e19812f0673ad87a623cf7"
+    },
+    {
+      "global_index": 14,
+      "filename": "trajectory6__window_0003.json",
+      "trajectory_id": "trajectory6",
+      "window_id": "window_0003",
+      "window_index": 3,
+      "run_name": "trajectory6__window_0003",
+      "sha256": "6e2c2de09ec95639616f71c4170e42c4969854c5729110eb228124e0b9f74b19"
+    },
+    {
+      "global_index": 15,
+      "filename": "trajectory7__window_0001.json",
+      "trajectory_id": "trajectory7",
+      "window_id": "window_0001",
+      "window_index": 1,
+      "run_name": "trajectory7__window_0001",
+      "sha256": "7d62838371aa272dc03cdeaaf85845f5260df78166d804ea300f4d9423a590ec"
+    },
+    {
+      "global_index": 16,
+      "filename": "trajectory7__window_0002.json",
+      "trajectory_id": "trajectory7",
+      "window_id": "window_0002",
+      "window_index": 2,
+      "run_name": "trajectory7__window_0002",
+      "sha256": "e144fc8cc335fc2905ce278112f82e6ea036be10a292aabf4b43680d67ab0d52"
+    },
+    {
+      "global_index": 17,
+      "filename": "trajectory7__window_0003.json",
+      "trajectory_id": "trajectory7",
+      "window_id": "window_0003",
+      "window_index": 3,
+      "run_name": "trajectory7__window_0003",
+      "sha256": "e245e59f4535a1217ff5ca6ee41cedba06dc4adce149f1bcdd6ba348632decbb"
+    },
+    {
+      "global_index": 18,
+      "filename": "trajectory7__window_0004.json",
+      "trajectory_id": "trajectory7",
+      "window_id": "window_0004",
+      "window_index": 4,
+      "run_name": "trajectory7__window_0004",
+      "sha256": "bcca59679178a7a1f36969c4c853ffdd0283571ce11365b3680febcd0e8bd81b"
+    },
+    {
+      "global_index": 19,
+      "filename": "trajectory8__window_0001.json",
+      "trajectory_id": "trajectory8",
+      "window_id": "window_0001",
+      "window_index": 1,
+      "run_name": "trajectory8__window_0001",
+      "sha256": "d6c575f046c4bc7db0ca739fa2daddad24fed58523aba28e734df964ea15304d"
+    },
+    {
+      "global_index": 20,
+      "filename": "trajectory8__window_0002.json",
+      "trajectory_id": "trajectory8",
+      "window_id": "window_0002",
+      "window_index": 2,
+      "run_name": "trajectory8__window_0002",
+      "sha256": "2329f708714ecd6cce7cf58889bde9ecfc01ff0332b94e071f4bb28098b823ac"
+    }
+  ]
+}

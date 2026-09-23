@@ -95,16 +95,46 @@ def validate_comparison(value, candidates, registry):
     return value
 
 
-def validate_review(value, candidates, registry):
-    _exact_keys(value, {'accepted_edge_types'}, 'Review 输出')
+def validate_review(value, candidates, comparison, registry):
+    _exact_keys(value, {'accepted_edge_types', 'revised_existing_edge_types'},
+                'Review 输出')
     accepted = validate_edge_type_list(value['accepted_edge_types'],
                                        'accepted_edge_types')
+    revisions = value['revised_existing_edge_types']
+    if not isinstance(revisions, list):
+        raise ValidationError('revised_existing_edge_types 必须是数组')
+    if not candidates and (accepted or revisions):
+        raise ValidationError('候选列表为空时不能新增或修订类型')
+
     registry_names = {item['name'] for item in registry}
-    conflicts = sorted(registry_names & {item['name'] for item in accepted})
-    if conflicts:
-        raise ValidationError(f'Review 接受了 Registry 中已有的名称：{conflicts}')
-    if not candidates and accepted:
-        raise ValidationError('候选列表为空时不能接受新增类型')
+    matched_names = {item['matched_existing_name']
+                     for item in comparison['existing']}
+    revised_by_name = {}
+    for index, item in enumerate(revisions):
+        label = f'revised_existing_edge_types[{index}]'
+        _exact_keys(item, {'original_name', 'revised_edge_type'}, label)
+        original_name = item['original_name']
+        if not isinstance(original_name, str) or not original_name.strip():
+            raise ValidationError(f'{label}.original_name 必须是非空字符串')
+        if original_name not in registry_names:
+            raise ValidationError(f'{label} 引用了未知 Registry 类型：{original_name}')
+        if original_name not in matched_names:
+            raise ValidationError(
+                f'{label} 的原类型不在本轮 Comparison existing 匹配中：'
+                f'{original_name}')
+        if original_name in revised_by_name:
+            raise ValidationError(f'同一已有类型被重复修订：{original_name}')
+        validate_edge_type(item['revised_edge_type'],
+                           f'{label}.revised_edge_type')
+        revised_by_name[original_name] = item['revised_edge_type']
+
+    final_names = [revised_by_name.get(edge['name'], edge)['name']
+                   for edge in registry]
+    final_names.extend(item['name'] for item in accepted)
+    if len(final_names) != len(set(final_names)):
+        conflicts = sorted(name for name in set(final_names)
+                           if final_names.count(name) > 1)
+        raise ValidationError(f'Review 更新后 Registry 类型名称冲突：{conflicts}')
     return value
 
 

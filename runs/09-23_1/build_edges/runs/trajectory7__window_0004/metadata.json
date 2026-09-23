@@ -1,0 +1,140 @@
+{
+  "window_file": "trajectory7__window_0004.json",
+  "trajectory_id": "trajectory7",
+  "window_id": "window_0004",
+  "global_index": 18,
+  "prompt_version": "v0001",
+  "registry_snapshot": [
+    {
+      "name": "USES_PRIOR_RESULT_TO_GUIDE_ACTION",
+      "definition": "A later agent action uses a previously produced artifact, observation, or confirmed result as an input or basis for constructing or applying a subsequent action.",
+      "source_description": "A prior result, artifact, observation, or confirmed finding produced or observed during earlier execution.",
+      "target_description": "A subsequent agent action that consumes, applies, or otherwise bases itself on that prior result."
+    },
+    {
+      "name": "ATTEMPTS_TO_REPAIR",
+      "definition": "A subsequent agent action attempts to resolve a failure or unmet prerequisite identified during an earlier execution step, for example by retrying with a revised artifact or alternative approach, or by installing or otherwise providing a missing component.",
+      "source_description": "An earlier observed execution failure or a prerequisite reported as missing or unavailable.",
+      "target_description": "A subsequent agent action intended to resolve that failure or unmet prerequisite."
+    },
+    {
+      "name": "VERIFIES_OUTCOME_OR_PREREQUISITE",
+      "definition": "A subsequent agent action independently checks whether a previously produced artifact, repaired state, candidate, or identified prerequisite satisfies its intended requirement, exists, or is available.",
+      "source_description": "A prior agent action or state that produced or identified an artifact, candidate, repair, or prerequisite whose status or correctness must be confirmed.",
+      "target_description": "A subsequent verification action that inspects, executes, probes, or otherwise checks that prior artifact, candidate, repair, or prerequisite."
+    },
+    {
+      "name": "COMPLETES_TASK_AFTER_VERIFICATION",
+      "definition": "The agent concludes the task, either by declaring completion or by reasoning that cites successful verification evidence, after execution results have been verified as satisfying the task requirements.",
+      "source_description": "Successful verification, test, or execution results confirming that the task objective or requirements have been met.",
+      "target_description": "A task-completion declaration or completion reasoning that ends the workflow."
+    },
+    {
+      "name": "SELECTS_APPROACH_BASED_ON_EVIDENCE",
+      "definition": "After evaluating available evidence, such as a blocked or unavailable approach, capability probe results, comparative evaluation outcomes, or diagnostic findings, the agent selects or adopts a tool, candidate solution, or strategy to pursue the task.",
+      "source_description": "Evidence from prior observations, probes, evaluations, or diagnostics that constrains or informs the available choices.",
+      "target_description": "A subsequent agent action or selection that adopts an alternative tool, candidate, or strategy based on that evidence."
+    },
+    {
+      "name": "MONITORS_ASYNCHRONOUS_OPERATION",
+      "definition": "A long-running operation that an earlier action launched in the background without waiting for completion is subsequently monitored by a separate action that inspects its output or log to determine progress or outcome.",
+      "source_description": "An agent action that launches a long-running operation in the background without waiting for it to finish.",
+      "target_description": "A subsequent action that inspects the launched operation's output or log file to determine whether it has completed and with what result."
+    },
+    {
+      "name": "DIAGNOSES_ISSUE_TO_INFORM_ACTION",
+      "definition": "An agent investigative step examines an observed failure, error, unexpected or incompatible result, or environmental constraint in order to identify its cause or determine an appropriate subsequent course of action.",
+      "source_description": "An observed failure, error, unexpected or incompatible result, or environmental constraint that requires investigation.",
+      "target_description": "A subsequent diagnostic, investigative, or information-gathering action, such as reasoning, search, or analysis, performed to identify the cause or inform the next step."
+    },
+    {
+      "name": "WAITS_FOR_OPERATION_COMPLETION",
+      "definition": "A subsequent agent action pauses, polls, or otherwise waits for a previously initiated long-running or asynchronous operation to finish, instead of proceeding while that operation is still in progress.",
+      "source_description": "An earlier agent action that initiated a long-running or asynchronous operation whose completion has not yet been observed.",
+      "target_description": "A subsequent agent action that pauses, polls, or waits until the previously initiated operation has finished."
+    },
+    {
+      "name": "PERFORMS_ADDITIONAL_VERIFICATION_FOR_UNCHECKED_REQUIREMENT",
+      "definition": "After one or more requirements have already been verified, the agent performs a separate, independent verification action targeted at a different requirement that has not yet been checked.",
+      "source_description": "A completed verification action that confirmed one or more task requirements.",
+      "target_description": "A subsequent, separate verification action performed to check a different requirement not covered by the earlier verification."
+    },
+    {
+      "name": "PROCEEDS_AFTER_SUCCESS_CONFIRMATION",
+      "definition": "An observation confirming that a preceding operation completed successfully enables the agent to advance to the next stage of its task, rather than requiring the prior operation to be repeated, repaired, or re-planned.",
+      "source_description": "An observation reporting that a preceding operation finished successfully.",
+      "target_description": "A subsequent agent action that advances to the next stage of the task on the basis of that success confirmation."
+    },
+    {
+      "name": "PLAN_IMPLEMENTED_BY_TOOL_CALL",
+      "definition": "An operation stated in the agent's reasoning as the next step is carried out by a subsequent tool call that performs that stated operation.",
+      "source_description": "An agent thought, analysis, or plan that states an operation to be performed next.",
+      "target_description": "A tool call that executes the operation stated in the preceding reasoning."
+    },
+    {
+      "name": "USES_OBSERVED_CONTENT_AS_EVIDENCE_FOR_CLASSIFICATION",
+      "definition": "The agent interprets content returned by a tool as evidence and uses it to assign the observed document or entity to a category.",
+      "source_description": "A tool observation containing the document text or extracted content to be interpreted.",
+      "target_description": "An agent classification decision that assigns the observed document or entity to a category."
+    },
+    {
+      "name": "EXTRACTS_FIELD_VALUES_FROM_OBSERVED_CONTENT",
+      "definition": "The agent identifies specific labeled or quantitative field values within content returned by a tool and records them as extracted results.",
+      "source_description": "A tool observation containing content with embedded labeled or quantitative field values.",
+      "target_description": "An agent result or decision that records the field values extracted from the observed content."
+    },
+    {
+      "name": "OBSERVED_CONFLICTING_VALUES_TRIGGER_PRECEDENCE_RULE",
+      "definition": "When an observation presents multiple differing candidate values for the same logical field, the agent applies a precedence or disambiguation rule to select the value to use.",
+      "source_description": "A tool observation containing multiple differing candidate values for the same requested field.",
+      "target_description": "An agent selection decision that chooses one candidate value by applying a precedence or disambiguation rule."
+    },
+    {
+      "name": "PARTIAL_OBSERVATION_TRIGGERS_FOLLOW_UP_INSPECTION",
+      "definition": "An observation that exposes only part of the content required for the current analysis causes the agent to perform a follow-up action that retrieves the remaining or fuller content of the same target.",
+      "source_description": "A tool observation that reveals or provides only a partial view of the content needed for the current analysis.",
+      "target_description": "A subsequent agent action that retrieves additional or complete content of the same target."
+    },
+    {
+      "name": "CLEANS_UP_TEMPORARY_RESOURCES",
+      "definition": "After the main task objective has been achieved and its outcome confirmed, a subsequent agent action removes temporary or intermediate resources that were created during execution and are no longer needed.",
+      "source_description": "A state or confirmation indicating that the main task objective has been completed.",
+      "target_description": "A subsequent cleanup action that deletes temporary or intermediate resources created during execution."
+    },
+    {
+      "name": "GENERALIZES_VERIFIED_METHOD_TO_BATCH",
+      "definition": "After a method, command, or procedure has been verified to work on an initial probe or test item, the agent applies the same verified method to process a batch of additional items.",
+      "source_description": "An observation confirming that a method or procedure succeeded on an initial probe or test item.",
+      "target_description": "A subsequent agent action that applies the verified method to a batch of remaining items."
+    },
+    {
+      "name": "RESOLVES_AMBIGUOUS_VALUE_WITH_REFERENCE_SOURCE",
+      "definition": "The agent detects an unknown, placeholder, or ambiguous value within previously retrieved data and queries a separate authoritative or reference source to determine the correct value to use.",
+      "source_description": "Previously retrieved data containing an unknown, placeholder, or ambiguous value that must be resolved before it can be used.",
+      "target_description": "A subsequent agent action that queries an external authoritative or reference source to obtain the correct value for the ambiguous or placeholder entry."
+    }
+  ],
+  "completed_stages": [
+    "discovery",
+    "comparison",
+    "review"
+  ],
+  "accepted_edge_types": [
+    {
+      "name": "VALIDATES_AGAINST_EXPECTED_REFERENCE",
+      "definition": "A subsequent verification action compares a newly derived output against an expected reference value or artifact that was established during an earlier execution step, in order to confirm that a generation or transformation preserved the expected content.",
+      "source_description": "An expected reference value, artifact, or intermediate product established by an earlier execution step, against which a derived output is to be compared.",
+      "target_description": "A comparison or validation action that checks the derived output against that expected reference to confirm transformation fidelity."
+    }
+  ],
+  "revised_existing_edge_types": [],
+  "accepted_edge_type_count": 1,
+  "revised_existing_edge_type_count": 0,
+  "status": "completed",
+  "created_at": "2026-09-23T02:07:29.725433+00:00",
+  "updated_at": "2026-09-23T02:08:58.417864+00:00",
+  "failed_stage": null,
+  "error": null,
+  "registry_size_after": 19,
+  "completed_at": "2026-09-23T02:08:58.417864+00:00"
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Recover DAG, Learn Bayesian Network, Intervene on Y, and Sample",
+  "query": "Using /app/bn_sample_10k.csv, recover the underlying DAG sampled from a Bayesian network. U has no parents, the DAG has exactly six edges total, and for any edge not involving U whose direction is unclear, treat the alphabetically earlier node as the child of the alphabetically later node. Save the recovered DAG edges to /app/learned_dag.csv in to,from CSV format. Then learn a Bayesian Network from /app/bn_sample_10k.csv using the recovered DAG and perform a causal intervention on Y by setting its value to 0.0 (or, if an exact-value intervention is unsupported, use an extremely small 10e-9 variance around 0.0). Save the intervened BN edges to /app/intervened_dag.csv in the same to,from format. Finally, sample 10k points from the intervened BN and save them to /app/final_bn_sample.csv with the same column names as the original data.",
+  "review_flags": [
+    "The task contains two steps numbered \"4)\" (saving the intervened DAG and sampling from the intervened BN); both appear required, but the duplicate numbering is potentially ambiguous.",
+    "The intervention fallback specifies an \"extremely small (10e-9) variance\"; the notation is nonstandard and might be intended to mean 1e-9 rather than 1e-8."
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "window_file": "trajectory1__window_0001.json",
+  "trajectory_id": "trajectory1",
+  "window_id": "window_0001",
+  "global_index": 0,
+  "prompt_version": "v0001",
+  "registry_snapshot": [],
+  "completed_stages": [
+    "discovery",
+    "comparison",
+    "review"
+  ],
+  "accepted_edge_types": [
+    {
+      "name": "USES_PREVIOUSLY_PRODUCED_ARTIFACT_AS_INPUT",
+      "definition": "A later agent action consumes an artifact that was produced by an earlier agent action, using that previously produced artifact as an input, for example by loading, sourcing, or executing a file or module created earlier.",
+      "source_description": "An agent action that creates or produces an artifact, such as writing a source file to disk.",
+      "target_description": "A later agent action that loads, sources, executes, or otherwise consumes the previously produced artifact as an input."
+    },
+    {
+      "name": "EXECUTION_BLOCKED_BY_PREVIOUSLY_OBSERVED_MISSING_DEPENDENCY",
+      "definition": "A subsequent agent action is attempted even though an earlier observation already reported that a required tool, interpreter, or dependency is unavailable, and the action consequently fails on account of that missing dependency.",
+      "source_description": "An observation reporting that a required tool, interpreter, or dependency is missing or unavailable in the environment.",
+      "target_description": "A later agent action that requires the missing dependency and fails because of it, for example with a command-not-found error."
+    },
+    {
+      "name": "ATTEMPTS_TO_REPAIR",
+      "definition": "A subsequent agent action attempts to resolve a failure identified during an earlier execution step, for example by installing or otherwise providing a missing prerequisite so that the failed step can be retried successfully.",
+      "source_description": "An earlier observed execution failure caused by a missing or unavailable prerequisite.",
+      "target_description": "A subsequent agent action intended to resolve that failure."
+    },
+    {
+      "name": "PLANNED_CONTINGENCY_CONFIRMED_BY_OBSERVATION",
+      "definition": "An agent's plan states a contingency or explicit expectation about a possible execution condition, and a later observation confirms that the anticipated condition holds, so the planned contingency applies.",
+      "source_description": "An agent plan or reasoning step that states a contingency or expectation about a possible execution condition.",
+      "target_description": "A subsequent observation or execution result that confirms the anticipated condition actually holds."
+    }
+  ],
+  "revised_existing_edge_types": [],
+  "accepted_edge_type_count": 4,
+  "revised_existing_edge_type_count": 0,
+  "status": "completed",
+  "created_at": "2026-09-23T01:34:06.871133+00:00",
+  "updated_at": "2026-09-23T01:35:14.060175+00:00",
+  "failed_stage": null,
+  "error": null,
+  "registry_size_after": 4,
+  "completed_at": "2026-09-23T01:35:14.060175+00:00"
+}

@@ -1,0 +1,10 @@
+{
+  "title": "Design DHFR FRET Fusion gBlock",
+  "query": "Design a gBlock encoding a fusion protein for a DHFR FRET stability experiment using a filter cube with 505 nm excitation and 610 nm emission, and write only the nucleotide sequence to /app/gblock.txt with no empty lines. The gBlock must contain, in N-to-C order, antibody binder–donor–DHFR–acceptor–molecule binder, separated by GS linkers of 5–20 amino acids between every subprotein, with no GS linkers at the N or C termini. Include no start or stop codons, remove the N-terminal methionine from every protein, and reuse the DHFR sequence from plasmid.gb. The molecule binding protein, donor, and acceptor must encode proteins found in /app/pdb_ids.txt, with protein sequences matching the FASTA returned by the PDB API for their PDB IDs; the donor and acceptor must have peak excitation/emission matching the 505/610 nm filter cube exactly according to the FPbase API. The molecule binding protein must be capable of binding the molecule represented by SMILES Nc3nc(OCc1ccccc1)c2nc[nH]c2n3 for bead pull-down. The antibody binder need not match a sequence in /app/pdb_ids.txt but must encode the protein for which the antibody in antibody.fasta was designed, using only the most common variant and without repeating it. The final gBlock must be at most 3000 nucleotides long, and any given 50-nucleotide window encoding the fusion protein must have 30–70% GC content.",
+  "review_flags": [
+    "The SMILES string does not directly identify the molecule binding protein or its PDB ID; determining the intended binder requires inference.",
+    "The antibody target is not named in antibody.fasta, so identifying the protein the antibody was designed for and its most common variant requires interpretation.",
+    "The exact donor and acceptor proteins are unspecified; only the requirement that their FPbase peak excitation/emission match 505/610 nm is given.",
+    "No codon-optimization host or codon-usage requirement is specified, so DNA sequence generation may require assumptions beyond the stated GC-content constraint."
+  ]
+}

@@ -165,9 +165,9 @@ Build Edges 按 `trajectory_id` 和 `window_index` 排序处理 Window。每个 
 
 1. **Blind Discovery**：从当前 Window 独立发现候选 Edge Type。
 2. **Type Comparison**：把候选类型与当前 Registry 快照比较。
-3. **Type Review**：结合 Window、候选、比较结果和 Registry，决定接受哪些新类型。
+3. **Type Review**：结合 Window、候选、比较结果和 Registry，决定接受哪些新类型，并修订本轮 `existing` 匹配到且定义需要改进的已有类型。
 
-Review 接受并通过严格 JSON 校验的类型会追加到：
+Review 通过严格 JSON 校验后，在同一次更新中原位替换修订的已有类型，再追加接受的新类型。结果保存到：
 
 ```text
 build_edges/edge_type_registry.json
@@ -213,7 +213,7 @@ build_edges/edge_type_registry.json
 
 Build Edges 使用非流式 DeepSeek 请求，成功调用开始和结束时默认不打印逐阶段日志。因此终端可能在请求期间长时间没有新输出。20 个 Window 的三阶段发现需要串行完成 60 次调用；默认 `registry_feedback` 下，每个非最终完整批次的非空反馈还会增加一次 Registry Revision 调用。
 
-完整输入契约、三阶段 Schema、Prompt 版本、审计文件和恢复规则见 [Build Edges README](src/build_edges/README.md)。
+每个 Window 完成后，终端显示候选数、Comparison 分类数、新增数、已有类型修订数和改名明细；批次 Review Packet 记录修订前后的完整定义。完整输入契约、三阶段 Schema、Prompt 版本、审计文件和恢复规则见 [Build Edges README](src/build_edges/README.md)。
 
 ## 每次运行的目录命名
 
