@@ -1,0 +1,20 @@
+[
+  {
+    "name": "PROVISIONS_REQUIRED_TOOLING",
+    "definition": "An agent action installs or configures a tool, library, or runtime dependency that the agent's plan requires, thereby enabling a subsequent execution step that relies on the provisioned capability.",
+    "source_description": "An agent action that installs or configures a tool, library, or dependency required by the agent's plan.",
+    "target_description": "A subsequent agent execution step that relies on the provisioned tool, library, or dependency."
+  },
+  {
+    "name": "REPLACES_STRATEGY_AFTER_DIAGNOSIS",
+    "definition": "Diagnostic evidence explaining why the current method cannot succeed causes the agent to abandon that method and perform a subsequent action that implements a fundamentally different approach toward the same subgoal.",
+    "source_description": "A diagnostic observation that reveals the root cause or limitation making the current method unsuitable for achieving the subgoal.",
+    "target_description": "A subsequent agent action that implements a different strategy in place of the abandoned method to pursue the same subgoal."
+  },
+  {
+    "name": "CONTINUES_INSPECTION_OF_PARTIALLY_VIEWED_RESULT",
+    "definition": "After an earlier observation exposes only part of a produced result or a long output, a subsequent agent action retrieves or inspects the remaining, not-yet-examined portion of that same result in order to complete its examination.",
+    "source_description": "An earlier observation that revealed only a subset of a produced result or long output, leaving the remainder unexamined.",
+    "target_description": "A subsequent agent action that retrieves or inspects the remaining portion of the same result to continue its examination."
+  }
+]

@@ -1,0 +1,81 @@
+{
+  "stage": "comparison",
+  "window_file": "trajectory10__window_0002.json",
+  "prompt_version": "v0001",
+  "model": "deepseek-flash",
+  "succeeded": true,
+  "completed_at": "2026-09-29T05:37:08.725667+00:00",
+  "duration_seconds": 11.312,
+  "attempt_count": 1,
+  "attempts": [
+    {
+      "attempt": 1,
+      "started_at": "2026-09-29T05:37:08.724038+00:00",
+      "duration_seconds": 11.312,
+      "raw_response": {
+        "id": "2ffa108f-1800-4a12-bda0-0c86594704e9",
+        "object": "chat.completion",
+        "created": 1790660223,
+        "model": "deepseek-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\n  \"existing\": [\n    {\n      \"candidate_name\": \"INFORMS_SUBSEQUENT_PLAN\",\n      \"matched_existing_name\": \"PROBES_ENVIRONMENT_TO_INFORM_ACTION\"\n    },\n    {\n      \"candidate_name\": \"VERIFIES_GENERATED_ARTIFACT\",\n      \"matched_existing_name\": \"VERIFIES_PREVIOUSLY_PRODUCED_ARTIFACT\"\n    },\n    {\n      \"candidate_name\": \"CONSUMES_PRIOR_OUTPUT_AS_INPUT\",\n      \"matched_existing_name\": \"USES_PREVIOUS_RESULT_AS_INPUT\"\n    },\n    {\n      \"candidate_name\": \"TRIGGERS_TASK_COMPLETION\",\n      \"matched_existing_name\": \"TRIGGERS_TASK_COMPLETION\"\n    }\n  ],\n  \"new\": [\n    {\n      \"name\": \"EXTENDS_VERIFICATION_COVERAGE\",\n      \"definition\": \"After an initial verification succeeds, a subsequent step performs additional or broader tests on the same subject.\",\n      \"source_description\": \"A successful initial verification result.\",\n      \"target_description\": \"A subsequent verification action that expands test coverage.\"\n    }\n  ],\n  \"uncertain\": []\n}",
+              "reasoning_content": "We need answer only JSON. Need classify candidates against existing registry.\n\nWe need compare 5 candidates:\n\n1 INFORMS_SUBSEQUENT_PLAN\nDefinition: observation of specifications/reference material used to derive semantics that shape subsequent design/plan. Source: observation revealing specification/behavior. Target: subsequent plan/design grounded.\n\nExisting PROBES_ENVIRONMENT_TO_INFORM_ACTION: source inspection/probe, target subsequent agent step reasoning/design/action selected on basis. This covers observation informs subsequent reasoning/design/action. INFORMS_SUBSEQUENT_PLAN seems semantically equivalent? It specifically observation specs/reference material -> plan/design. Existing includes reference artifact/specification and informs reasoning/design. So EXISTING matched PROBES_ENVIRONMENT_TO_INFORM_ACTION likely.\n\n2 VERIFIES_GENERATED_ARTIFACT\nDefinition: subsequent execution step exercises/inspects artifact produced by earlier action to confirm behaves as required.\nExisting VERIFIES_PREVIOUSLY_PRODUCED_ARTIFACT: subsequent action loads, executes, sources, or otherwise exercises artifact produced by earlier action to determine whether behaves as intended. This is exactly same. EXISTING matched.\n\n3 EXTENDS_VERIFICATION_COVERAGE\nDefinition: After initial verification succeeds, subsequent step performs additional/broader tests on same subject.\nExisting? VERIFIES_PREVIOUS_RESULT? That's checking whether earlier result/claim present/matches. VERIFIES_PREVIOUSLY_PRODUCED_ARTIFACT? artifact correctness. No existing specifically for extending verification coverage after success. Could be distinct: initial verification success leads to more tests. It's a relationship between successful initial verification and subsequent verification expanding coverage. This is not covered by existing types. Need decide NEW or UNCERTAIN. Existing VERIFIES_PREVIOUS_RESULT maybe source a result/claim from earlier, target independent check. Here source is successful initial verification result, target subsequent verification action expands test coverage. Partial overlap? It involves verification and prior result. But semantic: extending verification after initial success. Existing doesn't cover \"after success, do additional broader tests\". It might be considered a type of VERIFIES_PREVIOUS_RESULT? Actually target is not checking the earlier result directly but performing additional tests on same subject. Source is not a claim but a successful verification. It is a distinct relationship? Could be NEW. But maybe \"VERIFIES_PREVIOUS_RESULT\" covers subsequent check on earlier result, but not \"expands coverage\". I lean NEW or UNCERTAIN. Granularity rules: preserve genuinely different semantic relationships. This is distinct from one verification of result. So NEW.\n\nBut we need exactly one category. We can put NEW with full object.\n\n4 CONSUMES_PRIOR_OUTPUT_AS_INPUT\nDefinition: value/artifact produced by earlier action fed as input into subsequent action.\nExisting USES_PREVIOUS_RESULT_AS_INPUT: subsequent action consumes result/artifact produced by earlier step as input. Exactly. EXISTING matched USES_PREVIOUS_RESULT_AS_INPUT.\n\n5 TRIGGERS_TASK_COMPLETION\nDefinition: verification result confirming produced solution satisfies requirements leads agent to decide task complete.\nExisting TRIGGERS_TASK_COMPLETION: verified satisfactory execution outcome leads agent conclude complete. Exactly. EXISTING matched TRIGGERS_TASK_COMPLETION.\n\nSo existing: 1,2,4,5. New: 3? Need ensure if EXTENDS_VERIFICATION_COVERAGE maybe existing VERIFIES_PREVIOUS_RESULT partially? Let's analyze.\n\nCandidate 3 source: \"A successful initial verification result.\" target: \"A subsequent verification action that expands test coverage.\" This is not exactly \"verifies previous result\" because the subsequent verification doesn't verify the initial verification result; it extends testing. Could be \"after initial verification succeeds, subsequent step performs additional or broader tests on same subject.\" This is a relationship between verification results/actions. Registry has VERIFIES_PREVIOUSLY_PRODUCED_ARTIFACT, VERIFIES_PREVIOUS_RESULT. None cover expanding coverage after success. It's distinct. Classify NEW.\n\nCould there be an existing type \"RETRIES_AFTER_REMEDIATION\"? No.\n\nCould it be considered \"CONFORMS...\" no.\n\nSo final JSON with existing list, new list one, uncertain empty.\n\nNeed output valid JSON only. Include all fields. Ensure new object has name, definition, source_description, target_description. For existing entries candidate_name and matched_existing_name.\n\nLet's craft.\n\nExisting:\n- INFORMS_SUBSEQUENT_PLAN -> PROBES_ENVIRONMENT_TO_INFORM_ACTION\n- VERIFIES_GENERATED_ARTIFACT -> VERIFIES_PREVIOUSLY_PRODUCED_ARTIFACT\n- CONSUMES_PRIOR_OUTPUT_AS_INPUT -> USES_PREVIOUS_RESULT_AS_INPUT\n- TRIGGERS_TASK_COMPLETION -> TRIGGERS_TASK_COMPLETION\n\nNew:\n- EXTENDS_VERIFICATION_COVERAGE with given fields.\n\nUncertain: [].\n\nNeed ensure JSON valid no markdown."
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 3001,
+          "completion_tokens": 1349,
+          "total_tokens": 4350,
+          "prompt_tokens_details": {
+            "cached_tokens": 1152
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1086
+          },
+          "prompt_cache_hit_tokens": 1152,
+          "prompt_cache_miss_tokens": 1849
+        },
+        "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+      },
+      "response_content": "{\n  \"existing\": [\n    {\n      \"candidate_name\": \"INFORMS_SUBSEQUENT_PLAN\",\n      \"matched_existing_name\": \"PROBES_ENVIRONMENT_TO_INFORM_ACTION\"\n    },\n    {\n      \"candidate_name\": \"VERIFIES_GENERATED_ARTIFACT\",\n      \"matched_existing_name\": \"VERIFIES_PREVIOUSLY_PRODUCED_ARTIFACT\"\n    },\n    {\n      \"candidate_name\": \"CONSUMES_PRIOR_OUTPUT_AS_INPUT\",\n      \"matched_existing_name\": \"USES_PREVIOUS_RESULT_AS_INPUT\"\n    },\n    {\n      \"candidate_name\": \"TRIGGERS_TASK_COMPLETION\",\n      \"matched_existing_name\": \"TRIGGERS_TASK_COMPLETION\"\n    }\n  ],\n  \"new\": [\n    {\n      \"name\": \"EXTENDS_VERIFICATION_COVERAGE\",\n      \"definition\": \"After an initial verification succeeds, a subsequent step performs additional or broader tests on the same subject.\",\n      \"source_description\": \"A successful initial verification result.\",\n      \"target_description\": \"A subsequent verification action that expands test coverage.\"\n    }\n  ],\n  \"uncertain\": []\n}",
+      "error": null
+    }
+  ],
+  "parsed_response": {
+    "existing": [
+      {
+        "candidate_name": "INFORMS_SUBSEQUENT_PLAN",
+        "matched_existing_name": "PROBES_ENVIRONMENT_TO_INFORM_ACTION"
+      },
+      {
+        "candidate_name": "VERIFIES_GENERATED_ARTIFACT",
+        "matched_existing_name": "VERIFIES_PREVIOUSLY_PRODUCED_ARTIFACT"
+      },
+      {
+        "candidate_name": "CONSUMES_PRIOR_OUTPUT_AS_INPUT",
+        "matched_existing_name": "USES_PREVIOUS_RESULT_AS_INPUT"
+      },
+      {
+        "candidate_name": "TRIGGERS_TASK_COMPLETION",
+        "matched_existing_name": "TRIGGERS_TASK_COMPLETION"
+      }
+    ],
+    "new": [
+      {
+        "name": "EXTENDS_VERIFICATION_COVERAGE",
+        "definition": "After an initial verification succeeds, a subsequent step performs additional or broader tests on the same subject.",
+        "source_description": "A successful initial verification result.",
+        "target_description": "A subsequent verification action that expands test coverage."
+      }
+    ],
+    "uncertain": []
+  },
+  "previous_calls": []
+}

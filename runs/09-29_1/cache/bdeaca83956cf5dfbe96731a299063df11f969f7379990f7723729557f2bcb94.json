@@ -1,0 +1,5 @@
+{
+  "title": "Find best move for White in chess_board.png",
+  "query": "The file chess_board.png contains an image of a chess board with White to move. Determine the best move for White and write it to /app/move.txt in the form [src][dst] (for example, e2e4 or h1h8). If there are multiple winning moves, write all of them to the file, one per line.",
+  "review_flags": []
+}

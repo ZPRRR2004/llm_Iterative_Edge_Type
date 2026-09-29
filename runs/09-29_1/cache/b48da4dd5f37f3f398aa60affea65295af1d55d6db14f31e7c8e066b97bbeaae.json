@@ -1,0 +1,12 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_2_1",
+      "start_anchor": "New Terminal Output:\n\nroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app# git clone --branch 1.0 --depth 1 https://github.com/BVLC/caffe.git /app/caffe 2>&1 | tail -3\n\nTurn off this advice by setting config variable advice.detachedHead to false\n\n"
+    },
+    {
+      "tool_call_id": "call_2_2",
+      "start_anchor": "root@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app# protoc --version; ls /app/caffe | head\nlibprotoc 3.21.12\nCMakeLists.txt\nCONTRIBUTING.md\nCONTRIBUTORS.md\nINSTALL.md\nLICENSE\nMakefile\nMakefile.config.example\nREADME.md\ncaffe.cloc\ncmake\nroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app#\n"
+    }
+  ]
+}

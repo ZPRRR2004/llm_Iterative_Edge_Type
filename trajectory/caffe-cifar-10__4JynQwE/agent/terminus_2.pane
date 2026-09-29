@@ -1,0 +1,270 @@
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app# asciinema rec --stdin /logs/agent/recording.cast
+[?2004l[0;32masciinema: recording asciicast to /logs/agent/recording.cast[0m
+[0;32masciinema: press <ctrl-d> or type "exit" when you're done[0m
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app# clear
+[?2004l[H[J[3J[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app# cat /etc/os-release && nproc && which gcc g++ make git wget && ls /app
+[?2004lPRETTY_NAME="Ubuntu 24.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.4 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
+4
+/usr/bin/gcc
+/usr/bin/make
+/usr/bin/git
+/usr/bin/wget
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app# apt-get update -qq
+[?2004l[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app# DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends g++ ca-certificates libprotobuf-dev protobuf-compiler libboost-system-dev libboost-thread-dev libboost-filesystem-dev libboost-regex-dev libgflags-dev libgoogle-glog-dev libhdf5-dev liblmdb-dev libleveldb-dev libsnappy-dev libopenblas-dev 2>&1 | tail -5
+[?2004lSetting up libboost-thread-dev:amd64 (1.83.0.1ubuntu2) ...
+Setting up libhdf5-hl-fortran-100t64:amd64 (1.10.10+repack-3.1ubuntu4) ...
+Setting up libhdf5-dev (1.10.10+repack-3.1ubuntu4) ...
+update-alternatives: using /usr/lib/x86_64-linux-gnu/pkgconfig/hdf5-serial.pc to provide /usr/lib/x86_64-linux-gnu/pkgconfig/hdf5.pc (hdf5.pc) in auto mode
+Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app# git clone --branch 1.0 --depth 1 https://github.com/BVLC/caffe.git /app/caffe 2>&1 | tail -3
+[?2004l
+Turn off this advice by setting config variable advice.detachedHead to false
+
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app# protoc --version; ls /app/caffe | head
+[?2004llibprotoc 3.21.12
+CMakeLists.txt
+CONTRIBUTING.md
+CONTRIBUTORS.md
+INSTALL.md
+LICENSE
+Makefile
+Makefile.config.example
+README.md
+caffe.cloc
+cmake
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app# cd /app/caffe && cp Makefile.config.example Makefile.config && sed -i 's/^# CPU_ONLY := 1/CPU_ONLY := 1/' Makefile.config && sed -i 's/^# USE_OPENCV := 0/USE_OPENCV := 0/' Makefile.config && sed -i 's/^BLAS := atlas/BLAS := open/' Makefile.config && sed -i 's|^INCLUDE_DIRS := \$(PYTHON_INCLUDE) /usr/local/include|INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial|' Makefile.config && sed -i 's|^LIBRARY_DIRS := \$(PYTHON_LIB) /usr/local/lib /usr/lib|LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu/hdf5/serial|' Makefile.config && grep -E 'CPU_ONLY|USE_OPENCV|BLAS :=|INCLUDE_DIRS|LIBRARY_DIRS' Makefile.config
+[?2004l[01;31m[KCPU_ONLY[m[K := 1
+[01;31m[KUSE_OPENCV[m[K := 0
+[01;31m[KBLAS :=[m[K open
+[01;31m[KINCLUDE_DIRS[m[K := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial
+[01;31m[KLIBRARY_DIRS[m[K := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu/hdf5/serial
+# [01;31m[KINCLUDE_DIRS[m[K += $(shell brew --prefix)/include
+# [01;31m[KLIBRARY_DIRS[m[K += $(shell brew --prefix)/lib
+# (Usually not necessary -- OpenCV libraries are normally installed in one of the above $[01;31m[KLIBRARY_DIRS[m[K.)
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sed -i 's/SetTotalBytesLimit(kProtoReadBytesLimit, 536870912)/SetTotalBytesLimit(kProtoReadBytesLimit)/' src/caffe/util/io.cpp && grep -n SetTotalBytesLimit src/caffe/util/io.cpp
+[?2004l[32m[K57[m[K[36m[K:[m[K  coded_input->[01;31m[KSetTotalBytesLimit[m[K(kProtoReadBytesLimit);
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# make all -j4 2>&1 | tail -20 > /tmp/build.log; tail -5 /tmp/build.log
+[?2004lCXX/LD -o .build_release/tools/upgrade_solver_proto_text.bin
+CXX/LD -o .build_release/examples/cifar10/convert_cifar_data.bin
+CXX/LD -o .build_release/examples/cpp_classification/classification.bin
+CXX/LD -o .build_release/examples/mnist/convert_mnist_data.bin
+CXX/LD -o .build_release/examples/siamese/convert_mnist_siamese_data.bin
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# cd /app/caffe && ./data/cifar10/get_cifar10.sh 2>&1 | tail -3
+[?2004l
+Unzipping...
+Done.
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# ./examples/cifar10/create_cifar10.sh && ls examples/cifar10/
+[?2004lCreating lmdb...
+I20260604 23:59:30.373060  3198 db_lmdb.cpp:35] Opened lmdb examples/cifar10/cifar10_train_lmdb
+I20260604 23:59:30.373399  3198 convert_cifar_data.cpp:52] Writing Training data
+I20260604 23:59:30.373412  3198 convert_cifar_data.cpp:55] Training Batch 1
+I20260604 23:59:30.523723  3198 convert_cifar_data.cpp:55] Training Batch 2
+I20260604 23:59:30.555920  3198 convert_cifar_data.cpp:55] Training Batch 3
+I20260604 23:59:30.587018  3198 convert_cifar_data.cpp:55] Training Batch 4
+I20260604 23:59:30.619303  3198 convert_cifar_data.cpp:55] Training Batch 5
+I20260604 23:59:31.000156  3198 convert_cifar_data.cpp:73] Writing Testing data
+I20260604 23:59:31.000528  3198 db_lmdb.cpp:35] Opened lmdb examples/cifar10/cifar10_test_lmdb
+Computing image mean...
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+F20260604 23:59:31.107812  3262 compute_image_mean.cpp:122] This tool requires OpenCV; compile with USE_OPENCV.
+*** Check failure stack trace: ***
+Aborted (core dumped)
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3 python3-protobuf python3-numpy 2>&1 | tail -2
+[?2004lSetting up python3-numpy (1:1.26.4+ds-6ubuntu1) ...
+Setting up python3-protobuf (3.21.12-8.2ubuntu0.3) ...
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# cd /app/caffe && protoc --proto_path=src/caffe/proto --python_out=/tmp src/caffe/proto/caffe.proto && ls /tmp/caffe_pb2.py
+[?2004l/tmp/caffe_pb2.py
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# cat > /tmp/compute_mean.py << 'EOF'
+[?2004l[?2004h> import sys, numpy as np
+[?2004l[?2004h> sys.path.insert(0, '/tmp')
+[?2004l[?2004h> import caffe_pb2
+[?2004l[?2004h> total = np.zeros(3072, dtype=np.float64)
+[?2004l[?2004h> n = 0
+[?2004l[?2004h> for i in range(1, 6):
+[?2004l[?2004h>     raw = np.fromfile('data/cifar10/data_batch_%d.bin' % i, dtype=np.uint8)
+[?2004l[?2004h>     recs = raw.reshape(-1, 3073)
+[?2004l[?2004h>     total += recs[:, 1:].astype(np.float64).sum(axis=0)
+[?2004l[?2004h>     n += recs.shape[0]
+[?2004l[?2004h> mean = total / n
+[?2004l[?2004h> blob = caffe_pb2.BlobProto()
+[?2004l[?2004h> blob.num = 1
+[?2004l[?2004h> blob.channels = 3
+[?2004l[?2004h> blob.height = 32
+[?2004l[?2004h> blob.width = 32
+[?2004l[?2004h> blob.data.extend(mean.astype(np.float32).tolist())
+[?2004l[?2004h> with open('examples/cifar10/mean.binaryproto', 'wb') as f:
+[?2004l[?2004h>     f.write(blob.SerializeToString())
+[?2004l[?2004h> print('done', n, mean[:5])
+[?2004l[?2004h> EOF
+[?2004l[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# python3 /tmp/compute_mean.py && ls -la examples/cifar10/mean.binaryproto
+[?2004ldone 50000 [130.71074 130.14036 131.05044 131.56886 132.1847 ]
+-rw-r--r-- 1 root root 12299 Jun  5 00:01 examples/cifar10/mean.binaryproto
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sed -i 's/^max_iter:.*/max_iter: 500/' examples/cifar10/cifar10_quick_solver.prototxt && sed -i 's/^solver_mode:.*/solver_mode: CPU/' examples/cifar10/cifar10_quick_solver.prototxt && cat examples/cifar10/cifar10_quick_solver.prototxt
+[?2004l# reduce the learning rate after 8 epochs (4000 iters) by a factor of 10
+
+# The train/test net protocol buffer definition
+net: "examples/cifar10/cifar10_quick_train_test.prototxt"
+# test_iter specifies how many forward passes the test should carry out.
+# In the case of MNIST, we have test batch size 100 and 100 test iterations,
+# covering the full 10,000 testing images.
+test_iter: 100
+# Carry out testing every 500 training iterations.
+test_interval: 500
+# The base learning rate, momentum and the weight decay of the network.
+base_lr: 0.001
+momentum: 0.9
+weight_decay: 0.004
+# The learning rate policy
+lr_policy: "fixed"
+# Display every 100 iterations
+display: 100
+# The maximum number of iterations
+max_iter: 500
+# snapshot intermediate results
+snapshot: 4000
+snapshot_prefix: "examples/cifar10/cifar10_quick"
+# solver mode: CPU or GPU
+solver_mode: CPU
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# cd /app/caffe && nohup ./build/tools/caffe train --solver=examples/cifar10/cifar10_quick_solver.prototxt > /app/caffe/training_output.txt 2>&1 &
+[?2004l[1] 3514
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 20 && tail -5 /app/caffe/training_output.txt
+[?2004lI20260605 00:02:24.904316  3516 solver.cpp:56] Solver scaffolding done.
+I20260605 00:02:24.904336  3516 caffe.cpp:248] Starting Optimization
+I20260605 00:02:24.904345  3516 solver.cpp:272] Solving CIFAR10_quick
+I20260605 00:02:24.904352  3516 solver.cpp:273] Learning Rate Policy: fixed
+I20260605 00:02:24.904639  3516 solver.cpp:330] Iteration 0, Testing net (#0)
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 50; tail -3 /app/caffe/training_output.txt
+[?2004lI20260605 00:02:24.904345  3516 solver.cpp:272] Solving CIFAR10_quick
+I20260605 00:02:24.904352  3516 solver.cpp:273] Learning Rate Policy: fixed
+I20260605 00:02:24.904639  3516 solver.cpp:330] Iteration 0, Testing net (#0)
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -3 /app/caffe/training_output.txt
+[?2004lI20260605 00:05:48.126439  3516 solver.cpp:218] Iteration 0 (7.89712e-32 iter/s, 203.222s/100 iters), loss = 2.30175
+I20260605 00:05:48.126518  3516 solver.cpp:237]     Train net output #0: loss = 2.30175 (* 1 = 2.30175 loss)
+I20260605 00:05:48.126533  3516 sgd_solver.cpp:105] Iteration 0, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -3 /app/caffe/training_output.txt
+[?2004lI20260605 00:05:48.126439  3516 solver.cpp:218] Iteration 0 (7.89712e-32 iter/s, 203.222s/100 iters), loss = 2.30175
+I20260605 00:05:48.126518  3516 solver.cpp:237]     Train net output #0: loss = 2.30175 (* 1 = 2.30175 loss)
+I20260605 00:05:48.126533  3516 sgd_solver.cpp:105] Iteration 0, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; grep -c 'sgd_solver' /app/caffe/training_output.txt; tail -2 /app/caffe/training_output.txt
+[?2004l1
+I20260605 00:05:48.126518  3516 solver.cpp:237]     Train net output #0: loss = 2.30175 (* 1 = 2.30175 loss)
+I20260605 00:05:48.126533  3516 sgd_solver.cpp:105] Iteration 0, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:05:48.126518  3516 solver.cpp:237]     Train net output #0: loss = 2.30175 (* 1 = 2.30175 loss)
+I20260605 00:05:48.126533  3516 sgd_solver.cpp:105] Iteration 0, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# ps aux | grep caffe | grep -v grep | head -2; top -bn1 | head -12 | tail -5
+[?2004lroot        3516  0.0  0.0 9544036 147152 pts/1  Rl   00:02  29:03 ./build/tools/caffe train --solver=examples/cifar10/cifar10_quick_solver.prototxt
+   3516 root      20   0 9544036 147664  66256 R 290.0   0.0  29:05.03 caffe
+      1 root      20   0 1273200  54784  29696 S   5.0   0.0   0:18.97 daytona
+   3843 root      20   0    9256   4112   2576 R   5.0   0.0   0:00.01 top
+     81 root      20   0    4324   3080   3080 S   0.0   0.0   0:00.00 bash
+     87 root      20   0    4324   1536   1536 S   0.0   0.0   0:00.00 bash
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 50; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:05:48.126518  3516 solver.cpp:237]     Train net output #0: loss = 2.30175 (* 1 = 2.30175 loss)
+I20260605 00:05:48.126533  3516 sgd_solver.cpp:105] Iteration 0, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:05:48.126518  3516 solver.cpp:237]     Train net output #0: loss = 2.30175 (* 1 = 2.30175 loss)
+I20260605 00:05:48.126533  3516 sgd_solver.cpp:105] Iteration 0, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:05:48.126518  3516 solver.cpp:237]     Train net output #0: loss = 2.30175 (* 1 = 2.30175 loss)
+I20260605 00:05:48.126533  3516 sgd_solver.cpp:105] Iteration 0, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:05:48.126518  3516 solver.cpp:237]     Train net output #0: loss = 2.30175 (* 1 = 2.30175 loss)
+I20260605 00:05:48.126533  3516 sgd_solver.cpp:105] Iteration 0, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:05:48.126518  3516 solver.cpp:237]     Train net output #0: loss = 2.30175 (* 1 = 2.30175 loss)
+I20260605 00:05:48.126533  3516 sgd_solver.cpp:105] Iteration 0, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:15:46.721187  3516 solver.cpp:237]     Train net output #0: loss = 1.79236 (* 1 = 1.79236 loss)
+I20260605 00:15:46.721199  3516 sgd_solver.cpp:105] Iteration 100, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:15:46.721187  3516 solver.cpp:237]     Train net output #0: loss = 1.79236 (* 1 = 1.79236 loss)
+I20260605 00:15:46.721199  3516 sgd_solver.cpp:105] Iteration 100, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:15:46.721187  3516 solver.cpp:237]     Train net output #0: loss = 1.79236 (* 1 = 1.79236 loss)
+I20260605 00:15:46.721199  3516 sgd_solver.cpp:105] Iteration 100, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:15:46.721187  3516 solver.cpp:237]     Train net output #0: loss = 1.79236 (* 1 = 1.79236 loss)
+I20260605 00:15:46.721199  3516 sgd_solver.cpp:105] Iteration 100, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:15:46.721187  3516 solver.cpp:237]     Train net output #0: loss = 1.79236 (* 1 = 1.79236 loss)
+I20260605 00:15:46.721199  3516 sgd_solver.cpp:105] Iteration 100, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:15:46.721187  3516 solver.cpp:237]     Train net output #0: loss = 1.79236 (* 1 = 1.79236 loss)
+I20260605 00:15:46.721199  3516 sgd_solver.cpp:105] Iteration 100, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; date; tail -2 /app/caffe/training_output.txt
+[?2004lFri Jun  5 00:24:24 UTC 2026
+I20260605 00:15:46.721187  3516 solver.cpp:237]     Train net output #0: loss = 1.79236 (* 1 = 1.79236 loss)
+I20260605 00:15:46.721199  3516 sgd_solver.cpp:105] Iteration 100, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:15:46.721187  3516 solver.cpp:237]     Train net output #0: loss = 1.79236 (* 1 = 1.79236 loss)
+I20260605 00:15:46.721199  3516 sgd_solver.cpp:105] Iteration 100, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:25:53.623306  3516 solver.cpp:237]     Train net output #0: loss = 1.59659 (* 1 = 1.59659 loss)
+I20260605 00:25:53.623320  3516 sgd_solver.cpp:105] Iteration 200, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:25:53.623306  3516 solver.cpp:237]     Train net output #0: loss = 1.59659 (* 1 = 1.59659 loss)
+I20260605 00:25:53.623320  3516 sgd_solver.cpp:105] Iteration 200, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:25:53.623306  3516 solver.cpp:237]     Train net output #0: loss = 1.59659 (* 1 = 1.59659 loss)
+I20260605 00:25:53.623320  3516 sgd_solver.cpp:105] Iteration 200, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:25:53.623306  3516 solver.cpp:237]     Train net output #0: loss = 1.59659 (* 1 = 1.59659 loss)
+I20260605 00:25:53.623320  3516 sgd_solver.cpp:105] Iteration 200, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:25:53.623306  3516 solver.cpp:237]     Train net output #0: loss = 1.59659 (* 1 = 1.59659 loss)
+I20260605 00:25:53.623320  3516 sgd_solver.cpp:105] Iteration 200, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:25:53.623306  3516 solver.cpp:237]     Train net output #0: loss = 1.59659 (* 1 = 1.59659 loss)
+I20260605 00:25:53.623320  3516 sgd_solver.cpp:105] Iteration 200, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:25:53.623306  3516 solver.cpp:237]     Train net output #0: loss = 1.59659 (* 1 = 1.59659 loss)
+I20260605 00:25:53.623320  3516 sgd_solver.cpp:105] Iteration 200, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; date; tail -2 /app/caffe/training_output.txt
+[?2004lFri Jun  5 00:35:54 UTC 2026
+I20260605 00:25:53.623306  3516 solver.cpp:237]     Train net output #0: loss = 1.59659 (* 1 = 1.59659 loss)
+I20260605 00:25:53.623320  3516 sgd_solver.cpp:105] Iteration 200, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:36:16.021319  3516 solver.cpp:237]     Train net output #0: loss = 1.39196 (* 1 = 1.39196 loss)
+I20260605 00:36:16.021333  3516 sgd_solver.cpp:105] Iteration 300, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:36:16.021319  3516 solver.cpp:237]     Train net output #0: loss = 1.39196 (* 1 = 1.39196 loss)
+I20260605 00:36:16.021333  3516 sgd_solver.cpp:105] Iteration 300, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:36:16.021319  3516 solver.cpp:237]     Train net output #0: loss = 1.39196 (* 1 = 1.39196 loss)
+I20260605 00:36:16.021333  3516 sgd_solver.cpp:105] Iteration 300, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:36:16.021319  3516 solver.cpp:237]     Train net output #0: loss = 1.39196 (* 1 = 1.39196 loss)
+I20260605 00:36:16.021333  3516 sgd_solver.cpp:105] Iteration 300, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:36:16.021319  3516 solver.cpp:237]     Train net output #0: loss = 1.39196 (* 1 = 1.39196 loss)
+I20260605 00:36:16.021333  3516 sgd_solver.cpp:105] Iteration 300, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:36:16.021319  3516 solver.cpp:237]     Train net output #0: loss = 1.39196 (* 1 = 1.39196 loss)
+I20260605 00:36:16.021333  3516 sgd_solver.cpp:105] Iteration 300, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; date; tail -2 /app/caffe/training_output.txt
+[?2004lFri Jun  5 00:44:10 UTC 2026
+I20260605 00:36:16.021319  3516 solver.cpp:237]     Train net output #0: loss = 1.39196 (* 1 = 1.39196 loss)
+I20260605 00:36:16.021333  3516 sgd_solver.cpp:105] Iteration 300, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:36:16.021319  3516 solver.cpp:237]     Train net output #0: loss = 1.39196 (* 1 = 1.39196 loss)
+I20260605 00:36:16.021333  3516 sgd_solver.cpp:105] Iteration 300, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:46:12.222237  3516 solver.cpp:237]     Train net output #0: loss = 1.17883 (* 1 = 1.17883 loss)
+I20260605 00:46:12.222249  3516 sgd_solver.cpp:105] Iteration 400, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# sleep 55; tail -2 /app/caffe/training_output.txt
+[?2004lI20260605 00:46:12.222237  3516 solver.cpp:237]     Train net output #0: loss = 1.17883 (* 1 = 1.17883 loss)
+I20260605 00:46:12.222249  3516 sgd_solver.cpp:105] Iteration 400, lr = 0.001
+[?2004hroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app/caffe# 

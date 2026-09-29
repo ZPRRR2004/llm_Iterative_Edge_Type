@@ -1,0 +1,159 @@
+{
+  "id": "38ee7dfe-fea3-4a5d-b726-3e19e1ec1353",
+  "task_name": "terminal-bench/raman-fitting",
+  "trial_name": "raman-fitting__f6MGAsA",
+  "trial_uri": "file:///home/alex/.cursor/worktrees/harbor__SSH__tbench-gcp_/txv1/jobs/tbench-2-1-fable-5__high-fallback/raman-fitting__f6MGAsA",
+  "task_id": {
+    "org": "terminal-bench",
+    "name": "raman-fitting",
+    "ref": "sha256:97ca4025332b20739da553cab0658f2ead925d1b5b3b9b7664dc9eb5e7fbeab7"
+  },
+  "source": "terminal-bench/terminal-bench-2-1",
+  "task_checksum": "73157911d2f6196d30097f9b7e3388771a0a843500ad23ea31b66ca9ae5b5118",
+  "config": {
+    "task": {
+      "path": null,
+      "git_url": null,
+      "git_commit_id": null,
+      "name": "terminal-bench/raman-fitting",
+      "ref": "sha256:97ca4025332b20739da553cab0658f2ead925d1b5b3b9b7664dc9eb5e7fbeab7",
+      "overwrite": false,
+      "download_dir": null,
+      "source": "terminal-bench/terminal-bench-2-1"
+    },
+    "trial_name": "raman-fitting__f6MGAsA",
+    "trials_dir": "jobs/tbench-2-1-fable-5__high-fallback",
+    "timeout_multiplier": 1.0,
+    "agent_timeout_multiplier": null,
+    "verifier_timeout_multiplier": null,
+    "agent_setup_timeout_multiplier": null,
+    "environment_build_timeout_multiplier": null,
+    "agent": {
+      "name": "terminus-2",
+      "import_path": null,
+      "model_name": "anthropic/claude-fable-5",
+      "skills": [],
+      "override_timeout_sec": null,
+      "override_setup_timeout_sec": null,
+      "max_timeout_sec": null,
+      "extra_allowed_hosts": [],
+      "kwargs": {
+        "model_info": {
+          "supports_adaptive_thinking": true,
+          "supports_reasoning": true,
+          "supports_max_reasoning_effort": true,
+          "supports_xhigh_reasoning_effort": true
+        },
+        "temperature": 1,
+        "llm_kwargs": {
+          "extra_headers": {
+            "anthropic-beta": "server-side-fallback-2026-06-02"
+          }
+        },
+        "llm_call_kwargs": {
+          "max_tokens": 128000,
+          "allowed_openai_params": [
+            "thinking",
+            "fallback"
+          ],
+          "thinking": {
+            "type": "adaptive"
+          },
+          "output_config": {
+            "effort": "high"
+          },
+          "fallback": [
+            {
+              "model": "claude-opus-4-8"
+            }
+          ]
+        },
+        "reasoning_effort": "high"
+      },
+      "env": {},
+      "mcp_servers": []
+    },
+    "environment": {
+      "type": "daytona",
+      "import_path": null,
+      "force_build": false,
+      "delete": true,
+      "cpu_enforcement_policy": "auto",
+      "memory_enforcement_policy": "auto",
+      "override_cpus": null,
+      "override_memory_mb": null,
+      "override_storage_mb": null,
+      "override_gpus": null,
+      "override_tpu": null,
+      "mounts": null,
+      "extra_docker_compose": [],
+      "env": {},
+      "kwargs": {},
+      "extra_allowed_hosts": []
+    },
+    "verifier": {
+      "override_timeout_sec": null,
+      "max_timeout_sec": null,
+      "env": {},
+      "disable": false
+    },
+    "artifacts": [],
+    "extra_instruction_paths": [],
+    "job_id": "17f04e4f-1a75-4204-9b75-d042ef0333ec"
+  },
+  "agent_info": {
+    "name": "terminus-2",
+    "version": "2.0.0",
+    "model_info": {
+      "name": "claude-fable-5",
+      "provider": "anthropic"
+    }
+  },
+  "agent_result": {
+    "n_input_tokens": 43965,
+    "n_cache_tokens": 31378,
+    "n_output_tokens": 13273,
+    "cost_usd": null,
+    "rollout_details": [],
+    "metadata": {
+      "n_episodes": 9,
+      "api_request_times_msec": [
+        7256.946802139282,
+        7636.286497116089,
+        10574.922561645508,
+        34718.86992454529,
+        7348.811864852905,
+        91753.63254547119,
+        34400.497913360596,
+        9886.36565208435,
+        8487.061738967896
+      ],
+      "summarization_count": 0
+    }
+  },
+  "verifier_result": {
+    "rewards": {
+      "reward": 1.0
+    }
+  },
+  "exception_info": null,
+  "started_at": "2026-06-04T23:52:21.527836Z",
+  "finished_at": "2026-06-04T23:58:54.469795Z",
+  "environment_setup": {
+    "started_at": "2026-06-04T23:52:21.547262Z",
+    "finished_at": "2026-06-04T23:52:27.821605Z"
+  },
+  "agent_setup": {
+    "started_at": "2026-06-04T23:52:27.821638Z",
+    "finished_at": "2026-06-04T23:52:53.944156Z"
+  },
+  "agent_execution": {
+    "started_at": "2026-06-04T23:52:53.944270Z",
+    "finished_at": "2026-06-04T23:58:39.617792Z"
+  },
+  "verifier": {
+    "started_at": "2026-06-04T23:58:41.385629Z",
+    "finished_at": "2026-06-04T23:58:54.277327Z"
+  },
+  "step_results": null
+}

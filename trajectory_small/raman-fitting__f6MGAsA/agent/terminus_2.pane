@@ -1,0 +1,201 @@
+[?2004hroot@157a56ea-3acd-478c-aec0-66971ff88c54:/app# asciinema rec --stdin /logs/agent/recording.cast
+[?2004l[0;32masciinema: recording asciicast to /logs/agent/recording.cast[0m
+[0;32masciinema: press <ctrl-d> or type "exit" when you're done[0m
+[?2004hroot@157a56ea-3acd-478c-aec0-66971ff88c54:/app# clear
+[?2004l[H[J[3J[?2004hroot@157a56ea-3acd-478c-aec0-66971ff88c54:/app# ls -la /app
+[?2004ltotal 88
+drwxr-xr-x 1 root root    34 Jun 17  2025 .
+drwxr-xr-x 1 root root   102 Jun  4 23:52 ..
+-rw-r--r-- 1 root root 88805 Jun 17  2025 graphene.dat
+[?2004hroot@157a56ea-3acd-478c-aec0-66971ff88c54:/app# python3 -c 'import numpy, scipy; print("ok")'
+[?2004lTraceback (most recent call last):
+  File [35m"<string>"[0m, line [35m1[0m, in [35m<module>[0m
+    [1;31mimport numpy, scipy[0m; print("ok")
+    [1;31m^^^^^^^^^^^^^^^^^^^[0m
+[1;35mModuleNotFoundError[0m: [35mNo module named 'numpy'[0m
+[?2004hroot@157a56ea-3acd-478c-aec0-66971ff88c54:/app# head -30 /app/graphene.dat
+[?2004l47183,554644	19261,547207
+46588,360019	19266,089699
+46008,191298	19077,996963
+45442,488736	19173,287322
+44890,718036	19501,518253
+44352,368927	19506,586203
+43826,959593	19752,431144
+43314,029137	19812,863021
+42813,138290	19678,348151
+42323,866373	19764,871128
+41845,813826	19360,099292
+41378,600916	19413,554878
+40921,863181	19626,191780
+40475,250679	19704,066336
+40038,430487	19495,727898
+39611,084116	19672,573559
+39192,908278	19538,763458
+38783,609488	19344,943112
+38382,908122	19510,307527
+37990,536178	19552,152695
+37606,236678	19568,884582
+37229,764497	19605,714542
+36860,880256	19652,302102
+36499,358232	19518,303269
+36144,980263	19684,212843
+35797,536721	19599,237174
+35456,826102	19666,264313
+35122,653398	19895,771042
+34794,833482	19781,231391
+34473,186962	19931,483503
+[?2004hroot@157a56ea-3acd-478c-aec0-66971ff88c54:/app# pip install numpy scipy 2>&1 | tail -3
+[?2004l
+[notice] A new release of pip is available: 25.2 -> 26.1.2
+[notice] To update, run: pip install --upgrade pip
+[?2004hroot@157a56ea-3acd-478c-aec0-66971ff88c54:/app# tail -10 /app/graphene.dat; wc -l /app/graphene.dat
+[?2004l1651,076544	6302,950951
+1650,814593	6154,492341
+1650,552790	6150,191176
+1650,291141	6157,269473
+1650,029641	6090,511415
+1649,768294	6062,725860
+1649,507095	6005,066261
+1649,246046	6009,427936
+1648,985151	5911,446799
+1648,724404	5950,923261
+3565 /app/graphene.dat
+[?2004hroot@157a56ea-3acd-478c-aec0-66971ff88c54:/app# python3 -c 'import numpy, scipy; print("ok")'
+[?2004lok
+[?2004hroot@157a56ea-3acd-478c-aec0-66971ff88c54:/app# cat > /app/inspect.py << 'EOF'
+[?2004l[?2004h> import numpy as np
+[?2004l[?2004h> data = np.loadtxt('/app/graphene.dat', converters={0: lambda s: float(s.decode().replace(',','.')) if isinstance(s,bytes) else float(s.replace(',','.')), 1: lambda s: float(s.decode().replace(',','.')) if isinstance(s,bytes) else float(s.replace(',','.'))})
+[?2004l[?2004h> x, y = data[:,0], data[:,1]
+[?2004l[?2004h> print('x range', x.min(), x.max(), 'n', len(x))
+[?2004l[?2004h> from scipy.signal import find_peaks
+[?2004l[?2004h> # sort ascending
+[?2004l[?2004h> idx = np.argsort(x)
+[?2004l[?2004h> x, y = x[idx], y[idx]
+[?2004l[?2004h> peaks, props = find_peaks(y, prominence=2000)
+[?2004l[?2004h> for p in peaks:
+[?2004l[?2004h>     print('peak at x=%.2f y=%.1f' % (x[p], y[p]))
+[?2004l[?2004h> EOF
+[?2004l[?2004hroot@157a56ea-3acd-478c-aec0-66971ff88c54:/app# python3 /app/inspect.py
+[?2004lTraceback (most recent call last):
+  File [35m"/app/inspect.py"[0m, line [35m1[0m, in [35m<module>[0m
+    import numpy as np
+  File [35m"/usr/local/lib/python3.13/site-packages/numpy/__init__.py"[0m, line [35m112[0m, in [35m<module>[0m
+    from numpy.__config__ import show_config
+  File [35m"/usr/local/lib/python3.13/site-packages/numpy/__config__.py"[0m, line [35m4[0m, in [35m<module>[0m
+    from numpy._core._multiarray_umath import (
+    ...<3 lines>...
+    )
+  File [35m"/usr/local/lib/python3.13/site-packages/numpy/_core/__init__.py"[0m, line [35m24[0m, in [35m<module>[0m
+    from . import multiarray
+  File [35m"/usr/local/lib/python3.13/site-packages/numpy/_core/multiarray.py"[0m, line [35m11[0m, in [35m<module>[0m
+    from . import _multiarray_umath, overrides
+  File [35m"/usr/local/lib/python3.13/site-packages/numpy/_core/overrides.py"[0m, line [35m4[0m, in [35m<module>[0m
+    import inspect
+  File [35m"/app/inspect.py"[0m, line [35m2[0m, in [35m<module>[0m
+    data = [1;31mnp.loadtxt[0m('/app/graphene.dat', converters={0: lambda s: float(s.decode().replace(',','.')) if isinstance(s,bytes) else float(s.replace(',','.')), 1: lambda s: float(s.decode().replace(',','.')) if isinstance(s,bytes) else float(s.replace(',','.'))})
+           [1;31m^^^^^^^^^^[0m
+[1;35mAttributeError[0m: [35mpartially initialized module 'numpy' from '/usr/local/lib/python3.13/site-packages/numpy/__init__.py' has no attribute 'loadtxt' (most likely due to a circular import)[0m
+[?2004hroot@157a56ea-3acd-478c-aec0-66971ff88c54:/app# mv /app/inspect.py /app/peek.py && python3 /app/peek.py
+[?2004lx range 1648.724404 47183.554644 n 3565
+peak at x=3745.05 y=12920.9
+peak at x=6329.37 y=13777.7
+peak at x=10289.94 y=18805.2
+peak at x=19139.54 y=79400.1
+peak at x=33244.97 y=21252.7
+[?2004hroot@157a56ea-3acd-478c-aec0-66971ff88c54:/app# cat > /app/peek2.py << 'EOF'
+[?2004l[?2004h> import numpy as np
+[?2004l[?2004h> conv = lambda s: float(s.replace(',','.'))
+[?2004l[?2004h> data = np.loadtxt('/app/graphene.dat', converters={0:conv,1:conv}, encoding=None)
+[?2004l[?2004h> x, y = data[:,0], data[:,1]
+[?2004l[?2004h> print('monotonic decreasing:', np.all(np.diff(x)<0))
+[?2004l[?2004h> idx = np.argsort(x); x,y = x[idx], y[idx]
+[?2004l[?2004h> d = np.diff(x)
+[?2004l[?2004h> print('spacing min/max:', d.min(), d.max())
+[?2004l[?2004h> # check if 1/x linear in index
+[?2004l[?2004h> invx = 1/x
+[?2004l[?2004h> dd = np.diff(invx)
+[?2004l[?2004h> print('d(1/x) first 3:', dd[:3], 'mid:', dd[len(dd)//2-1:len(dd)//2+2], 'last 3:', dd[-3:])
+[?2004l[?2004h> from scipy.signal import find_peaks
+[?2004l[?2004h> peaks, props = find_peaks(y, prominence=800, width=3)
+[?2004l[?2004h> for p,w,prom in zip(peaks, props['widths'], props['prominences']):
+[?2004l[?2004h>     # width in x units
+[?2004l[?2004h>     wx = w * (x[min(p+1,len(x)-1)]-x[max(p-1,0)])/2
+[?2004l[?2004h>     print('peak x=%.2f y=%.1f prom=%.0f width_pts=%.1f width_x=%.2f' % (x[p], y[p], prom, w, wx))
+[?2004l[?2004h> EOF
+[?2004l[?2004hroot@157a56ea-3acd-478c-aec0-66971ff88c54:/app# python3 /app/peek2.py
+[?2004lmonotonic decreasing: True
+spacing min/max: 0.2607470000000376 595.1946250000037
+d(1/x) first 3: [-9.59079281e-08 -9.59320134e-08 -9.59582666e-08] mid: [-1.55145015e-07 -1.55189988e-07 -1.55233954e-07] last 3: [-2.70577e-07 -2.70671e-07 -2.70764e-07]
+peak x=3084.66 y=1300.7 prom=844 width_pts=6.3 width_x=10.34
+peak x=3745.05 y=12920.9 prom=11204 width_pts=19.6 width_x=52.49
+peak x=6329.37 y=13777.7 prom=7698 width_pts=7.7 width_x=69.65
+peak x=10289.94 y=18805.2 prom=7257 width_pts=23.7 width_x=615.12
+peak x=16245.58 y=18159.9 prom=1748 width_pts=5.1 width_x=343.79
+peak x=19139.54 y=79400.1 prom=67189 width_pts=9.1 width_x=868.34
+peak x=33244.97 y=21252.7 prom=2175 width_pts=6.7 width_x=1989.04
+[?2004hroot@157a56ea-3acd-478c-aec0-66971ff88c54:/app# cat > /app/fit.py << 'EOF'
+[?2004l[?2004h> import numpy as np, json
+[?2004l[?2004h> from scipy.optimize import curve_fit
+[?2004l[?2004h> conv = lambda s: float(s.replace(',','.'))
+[?2004l[?2004h> data = np.loadtxt('/app/graphene.dat', converters={0:conv,1:conv}, encoding=None)
+[?2004l[?2004h> shift = 1e7/data[:,0]
+[?2004l[?2004h> y = data[:,1]
+[?2004l[?2004h> idx = np.argsort(shift)
+[?2004l[?2004h> shift, y = shift[idx], y[idx]
+[?2004l[?2004h> 
+[?2004l[?2004h> def lorentz(x, x0, gamma, amplitude, offset):
+[?2004l[?2004h>     return offset + amplitude * gamma**2 / ((x-x0)**2 + gamma**2)
+[?2004l[?2004h> 
+[?2004l[?2004h> def fitpeak(lo, hi, x0g):
+[?2004l[?2004h>     m = (shift>=lo)&(shift<=hi)
+[?2004l[?2004h>     xs, ys = shift[m], y[m]
+[?2004l[?2004h>     off0 = ys.min()
+[?2004l[?2004h>     amp0 = ys.max()-off0
+[?2004l[?2004h>     p0 = [x0g, 15, amp0, off0]
+[?2004l[?2004h>     popt, pcov = curve_fit(lorentz, xs, ys, p0=p0)
+[?2004l[?2004h>     perr = np.sqrt(np.diag(pcov))
+[?2004l[?2004h>     print('fit:', popt, 'err:', perr, 'npts:', len(xs))
+[?2004l[?2004h>     return popt
+[?2004l[?2004h> 
+[?2004l[?2004h> gG = fitpeak(1500, 1660, 1580)
+[?2004l[?2004h> g2D = fitpeak(2550, 2800, 2670)
+[?2004l[?2004h> res = {
+[?2004l[?2004h>   'G': {'x0': float(gG[0]), 'gamma': float(abs(gG[1])), 'amplitude': float(gG[2]), 'offset': float(gG[3])},
+[?2004l[?2004h>   '2D': {'x0': float(g2D[0]), 'gamma': float(abs(g2D[1])), 'amplitude': float(g2D[2]), 'offset': float(g2D[3])}
+[?2004l[?2004h> }
+[?2004l[?2004h> with open('/app/results.json','w') as f:
+[?2004l[?2004h>     json.dump(res, f, indent=2)
+[?2004l[?2004h> print(json.dumps(res, indent=2))
+[?2004l[?2004h> EOF
+[?2004l[?2004hroot@157a56ea-3acd-478c-aec0-66971ff88c54:/app# python3 /app/fit.py
+[?2004lfit: [1580.33094686    8.54226319 8316.72283809 5732.82392044] err: [  0.20441061   0.34737786 199.69232177  58.11781375] npts: 71
+fit: [ 2670.09514215    17.85809373 12382.32659252  1131.74000496] err: [  0.17127019   0.31162085 119.89540384  45.41890888] npts: 131
+{
+  "G": {
+    "x0": 1580.330946860035,
+    "gamma": 8.54226319045122,
+    "amplitude": 8316.722838086347,
+    "offset": 5732.823920438623
+  },
+  "2D": {
+    "x0": 2670.0951421531336,
+    "gamma": 17.858093727377675,
+    "amplitude": 12382.326592515667,
+    "offset": 1131.7400049592363
+  }
+}
+[?2004hroot@157a56ea-3acd-478c-aec0-66971ff88c54:/app# cat /app/results.json
+[?2004l{
+  "G": {
+    "x0": 1580.330946860035,
+    "gamma": 8.54226319045122,
+    "amplitude": 8316.722838086347,
+    "offset": 5732.823920438623
+  },
+  "2D": {
+    "x0": 2670.0951421531336,
+    "gamma": 17.858093727377675,
+    "amplitude": 12382.326592515667,
+    "offset": 1131.7400049592363
+  }
+}[?2004hroot@157a56ea-3acd-478c-aec0-66971ff88c54:/app# 

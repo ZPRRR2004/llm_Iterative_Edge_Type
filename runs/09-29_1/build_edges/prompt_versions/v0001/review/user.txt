@@ -1,0 +1,104 @@
+Review the semantic edge types discovered from the current agent execution Context Window.
+
+Use the complete trajectory, the original Discovery candidates, the complete Type Comparison result, and the current Registry snapshot to perform both tasks below.
+
+
+# Task A: New Edge Type Review
+
+Review all original candidates, including candidates classified as EXISTING, NEW, and UNCERTAIN.
+
+Determine which candidates represent valid and genuinely new semantic relationships that should be added to the Registry.
+
+Reassess the previous comparison decisions using the detailed trajectory evidence and the current Registry.
+
+When a candidate is already adequately covered by an existing type, represent its relationship through that existing type.
+
+When a candidate represents a genuinely distinct relationship, consider accepting it as a new type.
+
+Return accepted new types in accepted_edge_types.
+
+You may refine the complete four-field definitions of accepted types.
+
+
+# Task B: Existing Edge Type Revision
+
+Review every entry in the EXISTING category of the previous Type Comparison.
+
+For each entry:
+
+1. Locate the complete original candidate using candidate_name.
+
+2. Locate the complete matched existing Registry type using matched_existing_name.
+
+3. Compare their semantic meanings, applicability conditions, source roles, target roles, and relationship directions.
+
+4. Examine whether the matched existing type accurately and clearly represents the candidate's underlying semantic relationship.
+
+5. Determine whether the matched existing type's name, definition, semantic granularity, source_description, or target_description needs improvement.
+
+6. When improvement is necessary, return a complete revised version of the matched existing type in revised_existing_edge_types.
+
+7. Use original_name to identify the original Registry type being revised.
+
+8. Preserve appropriately defined existing types unchanged.
+
+9. When multiple candidates match the same existing type, consider them together and produce at most one unified revision for that type.
+
+10. When a candidate represents a genuinely distinct relationship from its matched existing type, consider accepting it as a new type through Task A.
+
+Apply the supplied semantic granularity rules and positive and negative examples to both tasks.
+
+
+# Current Context Window
+
+{{context_window}}
+
+
+# Original Discovery Candidates
+
+{{candidate_edge_types}}
+
+
+# Complete Type Comparison Result
+
+{{comparison_results}}
+
+
+# Current Registry Snapshot
+
+{{existing_registry}}
+
+
+# Required Output
+
+Return exactly one JSON object containing:
+
+{
+  "accepted_edge_types": [
+    {
+      "name": "...",
+      "definition": "...",
+      "source_description": "...",
+      "target_description": "..."
+    }
+  ],
+  "revised_existing_edge_types": [
+    {
+      "original_name": "...",
+      "revised_edge_type": {
+        "name": "...",
+        "definition": "...",
+        "source_description": "...",
+        "target_description": "..."
+      }
+    }
+  ]
+}
+
+Populate accepted_edge_types with complete four-field definitions of newly accepted types.
+
+Populate revised_existing_edge_types with complete revisions of matched existing Registry types that need improvement.
+
+Both arrays may be empty.
+
+Return only valid JSON.

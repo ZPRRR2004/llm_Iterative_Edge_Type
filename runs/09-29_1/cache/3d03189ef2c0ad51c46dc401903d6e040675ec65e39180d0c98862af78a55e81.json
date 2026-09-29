@@ -1,0 +1,5 @@
+{
+  "title": "Reimplement COBOL program in Python",
+  "query": "Create /app/program.py to re-implement the functionality of /app/src/program.cbl in Python. The script must read inputs from /app/src/INPUT.DAT and apply the same logic as the COBOL program to modify the .DAT files in /app/data/. Given the same /app/src/INPUT.DAT and the same initial states of /app/data/ACCOUNTS.DAT, /app/data/BOOKS.DAT, and /app/data/TRANSACTIONS.DAT, running /app/program.py must produce /app/data/ACCOUNTS.DAT, /app/data/BOOKS.DAT, and /app/data/TRANSACTIONS.DAT that are identical content-wise to those produced by running /app/src/program.cbl with GnuCOBOL 3.",
+  "review_flags": []
+}

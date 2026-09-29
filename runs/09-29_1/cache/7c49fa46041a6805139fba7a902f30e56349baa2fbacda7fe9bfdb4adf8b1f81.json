@@ -1,0 +1,12 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_1_1",
+      "start_anchor": "New Terminal Output:\n\nroot@275e2d70-481c-4ebd-ba76-326b4711ee88:/app# sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/debian.sources && apt-get update -qq\n"
+    },
+    {
+      "tool_call_id": "call_1_2",
+      "start_anchor": "root@275e2d70-481c-4ebd-ba76-326b4711ee88:/app# apt-get install -y -qq build-essential dpkg-dev devscripts >/dev/null 2>&1; which gcc make\n"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_0_1",
+      "start_anchor": "New Terminal Output:\nroot@1ffde2ee-1bf4-421e-9b4f-8e807d8a8dd0:/app# which Rscript && Rscript --version || echo NO_R_FOUND"
+    },
+    {
+      "tool_call_id": "call_0_2",
+      "start_anchor": "root@1ffde2ee-1bf4-421e-9b4f-8e807d8a8dd0:/app# cat > /app/ars.R << 'EOF'"
+    },
+    {
+      "tool_call_id": "call_0_3",
+      "start_anchor": "root@1ffde2ee-1bf4-421e-9b4f-8e807d8a8dd0:/app# Rscript -e 'source(\"/app/ars.R\"); test()' 2>&1 | tail -60"
+    }
+  ]
+}

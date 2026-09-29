@@ -1,0 +1,12 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_2_1",
+      "start_anchor": "New Terminal Output:\n\nroot@47cf51ce-5954-411b-b1fd-9e2dfcf2cc84:/app# printf '%s' '<noscript><p title=\"</noscript><img src=x onerror=alert(1)>\"></p></noscript>' > /app/out.html\n"
+    },
+    {
+      "tool_call_id": "call_2_2",
+      "start_anchor": "root@47cf51ce-5954-411b-b1fd-9e2dfcf2cc84:/app# cp /app/out.html /tmp/c.html && python /app/filter.py /tmp/c.html && echo '---' && cat /tmp/c.html; echo\n"
+    }
+  ]
+}

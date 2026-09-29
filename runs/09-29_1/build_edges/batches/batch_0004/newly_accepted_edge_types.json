@@ -1,0 +1,62 @@
+[
+  {
+    "name": "PROBES_ALTERNATIVE_RESOURCES_AFTER_FAILURE",
+    "definition": "After an attempt to access a specific resource fails, a subsequent agent action attempts to obtain the needed resource by trying alternative candidate resources, locations, or identifiers instead of remedying the failed one.",
+    "source_description": "An observation reporting that a prior attempt to access a specific resource failed, such as a not-found, forbidden, or otherwise unsuccessful access response.",
+    "target_description": "A subsequent agent action that tries alternative candidate resources, locations, or identifiers in order to obtain the needed resource."
+  },
+  {
+    "name": "WAITS_FOR_OPERATION_COMPLETION",
+    "definition": "A subsequent agent action waits for, polls, or checks the progress of a previously initiated long-running operation that is still in progress, in order to detect its completion before proceeding with dependent steps.",
+    "source_description": "An earlier initiated long-running or background operation whose completion has not yet been observed.",
+    "target_description": "A subsequent wait, poll, or progress-check action that determines whether that pending operation has finished."
+  },
+  {
+    "name": "INVESTIGATES_LACK_OF_PROGRESS",
+    "definition": "An observation that an ongoing or launched operation has produced no expected new output or progress for an extended period, without any error or failure having been reported, triggers a subsequent diagnostic action to confirm that the operation is still active or is still consuming resources.",
+    "source_description": "An observation indicating that an ongoing or launched operation has produced no expected new output or progress after an extended period, without an associated error or failure report.",
+    "target_description": "A subsequent diagnostic action that checks whether the operation is still active or consuming resources, such as inspecting its process status or resource usage."
+  },
+  {
+    "name": "LIVENESS_EVIDENCE_JUSTIFIES_CONTINUED_WAITING",
+    "definition": "An observation confirming that a previously launched long-running process is still alive and actively consuming resources is used to justify continuing to wait and monitor that process rather than restarting, aborting, or otherwise intervening.",
+    "source_description": "An observation that verifies the continued liveness or resource activity of an earlier launched long-running process, such as process status or resource-usage output.",
+    "target_description": "A subsequent agent reasoning step or decision to keep waiting and monitoring the process instead of restarting, aborting, or intervening."
+  },
+  {
+    "name": "UNCHANGED_STATE_TRIGGERS_REPEATED_POLL",
+    "definition": "An observation reporting the same execution state as a previous observation, indicating that no new progress has occurred, leads the agent to re-execute the same monitoring action against the same resource.",
+    "source_description": "An observation of a long-running task or resource whose reported state is identical to the previously observed state and shows no new milestone or output.",
+    "target_description": "A repeated monitoring or polling action of the same kind directed at the same resource."
+  },
+  {
+    "name": "OBSERVED_MILESTONE_UPDATES_PROGRESS_ESTIMATE",
+    "definition": "A newly observed progress milestone of a long-running task is used to refine the agent's estimate of the processing rate and the remaining time or point of completion, which shapes the plan for subsequent monitoring.",
+    "source_description": "An observation reporting a new progress milestone of a long-running task, such as a reached counter or iteration value, optionally together with a timestamp.",
+    "target_description": "A subsequent agent reasoning step that derives a revised progress or timing estimate, and a corresponding monitoring plan, from that milestone."
+  },
+  {
+    "name": "METRIC_IMPROVEMENT_CONFIRMS_TASK_HEALTH",
+    "definition": "An observed improvement in a monitored quality metric is interpreted as evidence that a running task is behaving correctly, supporting a decision that no corrective action is needed.",
+    "source_description": "An observation of a monitored metric value that has improved relative to an earlier observation of the same metric.",
+    "target_description": "A subsequent agent assessment that the task is progressing correctly and does not require repair or intervention."
+  },
+  {
+    "name": "OBSERVED_MILESTONE_VALIDATES_PRIOR_ESTIMATE",
+    "definition": "A previously stated estimate or expectation about the expected progress, processing rate, or timing of an ongoing execution is subsequently confirmed when a later observation reports the predicted milestone or value, indicating that the execution is advancing as predicted.",
+    "source_description": "A previously stated estimate or expectation about the expected progress, processing rate, timing, or next milestone of an ongoing execution.",
+    "target_description": "A later observation reporting the predicted progress milestone or value, which matches the earlier estimate and thereby confirms it."
+  },
+  {
+    "name": "MONITORING_ACTION_YIELDS_UNCHANGED_OBSERVATION",
+    "definition": "A monitoring or polling action performed to check the status of an ongoing execution returns an observation whose content is identical to the most recently known state, indicating that no new progress has occurred since the previous check.",
+    "source_description": "An agent action that polls or otherwise checks the status of an ongoing execution.",
+    "target_description": "The resulting observation whose content matches the previous known state of the execution and shows no new progress."
+  },
+  {
+    "name": "EXTENDS_VERIFICATION_FOR_IDENTIFIED_RISK",
+    "definition": "An identified untested edge case, coverage gap, or potential failure mode in the current solution prompts the agent to construct and run an additional verification that specifically targets that previously uncovered scenario.",
+    "source_description": "An agent reasoning step identifying an untested edge case, coverage gap, or potential failure mode in the current solution.",
+    "target_description": "A newly constructed verification action designed to exercise and check that previously uncovered scenario."
+  }
+]

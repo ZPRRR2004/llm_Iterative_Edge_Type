@@ -1,0 +1,107 @@
+{
+  "revisions": [
+    {
+      "original_name": "USES_PREVIOUS_RESULT_AS_INPUT",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "PROBES_ENVIRONMENT_TO_INFORM_ACTION",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "VERIFIES_PREVIOUS_RESULT",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "TRIGGERS_TASK_COMPLETION",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "PRESERVES_STATE_BEFORE_MUTATION",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "RESOLVES_BLOCKING_CONDITION",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "INVESTIGATES_ISSUE_OR_UNCERTAINTY",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "IMPLEMENTS_PLANNED_ACTION",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "ACTION_TRIGGERS_CONFIRMATION_REQUEST",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "RESPONDS_TO_CONFIRMATION_REQUEST",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "DERIVES_INFORMATION_FROM_OBSERVED_CONTENT",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "CLEANS_UP_OR_RESTORES_STATE",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "EVALUATES_CANDIDATES_AGAINST_CRITERIA",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "PROBES_ALTERNATIVE_RESOURCES_AFTER_FAILURE",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "WAITS_FOR_OPERATION_COMPLETION",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "MONITORS_LONG_RUNNING_OPERATION",
+        "definition": "An agent monitors a previously initiated long-running operation, such that an earlier operation state, progress observation, or monitoring action is followed by a subsequent monitoring action, progress observation, or reasoning step that checks, waits for, interprets, or estimates the operation's progress, state, liveness, or completion.",
+        "source_description": "An earlier initiated long-running operation, or a prior observation, monitoring action, or progress estimate concerning its progress, state, liveness, or completion.",
+        "target_description": "A subsequent monitoring action, progress observation, or reasoning step that checks, waits for, interprets, or estimates the progress, state, liveness, or completion of that operation."
+      }
+    },
+    {
+      "original_name": "INVESTIGATES_LACK_OF_PROGRESS",
+      "operation": "MERGE",
+      "merge_into": "WAITS_FOR_OPERATION_COMPLETION"
+    },
+    {
+      "original_name": "LIVENESS_EVIDENCE_JUSTIFIES_CONTINUED_WAITING",
+      "operation": "MERGE",
+      "merge_into": "WAITS_FOR_OPERATION_COMPLETION"
+    },
+    {
+      "original_name": "UNCHANGED_STATE_TRIGGERS_REPEATED_POLL",
+      "operation": "MERGE",
+      "merge_into": "WAITS_FOR_OPERATION_COMPLETION"
+    },
+    {
+      "original_name": "OBSERVED_MILESTONE_UPDATES_PROGRESS_ESTIMATE",
+      "operation": "MERGE",
+      "merge_into": "WAITS_FOR_OPERATION_COMPLETION"
+    },
+    {
+      "original_name": "METRIC_IMPROVEMENT_CONFIRMS_TASK_HEALTH",
+      "operation": "DELETE"
+    },
+    {
+      "original_name": "OBSERVED_MILESTONE_VALIDATES_PRIOR_ESTIMATE",
+      "operation": "DELETE"
+    },
+    {
+      "original_name": "MONITORING_ACTION_YIELDS_UNCHANGED_OBSERVATION",
+      "operation": "MERGE",
+      "merge_into": "WAITS_FOR_OPERATION_COMPLETION"
+    },
+    {
+      "original_name": "EXTENDS_VERIFICATION_FOR_IDENTIFIED_RISK",
+      "operation": "KEEP"
+    }
+  ]
+}

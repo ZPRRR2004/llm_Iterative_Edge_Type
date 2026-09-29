@@ -1,0 +1,12 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_1_1",
+      "start_anchor": "New Terminal Output:\n\nroot@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app# apt-get update -qq\n"
+    },
+    {
+      "tool_call_id": "call_1_2",
+      "start_anchor": "root@b45d0d5c-a909-40a6-9e0e-2d1cba954189:/app# DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends g++ ca-certificates libprotobuf-dev pr\n"
+    }
+  ]
+}

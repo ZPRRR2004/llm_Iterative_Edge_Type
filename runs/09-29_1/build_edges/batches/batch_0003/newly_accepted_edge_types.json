@@ -1,0 +1,26 @@
+[
+  {
+    "name": "RESOLVES_AMBIGUOUS_VALUE_USING_REFERENCE",
+    "definition": "A subsequent agent action uses a previously retrieved authoritative reference to interpret, disambiguate, or replace an unknown, placeholder, or ambiguous value found in another data source, thereby determining the correct value.",
+    "source_description": "A previously retrieved authoritative reference observation that contains the information needed to interpret, disambiguate, or replace the ambiguous or unknown value.",
+    "target_description": "A subsequent agent action or reasoning step that resolves the unknown, placeholder, or ambiguous value using the retrieved reference."
+  },
+  {
+    "name": "INVESTIGATES_TO_RESOLVE_AMBIGUITY",
+    "definition": "A subsequent agent action examines a resource, dataset, or its characteristics in order to resolve an identified ambiguity or uncertainty (such as unclear units, format, or meaning) before continuing with the task.",
+    "source_description": "An agent reasoning step or observation that identifies an ambiguity or uncertainty about a resource's structure, format, units, or meaning.",
+    "target_description": "A subsequent information-gathering agent action that inspects the resource or its characteristics in order to clarify and resolve that ambiguity."
+  },
+  {
+    "name": "EVALUATES_ALTERNATIVES_TO_SELECT_BEST",
+    "definition": "A subsequent agent action scores or compares multiple candidate alternatives (e.g., hypotheses, models, or configurations) using a quantitative criterion and selects the best-scoring alternative to carry forward.",
+    "source_description": "An agent evaluation step that scores or compares a set of candidate alternatives against a quantitative criterion.",
+    "target_description": "The best-scoring candidate alternative that the agent adopts for subsequent processing."
+  },
+  {
+    "name": "IDENTIFIES_CODE_REQUIRING_MODIFICATION",
+    "definition": "A diagnostic search, static-analysis, or codebase-scanning action surfaces specific code locations or constructs that require modification or are incompatible with the target runtime environment or requirements.",
+    "source_description": "A diagnostic search, static-analysis, or codebase-scanning action performed to locate problematic patterns or incompatibilities.",
+    "target_description": "The specific code locations or constructs surfaced by that action as requiring modification or as incompatible with the target environment or requirements."
+  }
+]

@@ -1,0 +1,66 @@
+{
+  "task": {
+    "name": "terminal-bench/cobol-modernization",
+    "type": "package",
+    "digest": "sha256:e03aa03965eee48c9f772d566ff9bcd741fceeac9693123f82a13fdd46be0d88",
+    "source": "terminal-bench/terminal-bench-2-1"
+  },
+  "timeout_multiplier": 1.0,
+  "agent": {
+    "name": "terminus-2",
+    "model_name": "anthropic/claude-fable-5",
+    "skills": [],
+    "extra_allowed_hosts": [],
+    "kwargs": {
+      "model_info": {
+        "supports_adaptive_thinking": true,
+        "supports_reasoning": true,
+        "supports_max_reasoning_effort": true,
+        "supports_xhigh_reasoning_effort": true
+      },
+      "temperature": 1,
+      "llm_kwargs": {
+        "extra_headers": {
+          "anthropic-beta": "server-side-fallback-2026-06-02"
+        }
+      },
+      "llm_call_kwargs": {
+        "max_tokens": 128000,
+        "allowed_openai_params": [
+          "thinking",
+          "fallback"
+        ],
+        "thinking": {
+          "type": "adaptive"
+        },
+        "output_config": {
+          "effort": "high"
+        },
+        "fallback": [
+          {
+            "model": "claude-opus-4-8"
+          }
+        ]
+      },
+      "reasoning_effort": "high"
+    },
+    "env": {},
+    "mcp_servers": []
+  },
+  "skills": [],
+  "environment": {
+    "type": "daytona",
+    "force_build": false,
+    "delete": true,
+    "cpu_enforcement_policy": "auto",
+    "memory_enforcement_policy": "auto",
+    "extra_docker_compose": [],
+    "env": {},
+    "kwargs": {},
+    "extra_allowed_hosts": []
+  },
+  "verifier": {
+    "env": {},
+    "disable": false
+  }
+}

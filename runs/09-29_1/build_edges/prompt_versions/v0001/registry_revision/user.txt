@@ -1,0 +1,15 @@
+Apply the following human feedback to the complete current edge type registry.
+
+Human Feedback:
+
+{{human_feedback}}
+
+Current Edge Type Registry:
+
+{{existing_registry}}
+
+Review every edge type in the registry and assign exactly one revision operation.
+
+Apply the supplied granularity rules and positive and negative examples when interpreting the human feedback.
+
+Return the complete revision plan using the required JSON schema.

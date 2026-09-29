@@ -1,0 +1,5 @@
+{
+  "title": "Create sanitizer-bypassing HTML alert",
+  "query": "Create a file called /app/out.html that, even after being processed by /app/filter.py, will still trigger a JavaScript alert() when opened in a browser. The alert must trigger automatically without any interaction with the webpage. /app/filter.py takes an HTML file as a command-line argument and modifies it in place to remove JavaScript from HTML files to prevent XSS attacks. The result can be verified by running /app/test_outputs.py.",
+  "review_flags": []
+}

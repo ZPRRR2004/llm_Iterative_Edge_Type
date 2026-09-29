@@ -1,0 +1,138 @@
+{
+  "window_file": "trajectory13__window_0001.json",
+  "trajectory_id": "trajectory13",
+  "window_id": "window_0001",
+  "global_index": 10,
+  "prompt_version": "v0001",
+  "registry_snapshot": [
+    {
+      "name": "ATTEMPTS_TO_REPAIR",
+      "definition": "A subsequent agent action attempts to resolve a failure, blocker, or detected defect in an earlier execution step, including retrying an operation after remediation and correcting a verification procedure that produced a false failure.",
+      "source_description": "An earlier observed failure, blocker, or detected defect (e.g., a reported error, missing prerequisite, or false-positive verification result).",
+      "target_description": "A subsequent agent action intended to resolve or correct that failure, blocker, or defect."
+    },
+    {
+      "name": "USES_PREVIOUS_RESULT_AS_INPUT",
+      "definition": "A subsequent agent action consumes a result, artifact, or resource that was obtained or produced by an earlier execution step, as an input to that action.",
+      "source_description": "A result, artifact, or resource obtained or produced by an earlier execution step (e.g., a generated file, a discovered input file, or a computed value).",
+      "target_description": "A subsequent agent action that takes that earlier result, artifact, or resource as an input."
+    },
+    {
+      "name": "PROBES_ENVIRONMENT_TO_INFORM_ACTION",
+      "definition": "The agent obtains information about its execution environment, a reference artifact, or an implementation's behavior, including by supplying a controlled probe input, and the resulting information informs subsequent reasoning, design, or action.",
+      "source_description": "An inspection, probe, or controlled experiment (e.g., reading a file, listing resources, examining a reference, or supplying a synthesized input to elicit behavior) whose outcome reveals relevant state, behavior, or specification.",
+      "target_description": "A subsequent agent step, whether reasoning, design decision, or action, that is selected or configured based on the probe's outcome."
+    },
+    {
+      "name": "VERIFIES_PREVIOUS_RESULT",
+      "definition": "A subsequent agent action checks, confirms, or broadens confidence in a result, artifact, claim, or state change attributed to an earlier execution step, including reading or running a produced artifact and performing additional checks after an initial verification succeeded.",
+      "source_description": "An earlier result, artifact, claim, or state change attributed to an execution step (e.g., a produced file, a reported outcome, or an initial verification success).",
+      "target_description": "A subsequent independent check that confirms, refutes, or further exercises that earlier result, artifact, claim, or state change."
+    },
+    {
+      "name": "TRIGGERS_TASK_COMPLETION",
+      "definition": "A verified satisfactory execution outcome leads the agent to conclude that the task is complete and to mark it as finished.",
+      "source_description": "A verified positive execution outcome, such as all checks passing and required deliverables being confirmed present.",
+      "target_description": "The agent's decision to mark the task as complete."
+    },
+    {
+      "name": "CONFORMS_GENERATED_OUTPUT_TO_OBSERVED_FORMAT",
+      "definition": "The content of an artifact produced by the agent is structured to comply with a syntax, grammar, or interface format that was previously established by an observed reference artifact or specification of the target system.",
+      "source_description": "An earlier observation that established the accepted format or interface rules for the artifact to be produced.",
+      "target_description": "The agent-produced artifact whose content is structured to conform to those observed format rules."
+    },
+    {
+      "name": "PRESERVES_STATE_BEFORE_MUTATION",
+      "definition": "An agent action creates a backup or snapshot copy of persistent or input state in a safe location before a subsequent operation that is expected to modify, overwrite, or consume that state, so that the original state can later be restored or compared against.",
+      "source_description": "An agent action that copies or snapshots existing state (e.g., a data directory or an input file) to a separate location.",
+      "target_description": "A subsequent operation that is expected to modify or consume that same state."
+    },
+    {
+      "name": "ESTABLISHES_REFERENCE_ORACLE",
+      "definition": "An agent action builds, executes, or captures the output of the original/reference implementation in order to obtain and retain authoritative reference behavior or output that is used as the ground-truth oracle against which the agent's own reimplementation is validated.",
+      "source_description": "An agent action that compiles, runs, or otherwise exercises the original/reference implementation and captures its output.",
+      "target_description": "The observed or stored reference behavior/output retained as the authoritative ground truth (oracle) for validating the agent's implementation."
+    },
+    {
+      "name": "INVESTIGATES_DISCREPANCY_CAUSE",
+      "definition": "A detected discrepancy or failure observed during comparison or verification triggers a subsequent diagnostic action that inspects raw, low-level evidence (such as actual bytes, records, logs, or internal state involved) in order to determine the underlying cause of that discrepancy.",
+      "source_description": "An observed verification discrepancy or failure, such as a mismatch between the candidate's produced state and the expected or reference state.",
+      "target_description": "A subsequent diagnostic action that examines raw, low-level evidence to explain the cause of the discrepancy."
+    },
+    {
+      "name": "VALIDATES_CANDIDATES_AGAINST_EXPECTED_OUTCOME",
+      "definition": "An agent action evaluates multiple candidate interpretations or solutions against a known expected outcome or success constraint, in order to identify and select the candidate that satisfies it.",
+      "source_description": "A known expected result or success criterion derived from the task specification (e.g., a required output prefix or value) that constrains which candidate interpretation can be correct.",
+      "target_description": "A subsequent agent action or script that tests candidate interpretations against that expected result and selects the one that matches."
+    },
+    {
+      "name": "PIVOTS_TO_ALTERNATIVE_APPROACH_AFTER_REPEATED_FAILURE",
+      "definition": "After an initial approach repeatedly produces unreliable, ambiguous, or unsuccessful results, the agent stops using that approach and adopts a fundamentally different strategy that does not depend on the failing approach, in order to make progress on the task.",
+      "source_description": "A sequence of unreliable, ambiguous, or unsuccessful results repeatedly produced by an initial approach.",
+      "target_description": "A subsequent agent action that implements a different approach to accomplish the task instead of continuing with the failing approach."
+    },
+    {
+      "name": "PRODUCES_DELIVERABLE_ON_VALIDATED_CANDIDATE",
+      "definition": "An agent action produces the required output artifact when a candidate interpretation or solution satisfies the expected validation criterion, so that the deliverable is written only upon successful validation.",
+      "source_description": "A candidate interpretation or solution that satisfies the expected validation criterion.",
+      "target_description": "The required output artifact produced as a result of that successful validation."
+    }
+  ],
+  "completed_stages": [
+    "discovery",
+    "comparison",
+    "review"
+  ],
+  "accepted_edge_types": [
+    {
+      "name": "PROVISIONS_MISSING_PREREQUISITE",
+      "definition": "A subsequent agent action installs or otherwise obtains a prerequisite (tool, library, or package) that an earlier reconnaissance observation reported as absent, without a preceding execution failure having occurred.",
+      "source_description": "An earlier observation that reports a required tool, dependency, or capability is absent from the environment.",
+      "target_description": "A subsequent agent action that installs or otherwise obtains the missing prerequisite so that it becomes available."
+    },
+    {
+      "name": "INVESTIGATES_FAILURE_CAUSE",
+      "definition": "A subsequent agent action inspects or searches the diagnostic output produced by an earlier failed execution step in order to determine the cause of that failure.",
+      "source_description": "An earlier observed execution failure whose diagnostic output (log or error message) is available.",
+      "target_description": "A subsequent agent action that reads or searches the failure's diagnostic output to identify its cause."
+    },
+    {
+      "name": "MONITORS_LAUNCHED_ASYNC_OPERATION",
+      "definition": "A subsequent agent action checks the progress or completion status of a long-running operation that was previously launched asynchronously, for example by reading its log or inspecting its job state.",
+      "source_description": "A long-running operation that a previous agent action launched asynchronously (e.g., a background job).",
+      "target_description": "A subsequent agent action that inspects the operation's log or job state to check its progress or completion."
+    },
+    {
+      "name": "RETRIES_FAILED_OPERATION_AFTER_REMEDY",
+      "definition": "The agent re-executes a previously failed operation after performing a corrective action intended to remove the cause of the earlier failure.",
+      "source_description": "A corrective action that remedied the cause of an earlier operation failure.",
+      "target_description": "A re-execution (retry) of the previously failed operation."
+    }
+  ],
+  "revised_existing_edge_types": [
+    {
+      "original_name": "ATTEMPTS_TO_REPAIR",
+      "original_edge_type": {
+        "name": "ATTEMPTS_TO_REPAIR",
+        "definition": "A subsequent agent action attempts to resolve a failure, blocker, or detected defect in an earlier execution step, including retrying an operation after remediation and correcting a verification procedure that produced a false failure.",
+        "source_description": "An earlier observed failure, blocker, or detected defect (e.g., a reported error, missing prerequisite, or false-positive verification result).",
+        "target_description": "A subsequent agent action intended to resolve or correct that failure, blocker, or defect."
+      },
+      "revised_edge_type": {
+        "name": "ATTEMPTS_TO_REPAIR",
+        "definition": "A subsequent agent action attempts to resolve a failure, error, or detected defect observed in an earlier execution step by removing or correcting its cause, including correcting a verification procedure that produced a spurious failure.",
+        "source_description": "An earlier observed failure, error, or detected defect produced by or attributed to an execution step (e.g., a reported error or a spurious verification failure).",
+        "target_description": "A subsequent agent action intended to remove or correct the cause of that failure, error, or defect."
+      }
+    }
+  ],
+  "accepted_edge_type_count": 4,
+  "revised_existing_edge_type_count": 1,
+  "status": "completed",
+  "created_at": "2026-09-29T05:49:39.289615+00:00",
+  "updated_at": "2026-09-29T05:52:01.209563+00:00",
+  "failed_stage": null,
+  "error": null,
+  "registry_size_after": 16,
+  "completed_at": "2026-09-29T05:52:01.209563+00:00"
+}

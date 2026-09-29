@@ -1,0 +1,109 @@
+{
+  "window_file": "trajectory18__window_0001.json",
+  "trajectory_id": "trajectory18",
+  "window_id": "window_0001",
+  "global_index": 20,
+  "prompt_version": "v0001",
+  "registry_snapshot": [
+    {
+      "name": "ATTEMPTS_TO_REPAIR",
+      "definition": "A subsequent agent action attempts to resolve an earlier observed failure, error, defect, invalidating result, or repeated unsuccessful/unreliable result by correcting its cause or adopting a corrected or alternative approach.",
+      "source_description": "An earlier observed failure, error, defect, result that invalidates an earlier assumption or approach, or sequence of unreliable or unsuccessful results.",
+      "target_description": "A subsequent agent action intended to correct the cause or to adopt a corrected or alternative approach."
+    },
+    {
+      "name": "USES_PREVIOUS_RESULT_AS_INPUT",
+      "definition": "A subsequent agent action or produced artifact consumes a result, artifact, resource, or observed format/constraint obtained from an earlier execution step as an input, dependency, or conformance target.",
+      "source_description": "A result, artifact, resource, or observed format/constraint obtained or produced by an earlier execution step.",
+      "target_description": "A subsequent agent action or produced artifact that uses that earlier result, artifact, resource, or observed format as an input, dependency, or conformance target."
+    },
+    {
+      "name": "PROBES_ENVIRONMENT_TO_INFORM_ACTION",
+      "definition": "The agent obtains information about its execution environment, a reference artifact or implementation, or its own state, including by reading files, listing resources, supplying controlled probes, establishing a reference oracle, or re-examining the environment after expressing completion intent, and the resulting information informs subsequent reasoning, design, validation, or action.",
+      "source_description": "An inspection, probe, controlled experiment, reference implementation execution, or diagnostic re-examination whose outcome reveals relevant state, behavior, specification, reference result, or overlooked condition.",
+      "target_description": "A subsequent agent step, reasoning/design decision, validation action, or retained reference behavior/state that is selected, configured, or used based on the probe's outcome."
+    },
+    {
+      "name": "VERIFIES_PREVIOUS_RESULT",
+      "definition": "A subsequent agent action or reasoning step checks, confirms, reasserts, or monitors a result, artifact, claim, state change, or asynchronous operation attributed to an earlier execution step.",
+      "source_description": "An earlier result, artifact, claim, state change, launched asynchronous operation, or verified conclusion attributed to an execution step.",
+      "target_description": "A subsequent independent check, status inspection, or restatement that confirms, refutes, monitors, or further exercises that earlier result, artifact, claim, state change, operation, or conclusion."
+    },
+    {
+      "name": "TRIGGERS_TASK_COMPLETION",
+      "definition": "A verified satisfactory execution outcome leads the agent to conclude that the task is complete and to mark it as finished.",
+      "source_description": "A verified positive execution outcome, such as all checks passing and required deliverables being confirmed present.",
+      "target_description": "The agent's decision to mark the task as complete."
+    },
+    {
+      "name": "PRESERVES_STATE_BEFORE_MUTATION",
+      "definition": "An agent action creates a backup or snapshot copy of persistent or input state in a safe location before a subsequent operation that is expected to modify, overwrite, or consume that state, so that the original state can later be restored or compared against.",
+      "source_description": "An agent action that copies or snapshots existing state (e.g., a data directory or an input file) to a separate location.",
+      "target_description": "A subsequent operation that is expected to modify or consume that same state."
+    },
+    {
+      "name": "VALIDATES_CANDIDATES_AGAINST_EXPECTED_OUTCOME",
+      "definition": "An agent action evaluates candidate interpretations or solutions against a known expected outcome or success constraint and, upon identifying the satisfying candidate, produces the required output artifact from it.",
+      "source_description": "A known expected result or success criterion derived from the task specification that constrains which candidate interpretation can be correct.",
+      "target_description": "A subsequent agent action or script that tests candidate interpretations against that expected result, selects the matching candidate, and produces the required output artifact."
+    },
+    {
+      "name": "SATISFIES_PREREQUISITE_FOR_SUBSEQUENT_ACTION",
+      "definition": "An earlier observation or completed action establishes, provisions, or completes a prerequisite or condition, such as installing a missing dependency, finishing partial setup, or successfully remedying a failure, that enables or requires a subsequent agent action.",
+      "source_description": "An earlier observation of a missing, incomplete, or unsatisfied prerequisite, or an action that satisfies or completes a prerequisite.",
+      "target_description": "A subsequent agent action that provisions the missing prerequisite, completes the remaining setup, or proceeds or retries because the prerequisite is satisfied."
+    },
+    {
+      "name": "INVESTIGATES_FAILURE_CAUSE",
+      "definition": "A subsequent agent action inspects or searches diagnostic output, raw evidence, or related environment/state evidence produced by or associated with an earlier observed failure, error, or discrepancy in order to determine its cause.",
+      "source_description": "An earlier observed execution failure, error, or discrepancy whose diagnostic output or related state evidence is available.",
+      "target_description": "A subsequent diagnostic action that examines the failure's or discrepancy's diagnostic output, raw evidence, or related environment state to identify its cause."
+    },
+    {
+      "name": "IMPLEMENTS_PLANNED_ACTION",
+      "definition": "A tool call executes an action that the agent specified as intended in its immediately preceding plan or decision.",
+      "source_description": "An agent reasoning step that states a plan or an intended action to be taken.",
+      "target_description": "A subsequent tool call that carries out the planned action."
+    },
+    {
+      "name": "ACTION_TRIGGERS_CONFIRMATION_REQUEST",
+      "definition": "An agent action that the environment regards as requiring explicit confirmation causes the environment to return an observation requesting confirmation before the action is finalized.",
+      "source_description": "An agent tool call or action whose finalization the environment gates behind explicit confirmation.",
+      "target_description": "The resulting environment observation that requests the agent to confirm or repeat the prior action."
+    },
+    {
+      "name": "RESPONDS_TO_CONFIRMATION_REQUEST",
+      "definition": "In direct response to an environment confirmation request, the agent issues a subsequent tool call that confirms or repeats the gated action.",
+      "source_description": "An environment observation that requests confirmation of a previous agent action.",
+      "target_description": "A tool call that repeats or confirms the prior action in order to satisfy the confirmation request."
+    },
+    {
+      "name": "DERIVES_INFORMATION_FROM_OBSERVED_CONTENT",
+      "definition": "An agent derives semantic or structured information, such as a category label, a field value, or a selected value among conflicting candidates, from the content of an item observed in an earlier reading or extraction step.",
+      "source_description": "An observation containing the content of an item or multiple conflicting candidate values from an earlier reading or extraction step.",
+      "target_description": "The category label, structured attribute value, or selected value derived by the agent from that observed content."
+    },
+    {
+      "name": "CLEANS_UP_OR_RESTORES_STATE",
+      "definition": "A subsequent agent action removes temporary or intermediate resources, or reverts unwanted state changes, to restore a clean or required state, either after task completion or before continuing a workflow.",
+      "source_description": "An earlier action that produced temporary or unwanted state changes, or a point at which the primary task objectives are complete.",
+      "target_description": "A subsequent agent action that cleans up or reverts those state changes to restore a clean or required state."
+    }
+  ],
+  "completed_stages": [
+    "discovery",
+    "comparison",
+    "review"
+  ],
+  "accepted_edge_types": [],
+  "revised_existing_edge_types": [],
+  "accepted_edge_type_count": 0,
+  "revised_existing_edge_type_count": 0,
+  "status": "completed",
+  "created_at": "2026-09-29T06:07:22.782978+00:00",
+  "updated_at": "2026-09-29T06:09:23.124423+00:00",
+  "failed_stage": null,
+  "error": null,
+  "registry_size_after": 14,
+  "completed_at": "2026-09-29T06:09:23.124423+00:00"
+}

@@ -1,0 +1,77 @@
+{
+  "stage": "comparison",
+  "window_file": "trajectory13__window_0003.json",
+  "prompt_version": "v0001",
+  "model": "deepseek-flash",
+  "succeeded": true,
+  "completed_at": "2026-09-29T05:53:18.087509+00:00",
+  "duration_seconds": 13.406,
+  "attempt_count": 1,
+  "attempts": [
+    {
+      "attempt": 1,
+      "started_at": "2026-09-29T05:53:18.085582+00:00",
+      "duration_seconds": 13.406,
+      "raw_response": {
+        "id": "d9fcd192-7dbd-44b0-81d9-abb65d033b10",
+        "object": "chat.completion",
+        "created": 1790661190,
+        "model": "deepseek-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"existing\":[{\"candidate_name\":\"INVESTIGATES_FAILURE\",\"matched_existing_name\":\"INVESTIGATES_FAILURE_CAUSE\"},{\"candidate_name\":\"ATTEMPTS_TO_REPAIR\",\"matched_existing_name\":\"ATTEMPTS_TO_REPAIR\"},{\"candidate_name\":\"MONITORS_ASYNC_TASK\",\"matched_existing_name\":\"MONITORS_LAUNCHED_ASYNC_OPERATION\"}],\"new\":[{\"name\":\"USES_SUCCESSFUL_RESULT_AS_PRECONDITION\",\"definition\":\"A subsequent action is initiated because an earlier prerequisite step completed successfully, satisfying the dependency it provides.\",\"source_description\":\"A successfully completed prerequisite step.\",\"target_description\":\"A subsequent action that depends on that prerequisite being satisfied.\"}],\"uncertain\":[]}",
+              "reasoning_content": "We need answer only JSON. Need compare candidates vs registry. Need classify each candidate exactly once.\n\nCandidates:\n1 INVESTIGATES_FAILURE\n2 ATTEMPTS_TO_REPAIR\n3 MONITORS_ASYNC_TASK\n4 USES_SUCCESSFUL_RESULT_AS_PRECONDITION\n\nExisting includes:\nATTEMPTS_TO_REPAIR (same name)\nMONITORS_LAUNCHED_ASYNC_OPERATION seems equivalent to MONITORS_ASYNC_TASK? Need decide existing vs uncertain.\nINVESTIGATES_FAILURE_CAUSE equivalent to INVESTIGATES_FAILURE? Candidate definition: diagnostic action examines logs or output to determine cause of earlier observed execution failure. Existing INVESTIGATES_FAILURE_CAUSE: subsequent action inspects or searches diagnostic output produced by earlier observed failure, or related env/state evidence, to determine cause. This is equivalent. Also INVESTIGATES_DISCREPANCY_CAUSE focuses discrepancy. Candidate more general failure. Existing INVESTIGATES_FAILURE_CAUSE adequately covers. So EXISTING matched INVESTIGATES_FAILURE_CAUSE.\n\nATTEMPTS_TO_REPAIR candidate matches existing ATTEMPTS_TO_REPAIR. Existing broader includes correcting verification procedure spurious failure. Candidate definition: subsequent action attempts to resolve previously identified execution failure. Source cause determined/suspected. Existing similar. EXISTING matched ATTEMPTS_TO_REPAIR.\n\nMONITORS_ASYNC_TASK candidate definition: polling action checks progress/completion status of long-running asynchronously launched process. Source long-running background process launched earlier unknown. Target polling action inspects status/log. Existing MONITORS_LAUNCHED_ASYNC_OPERATION: subsequent action checks progress/completion status of long-running operation previously launched asynchronously by reading log/inspecting job state. Equivalent. EXISTING matched MONITORS_LAUNCHED_ASYNC_OPERATION.\n\nUSES_SUCCESSFUL_RESULT_AS_PRECONDITION: subsequent action initiated because earlier prerequisite step completed successfully, satisfying dependency. Existing registry? USES_PREVIOUS_RESULT_AS_INPUT: consumes result/artifact/resource produced by earlier as input. That is different: successful completion as enabling precondition vs result as input. Could be covered by PROBES? No. There is maybe no exact. Could be considered NEW? Need evaluate.\n\nExisting registry includes ATTEMPTS_TO_REPAIR, USES_PREVIOUS_RESULT_AS_INPUT, PROBES_ENVIRONMENT_TO_INFORM_ACTION, VERIFIES_PREVIOUS_RESULT, TRIGGERS_TASK_COMPLETION, CONFORMS_GENERATED_OUTPUT..., PRESERVES_STATE..., ESTABLISHES_REFERENCE_ORACLE, INVESTIGATES_DISCREPANCY_CAUSE, VALIDATES_CANDIDATES_AGAINST_EXPECTED_OUTCOME, PIVOTS_TO_ALTERNATIVE_APPROACH_AFTER_REPEATED_FAILURE, PRODUCES_DELIVERABLE_ON_VALIDATED_CANDIDATE, PROVISIONS_MISSING_PREREQUISITE, INVESTIGATES_FAILURE_CAUSE, MONITORS_LAUNCHED_ASYNC_OPERATION, RETRIES_FAILED_OPERATION_AFTER_REMEDY.\n\nCandidate USES_SUCCESSFUL_RESULT_AS_PRECONDITION: \"A subsequent action is initiated because an earlier prerequisite step completed successfully, satisfying the dependency it provides.\" Source successfully completed prerequisite step. Target subsequent action depends on prerequisite satisfied.\n\nCould this be considered same as USES_PREVIOUS_RESULT_AS_INPUT? Not exactly: source is a completed prerequisite step, not necessarily a produced result used as input. It could be e.g., after mkdir success, cd into dir? The dependency is prerequisite satisfaction. Existing USES_PREVIOUS_RESULT_AS_INPUT specifically consumes result/artifact/resource produced. Precondition may not be a result artifact, but a state condition. Is there existing type covering \"subsequent action enabled by prior success\"? PROBES_ENVIRONMENT_TO_INFORM_ACTION: probe outcome informs action. Not same: success of prerequisite informs enabling, not information design. TRIGGERS_TASK_COMPLETION: verified outcome leads to completion. Not same. Maybe NEW. But need consider if this is a common semantic relationship and not overly broad? It seems a valid edge type: successful prerequisite enabling subsequent dependent action. But maybe existing USES_PREVIOUS_RESULT_AS_INPUT could cover if prerequisite provides dependency? Candidate says \"satisfying the dependency it provides\" maybe a prerequisite step produces a condition needed. Hmm.\n\nWe need classify all. Could there be uncertainty? It partially overlaps with USES_PREVIOUS_RESULT_AS_INPUT (both connect earlier successful step to later action) but source role differs: result/artifact/resource vs successfully completed prerequisite step. Also with PROBES? Not really. The rules: classify NEW when distinct. Does existing \"TRIGGERS_TASK_COMPLETION\" relate successful outcome to completion, not next action. So NEW likely. But need ensure not overly broad. Name \"USES_SUCCESSFUL_RESULT_AS_PRECONDITION\" is a bit generic but definition precise: subsequent action initiated because earlier prerequisite step completed successfully. It's reusable. Could be considered NEW.\n\nWe need output schema existing list, new list with full edge type fields, uncertain list. We can include new candidate exactly fields. Existing matched names.\n\nNeed ensure every candidate exactly once.\n\nLet's craft JSON. For existing:\n- candidate_name INVESTIGATES_FAILURE -> matched_existing_name INVESTIGATES_FAILURE_CAUSE\n- ATTEMPTS_TO_REPAIR -> ATTEMPTS_TO_REPAIR\n- MONITORS_ASYNC_TASK -> MONITORS_LAUNCHED_ASYNC_OPERATION\n\nNew:\n- USES_SUCCESSFUL_RESULT_AS_PRECONDITION with definition etc. Should we adjust? Use candidate's fields. Need exactly four fields each in new. It can include name definition source_description target_description.\n\nUncertain empty.\n\nCheck if ATTEMPTS_TO_REPAIR candidate definition source \"previously identified execution failure whose cause has been determined or suspected.\" Existing source \"earlier observed failure, error, or detected defect produced by or attributed...\" Existing broader. Adequately covers? Yes. Candidate more specific cause determined/suspected, but same relationship. Existing covers.\n\nINVESTIGATES_FAILURE candidate says diagnostic action examines logs or output to determine cause of earlier observed execution failure. Existing INVESTIGATES_FAILURE_CAUSE exactly. Yes.\n\nMONITORS_ASYNC_TASK equivalent to existing MONITORS_LAUNCHED_ASYNC_OPERATION. Yes.\n\nUSES_SUCCESSFUL_RESULT_AS_PRECONDITION: Is there existing \"PROVISIONS_MISSING_PREREQUISITE\" maybe inverse? That's provisioning missing prerequisite after absence observed, no failure. Candidate is using successful prerequisite. Not same.\n\nCould there be existing \"USES_PREVIOUS_RESULT_AS_INPUT\" partially overlaps? Candidate source is successful prerequisite step, target action initiated because prerequisite completed. In many trajectories, a step's successful completion is not itself a \"result, artifact, or resource\" consumed. It is a precondition state. So distinct. NEW.\n\nNeed final JSON only. Ensure valid JSON object no markdown. Fields exactly.\n\nLet's produce."
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 3646,
+          "completion_tokens": 1728,
+          "total_tokens": 5374,
+          "prompt_tokens_details": {
+            "cached_tokens": 1152
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1562
+          },
+          "prompt_cache_hit_tokens": 1152,
+          "prompt_cache_miss_tokens": 2494
+        },
+        "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+      },
+      "response_content": "{\"existing\":[{\"candidate_name\":\"INVESTIGATES_FAILURE\",\"matched_existing_name\":\"INVESTIGATES_FAILURE_CAUSE\"},{\"candidate_name\":\"ATTEMPTS_TO_REPAIR\",\"matched_existing_name\":\"ATTEMPTS_TO_REPAIR\"},{\"candidate_name\":\"MONITORS_ASYNC_TASK\",\"matched_existing_name\":\"MONITORS_LAUNCHED_ASYNC_OPERATION\"}],\"new\":[{\"name\":\"USES_SUCCESSFUL_RESULT_AS_PRECONDITION\",\"definition\":\"A subsequent action is initiated because an earlier prerequisite step completed successfully, satisfying the dependency it provides.\",\"source_description\":\"A successfully completed prerequisite step.\",\"target_description\":\"A subsequent action that depends on that prerequisite being satisfied.\"}],\"uncertain\":[]}",
+      "error": null
+    }
+  ],
+  "parsed_response": {
+    "existing": [
+      {
+        "candidate_name": "INVESTIGATES_FAILURE",
+        "matched_existing_name": "INVESTIGATES_FAILURE_CAUSE"
+      },
+      {
+        "candidate_name": "ATTEMPTS_TO_REPAIR",
+        "matched_existing_name": "ATTEMPTS_TO_REPAIR"
+      },
+      {
+        "candidate_name": "MONITORS_ASYNC_TASK",
+        "matched_existing_name": "MONITORS_LAUNCHED_ASYNC_OPERATION"
+      }
+    ],
+    "new": [
+      {
+        "name": "USES_SUCCESSFUL_RESULT_AS_PRECONDITION",
+        "definition": "A subsequent action is initiated because an earlier prerequisite step completed successfully, satisfying the dependency it provides.",
+        "source_description": "A successfully completed prerequisite step.",
+        "target_description": "A subsequent action that depends on that prerequisite being satisfied."
+      }
+    ],
+    "uncertain": []
+  },
+  "previous_calls": []
+}

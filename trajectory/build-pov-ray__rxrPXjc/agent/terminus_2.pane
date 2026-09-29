@@ -1,0 +1,936 @@
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app# asciinema rec --stdin /logs/agent/recording.cast
+[?2004l[0;32masciinema: recording asciicast to /logs/agent/recording.cast[0m
+[0;32masciinema: press <ctrl-d> or type "exit" when you're done[0m
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app# clear
+[?2004l[H[J[3J[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app# ls -la /app /app/deps 2>&1 | head -50
+[?2004l/app:
+total 0
+drwxr-xr-x 3 root root  26 Oct 31  2025 .
+drwxr-xr-x 1 root root 102 Jun  4 23:33 ..
+drwxr-xr-x 2 root root  32 Oct 31  2025 deps
+
+/app/deps:
+total 8
+drwxr-xr-x 2 root root   32 Oct 31  2025 .
+drwxr-xr-x 3 root root   26 Oct 31  2025 ..
+-rw-r--r-- 1 root root 4678 Oct 24  2025 illum1.pov
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app# which curl wget gcc make unzip tar; gcc --version | head -1
+[?2004l/usr/bin/curl
+/usr/bin/wget
+/usr/bin/tar
+bash: gcc: command not found
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app# curl -s --max-time 20 https://ftp.povray.org/pub/povray/Old-Versions/Official-2.2/ | head -60
+[?2004l<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>303 See Other</title>
+</head><body>
+<h1>See Other</h1>
+<p>The answer to your request is located <a href="https://www.povray.org/pub/povray/Old-Versions/Official-2.2/">here</a>.</p>
+<hr>
+<address>Apache/2 Server at ftp.povray.org Port 443</address>
+</body></html>
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app# curl -sL --max-time 30 https://www.povray.org/pub/povray/Old-Versions/Official-2.2/ 
+[?2004l<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL was not found on this server.</p>
+<hr>
+<address>Apache/2 Server at www.povray.org Port 443</address>
+</body></html>
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app# apt-get update -qq && apt-get install -y -qq gcc make unzip > /tmp/apt.log 2>&1; tail -2 /tmp/apt.log; which gcc make unzip
+[?2004lSetting up gcc (4:13.2.0-7ubuntu1) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+/usr/bin/gcc
+/usr/bin/make
+/usr/bin/unzip
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app# curl -sL --max-time 30 https://www.povray.org/pub/povray/Old-Versions/ | grep -oE 'href="[^"]+"' | head -40
+[?2004l[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app# curl -sIL --max-time 30 https://www.povray.org/pub/povray/Old-Versions/ | head -20
+[?2004lHTTP/1.1 404 Not Found
+Date: Thu, 04 Jun 2026 23:35:50 GMT
+Server: Apache/2
+Content-Type: text/html; charset=iso-8859-1
+
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app# curl -sL --max-time 30 https://www.povray.org/pub/povray/ | head -60
+[?2004l<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL was not found on this server.</p>
+<hr>
+<address>Apache/2 Server at www.povray.org Port 443</address>
+</body></html>
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app# for u in http://ftp.povray.org/ http://ftp.povray.org/pub/ http://ftp.povray.org/pub/povray/ https://ftp.povray.org/Old-Versions/ https://www.povray.org/ftp/pub/povray/Old-Versions/; do echo "== $u"; curl -sIL --max-time 15 "$u" | grep -E 'HTTP|Location' ; done
+[?2004l== http://ftp.povray.org/
+[01;31m[KHTTP[m[K/1.1 301 Moved Permanently
+[01;31m[KLocation[m[K: https://ftp.povray.org/
+[01;31m[KHTTP[m[K/2 403 
+== http://ftp.povray.org/pub/
+[01;31m[KHTTP[m[K/1.1 301 Moved Permanently
+[01;31m[KLocation[m[K: https://ftp.povray.org/pub/
+[01;31m[KHTTP[m[K/2 403 
+== http://ftp.povray.org/pub/povray/
+[01;31m[KHTTP[m[K/1.1 301 Moved Permanently
+[01;31m[KLocation[m[K: https://ftp.povray.org/pub/povray/
+[01;31m[KHTTP[m[K/2 403 
+== https://ftp.povray.org/Old-Versions/
+[01;31m[KHTTP[m[K/2 403 
+== https://www.povray.org/ftp/pub/povray/Old-Versions/
+[01;31m[KHTTP[m[K/1.1 200 OK
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app# curl -s --max-time 30 https://www.povray.org/ftp/pub/povray/Old-Versions/ | grep -oE 'href="[^"]+"'
+[?2004l[01;31m[Khref="?C=N;O=D"[m[K
+[01;31m[Khref="?C=M;O=A"[m[K
+[01;31m[Khref="?C=S;O=A"[m[K
+[01;31m[Khref="/ftp/pub/povray/"[m[K
+[01;31m[Khref="Official-1.0/"[m[K
+[01;31m[Khref="Official-2.0/"[m[K
+[01;31m[Khref="Official-2.1/"[m[K
+[01;31m[Khref="Official-2.2/"[m[K
+[01;31m[Khref="Official-3.0/"[m[K
+[01;31m[Khref="Official-3.1/"[m[K
+[01;31m[Khref="Official-3.1d/"[m[K
+[01;31m[Khref="Official-3.1e/"[m[K
+[01;31m[Khref="Official-3.1g/"[m[K
+[01;31m[Khref="Official-3.5/"[m[K
+[01;31m[Khref="Official-3.6/"[m[K
+[01;31m[Khref="Official-3.62/"[m[K
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app# curl -s --max-time 30 https://www.povray.org/ftp/pub/povray/Old-Versions/Official-2.2/ | grep -oE 'href="[^"]+"' M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K'
+[?2004l[01;31m[Khref="?C=N;O=D"[m[K
+[01;31m[Khref="?C=M;O=A"[m[K
+[01;31m[Khref="?C=S;O=A"[m[K
+[01;31m[Khref="/ftp/pub/povray/Old-Versions/"[m[K
+[01;31m[Khref="KNOWNBUGS.DOC"[m[K
+[01;31m[Khref="POVAMI.LZH"[m[K
+[01;31m[Khref="POVDOC.LZH"[m[K
+[01;31m[Khref="POVDOC.SEA"[m[K
+[01;31m[Khref="POVDOC.TAR.Z"[m[K
+[01;31m[Khref="POVDOC.ZIP"[m[K
+[01;31m[Khref="POVIBM.EXE"[m[K
+[01;31m[Khref="POVINF.DOC"[m[K
+[01;31m[Khref="POVMAC.SEA"[m[K
+[01;31m[Khref="POVMNF.SEA"[m[K
+[01;31m[Khref="POVSCN.LZH"[m[K
+[01;31m[Khref="POVSCN.TAR.Z"[m[K
+[01;31m[Khref="POVSCN.ZIP"[m[K
+[01;31m[Khref="POVSRC.LZH"[m[K
+[01;31m[Khref="POVSRC.SEA"[m[K
+[01;31m[Khref="POVSRC.TAR.Z"[m[K
+[01;31m[Khref="POVSRC.ZIP"[m[K
+[01;31m[Khref="README2.2"[m[K
+[01;31m[Khref="WHATSNEW.DOC"[m[K
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app# mkdir -p /app/povray-2.2 && cd /app/povray-2.2 && curl -sO https://www.povray.org/ftp/pub/povray/Old-Versions/Official-2.2/POVSRC.TAR.Z && curl -sO https://www.povray.org/ftp/pub/povray/Old-Versions/Official-2.2/POVDOC.TAR.Z && ls -la
+[?2004ltotal 836
+drwxr-xr-x 2 root root     46 Jun  4 23:38 [0m[01;34m.[0m
+drwxr-xr-x 1 root root     32 Jun  4 23:38 [01;34m..[0m
+-rw-r--r-- 1 root root 276500 Jun  4 23:38 [01;31mPOVDOC.TAR.Z[0m
+-rw-r--r-- 1 root root 575233 Jun  4 23:38 [01;31mPOVSRC.TAR.Z[0m
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2# tar tzf POVSRC.TAR.Z | head -20; echo ----; tar tzf POVDOC.TAR.Z | head -20
+[?2004lsource/bezier.c
+source/blob.c
+source/bound.c
+source/boxes.c
+source/camera.c
+source/colour.c
+source/cones.c
+source/csg.c
+source/discs.c
+source/dump.c
+source/express.c
+source/frame.h
+source/gif.c
+source/gifdecod.c
+source/hfield.c
+source/iff.c
+source/image.c
+source/lighting.c
+source/matrices.c
+source/normal.c
+----
+povdoc/
+povdoc/docs/
+povdoc/docs/povray.doc
+povdoc/docs/textures.doc
+povdoc/demo/
+povdoc/demo/demo.cat
+povdoc/demo/plasma3.gif
+povdoc/demo/shotxtr.inc
+povdoc/demo/stage1.inc
+povdoc/demo/arealit1.pov
+povdoc/demo/arealit2.pov
+povdoc/demo/arealit3.pov
+povdoc/demo/chars.pov
+povdoc/demo/colors.pov
+povdoc/demo/normal.pov
+povdoc/demo/pigment.pov
+povdoc/demo/primitiv.pov
+povdoc/demo/shapes.pov
+povdoc/demo/shapes2.pov
+povdoc/demo/texture1.pov
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2# tar xzf POVSRC.TAR.Z && tar xzf POVDOC.TAR.Z && ls source/ && ls povdoc/
+[?2004lbezier.c  camera.c  discs.c    gif.c       image.c     objects.c  planes.c    povray.c    render.c    texture.c   txttest.c
+blob.c    colour.c  dump.c     gifdecod.c  lighting.c  parse.c    point.c     quadrics.c  source.cat  texture.h   vect.c
+bound.c   cones.c   express.c  hfield.c    matrices.c  parse.h    poly.c      raw.c       spheres.c   tokenize.c  vector.h
+boxes.c   csg.c     frame.h    iff.c       normal.c    pigment.c  povproto.h  ray.c       targa.c     triangle.c
+[0m[01;34mdemo[0m  [01;34mdocs[0m  file_id.diz  [01;34minclude[0m  povdoc.cat  povinf.doc  povlegal.doc  whatsnew.doc
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2# ls source/unix 2>/dev/null; ls source/ | head -60; ls povdoc/include | head
+[?2004lbezier.c
+blob.c
+bound.c
+boxes.c
+camera.c
+colour.c
+cones.c
+csg.c
+discs.c
+dump.c
+express.c
+frame.h
+gif.c
+gifdecod.c
+hfield.c
+iff.c
+image.c
+lighting.c
+matrices.c
+normal.c
+objects.c
+parse.c
+parse.h
+pigment.c
+planes.c
+point.c
+poly.c
+povproto.h
+povray.c
+quadrics.c
+raw.c
+ray.c
+render.c
+source.cat
+spheres.c
+targa.c
+texture.c
+texture.h
+tokenize.c
+triangle.c
+txttest.c
+vect.c
+vector.h
+chars.inc
+colors.inc
+fov.inc
+include.cat
+ior.inc
+rough.gif
+shapes.inc
+shapes.old
+shapes2.inc
+shapesq.inc
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2# curl -sO https://www.povray.org/ftp/pub/povray/Old-Versions/Official-2.2/POVSRC.ZIP && unzip -l POVSRC.ZIP | head -80
+[?2004lArchive:  POVSRC.ZIP
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+     2434  1993-07-08 15:33   SOURCE/TEXTURE.H
+     2549  1993-02-01 18:06   SOURCE/SOURCE.CAT
+     2804  1993-07-28 17:54   SOURCE/CAMERA.C
+     3212  1993-07-29 17:42   SOURCE/RAY.C
+     3687  1993-07-08 15:34   SOURCE/VECTOR.H
+     4354  1993-07-29 17:12   SOURCE/TXTTEST.C
+     4596  1993-07-28 17:55   SOURCE/COLOUR.C
+     5684  1993-07-29 17:08   SOURCE/PLANES.C
+     5835  1993-07-28 17:56   SOURCE/DISCS.C
+     6804  1993-07-28 17:56   SOURCE/GIF.C
+     7942  1993-07-28 18:53   SOURCE/NORMAL.C
+     8068  1993-07-29 17:08   SOURCE/POINT.C
+     8307  1993-10-28 14:13   SOURCE/OBJECTS.C
+     9180  1993-07-28 17:56   SOURCE/DUMP.C
+     9806  1993-09-20 18:29   SOURCE/PARSE.H
+    10194  1993-10-28 14:28   SOURCE/CSG.C
+    10210  1993-07-29 17:09   SOURCE/RAW.C
+    10299  1993-07-29 17:08   SOURCE/QUADRICS.C
+    10392  1993-09-12 15:13   SOURCE/IFF.C
+    10521  1993-10-13 21:50   SOURCE/BOXES.C
+    11151  1993-07-28 17:55   SOURCE/CONES.C
+    11623  1993-07-29 17:11   SOURCE/SPHERES.C
+    13122  1993-07-08 15:00   SOURCE/EXPRESS.C
+    13758  1993-07-28 18:52   SOURCE/MATRICES.C
+    15693  1994-01-05 16:08   SOURCE/RENDER.C
+    15698  1993-08-06 13:58   SOURCE/GIFDECOD.C
+    16195  1993-07-29 17:11   SOURCE/TARGA.C
+    18680  1993-08-10 20:17   SOURCE/BLOB.C
+    19545  1993-07-29 17:08   SOURCE/POLY.C
+    19911  1993-11-03 13:27   SOURCE/BOUND.C
+    20275  1993-10-25 19:59   SOURCE/TRIANGLE.C
+    20396  1993-09-20 18:35   SOURCE/PIGMENT.C
+    21315  1994-01-05 16:05   SOURCE/TEXTURE.C
+    21699  1993-07-28 17:57   SOURCE/IMAGE.C
+    25515  1993-10-03 11:25   SOURCE/VECT.C
+    26086  1994-01-28 18:34   SOURCE/TOKENIZE.C
+    27922  1994-02-03 13:23   SOURCE/FRAME.H
+    30332  1993-10-12 15:21   SOURCE/POVPROTO.H
+    31748  1993-11-09 14:33   SOURCE/BEZIER.C
+    32609  1994-02-03 13:22   SOURCE/POVRAY.C
+    38646  1994-01-05 16:08   SOURCE/LIGHTING.C
+    48131  1994-01-28 21:11   SOURCE/HFIELD.C
+    88726  1993-11-09 14:35   SOURCE/PARSE.C
+        0  1993-09-26 18:43   MACHINE/IBMPC/
+        0  1993-11-29 14:06   MACHINE/AMIGA/
+        0  1993-09-26 18:43   MACHINE/MAC/
+        0  1993-09-26 18:43   MACHINE/UNIX/
+        0  1993-09-26 18:43   MACHINE/VAX/
+        0  1993-09-26 18:43   MACHINE/ACORN/
+     1236  1993-09-24 16:36   MACHINE/MACHINE.CAT
+        0  1993-09-26 18:43   MACHINE/IBMPC/INTEL/
+        0  1993-09-26 18:43   MACHINE/IBMPC/TIGA/
+        0  1993-09-26 18:43   MACHINE/IBMPC/DJGCC/
+        0  1993-09-26 18:43   MACHINE/IBMPC/MICROSOF/
+        0  1993-09-26 18:43   MACHINE/IBMPC/BORLAND/
+        0  1993-09-26 18:43   MACHINE/IBMPC/WATCOM/
+        0  1993-09-26 18:43   MACHINE/IBMPC/ZORTECH/
+        0  1993-09-28 15:03   MACHINE/IBMPC/OS2/
+     3030  1993-09-28 15:11   MACHINE/IBMPC/IBMPC.CAT
+    11644  1994-01-29 20:58   MACHINE/IBMPC/IBMCONF.H
+   124332  1994-01-29 19:59   MACHINE/IBMPC/IBM.C
+        0  1994-02-03 13:51   MACHINE/IBMPC/SYMATEC/
+       91  1993-02-20 13:59   MACHINE/IBMPC/INTEL/_GET_EBX.OBJ
+     4810  1994-02-03 02:20   MACHINE/IBMPC/INTEL/IBMPC.DOC
+     5318  1994-02-03 02:20   MACHINE/IBMPC/INTEL/POVMOD.DOC
+     5926  1994-01-29 18:02   MACHINE/IBMPC/INTEL/ICB.MAK
+     9272  1994-02-03 02:20   MACHINE/IBMPC/INTEL/VEMD.386
+    12951  1994-02-03 02:20   MACHINE/IBMPC/INTEL/Q&A.DOC
+    24312  1994-02-03 02:20   MACHINE/IBMPC/INTEL/IBMPCEXE.DOC
+   101619  1994-02-03 02:20   MACHINE/IBMPC/INTEL/POVMOD.EXE
+     7199  1992-03-24 22:08   MACHINE/IBMPC/TIGA/AI.LIB
+    12641  1992-03-25 14:13   MACHINE/IBMPC/TIGA/TIGADEFS.H
+    12915  1992-03-24 22:18   MACHINE/IBMPC/TIGA/EXTEND.H
+    23974  1992-03-25 14:13   MACHINE/IBMPC/TIGA/TIGA.H
+       81  1993-06-01 17:51   MACHINE/IBMPC/DJGCC/GCCFIX.COM
+      115  1993-02-09 12:33   MACHINE/IBMPC/DJGCC/MAKEFIX.BAT
+      351  1993-01-05 18:59   MACHINE/IBMPC/DJGCC/IBMGCC.LNK
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2# unzip -l POVSRC.ZIP | grep 'UNIX' 
+[?2004l        0  1993-09-26 18:43   MACHINE/[01;31m[KUNIX[m[K/
+      996  1992-11-11 01:11   MACHINE/[01;31m[KUNIX[m[K/[01;31m[KUNIX[m[K.CAT
+     1832  1993-08-06 15:25   MACHINE/[01;31m[KUNIX[m[K/GCC.C
+     1852  1993-10-03 11:28   MACHINE/[01;31m[KUNIX[m[K/[01;31m[KUNIX[m[K.C
+     3275  1992-11-11 01:11   MACHINE/[01;31m[KUNIX[m[K/XPOV.ICN
+     3486  1993-10-09 15:39   MACHINE/[01;31m[KUNIX[m[K/[01;31m[KUNIX[m[K.MAK
+     3618  1993-10-09 15:39   MACHINE/[01;31m[KUNIX[m[K/XWINDOWS.MAK
+     4657  1993-09-30 11:53   MACHINE/[01;31m[KUNIX[m[K/[01;31m[KUNIX[m[K.DOC
+     6228  1993-08-06 15:22   MACHINE/[01;31m[KUNIX[m[K/RS6CONF.H
+     6252  1993-08-06 15:22   MACHINE/[01;31m[KUNIX[m[K/GCCCONF.H
+     6296  1993-08-06 15:23   MACHINE/[01;31m[KUNIX[m[K/[01;31m[KUNIX[m[KCONF.H
+    16174  1993-08-06 15:24   MACHINE/[01;31m[KUNIX[m[K/XWIN.C
+    17623  1993-08-06 15:24   MACHINE/[01;31m[KUNIX[m[K/XWINDOWS.C
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2# unzip -o -q POVSRC.ZIP -d /app/povray-2.2 && ls MACHINE/UNIX/
+[?2004lGCC.C  GCCCONF.H  RS6CONF.H  UNIX.C  UNIX.CAT  UNIX.DOC  UNIX.MAK  UNIXCONF.H  XPOV.ICN  XWIN.C  XWINDOWS.C  XWINDOWS.MAK
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2# cat MACHINE/UNIX/UNIX.MAK
+[?2004l# Makefile for Persistence of Vision Raytracer
+# This file is released to the public domain.
+#
+#
+# MAKE Macros and Such...
+#
+
+#***************************************************************
+#*
+#*                      UNIX Makefile
+#*
+#***************************************************************
+
+# The exact options may depend on your compiler.  Feel free to modify
+# these as required.
+# The cc compiler on a HP9000 likes the -Aa option for all files except unix.c
+# The gcc compiler is usually satisfied with these options.
+
+OBJ	= o
+MACHINE_OBJ	= unix.$(OBJ)
+CFLAGS=		-c -O
+LFLAGS =	-o povray -O
+CC =            cc
+
+# Make's implicit rules for making a .o file from a .c file...
+#
+.c.o :
+	$(CC) $(CFLAGS) $*.c
+
+
+POVOBJS = povray.$(OBJ) bezier.$(OBJ) blob.$(OBJ) bound.$(OBJ) boxes.$(OBJ)  \
+	  camera.$(OBJ) colour.$(OBJ) cones.$(OBJ) csg.$(OBJ) discs.$(OBJ)   \
+	  dump.$(OBJ) express.$(OBJ) gif.$(OBJ) gifdecod.$(OBJ)              \
+	  hfield.$(OBJ) iff.$(OBJ) image.$(OBJ) lighting.$(OBJ)              \
+	  matrices.$(OBJ) normal.$(OBJ) objects.$(OBJ) parse.$(OBJ)          \
+	  pigment.$(OBJ) planes.$(OBJ) point.$(OBJ) poly.$(OBJ)              \
+	  quadrics.$(OBJ) raw.$(OBJ) ray.$(OBJ) render.$(OBJ) spheres.$(OBJ) \
+	  targa.$(OBJ) texture.$(OBJ) tokenize.$(OBJ) triangle.$(OBJ)        \
+	  txttest.$(OBJ) vect.$(OBJ) $(MACHINE_OBJ)
+
+
+povray:	$(POVOBJS)
+	$(CC) $(LFLAGS) $(POVOBJS) -lm
+
+povray.$(OBJ) : povray.c povproto.h frame.h vector.h config.h
+
+bezier.$(OBJ): config.h frame.h povproto.h vector.h
+
+blob.$(OBJ): config.h frame.h povproto.h vector.h
+
+bound.$(OBJ): config.h frame.h povproto.h vector.h
+
+boxes.$(OBJ): config.h frame.h povproto.h vector.h
+
+camera.$(OBJ): config.h frame.h povproto.h vector.h
+
+colour.$(OBJ): config.h frame.h povproto.h vector.h
+
+cones.$(OBJ): config.h frame.h povproto.h vector.h
+
+csg.$(OBJ): config.h frame.h povproto.h vector.h
+
+discs.$(OBJ): config.h frame.h povproto.h vector.h
+
+dump.$(OBJ): config.h frame.h povproto.h
+
+express.$(OBJ): config.h frame.h parse.h povproto.h vector.h
+
+gif.$(OBJ): config.h frame.h povproto.h
+
+gifdecod.$(OBJ): config.h frame.h povproto.h
+
+hfield.$(OBJ): config.h frame.h povproto.h vector.h
+
+iff.$(OBJ): config.h frame.h povproto.h
+
+image.$(OBJ): config.h frame.h povproto.h texture.h vector.h
+
+lighting.$(OBJ): config.h frame.h povproto.h vector.h
+
+matrices.$(OBJ): config.h frame.h povproto.h vector.h
+
+normal.$(OBJ): config.h frame.h povproto.h texture.h vector.h
+
+objects.$(OBJ): config.h frame.h povproto.h vector.h
+
+parse.$(OBJ): config.h frame.h parse.h povproto.h vector.h
+
+pigment.$(OBJ): config.h frame.h povproto.h texture.h vector.h
+
+planes.$(OBJ): config.h frame.h povproto.h vector.h
+
+point.$(OBJ): config.h frame.h povproto.h vector.h
+
+poly.$(OBJ): config.h frame.h povproto.h vector.h
+
+quadrics.$(OBJ): config.h frame.h povproto.h vector.h
+
+raw.$(OBJ): config.h frame.h povproto.h
+
+ray.$(OBJ): config.h frame.h povproto.h vector.h
+
+render.$(OBJ): config.h frame.h povproto.h vector.h
+
+spheres.$(OBJ): config.h frame.h povproto.h vector.h
+
+targa.$(OBJ): config.h frame.h povproto.h
+
+texture.$(OBJ): config.h frame.h povproto.h texture.h vector.h
+
+tokenize.$(OBJ): config.h frame.h parse.h povproto.h
+
+triangle.$(OBJ): config.h frame.h povproto.h vector.h
+
+txttest.$(OBJ): config.h frame.h povproto.h texture.h vector.h
+
+vect.$(OBJ): config.h frame.h povproto.h vector.h
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2# cat MACHINE/UNIX/UNIX.C
+[?2004l/****************************************************************************
+*                unix.c
+*
+*  This module implements UNIX specific routines.
+*
+*  from Persistence of Vision Raytracer
+*  Copyright 1993 Persistence of Vision Team
+*---------------------------------------------------------------------------
+*  NOTICE: This source code file is provided so that users may experiment
+*  with enhancements to POV-Ray and to port the software to platforms other 
+*  than those supported by the POV-Ray Team.  There are strict rules under
+*  which you are permitted to use this file.  The rules are in the file
+*  named POVLEGAL.DOC which should be distributed with this file. If 
+*  POVLEGAL.DOC is not available or for more info please contact the POV-Ray
+*  Team Coordinator by leaving a message in CompuServe's Graphics Developer's
+*  Forum.  The latest version of POV-Ray may be found there as well.
+*
+* This program is based on the popular DKB raytracer version 2.12.
+* DKBTrace was originally written by David K. Buck.
+* DKBTrace Ver 2.0-2.12 were written by David K. Buck & Aaron A. Collins.
+*
+*****************************************************************************/
+
+
+#include <math.h>
+#include "config.h"
+
+void unix_init_POVRAY PARAMS ((void))
+   {
+   }
+
+#ifdef UNDERFLOW
+int matherr (x)
+   struct exception *x;
+   {
+   switch(x->type) 
+     {
+     case DOMAIN:
+     case OVERFLOW:
+        x->retval = 1.0e17;
+        break;
+
+     case SING:
+     case UNDERFLOW:
+        x->retval = 0.0;
+        break;
+
+     default:
+        break;
+     }
+   return(1);
+   }
+#endif
+
+void display_finished ()
+   {
+   }
+
+void display_init ()
+   {
+   }
+
+void display_close ()
+   {
+   }
+
+void display_plot (x, y, Red, Green, Blue)
+   int x, y;
+   char Red, Green, Blue;
+   {
+   }
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2# cat MACHINE/UNIX/UNIXCONF.H
+[?2004l/*****************************************************************************
+*               unixconf.h
+*
+*  This header file contains all constants and types required to run on a
+*  UNIX system.
+*
+*  from Persistence of Vision Raytracer
+*  Copyright 1993 Persistence of Vision Team
+*---------------------------------------------------------------------------
+*  NOTICE: This source code file is provided so that users may experiment
+*  with enhancements to POV-Ray and to port the software to platforms other 
+*  than those supported by the POV-Ray Team.  There are strict rules under
+*  which you are permitted to use this file.  The rules are in the file
+*  named POVLEGAL.DOC which should be distributed with this file. If 
+*  POVLEGAL.DOC is not available or for more info please contact the POV-Ray
+*  Team Coordinator by leaving a message in CompuServe's Graphics Developer's
+*  Forum.  The latest version of POV-Ray may be found there as well.
+*
+* This program is based on the popular DKB raytracer version 2.12.
+* DKBTrace was originally written by David K. Buck.
+* DKBTrace Ver 2.0-2.12 were written by David K. Buck & Aaron A. Collins.
+*
+*****************************************************************************/
+
+/* Below are several defines needed by the generic parts of POV.  You
+*   may redefine them as needed in this config.h file.
+*
+*   The following constants are needed by various POV modules.  Each has
+*   a default (shown below) which is will be defined in frame.h if you don't 
+*   define them here.
+*
+*   #define EPSILON 1.0e-10               - a small value used for POLY
+*   #define FILE_NAME_LENGTH 150          - default file name length
+*   #define HUGE_VAL 1.0e+17              - a really big number
+*   #define DBL_FORMAT_STRING "%lf"       - the string to use for scanfs of doubles
+*   #define DEFAULT_OUTPUT_FORMAT  'd'    - the default +f format
+*   #define RED_RAW_FILE_EXTENSION ".red" - for +fr, this is the extension for the
+*                                           red file
+*   #define GREEN_RAW_FILE_EXTENSION ".grn"  - ditto for the green file
+*   #define BLUE_RAW_FILE_EXTENSION ".blu"   - ditto again for the blue file
+*   #define FILENAME_SEPARATOR "/"        - the character that separates names
+*                                           in a path.
+*   #define CASE_SENSITIVE_DEFAULT 2     - controls case sensitivity in DAT files
+*   #define READ_FILE_STRING "rb"        - special binary (raw, uncooked) 
+*   #define WRITE_FILE_STRING "wb"         modes of fopen()
+*   #define APPEND_FILE_STRING "ab"
+*   #define NORMAL '0'                   - machine-specific PaletteOption settings 
+*   #define GREY   'G'
+*
+*   These routines are required by POV to compute trace times.  The defaults 
+*   shown below are defined in most versions of C.  You may redefine them if
+*   your compiler doesn't support these.  If time is completely unsupported 
+*   define them as 0.
+*
+*   #define START_TIME time(&tstart);     
+*   #define STOP_TIME  time(&tstop);
+*   #define TIME_ELAPSED difftime (tstop, tstart);
+*
+*   Note difftime can be replaced with: #define TIME_ELAPSED (tstop - tstart); 
+*   in some cases. 
+*
+*   These are optional routines that POV calls.  You may define them
+*   or if undefined they will be defined as empty in frame.h.
+*
+*   #define STARTUP_POVRAY             - first executable statement of main
+*                                           (useful for initialization)
+*   #define PRINT_OTHER_CREDITS           - used for people who extend the machine specific modules
+*                                           (put your own printf's here)
+*   #define TEST_ABORT                    - code to test for ^C or abort
+*                                           (called on each pixel)
+*   #define FINISH_POVRAY              - last statement before exiting normally
+*   #define COOPERATE                    - called for multi-tasking
+*  
+*   These items are standard on some C compilers.  If they are not defined
+*   on your compiler or are called something different you may define your 
+*   own or use the defaults supplied in frame.h as shown below.
+*
+*   #define DBL double                    - floating point precision
+*   #define ACOS acos                     - arc cosine of DBL
+*   #define SQRT sqrt                     - square root of DBL
+*   #define POW pow                       - x to the y power - x, y DBL
+*   #define COS cos                       - cosine of DBL
+*   #define SIN sin                       - sine of DBL
+*   #define labs(x) (long) ((x<0)?-x:x)   - Returns the absolute value of long integer x
+*   #define max (x,y) ((x<y)?y:x)         - greater of x and y
+*
+*   On some systems "sprintf" returns the string rather than the length
+*   of the string.  If the string is returned, define the following:
+*   #define STRLN(x) strlen(x)
+*
+*   #define setvbuf(w,x,y,z)              - some systems don't understand setvbuf.
+*                                           If not, just define it away - it's
+*                                           not critical to the raytracer.  It
+*                                           just buffers disk accesses.
+*   This macro controls prototyping and is required by POV.  Choose one
+*   of the two options below or if left undefined it will default to ANSI 
+*   in frame.h
+*
+*   #define PARAMS (x) x                  - do ANSI prototyping
+*   #define PARAMS (x) ()                 - do K&R non-ANSI prototyping
+*
+*   These allow command line vs non-command line versions and alternate
+*   main routines.  Normally they should be undefined.  Define them 1 if needed.
+*   #define ALTMAIN 1
+*   #define NOCMDLINE 1
+****************************************************/
+
+/* By default, UNIX doesn't use ANSI prototyping */
+
+#ifdef _STDC_
+#define PARAMS(x) x
+#else
+#define PARAMS(x) ()
+#define volatile
+#endif
+
+/* needed for Poly.c */
+#ifdef SYSTEM_V
+#define STRLN(x) strlen(x)
+#endif
+
+#define EPSILON 1.0e-5
+
+#define STARTUP_POVRAY unix_init_POVRAY();
+#define TIME_ELAPSED (tstop- tstart);
+
+/* Need prototypes for these standard routines */
+char *getenv PARAMS((char *name));
+char *malloc PARAMS((int size));
+void free PARAMS((void *));
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2# cp MACHINE/UNIX/UNIX.C source/unix.c; cp MACHINE/UNIX/UNIXCONF.H source/config.h; cp MACHINE/UNIX/UNIX.MAK source/Makefile
+[?2004l[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2# cat MACHINE/UNIX/GCCCONF.H; diff MACHINE/UNIX/GCC.C MACHINE/UNIX/UNIX.C
+[?2004l/*****************************************************************************
+*               gccconf.h
+*
+*  This header file contains all constants and types required to run on a
+*  UNIX system using the GCC compiler.
+*
+*  from Persistence of Vision Raytracer
+*  Copyright 1993 Persistence of Vision Team
+*---------------------------------------------------------------------------
+*  NOTICE: This source code file is provided so that users may experiment
+*  with enhancements to POV-Ray and to port the software to platforms other 
+*  than those supported by the POV-Ray Team.  There are strict rules under
+*  which you are permitted to use this file.  The rules are in the file
+*  named POVLEGAL.DOC which should be distributed with this file. If 
+*  POVLEGAL.DOC is not available or for more info please contact the POV-Ray
+*  Team Coordinator by leaving a message in CompuServe's Graphics Developer's
+*  Forum.  The latest version of POV-Ray may be found there as well.
+*
+* This program is based on the popular DKB raytracer version 2.12.
+* DKBTrace was originally written by David K. Buck.
+* DKBTrace Ver 2.0-2.12 were written by David K. Buck & Aaron A. Collins.
+*
+*****************************************************************************/
+
+/* Below are several defines needed by the generic parts of POV.  You
+*   may redefine them as needed in this config.h file.
+*
+*   The following constants are needed by various POV modules.  Each has
+*   a default (shown below) which is will be defined in frame.h if you don't 
+*   define them here.
+*
+*   #define EPSILON 1.0e-10               - a small value used for POLY
+*   #define FILE_NAME_LENGTH 150          - default file name length
+*   #define HUGE_VAL 1.0e+17              - a really big number
+*   #define DBL_FORMAT_STRING "%lf"       - the string to use for scanfs of doubles
+*   #define DEFAULT_OUTPUT_FORMAT  'd'    - the default +f format
+*   #define RED_RAW_FILE_EXTENSION ".red" - for +fr, this is the extension for the
+*                                           red file
+*   #define GREEN_RAW_FILE_EXTENSION ".grn"  - ditto for the green file
+*   #define BLUE_RAW_FILE_EXTENSION ".blu"   - ditto again for the blue file
+*   #define FILENAME_SEPARATOR "/"        - the character that separates names
+*                                           in a path.
+*   #define CASE_SENSITIVE_DEFAULT 2     - controls case sensitivity in DAT files
+*   #define READ_FILE_STRING "rb"        - special binary (raw, uncooked) 
+*   #define WRITE_FILE_STRING "wb"         modes of fopen()
+*   #define APPEND_FILE_STRING "ab"
+*   #define NORMAL '0'                   - machine-specific PaletteOption settings 
+*   #define GREY   'G'
+*
+*   These routines are required by POV to compute trace times.  The defaults 
+*   shown below are defined in most versions of C.  You may redefine them if
+*   your compiler doesn't support these.  If time is completely unsupported 
+*   define them as 0.
+*
+*   #define START_TIME time(&tstart);     
+*   #define STOP_TIME  time(&tstop);
+*   #define TIME_ELAPSED difftime (tstop, tstart);
+*
+*   Note difftime can be replaced with: #define TIME_ELAPSED (tstop - tstart); 
+*   in some cases. 
+*
+*   These are optional routines that POV calls.  You may define them
+*   or if undefined they will be defined as empty in frame.h.
+*
+*   #define STARTUP_POVRAY             - first executable statement of main
+*                                           (useful for initialization)
+*   #define PRINT_OTHER_CREDITS           - used for people who extend the machine specific modules
+*                                           (put your own printf's here)
+*   #define TEST_ABORT                    - code to test for ^C or abort
+*                                           (called on each pixel)
+*   #define FINISH_POVRAY              - last statement before exiting normally
+*   #define COOPERATE                    - called for multi-tasking
+*  
+*   These items are standard on some C compilers.  If they are not defined
+*   on your compiler or are called something different you may define your 
+*   own or use the defaults supplied in frame.h as shown below.
+*
+*   #define DBL double                    - floating point precision
+*   #define ACOS acos                     - arc cosine of DBL
+*   #define SQRT sqrt                     - square root of DBL
+*   #define POW pow                       - x to the y power - x, y DBL
+*   #define COS cos                       - cosine of DBL
+*   #define SIN sin                       - sine of DBL
+*   #define labs(x) (long) ((x<0)?-x:x)   - Returns the absolute value of long integer x
+*   #define max (x,y) ((x<y)?y:x)         - greater of x and y
+*
+*   On some systems "sprintf" returns the string rather than the length
+*   of the string.  If the string is returned, define the following:
+*   #define STRLN(x) strlen(x)
+*
+*   #define setvbuf(w,x,y,z)              - some systems don't understand setvbuf.
+*                                           If not, just define it away - it's
+*                                           not critical to the raytracer.  It
+*                                           just buffers disk accesses.
+*   This macro controls prototyping and is required by POV.  Choose one
+*   of the two options below or if left undefined it will default to ANSI 
+*   in frame.h
+*
+*   #define PARAMS (x) x                  - do ANSI prototyping
+*   #define PARAMS (x) ()                 - do K&R non-ANSI prototyping
+*
+*   These allow command line vs non-command line versions and alternate
+*   main routines.  Normally they should be undefined.  Define them 1 if needed.
+*   #define ALTMAIN 1
+*   #define NOCMDLINE 1
+****************************************************/
+
+/* By default, UNIX doesn't use ANSI prototyping */
+
+#ifdef _STDC_
+#define PARAMS(x) x
+#else
+#define PARAMS(x) ()
+#define volatile
+#endif
+
+#define EPSILON 1.0e-5
+
+#define STARTUP_POVRAY unix_init_povray();
+
+/* GCC wants prototypes for these standard routines */
+
+char *getenv PARAMS((char *name));
+void *malloc PARAMS((unsigned size));
+void free PARAMS((void *));
+double fmod PARAMS((double, double));
+
+25c25
+< #include "frame.h"
+---
+> #include <math.h>
+28c28
+< void unix_init_povray PARAMS ((void))
+---
+> void unix_init_POVRAY PARAMS ((void))
+31a32
+> #ifdef UNDERFLOW
+33c34
+<    struct libm_exception *x;
+---
+>    struct exception *x;
+51a53
+> #endif
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2# cat > source/config.h <<'EOF'
+[?2004l[?2004h> /* config.h for modern Linux/gcc build of POV-Ray 2.2 */
+[?2004l[?2004h> #include <stdlib.h>
+[?2004l[?2004h> #include <string.h>
+[?2004l[?2004h> #include <time.h>
+[?2004l[?2004h> 
+[?2004l[?2004h> #define PARAMS(x) x
+[?2004l[?2004h> #define EPSILON 1.0e-5
+[?2004l[?2004h> #define STARTUP_POVRAY unix_init_POVRAY();
+[?2004l[?2004h> #define TIME_ELAPSED difftime(tstop, tstart);
+[?2004l[?2004h> 
+[?2004l[?2004h> void unix_init_POVRAY PARAMS((void));
+[?2004l[?2004h> EOF
+[?2004l[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2# cat > source/unix.c <<'EOF'
+[?2004l[?2004h> #include <math.h>
+[?2004l[?2004h> #include "config.h"
+[?2004l[?2004h> 
+[?2004l[?2004h> void unix_init_POVRAY(void) { }
+[?2004l[?2004h> void display_finished(void) { }
+[?2004l[?2004h> void display_init(void) { }
+[?2004l[?2004h> void display_close(void) { }
+[?2004l[?2004h> void display_plot(int x, int y, char Red, char Green, char Blue)
+[?2004l[?2004h> { (void)x; (void)y; (void)Red; (void)Green; (void)Blue; }
+[?2004l[?2004h> EOF
+[?2004l[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2# ls -la source/config.h source/unix.c
+[?2004l-rw-r--r-- 1 root root 287 Jun  4 23:42 source/config.h
+-rw-r--r-- 1 root root 283 Jun  4 23:42 source/unix.c
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2# cd source && make CC=gcc CFLAGS='-c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type' LFLAGS='-o povray -O2' 2>&1 | tail -40
+[?2004l      |                            int  long int
+      |                           %ld
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type bezier.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type blob.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type bound.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type boxes.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type camera.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type colour.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type cones.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type csg.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type discs.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type dump.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type express.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type gif.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type gifdecod.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type hfield.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type iff.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type image.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type lighting.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type matrices.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type normal.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type objects.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type parse.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type pigment.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type planes.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type point.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type poly.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type quadrics.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type raw.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type ray.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type render.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type spheres.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type targa.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type texture.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type tokenize.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type triangle.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type txttest.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type vect.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type unix.c
+gcc -o povray -O2 povray.o bezier.o blob.o bound.o boxes.o camera.o colour.o cones.o csg.o discs.o dump.o express.o gif.o gifdecod.o hfield.o iff.o image.o lighting.o matrices.o normal.o objects.o parse.o pigment.o planes.o point.o poly.o quadrics.o raw.o ray.o render.o spheres.o targa.o texture.o tokenize.o triangle.o txttest.o vect.o unix.o -lm
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2/source# cp povray /usr/local/bin/povray && ls -la /usr/local/bin/povray
+[?2004l-rwxr-xr-x 1 root root 308864 Jun  4 23:43 [0m[01;32m/usr/local/bin/povray[0m
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2/source# /usr/local/bin/povray +L/app/povray-2.2/povdoc/include +I/app/deps/illum1.pov +O/dev/null +P -V; echo EXIT=$?
+[?2004l
+  Persistence of Vision Raytracer Ver 2.2.u
+    This is an unofficial version compiled by:
+     FILL IN NAME HERE.........................
+     The POV-Ray Team is not responsible for supporting this version.
+  Copyright 1993 POV-Team
+  ----------------------------------------------------------------------
+  POV-Ray is based on DKBTrace 2.12 by David K. Buck & Aaron A. Collins.
+    Contributing Authors: (Alphabetically)
+       Steve Anger        Steve A. Bennett   David K. Buck
+       Aaron A. Collins   Alexander Enzmann  Dan Farmer
+       Douglas Muir       Bill Pulver        Robert Skinner
+       Scott Taylor       Drew Wells         Chris Young
+    Other contributors listed in the documentation.
+  ----------------------------------------------------------------------
+
+POV-Ray Options in effect: +fd +p +mb25 -q9 -w100 -h100 -s1 -e100
+-k0.000 -mv2.0 -i/app/deps/illum1.pov -o/dev/null -l/app/povray-2.2/povdoc/include 
+Parsing.........
+Preprocessing...
+
+/app/deps/illum1.pov statistics
+--------------------------------------
+Resolution 100 x 100
+# Rays:       91599    # Pixels:       10000  # Pixels supersampled:          0
+  Ray->Shape Intersection Tests:
+   Type             Tests    Succeeded   Percentage
+  -----------------------------------------------------------
+  Sphere          1425304      220437       15.47
+  Plane            554006      284736       51.40
+  Quadric          276956        3942        1.42
+  Calls to DNoise:       53224
+  Shadow Ray Tests:    1277250     Blocking Objects Found:      147516
+  Reflected Rays:        47187
+  Refracted Rays:        34412
+EXIT=144
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2/source# grep -n 'FINISH_POVRAY\|return\|exit' povray.c | head -20
+[?2004l170:        exit(1);
+178:                      exit(1);
+188:        exit(1);
+197:        exit(1);
+204:      exit(1);
+257:        exit(1);
+273:      exit(1);
+322:  FINISH_POVRAY
+338:  fprintf (stdout,"\n    P  = pause before exit");
+339:  fprintf (stdout,"\n    X  = enable early exit by key hit");
+359:  exit(1);
+431:  return;
+504:          exit (1);
+656:      exit(1);
+662:      exit(1);
+892:    return;
+899:    return;
+907:    exit(1);
+1023:    return (f);
+1032:      return (f);
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2/source# printf '\n#define FINISH_POVRAY exit(0);\n' >> config.h && make CC=gcc CFLAGS='-c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type' LFLAGS='-o povray -O2' 2>&1 | tail -3 && cp povray /usr/local/bin/povray
+[?2004lgcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type txttest.c
+gcc -c -O2 -std=gnu89 -fcommon -Wno-implicit -Wno-return-type vect.c
+gcc -o povray -O2 povray.o bezier.o blob.o bound.o boxes.o camera.o colour.o cones.o csg.o discs.o dump.o express.o gif.o gifdecod.o hfield.o iff.o image.o lighting.o matrices.o normal.o objects.o parse.o pigment.o planes.o point.o poly.o quadrics.o raw.o ray.o render.o spheres.o targa.o texture.o tokenize.o triangle.o txttest.o vect.o unix.o -lm
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2/source# /usr/local/bin/povray +L/app/povray-2.2/povdoc/include +I/app/deps/illum1.pov +O/dev/null +P -V > /tmp/render.log 2>&1; echo EXIT=$?; tail -5 /tmp/render.log
+[?2004lEXIT=0
+  Quadric          276956        3942        1.42
+  Calls to DNoise:       53224
+  Shadow Ray Tests:    1277250     Blocking Objects Found:      147516
+  Reflected Rays:        47187
+  Refracted Rays:        34412
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2/source# /usr/local/bin/povray +L/app/povray-2.2/povdoc/include +I/app/deps/illum1.pov +ft +O/tmp/test.tga +P -V > /dev/null 2>&1; echo EXIT=$?; ls -la /tmp/test.tga
+[?2004lEXIT=0
+-rw-r--r-- 1 root root 30018 Jun  4 23:45 [0m[01;35m/tmp/test.tga[0m
+[?2004hroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app/povray-2.2/source# 

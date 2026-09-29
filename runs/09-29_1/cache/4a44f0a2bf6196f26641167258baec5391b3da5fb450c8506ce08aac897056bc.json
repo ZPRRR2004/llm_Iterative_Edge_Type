@@ -1,0 +1,5 @@
+{
+  "title": "Build pMARS without X11 from Debian source",
+  "query": "Build pMARS from source with no X server. Because koth.org is unreliable, obtain the source from Debian packages instead, extract it to `/app/pmars-<version>/`, build from that source tree without X11 support, and leave the source tree in place. Install the binary to `/usr/local/bin/pmars`. Test the build with `pmars -b -r 50 -f flashpaper.red rave.red | tail -n 1`, which should output `Results: X Y Z` where X, Y, and Z are integers. The binary must have no X11 dependencies, use Debian sources, and have a working debugger.",
+  "review_flags": []
+}

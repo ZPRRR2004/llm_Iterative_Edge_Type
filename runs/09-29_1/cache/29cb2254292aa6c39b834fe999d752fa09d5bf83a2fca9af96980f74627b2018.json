@@ -1,0 +1,5 @@
+{
+  "title": "Sanitize dclm repository API keys",
+  "query": "Find and remove all API keys and other sensitive credentials from the GitHub repository \"dclm\", replacing each actual value with the corresponding placeholder: AWS access key IDs with <your-aws-access-key-id>, AWS secret access keys with <your-aws-secret-access-key>, GitHub tokens with <your-github-token>, and Hugging Face tokens with <your-huggingface-token>. Ensure the sensitive values are no longer present in the repository after sanitization, keep the placeholder values consistent across the repository, and do not delete or modify any files that are not contaminated with sensitive information.",
+  "review_flags": []
+}

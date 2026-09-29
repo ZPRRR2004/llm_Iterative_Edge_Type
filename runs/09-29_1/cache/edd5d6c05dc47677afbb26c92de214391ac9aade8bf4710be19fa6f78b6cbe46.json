@@ -1,0 +1,16 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_1_1",
+      "start_anchor": "New Terminal Output:\n\nroot@f652d906-55ef-49f3-83b1-6f0511ae460d:/app# python3 -c \"import PIL; print(PIL.__version__)\""
+    },
+    {
+      "tool_call_id": "call_1_2",
+      "start_anchor": "root@f652d906-55ef-49f3-83b1-6f0511ae460d:/app# python3 -c \"import pytesseract; print('yes')\""
+    },
+    {
+      "tool_call_id": "call_1_3",
+      "start_anchor": "root@f652d906-55ef-49f3-83b1-6f0511ae460d:/app# python3 -c \"import easyocr; print('yes')\""
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_0_1",
+      "start_anchor": "New Terminal Output:\nroot@06154e10-6e26-48f2-91e8-74d6ab98a473:/app# cat /app/sim.c\n"
+    },
+    {
+      "tool_call_id": "call_0_2",
+      "start_anchor": "root@06154e10-6e26-48f2-91e8-74d6ab98a473:/app# cat /app/gates.txt\n"
+    }
+  ]
+}

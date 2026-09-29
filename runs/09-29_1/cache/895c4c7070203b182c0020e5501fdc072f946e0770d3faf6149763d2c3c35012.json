@@ -1,0 +1,12 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_1_1",
+      "start_anchor": "New Terminal Output:\n\nroot@41bedcc5-c2da-4801-a719-e1a6858277c2:/app# pip install python-chess 2>&1 | tail -2\n"
+    },
+    {
+      "tool_call_id": "call_1_2",
+      "start_anchor": "root@41bedcc5-c2da-4801-a719-e1a6858277c2:/app# apt-get install -y stockfish 2>&1 | tail -2\n"
+    }
+  ]
+}

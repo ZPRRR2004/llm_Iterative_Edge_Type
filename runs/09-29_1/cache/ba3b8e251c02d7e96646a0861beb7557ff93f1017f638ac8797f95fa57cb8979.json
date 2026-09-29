@@ -1,0 +1,5 @@
+{
+  "title": "Install Caffe 1.0.0 and Train CIFAR-10 CNN",
+  "query": "Install the original BVLC Caffe deep learning framework version 1.0.0, clone it to /app/caffe, and build it for CPU-only execution. Train a convolutional neural network to classify CIFAR-10 images for exactly 500 iterations using the solver configuration at examples/cifar10/cifar10_quick_solver.prototxt. Write the training output to /app/caffe/training_output.txt, and verify that the test accuracy over 100 iterations is no more than 5% less than the train accuracy and is greater than 45%. The resulting model file must be available in the examples/cifar10 directory and named cifar10_quick_iter_{number_of_iterations}.caffemodel.",
+  "review_flags": []
+}

@@ -1,0 +1,20 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_0_1",
+      "start_anchor": "New Terminal Output:\nroot@7872acc5-21f2-4930-a0e3-cc386e7bb095:/app# python3 --version\n"
+    },
+    {
+      "tool_call_id": "call_0_2",
+      "start_anchor": "root@7872acc5-21f2-4930-a0e3-cc386e7bb095:/app# cat > /app/run.py << 'EOF'\n"
+    },
+    {
+      "tool_call_id": "call_0_3",
+      "start_anchor": "root@7872acc5-21f2-4930-a0e3-cc386e7bb095:/app# cat > /tmp/test_run.py << 'EOF'\n"
+    },
+    {
+      "tool_call_id": "call_0_4",
+      "start_anchor": "root@7872acc5-21f2-4930-a0e3-cc386e7bb095:/app# cat > /tmp/test_interrupt.py << 'EOF'\n"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_0_1",
+      "start_anchor": "New Terminal Output:\nroot@275e2d70-481c-4ebd-ba76-326b4711ee88:/app# cat /etc/os-release | head -3; which gcc make wget curl dpkg-source\n"
+    },
+    {
+      "tool_call_id": "call_0_2",
+      "start_anchor": "root@275e2d70-481c-4ebd-ba76-326b4711ee88:/app# ls /app; apt-cache policy pmars 2>/dev/null | head\n"
+    },
+    {
+      "tool_call_id": "call_0_3",
+      "start_anchor": "root@275e2d70-481c-4ebd-ba76-326b4711ee88:/app# grep -r . /etc/apt/sources.list /etc/apt/sources.list.d/ 2>/dev/null | head\n"
+    }
+  ]
+}

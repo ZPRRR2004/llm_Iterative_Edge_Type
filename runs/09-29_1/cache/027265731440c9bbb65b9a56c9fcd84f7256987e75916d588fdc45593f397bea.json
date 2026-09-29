@@ -1,0 +1,12 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_1_1",
+      "start_anchor": "New Terminal Output:\n\nroot@4948df26-435a-4c13-b744-89f75ecaa464:/app# cat > /app/meeting_scheduled.ics << 'EOF'\n"
+    },
+    {
+      "tool_call_id": "call_1_2",
+      "start_anchor": "root@4948df26-435a-4c13-b744-89f75ecaa464:/app# cat /app/meeting_scheduled.ics\n"
+    }
+  ]
+}

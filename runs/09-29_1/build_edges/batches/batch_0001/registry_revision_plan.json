@@ -1,0 +1,123 @@
+{
+  "revisions": [
+    {
+      "original_name": "ATTEMPTS_TO_REPAIR",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "ATTEMPTS_TO_REPAIR",
+        "definition": "A subsequent agent action attempts to resolve a failure, blocker, or detected defect in an earlier execution step, including retrying an operation after remediation and correcting a verification procedure that produced a false failure.",
+        "source_description": "An earlier observed failure, blocker, or detected defect (e.g., a reported error, missing prerequisite, or false-positive verification result).",
+        "target_description": "A subsequent agent action intended to resolve or correct that failure, blocker, or defect."
+      }
+    },
+    {
+      "original_name": "VERIFIES_PREVIOUSLY_PRODUCED_ARTIFACT",
+      "operation": "MERGE",
+      "merge_into": "VERIFIES_PREVIOUS_RESULT"
+    },
+    {
+      "original_name": "DEFERS_BLOCKER_AND_CONTINUES_INDEPENDENT_WORK",
+      "operation": "DELETE"
+    },
+    {
+      "original_name": "RETRIES_AFTER_REMEDIATION",
+      "operation": "MERGE",
+      "merge_into": "ATTEMPTS_TO_REPAIR"
+    },
+    {
+      "original_name": "USES_PREVIOUS_RESULT_AS_INPUT",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "PROBES_ENVIRONMENT_TO_INFORM_ACTION",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "PROBES_ENVIRONMENT_TO_INFORM_ACTION",
+        "definition": "The agent obtains information about its execution environment, a reference artifact, or an implementation's behavior, including by supplying a controlled probe input, and the resulting information informs subsequent reasoning, design, or action.",
+        "source_description": "An inspection, probe, or controlled experiment (e.g., reading a file, listing resources, examining a reference, or supplying a synthesized input to elicit behavior) whose outcome reveals relevant state, behavior, or specification.",
+        "target_description": "A subsequent agent step, whether reasoning, design decision, or action, that is selected or configured based on the probe's outcome."
+      }
+    },
+    {
+      "original_name": "VERIFIES_PREVIOUS_RESULT",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "VERIFIES_PREVIOUS_RESULT",
+        "definition": "A subsequent agent action checks, confirms, or broadens confidence in a result, artifact, claim, or state change attributed to an earlier execution step, including reading or running a produced artifact and performing additional checks after an initial verification succeeded.",
+        "source_description": "An earlier result, artifact, claim, or state change attributed to an execution step (e.g., a produced file, a reported outcome, or an initial verification success).",
+        "target_description": "A subsequent independent check that confirms, refutes, or further exercises that earlier result, artifact, claim, or state change."
+      }
+    },
+    {
+      "original_name": "TRIGGERS_TASK_COMPLETION",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "PRODUCES_DELIVERABLE_VIA_AUTHORED_TOOL",
+      "operation": "MERGE",
+      "merge_into": "USES_PREVIOUS_RESULT_AS_INPUT"
+    },
+    {
+      "original_name": "CONFORMS_GENERATED_OUTPUT_TO_OBSERVED_FORMAT",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "REPORTS_ARTIFACT_METRIC_AGAINST_CONSTRAINT",
+      "operation": "DELETE"
+    },
+    {
+      "original_name": "EXTENDS_VERIFICATION_COVERAGE",
+      "operation": "MERGE",
+      "merge_into": "VERIFIES_PREVIOUS_RESULT"
+    },
+    {
+      "original_name": "PRESERVES_STATE_BEFORE_MUTATION",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "ESTABLISHES_REFERENCE_ORACLE",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "ESTABLISHES_REFERENCE_ORACLE",
+        "definition": "An agent action builds, executes, or captures the output of the original/reference implementation in order to obtain and retain authoritative reference behavior or output that is used as the ground-truth oracle against which the agent's own reimplementation is validated.",
+        "source_description": "An agent action that compiles, runs, or otherwise exercises the original/reference implementation and captures its output.",
+        "target_description": "The observed or stored reference behavior/output retained as the authoritative ground truth (oracle) for validating the agent's implementation."
+      }
+    },
+    {
+      "original_name": "PROBES_BEHAVIOR_WITH_CRAFTED_INPUT",
+      "operation": "MERGE",
+      "merge_into": "PROBES_ENVIRONMENT_TO_INFORM_ACTION"
+    },
+    {
+      "original_name": "INVESTIGATES_DISCREPANCY_CAUSE",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "PRESERVES_REFERENCE_OUTPUT_AS_ORACLE",
+      "operation": "MERGE",
+      "merge_into": "ESTABLISHES_REFERENCE_ORACLE"
+    },
+    {
+      "original_name": "CORRECTS_VERIFICATION_FALSE_POSITIVE",
+      "operation": "MERGE",
+      "merge_into": "ATTEMPTS_TO_REPAIR"
+    },
+    {
+      "original_name": "REFINES_IMPRECISE_OBSERVATION",
+      "operation": "DELETE"
+    },
+    {
+      "original_name": "VALIDATES_CANDIDATES_AGAINST_EXPECTED_OUTCOME",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "PIVOTS_TO_ALTERNATIVE_APPROACH_AFTER_REPEATED_FAILURE",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "PRODUCES_DELIVERABLE_ON_VALIDATED_CANDIDATE",
+      "operation": "KEEP"
+    }
+  ]
+}

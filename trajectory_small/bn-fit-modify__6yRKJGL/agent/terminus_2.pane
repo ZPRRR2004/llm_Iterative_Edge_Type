@@ -1,0 +1,246 @@
+[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# asciinema rec --stdin /logs/agent/recording.cast
+[?2004l[0;32masciinema: recording asciicast to /logs/agent/recording.cast[0m
+[0;32masciinema: press <ctrl-d> or type "exit" when you're done[0m
+[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# clear
+[?2004l[H[J[3J[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# ls -la /app && head -5 /app/bn_sample_10k.csv
+[?2004ltotal 828
+drwxr-xr-x 1 root root     39 Oct 31  2025 [0m[01;34m.[0m
+drwxr-xr-x 1 root root    102 Jun  4 23:44 [01;34m..[0m
+-rw-r--r-- 1 root root 844949 Oct 31  2025 bn_sample_10k.csv
+"U","Y","R","D","M"
+65.1595787086976,55.0497451938166,73.1506268775402,57.6615550291927,64.3384681778361
+44.6029054197735,43.600175682188,38.589412608575,45.9401940372555,21.2469494226791
+54.4564237284025,54.1307611128149,47.302573583304,41.8194189531508,52.392400251044
+57.3210008646862,61.0491365637276,48.9899101338243,54.4998895140635,52.223173316915
+[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# python3 -c "import pandas as pd; df=pd.read_csv('/app/bn_sample_10k.csv'); print(df.describe()); print(df.dtypes)"
+[?2004lTraceback (most recent call last):
+  File "<string>", line 1, in <module>
+ModuleNotFoundError: No module named 'pandas'
+[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# pip list 2>/dev/null | grep -i -E 'pgmpy|pomegranate|causal|bnlearn|networkx|sklearn|scikit|numpy|pandas|scipy'
+[?2004l[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# which R Rscript; pip install pandas numpy scipy scikit-learn networkx 2>&1 | tail -2
+[?2004l/usr/bin/R
+/usr/bin/Rscript
+note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
+hint: See PEP 668 for the detailed specification.
+[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# Rscript -e 'print("bnlearn" %in% rownames(installed.packages())); print(rownames(installed.packages()))' 2>&1 | head -20
+[?2004l[1] FALSE
+ [1] "KernSmooth" "MASS"       "Matrix"     "base"       "boot"      
+ [6] "class"      "cluster"    "codetools"  "compiler"   "datasets"  
+[11] "foreign"    "grDevices"  "graphics"   "grid"       "lattice"   
+[16] "methods"    "mgcv"       "nlme"       "nnet"       "parallel"  
+[21] "rpart"      "spatial"    "splines"    "stats"      "stats4"    
+[26] "survival"   "tcltk"      "tools"      "utils"     
+[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# Rscript -e 'install.packages("bnlearn", repos="https://cloud.r-project.org")' > /tmp/install.log 2>&1 &
+[?2004l[1] 798
+[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# sleep 30; tail -5 /tmp/install.log
+[?2004l[1]+  Done                    Rscript -e 'install.packages("bnlearn", repos="https://cloud.r-project.org")' > /tmp/install.log 2>&1
+‘bnlearn’ version 5.1 is in the repositories but depends on R (>= 4.4.0)
+
+A version of this package for your version of R might be available elsewhere,
+see the ideas at
+https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages 
+[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# R --version | head -1
+[?2004lR version 4.3.3 (2024-02-29) -- "Angel Food Cake"
+[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# Rscript -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/bnlearn/bnlearn_4.9.4.tar.gz", repos=NULL, type="source")' > /tmp/install2.log 2>&1 &
+[?2004l[1] 884
+[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# sleep 45; tail -5 /tmp/install2.log
+[?2004l[1]+  Done                    Rscript -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/bnlearn/bnlearn_4.9.4.tar.gz", repos=NULL, type="source")' > /tmp/install2.log 2>&1
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (bnlearn)
+[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# cat > /tmp/learn.R << 'EOF'
+[?2004l[?2004h> library(bnlearn)
+[?2004l[?2004h> df <- read.csv('/app/bn_sample_10k.csv')
+[?2004l[?2004h> cat('--- PC stable ---\n')
+[?2004l[?2004h> pcg <- pc.stable(df)
+[?2004l[?2004h> print(pcg)
+[?2004l[?2004h> cat('--- arcs ---\n')
+[?2004l[?2004h> print(arcs(pcg))
+[?2004l[?2004h> cat('--- undirected ---\n')
+[?2004l[?2004h> print(undirected.arcs(pcg))
+[?2004l[?2004h> cat('--- HC ---\n')
+[?2004l[?2004h> hcg <- hc(df)
+[?2004l[?2004h> print(arcs(hcg))
+[?2004l[?2004h> cat('--- GS ---\n')
+[?2004l[?2004h> gsg <- gs(df)
+[?2004l[?2004h> print(arcs(gsg))
+[?2004l[?2004h> print(undirected.arcs(gsg))
+[?2004l[?2004h> EOF
+[?2004l[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# Rscript /tmp/learn.R
+[?2004l--- PC stable ---
+Warning message:
+In vstruct.apply(arcs = arcs, vs = vs, nodes = nodes, debug = debug) :
+  vstructure Y -> M <- R is not applicable, because one or both arcs are oriented in the opposite direction.
+
+  Bayesian network learned via Constraint-based methods
+
+  model:
+    [partially directed graph]
+  nodes:                                 5 
+  arcs:                                  7 
+    undirected arcs:                     4 
+    directed arcs:                       3 
+  average markov blanket size:           3.20 
+  average neighbourhood size:            2.80 
+  average branching factor:              0.60 
+
+  learning algorithm:                    PC (Stable) 
+  conditional independence test:         Pearson's Correlation 
+  alpha threshold:                       0.05 
+  tests used in the learning procedure:  66 
+
+--- arcs ---
+      from to 
+ [1,] "U"  "Y"
+ [2,] "U"  "R"
+ [3,] "U"  "D"
+ [4,] "U"  "M"
+ [5,] "R"  "U"
+ [6,] "R"  "M"
+ [7,] "D"  "U"
+ [8,] "D"  "Y"
+ [9,] "M"  "U"
+[10,] "M"  "Y"
+[11,] "M"  "R"
+--- undirected ---
+     from to 
+[1,] "U"  "R"
+[2,] "U"  "D"
+[3,] "U"  "M"
+[4,] "R"  "U"
+[5,] "R"  "M"
+[6,] "D"  "U"
+[7,] "M"  "U"
+[8,] "M"  "R"
+--- HC ---
+     from to 
+[1,] "U"  "R"
+[2,] "U"  "M"
+[3,] "U"  "Y"
+[4,] "Y"  "D"
+[5,] "U"  "D"
+[6,] "R"  "M"
+--- GS ---
+      from to 
+ [1,] "U"  "Y"
+ [2,] "U"  "R"
+ [3,] "U"  "D"
+ [4,] "U"  "M"
+ [5,] "Y"  "U"
+ [6,] "Y"  "D"
+ [7,] "Y"  "M"
+ [8,] "R"  "U"
+ [9,] "R"  "M"
+[10,] "D"  "U"
+[11,] "D"  "Y"
+[12,] "M"  "U"
+[13,] "M"  "Y"
+[14,] "M"  "R"
+      from to 
+ [1,] "U"  "Y"
+ [2,] "U"  "R"
+ [3,] "U"  "D"
+ [4,] "U"  "M"
+ [5,] "Y"  "U"
+ [6,] "Y"  "D"
+ [7,] "Y"  "M"
+ [8,] "R"  "U"
+ [9,] "R"  "M"
+[10,] "D"  "U"
+[11,] "D"  "Y"
+[12,] "M"  "U"
+[13,] "M"  "Y"
+[14,] "M"  "R"
+[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# cat > /tmp/check.R << 'EOF'
+[?2004l[?2004h> library(bnlearn)
+[?2004l[?2004h> df <- read.csv('/app/bn_sample_10k.csv')
+[?2004l[?2004h> cat('M_Y|U: '); print(ci.test('M','Y','U',data=df)$p.value)
+[?2004l[?2004h> cat('M_Y|U,R: '); print(ci.test('M','Y',c('U','R'),data=df)$p.value)
+[?2004l[?2004h> cat('U_M|Y,R: '); print(ci.test('U','M',c('Y','R'),data=df)$p.value)
+[?2004l[?2004h> cat('D_Y|U: '); print(ci.test('D','Y','U',data=df)$p.value)
+[?2004l[?2004h> cat('U_D|Y: '); print(ci.test('U','D','Y',data=df)$p.value)
+[?2004l[?2004h> A <- model2network('[U][Y|U][R|U][D|U:Y][M|U:R]')
+[?2004l[?2004h> B <- model2network('[U][Y|U][R|U][D|U:Y][M|Y:R]')
+[?2004l[?2004h> C <- model2network('[U][R|U][M|U:R][Y|U:M][D|U:Y]')
+[?2004l[?2004h> cat('BIC A:', score(A, df, type='bic-g'), '\n')
+[?2004l[?2004h> cat('BIC B:', score(B, df, type='bic-g'), '\n')
+[?2004l[?2004h> cat('BIC C:', score(C, df, type='bic-g'), '\n')
+[?2004l[?2004h> hcg <- hc(df, restart=20)
+[?2004l[?2004h> cat('HC restart arcs:\n'); print(arcs(hcg)); cat('BIC HC:', score(hcg, df, type='bic-g'), '\n')
+[?2004l[?2004h> EOF
+[?2004l[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# Rscript /tmp/check.R
+[?2004lM_Y|U: [1] 0.01701721
+M_Y|U,R: [1] 0.006295432
+U_M|Y,R: [1] 0
+D_Y|U: [1] 1.459392e-237
+U_D|Y: [1] 5.107599e-230
+BIC A: -193627.6 
+BIC B: -194454.8 
+BIC C: -193629.3 
+HC restart arcs:
+     from to 
+[1,] "R"  "M"
+[2,] "D"  "U"
+[3,] "D"  "Y"
+[4,] "U"  "Y"
+[5,] "U"  "R"
+[6,] "U"  "M"
+BIC HC: -193627.6 
+[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# cat > /tmp/final.R << 'EOF'
+[?2004l[?2004h> library(bnlearn)
+[?2004l[?2004h> df <- read.csv('/app/bn_sample_10k.csv')
+[?2004l[?2004h> dag <- model2network('[U][Y|U][R|U][D|U:Y][M|U:R]')
+[?2004l[?2004h> a <- arcs(dag)
+[?2004l[?2004h> out <- data.frame(to=a[,'to'], from=a[,'from'])
+[?2004l[?2004h> write.csv(out, '/app/learned_dag.csv', row.names=FALSE, quote=FALSE)
+[?2004l[?2004h> fit <- bn.fit(dag, df)
+[?2004l[?2004h> mut <- mutilated(fit, evidence=list(Y=0))
+[?2004l[?2004h> ma <- arcs(bn.net(mut))
+[?2004l[?2004h> out2 <- data.frame(to=ma[,'to'], from=ma[,'from'])
+[?2004l[?2004h> write.csv(out2, '/app/intervened_dag.csv', row.names=FALSE, quote=FALSE)
+[?2004l[?2004h> set.seed(42)
+[?2004l[?2004h> samp <- rbn(mut, n=10000)
+[?2004l[?2004h> samp <- samp[, c('U','Y','R','D','M')]
+[?2004l[?2004h> write.csv(samp, '/app/final_bn_sample.csv', row.names=FALSE)
+[?2004l[?2004h> cat('done\n')
+[?2004l[?2004h> print(summary(samp))
+[?2004l[?2004h> EOF
+[?2004l[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# Rscript /tmp/final.R
+[?2004ldone
+       U               Y           R                D          
+ Min.   :13.58   Min.   :0   Min.   :-10.69   Min.   :-37.651  
+ 1st Qu.:43.27   1st Qu.:0   1st Qu.: 36.42   1st Qu.:  5.189  
+ Median :50.52   Median :0   Median : 46.46   Median : 15.504  
+ Mean   :50.49   Mean   :0   Mean   : 46.51   Mean   : 15.423  
+ 3rd Qu.:57.75   3rd Qu.:0   3rd Qu.: 56.80   3rd Qu.: 25.735  
+ Max.   :89.62   Max.   :0   Max.   :102.73   Max.   : 71.316  
+       M         
+ Min.   :-16.57  
+ 1st Qu.: 29.79  
+ Median : 41.31  
+ Mean   : 41.36  
+ 3rd Qu.: 52.78  
+ Max.   : 98.51  
+[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# cat /app/learned_dag.csv; echo ---; cat /app/intervened_dag.csv; echo ---; head -3 /app/final_bn_sample.csv; wc -l /app/final_bn_sample.csv
+[?2004lto,from
+Y,U
+R,U
+D,U
+D,Y
+M,U
+M,R
+---
+to,from
+M,R
+D,U
+M,U
+R,U
+D,Y
+---
+"U","Y","R","D","M"
+62.9078893660257,0,52.3375517020702,31.8722814680185,56.0738175438765
+48.4472075976581,0,42.1320872902981,28.6113568615471,25.2995163393606
+10001 /app/final_bn_sample.csv
+[?2004hroot@b425a66d-21df-49c6-baff-4811e57669b2:/app# 

@@ -1,0 +1,99 @@
+You are an expert in maintaining a semantic edge type registry for agent execution trajectories.
+
+Every fixed number of context windows, a human reviewer provides natural-language feedback about the current edge type registry.
+
+Your task is to apply the human feedback consistently to the complete current registry.
+
+For every edge type in the current registry, assign exactly one revision operation:
+
+KEEP
+DELETE
+REVISE
+MERGE
+
+## Operation Definitions
+
+KEEP:
+Preserve the edge type exactly as it currently appears in the registry.
+
+DELETE:
+Remove the edge type from the registry when the human feedback indicates that the semantic relationship should no longer remain as an independent type.
+
+REVISE:
+Preserve the underlying semantic relationship while revising its name, definition, source_description, and/or target_description.
+
+For REVISE, return the complete revised edge type with exactly four fields:
+
+name
+definition
+source_description
+target_description
+
+MERGE:
+Merge the current edge type into another edge type already present in the current registry when they should represent one semantic relationship.
+
+For MERGE, specify the target type using merge_into.
+
+The merge_into value must refer to the original name of another edge type in the supplied registry whose operation is KEEP or REVISE.
+
+## Revision Rules
+
+1. Review every edge type in the supplied registry.
+
+2. Assign exactly one operation to every input edge type.
+
+3. Apply the human feedback consistently across the complete registry.
+
+4. Use the supplied granularity rules and positive and negative examples to interpret the human feedback.
+
+5. Evaluate semantic meaning, applicability conditions, source role, target role, and relationship direction.
+
+6. Preserve distinct semantic relationships when their meanings, applicability conditions, or endpoint roles are meaningfully different.
+
+7. Use REVISE when an existing relationship remains useful but its current abstraction, name, definition, or endpoint descriptions should be improved.
+
+8. Use MERGE when multiple registry types should represent one underlying semantic relationship.
+
+9. Use DELETE when the human feedback indicates that a type should no longer be represented independently and no merge target is appropriate.
+
+10. Use KEEP when the current edge type already satisfies the human feedback and granularity criteria.
+
+11. When a MERGE target needs a broader or clearer definition, assign REVISE to the target type.
+
+12. Maintain a consistent relationship direction across definition, source_description, and target_description.
+
+13. Revised edge type names use uppercase underscore-separated naming.
+
+## Output Schema
+
+Return valid JSON using exactly this structure:
+
+{
+  "revisions": [
+    {
+      "original_name": "...",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "...",
+      "operation": "DELETE"
+    },
+    {
+      "original_name": "...",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "...",
+        "definition": "...",
+        "source_description": "...",
+        "target_description": "..."
+      }
+    },
+    {
+      "original_name": "...",
+      "operation": "MERGE",
+      "merge_into": "..."
+    }
+  ]
+}
+
+Return only the JSON object.

@@ -1,0 +1,1 @@
+long-running operation 的 monitoring/progress 相关边高度相似。合并这些仅在具体状态变化上有细微区别的类型，并删除过于依赖特定场景的边，保留更通用、可跨任务复用的关系。

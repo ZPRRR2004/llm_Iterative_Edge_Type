@@ -1,0 +1,16 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_0_1",
+      "start_anchor": "New Terminal Output:\nroot@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app# ls -la /app /app/deps 2>&1 | head -50"
+    },
+    {
+      "tool_call_id": "call_0_2",
+      "start_anchor": "root@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app# which curl wget gcc make unzip tar; gcc --version | head -1"
+    },
+    {
+      "tool_call_id": "call_0_3",
+      "start_anchor": "root@ab18d7f8-ce30-42f4-bef4-4a3fede35d44:/app# curl -s --max-time 20 https://ftp.povray.org/pub/povray/Old-Versions/Official-2.2/ | head -60"
+    }
+  ]
+}

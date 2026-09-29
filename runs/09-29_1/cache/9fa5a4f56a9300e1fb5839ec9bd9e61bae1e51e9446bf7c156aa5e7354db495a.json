@@ -1,0 +1,8 @@
+{
+  "title": "Fit G and 2D Raman Peaks and Save Results",
+  "query": "Fit the G and 2D peaks of the provided Raman Setup output spectrum from a graphene sample, extract each peak's x0, gamma, amplitude, and offset, and write the results to /app/results.json in the specified JSON format with G and 2D objects, each containing x0, gamma, amplitude, and offset.",
+  "review_flags": [
+    "The input Raman output file path/name is not specified in the task description.",
+    "The fitting function/model or method for extracting x0, gamma, amplitude, and offset is not specified."
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_0_1",
+      "start_anchor": "New Terminal Output:\nroot@3a5b0e1a-7403-4ed0-86d8-1abed79c99a2:/app# ls -la /app /app/src /app/data\n"
+    },
+    {
+      "tool_call_id": "call_0_2",
+      "start_anchor": "root@3a5b0e1a-7403-4ed0-86d8-1abed79c99a2:/app# cat /app/src/program.cbl\n"
+    }
+  ]
+}

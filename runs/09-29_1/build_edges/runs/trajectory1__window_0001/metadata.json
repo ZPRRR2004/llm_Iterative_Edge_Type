@@ -1,0 +1,43 @@
+{
+  "window_file": "trajectory1__window_0001.json",
+  "trajectory_id": "trajectory1",
+  "window_id": "window_0001",
+  "global_index": 0,
+  "prompt_version": "v0001",
+  "registry_snapshot": [],
+  "completed_stages": [
+    "discovery",
+    "comparison",
+    "review"
+  ],
+  "accepted_edge_types": [
+    {
+      "name": "ATTEMPTS_TO_REPAIR",
+      "definition": "A subsequent agent action attempts to resolve a failure or blocker identified during an earlier execution step, for example by installing a missing prerequisite, correcting a defect, or otherwise addressing the cause of the failure.",
+      "source_description": "An earlier observed execution failure or blocker (e.g., a reported error or missing prerequisite).",
+      "target_description": "A subsequent agent action intended to resolve that failure or blocker."
+    },
+    {
+      "name": "VERIFIES_PREVIOUSLY_PRODUCED_ARTIFACT",
+      "definition": "A subsequent agent action loads, executes, sources, or otherwise exercises an artifact produced by an earlier agent action in order to determine whether that artifact behaves as intended.",
+      "source_description": "An artifact produced by an earlier agent action (e.g., a written source, script, or configuration file).",
+      "target_description": "A subsequent agent action that loads or runs the artifact as a correctness check on it."
+    },
+    {
+      "name": "DEFERS_BLOCKER_AND_CONTINUES_INDEPENDENT_WORK",
+      "definition": "After observing that a prerequisite required for the end goal is unavailable, the agent postpones resolving that blocker and instead performs work that does not depend on the missing prerequisite, intending to address the blocker in a later step.",
+      "source_description": "An observation that a required prerequisite for the end goal is unavailable in the current environment.",
+      "target_description": "A subsequent agent action that produces deliverables independent of the missing prerequisite, taken before the blocker is resolved."
+    }
+  ],
+  "revised_existing_edge_types": [],
+  "accepted_edge_type_count": 3,
+  "revised_existing_edge_type_count": 0,
+  "status": "completed",
+  "created_at": "2026-09-29T05:30:31.700605+00:00",
+  "updated_at": "2026-09-29T05:31:23.640960+00:00",
+  "failed_stage": null,
+  "error": null,
+  "registry_size_after": 3,
+  "completed_at": "2026-09-29T05:31:23.640960+00:00"
+}

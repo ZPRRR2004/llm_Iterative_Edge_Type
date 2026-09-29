@@ -1,0 +1,157 @@
+{
+  "id": "56df8122-d61f-420e-b495-ec83d8ea621d",
+  "task_name": "terminal-bench/count-dataset-tokens",
+  "trial_name": "count-dataset-tokens__svuQgSG",
+  "trial_uri": "file:///home/alex/.cursor/worktrees/harbor__SSH__tbench-gcp_/txv1/jobs/tbench-2-1-fable-5__high-fallback/count-dataset-tokens__svuQgSG",
+  "task_id": {
+    "org": "terminal-bench",
+    "name": "count-dataset-tokens",
+    "ref": "sha256:cd0574ec8281f53854256acc93702ed1441407c0428849e1dd4f27e863c6b08a"
+  },
+  "source": "terminal-bench/terminal-bench-2-1",
+  "task_checksum": "0ab655881a4827d9ec8f9930d4c4c8827729b20c978c20ff9cc6317f90660b5c",
+  "config": {
+    "task": {
+      "path": null,
+      "git_url": null,
+      "git_commit_id": null,
+      "name": "terminal-bench/count-dataset-tokens",
+      "ref": "sha256:cd0574ec8281f53854256acc93702ed1441407c0428849e1dd4f27e863c6b08a",
+      "overwrite": false,
+      "download_dir": null,
+      "source": "terminal-bench/terminal-bench-2-1"
+    },
+    "trial_name": "count-dataset-tokens__svuQgSG",
+    "trials_dir": "jobs/tbench-2-1-fable-5__high-fallback",
+    "timeout_multiplier": 1.0,
+    "agent_timeout_multiplier": null,
+    "verifier_timeout_multiplier": null,
+    "agent_setup_timeout_multiplier": null,
+    "environment_build_timeout_multiplier": null,
+    "agent": {
+      "name": "terminus-2",
+      "import_path": null,
+      "model_name": "anthropic/claude-fable-5",
+      "skills": [],
+      "override_timeout_sec": null,
+      "override_setup_timeout_sec": null,
+      "max_timeout_sec": null,
+      "extra_allowed_hosts": [],
+      "kwargs": {
+        "model_info": {
+          "supports_adaptive_thinking": true,
+          "supports_reasoning": true,
+          "supports_max_reasoning_effort": true,
+          "supports_xhigh_reasoning_effort": true
+        },
+        "temperature": 1,
+        "llm_kwargs": {
+          "extra_headers": {
+            "anthropic-beta": "server-side-fallback-2026-06-02"
+          }
+        },
+        "llm_call_kwargs": {
+          "max_tokens": 128000,
+          "allowed_openai_params": [
+            "thinking",
+            "fallback"
+          ],
+          "thinking": {
+            "type": "adaptive"
+          },
+          "output_config": {
+            "effort": "high"
+          },
+          "fallback": [
+            {
+              "model": "claude-opus-4-8"
+            }
+          ]
+        },
+        "reasoning_effort": "high"
+      },
+      "env": {},
+      "mcp_servers": []
+    },
+    "environment": {
+      "type": "daytona",
+      "import_path": null,
+      "force_build": false,
+      "delete": true,
+      "cpu_enforcement_policy": "auto",
+      "memory_enforcement_policy": "auto",
+      "override_cpus": null,
+      "override_memory_mb": null,
+      "override_storage_mb": null,
+      "override_gpus": null,
+      "override_tpu": null,
+      "mounts": null,
+      "extra_docker_compose": [],
+      "env": {},
+      "kwargs": {},
+      "extra_allowed_hosts": []
+    },
+    "verifier": {
+      "override_timeout_sec": null,
+      "max_timeout_sec": null,
+      "env": {},
+      "disable": false
+    },
+    "artifacts": [],
+    "extra_instruction_paths": [],
+    "job_id": "17f04e4f-1a75-4204-9b75-d042ef0333ec"
+  },
+  "agent_info": {
+    "name": "terminus-2",
+    "version": "2.0.0",
+    "model_info": {
+      "name": "claude-fable-5",
+      "provider": "anthropic"
+    }
+  },
+  "agent_result": {
+    "n_input_tokens": 41459,
+    "n_cache_tokens": 30094,
+    "n_output_tokens": 2805,
+    "cost_usd": null,
+    "rollout_details": [],
+    "metadata": {
+      "n_episodes": 7,
+      "api_request_times_msec": [
+        8759.746551513672,
+        7469.493627548218,
+        6380.774736404419,
+        13876.508951187134,
+        10237.483024597168,
+        6079.027891159058,
+        6598.414659500122
+      ],
+      "summarization_count": 0
+    }
+  },
+  "verifier_result": {
+    "rewards": {
+      "reward": 1.0
+    }
+  },
+  "exception_info": null,
+  "started_at": "2026-06-04T23:24:04.988775Z",
+  "finished_at": "2026-06-04T23:30:17.037592Z",
+  "environment_setup": {
+    "started_at": "2026-06-04T23:24:05.301299Z",
+    "finished_at": "2026-06-04T23:24:06.754727Z"
+  },
+  "agent_setup": {
+    "started_at": "2026-06-04T23:24:06.754749Z",
+    "finished_at": "2026-06-04T23:24:31.040159Z"
+  },
+  "agent_execution": {
+    "started_at": "2026-06-04T23:24:31.040284Z",
+    "finished_at": "2026-06-04T23:30:02.597331Z"
+  },
+  "verifier": {
+    "started_at": "2026-06-04T23:30:10.756688Z",
+    "finished_at": "2026-06-04T23:30:16.717392Z"
+  },
+  "step_results": null
+}

@@ -1,0 +1,12 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_0_1",
+      "start_anchor": "New Terminal Output:\nroot@47cf51ce-5954-411b-b1fd-9e2dfcf2cc84:/app# cat /app/filter.py\n"
+    },
+    {
+      "tool_call_id": "call_0_2",
+      "start_anchor": "root@47cf51ce-5954-411b-b1fd-9e2dfcf2cc84:/app# cat /app/test_outputs.py\n"
+    }
+  ]
+}

@@ -1,0 +1,312 @@
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/app# asciinema rec --stdin /logs/agent/recording.cast
+[?2004l[0;32masciinema: recording asciicast to /logs/agent/recording.cast[0m
+[0;32masciinema: press <ctrl-d> or type "exit" when you're done[0m
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/app# clear
+[?2004l[H[J[3J[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/app# ls /tmp/CompCert 2>/dev/null | head; uname -m; cat /etc/os-release | head -3
+[?2004lx86_64
+PRETTY_NAME="Ubuntu 24.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/app# which coqc ocaml menhir opam gcc make git; coqc --version 2>/dev/null; ocaml -version 2>/dev/null; menhir --version 2>/dev/null
+[?2004l[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/app# apt-get update -y >/tmp/apt.log 2>&1; tail -3 /tmp/apt.log
+[?2004lHit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+Fetched 126 kB in 1s (163 kB/s)
+Reading package lists...
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/app# apt-get install -y build-essential git wget unzip opam >/tmp/apt2.log 2>&1; tail -3 /tmp/apt2.log
+[?2004lSetting up libc-devtools (2.39-0ubuntu8.7) ...
+Setting up libheif-plugin-aomenc:amd64 (1.17.6-1ubuntu4.3) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/app# opam init --disable-sandboxing -y --bare >/tmp/opam_init.log 2>&1; tail -3 /tmp/opam_init.log
+[?2004l  You can always re-run this setup with 'opam init' later.
+
+[WARNING] Shell not updated in non-interactive mode: use --shell-setup
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/app# apt-get install -y ocaml ocaml-findlib >/tmp/apt3.log 2>&1; ocaml -version
+[?2004lThe OCaml toplevel, version 4.14.1
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/app# opam switch create default --packages=ocaml-system -y >/tmp/opam_switch.log 2>&1; tail -3 /tmp/opam_switch.log
+[?2004l-> installed ocaml.4.14.1
+Done.
+# Run eval $(opam env --switch=default) to update the current shell environment
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/app# eval $(opam env) && nohup opam install -y coq.8.17.1 menhir > /tmp/opam_coq.log 2>&1 &
+[?2004l[1] 6157
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/app# [WARNING] Running as root is not recommended
+cd /tmp && wget -q https://github.com/AbsInt/CompCert/archive/refs/tags/v3.13.1.tar.gz -O compcert.tar.gz && tar xzf compcert.tar.gz && mv CompCert-3.13.1 CompCert && ls /tmp/CompCert | head
+[?2004lChangelog.md
+LICENSE
+Makefile
+Makefile.extr
+Makefile.menhir
+MenhirLib
+README.md
+VERSION
+aarch64
+arm
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp# tail -2 /tmp/opam_coq.log
+[?2004l
+You can retry with '--assume-depexts' to skip this check, or run 'opam option depext=false' to permanently disable handling of system packages altogether.
+[1]+  Exit 10                 eval $(opam env) && nohup opam install -y coq.8.17.1 menhir > /tmp/opam_coq.log 2>&1  (wd: /app)
+(wd now: /tmp)
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp# grep -B5 'retry' /tmp/opam_coq.log | head -20
+[?2004l[NOTE] Use 'opam option depext-run-installs=false' if you don't want to be prompted again.
+This command should get the requirements installed:
+
+    apt-get install libgmp-dev pkg-config
+
+You can retry with '--assume-depexts' to skip this check, or run 'opam option depext=false' to permanently disable handling of system packages altogether.
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp# apt-get install -y libgmp-dev pkg-config zlib1g-dev >/tmp/apt4.log 2>&1; tail -1 /tmp/apt4.log
+[?2004lProcessing triggers for libc-bin (2.39-0ubuntu8.7) ...
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp# nohup opam install -y coq.8.17.1 menhir > /tmp/opam_coq.log 2>&1 &
+[?2004l[1] 6372
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp# sleep 55; tail -3 /tmp/opam_coq.log
+[?2004l-> installed menhirGLR.20260209
+-> installed menhirLib.20260209
+-> installed menhirSdk.20260209
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp# sleep 55; tail -2 /tmp/opam_coq.log; jobs
+[?2004l-> installed coq-core.8.17.1
+-> installed coqide-server.8.17.1
+[1]+  Running                 nohup opam install -y coq.8.17.1 menhir > /tmp/opam_coq.log 2>&1 &
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp# sleep 55; tail -2 /tmp/opam_coq.log; jobs
+[?2004l[1]+  Exit 31                 nohup opam install -y coq.8.17.1 menhir > /tmp/opam_coq.log 2>&1
+The former state can be restored with:
+    /usr/bin/opam switch import "/root/.opam/default/.opam-switch/backup/state-20260605003230.export"
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp# grep -n -i 'fail\|error' /tmp/opam_coq.log | head -20
+[?2004l46:[ERROR] The compilation of coq-stdlib.8.17.1 failed at "dune build -p coq-stdlib -j 47 @install".
+48:#=== ERROR while compiling coq-stdlib.8.17.1 ==================================#
+72:<><> Error report <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+73:+- The following actions failed
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp# opam list 2>/dev/null | grep -i 'coq\|menhir'
+[?2004l[01;31m[Kcoq[m[K-core        8.17.1      The [01;31m[KCoq[m[K Proof Assistant -- Core Binaries and Tools
+[01;31m[Kcoq[m[Kide-server   8.17.1      The [01;31m[KCoq[m[K Proof Assistant, XML protocol server
+[01;31m[Kmenhir[m[K          20260209    An LR(1) parser generator
+[01;31m[Kmenhir[m[KCST       20260209    Runtime support library for unparsers generated by [01;31m[KMenhir[m[K
+[01;31m[Kmenhir[m[KGLR       20260209    Runtime support library for GLR parsers generated by [01;31m[KMenhir[m[K
+[01;31m[Kmenhir[m[KLib       20260209    Runtime support library for parsers generated by [01;31m[KMenhir[m[K
+[01;31m[Kmenhir[m[KSdk       20260209    Compile-time library for auxiliary tools related to [01;31m[KMenhir[m[K
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp# sed -n '46,75p' /tmp/opam_coq.log
+[?2004l[ERROR] The compilation of coq-stdlib.8.17.1 failed at "dune build -p coq-stdlib -j 47 @install".
+
+#=== ERROR while compiling coq-stdlib.8.17.1 ==================================#
+# context              2.1.5 | linux/x86_64 | ocaml-system.4.14.1 | https://opam.ocaml.org#53ade9156217404fdec7732a2e52c71b31c992a6
+# path                 ~/.opam/default/.opam-switch/build/coq-stdlib.8.17.1
+# command              ~/.opam/default/bin/dune build -p coq-stdlib -j 47 @install
+# exit-code            1
+# env-file             ~/.opam/log/coq-stdlib-6372-3862b0.env
+# output-file          ~/.opam/log/coq-stdlib-6372-3862b0.out
+### output ###
+# [...]
+# 2622 |   (action (run coqc -boot -R ../. Coq -I /root/.opam/default/lib/coq-core/plugins/number_string_notation -I /root/.opam/default/lib/coq-core/plugins/zify -I /root/.opam/default/lib/coq-core/plugins/tauto -I /root/.opam/default/lib/coq-core/plugins/ssreflect -I /root/.opam/default/lib/coq-core/plugins/firstorder -I /root/.opam/default/lib/coq-core/plugins/funind -I /root/.opam/default/l[...]
+# (cd _build/default/theories/ZArith && /root/.opam/default/bin/coqc -boot -R ../. Coq -I /root/.opam/default/lib/coq-core/plugins/number_string_notation -I /root/.opam/default/lib/coq-core/plugins/zify -I /root/.opam/default/lib/coq-core/plugins/tauto -I /root/.opam/default/lib/coq-core/plugins/ssreflect -I /root/.opam/default/lib/coq-core/plugins/firstorder -I /root/.opam/default/lib/coq-core[...]
+# Command got signal SEGV.
+# File "theories/dune", lines 1577-1582, characters 1-1282:
+# 1577 |  (rule
+# 1578 |   (targets QArith_base.glob QArith_base.vos QArith_base.vo)
+# 1579 |   (deps ../Init/Prelude.vo .././ZArith/ZArith_base.vo
+# 1580 |         .././setoid_ring/ZArithRing.vo .././ZArith/BinInt.vo
+# 1581 |         .././Classes/Morphisms.vo .././Setoids/Setoid.vo .././Bool/Bool.vo)
+# 1582 |   (action (run coqc -boot -R ../. Coq -I /root/.opam/default/lib/coq-core/plugins/number_string_notation -I /root/.opam/default/lib/coq-core/plugins/zify -I /root/.opam/default/lib/coq-core/plugins/tauto -I /root/.opam/default/lib/coq-core/plugins/ssreflect -I /root/.opam/default/lib/coq-core/plugins/firstorder -I /root/.opam/default/lib/coq-core/plugins/funind -I /root/.opam/default/l[...]
+# (cd _build/default/theories/QArith && /root/.opam/default/bin/coqc -boot -R ../. Coq -I /root/.opam/default/lib/coq-core/plugins/number_string_notation -I /root/.opam/default/lib/coq-core/plugins/zify -I /root/.opam/default/lib/coq-core/plugins/tauto -I /root/.opam/default/lib/coq-core/plugins/ssreflect -I /root/.opam/default/lib/coq-core/plugins/firstorder -I /root/.opam/default/lib/coq-core[...]
+# Command got signal SEGV.
+
+
+
+<><> Error report <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
++- The following actions failed
+| - build coq-stdlib 8.17.1
++- 
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp# ulimit -s; ulimit -s unlimited; ulimit -s
+[?2004l8192
+unlimited
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp# nohup opam install -y coq.8.17.1 -j 8 > /tmp/opam_coq2.log 2>&1 &
+[?2004l[1] 20203
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp# sleep 50; tail -2 /tmp/opam_coq2.log; jobs
+[?2004l-> retrieved coq.8.17.1  (cached)
+-> retrieved coq-stdlib.8.17.1  (cached)
+[1]+  Running                 nohup opam install -y coq.8.17.1 -j 8 > /tmp/opam_coq2.log 2>&1 &
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp# sleep 55; tail -2 /tmp/opam_coq2.log; jobs
+[?2004l-> retrieved coq.8.17.1  (cached)
+-> retrieved coq-stdlib.8.17.1  (cached)
+[1]+  Running                 nohup opam install -y coq.8.17.1 -j 8 > /tmp/opam_coq2.log 2>&1 &
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp# sleep 55; tail -2 /tmp/opam_coq2.log; jobs
+[?2004l[1]+  Done                    nohup opam install -y coq.8.17.1 -j 8 > /tmp/opam_coq2.log 2>&1
+Done.
+# Run eval $(opam env) to update the current shell environment
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp# eval $(opam env); cd /tmp/CompCert && ./configure x86_64-linux 2>&1 | tail -25
+[?2004l[WARNING] Running as root is not recommended
+Testing assembler support for CFI directives... yes
+Testing linker support for '-no-pie' / '-nopie' option... yes, '-no-pie'
+Testing Coq... version 8.17.1 -- UNSUPPORTED
+Error: CompCert requires a version of Coq between 8.12.0 and 8.16.1
+Testing OCaml... version 4.14.1 -- good!
+Testing OCaml native-code compiler... yes
+Testing OCaml .opt compilers... yes
+Testing Menhir... version 20260209 -- good!
+Testing GNU make... version 4.3 (command 'make') -- good!
+One or several required tools are missing or too old.  Aborting.
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# ulimit -s unlimited; nohup opam install -y coq.8.16.1 -j 8 > /tmp/opam_coq3.log 2>&1 &
+[?2004l[1] 22721
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# sleep 55; tail -2 /tmp/opam_coq3.log; jobs
+[?2004l-> installed conf-findutils.1
+-> retrieved coq.8.16.1  (https://opam.ocaml.org/cache)
+[1]+  Running                 nohup opam install -y coq.8.16.1 -j 8 > /tmp/opam_coq3.log 2>&1 &
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# sleep 55; tail -2 /tmp/opam_coq3.log; jobs
+[?2004l-> installed conf-findutils.1
+-> retrieved coq.8.16.1  (https://opam.ocaml.org/cache)
+[1]+  Running                 nohup opam install -y coq.8.16.1 -j 8 > /tmp/opam_coq3.log 2>&1 &
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# sleep 55; tail -2 /tmp/opam_coq3.log; jobs
+[?2004l-> installed conf-findutils.1
+-> retrieved coq.8.16.1  (https://opam.ocaml.org/cache)
+[1]+  Running                 nohup opam install -y coq.8.16.1 -j 8 > /tmp/opam_coq3.log 2>&1 &
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# sleep 55; tail -2 /tmp/opam_coq3.log; jobs
+[?2004l[1]+  Done                    nohup opam install -y coq.8.16.1 -j 8 > /tmp/opam_coq3.log 2>&1
+-> installed coq.8.16.1
+Done.
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# eval $(opam env); cd /tmp/CompCert && ./configure x86_64-linux 2>&1 | tail -15
+[?2004l[WARNING] Running as root is not recommended
+    Linker........................ gcc -m64 -no-pie
+    Archiver...................... ar rcs
+    Math library.................. -lm
+    Build command to use.......... make
+    Menhir API library............ /root/.opam/default/lib/menhirLib
+    The Flocq library............. local
+    The MenhirLib library......... local
+    Binaries installed in......... /usr/local/bin
+    Shared config installed in.... /usr/local/share
+    Runtime library provided...... true
+    Library files installed in.... /usr/local/lib/compcert
+    Man pages installed in........ /usr/local/share/man
+    Standard headers provided..... true
+    Standard headers installed in. /usr/local/lib/compcert/include
+    Coq development will not be installed
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# ulimit -s unlimited; nohup make -j8 > /tmp/ccomp_build.log 2>&1 &
+[?2004l[1] 46052
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# sleep 55; tail -3 /tmp/ccomp_build.log; jobs
+[?2004lCOQC common/Globalenvs.v
+COQC cfrontend/Cop.v
+COQC common/Events.v
+[1]+  Running                 nohup make -j8 > /tmp/ccomp_build.log 2>&1 &
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# sleep 55; tail -2 /tmp/ccomp_build.log; jobs
+[?2004l[1]+  Exit 2                  nohup make -j8 > /tmp/ccomp_build.log 2>&1
+make[1]: Leaving directory '/tmp/CompCert'
+make: *** [Makefile:181: all] Error 2
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# grep -n -B3 -i 'error' /tmp/ccomp_build.log | head -40
+[?2004l32-COQC lib/IntvSets.v
+33-COQC lib/Decidableplus.v
+34-COQC lib/BoolEqual.v
+35:COQC common/Errors.v
+--
+66-COQC flocq/Prop/Double_rounding.v
+67-COQC flocq/Calc/Plus.v
+68-COQC flocq/IEEE754/BinarySingleNaN.v
+69:COQC flocq/Prop/Plus_error.v
+70:COQC flocq/Prop/Mult_error.v
+71:COQC flocq/Prop/Div_sqrt_error.v
+--
+152-COQC x86/SelectOpproof.v
+153-COQC backend/Tailcall.v
+154-Killed
+155:make[1]: *** [Makefile:260: cfrontend/SimplExprproof.vo] Error 137
+156-make[1]: *** Waiting for unfinished jobs....
+157-make[1]: Leaving directory '/tmp/CompCert'
+158:make: *** [Makefile:181: all] Error 2
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# free -h; nohup make -j2 > /tmp/ccomp_build2.log 2>&1 &
+[?2004l               total        used        free      shared  buff/cache   available
+Mem:           377Gi        28Gi       327Gi        97Mi        24Gi       349Gi
+Swap:             0B          0B          0B
+[1] 46729
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# sleep 55; tail -2 /tmp/ccomp_build2.log; jobs
+[?2004lCOQC x86/Asmgenproof.v
+COQC driver/Compiler.v
+[1]+  Running                 nohup make -j2 > /tmp/ccomp_build2.log 2>&1 &
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# sleep 55; tail -2 /tmp/ccomp_build2.log; jobs
+[?2004l[1]+  Exit 2                  nohup make -j2 > /tmp/ccomp_build2.log 2>&1
+make[1]: Leaving directory '/tmp/CompCert'
+make: *** [Makefile:183: all] Error 2
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# grep -n -B5 -i 'error\|Killed' /tmp/ccomp_build2.log | head -50
+[?2004l102-Built an LR(1) automaton with 628 states.
+103-2 shift/reduce conflicts were silently solved.
+104-Built an LR(0) automaton with 628 states.
+105-The construction mode is pager.
+106-Built an LR(1) automaton with 628 states.
+107:Extra reductions on error were added in 103 states.
+108-Priority played a role in 0 of these states.
+109-2 shift/reduce conflicts were silently solved.
+110:Extra reductions on error were added in 103 states.
+111-Priority played a role in 0 of these states.
+112:Read 233 sample input sentences and 180 error messages.
+--
+126-OCAMLC   extraction/Bool.mli
+127-OCAMLC   extraction/Orders.mli
+128-OCAMLC   extraction/EquivDec.mli
+129-OCAMLC   extraction/BoolEqual.mli
+130-OCAMLC   extraction/String0.mli
+131:OCAMLC   extraction/Errors.mli
+--
+172-OCAMLC   extraction/OrdersTac.mli
+173-OCAMLOPT extraction/EquivDec.ml
+174-OCAMLC   extraction/OrdersFacts.mli
+175-OCAMLOPT extraction/BoolEqual.ml
+176-OCAMLOPT extraction/String0.ml
+177:OCAMLOPT extraction/Errors.ml
+--
+215-OCAMLOPT cparser/Cprint.ml
+216-OCAMLC   cparser/Cutil.mli
+217-OCAMLC   extraction/Alphabet.mli
+218-OCAMLC   extraction/FMapList.mli
+219-OCAMLOPT cparser/pre_parser.ml
+220:OCAMLC   cparser/ErrorReports.mli
+--
+232-OCAMLOPT cparser/Transform.ml
+233-OCAMLOPT cparser/Rename.ml
+234-OCAMLOPT extraction/Alphabet.ml
+235-OCAMLC   extraction/Grammar.mli
+236-OCAMLOPT extraction/FMapList.ml
+237:OCAMLOPT cparser/ErrorReports.ml
+238:File "cparser/ErrorReports.ml", line 19, characters 11-28:
+239-19 | module S = MenhirLib.General (* Streams *)
+240-                ^^^^^^^^^^^^^^^^^
+241:Error: Unbound module MenhirLib.General
+242:make[2]: *** [Makefile.extr:147: cparser/ErrorReports.cmx] Error 2
+243-make[2]: *** Waiting for unfinished jobs....
+244-make[2]: Leaving directory '/tmp/CompCert'
+245:make[1]: *** [Makefile:218: ccomp] Error 2
+246-make[1]: Leaving directory '/tmp/CompCert'
+247:make: *** [Makefile:183: all] Error 2
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# opam install -y menhir.20230608 > /tmp/opam_menhir.log 2>&1; tail -3 /tmp/opam_menhir.log
+[?2004l-> installed menhirSdk.20230608
+-> installed menhir.20230608
+Done.
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# eval $(opam env); rm -f cparser/pre_parser.ml cparser/pre_parser.mli cparser/pre_parser_messages.ml; ./configure x86_64-linux > /tmp/conf2.log 2>&1; tail -2 /tmp/conf2.log
+[?2004l[WARNING] Running as root is not recommended
+    Standard headers installed in. /usr/local/lib/compcert/include
+    Coq development will not be installed
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# nohup make -j2 > /tmp/ccomp_build3.log 2>&1 &
+[?2004l[1] 50201
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# sleep 50; tail -3 /tmp/ccomp_build3.log; jobs
+[?2004lCOQC backend/CminorSel.v
+COQC x86/Machregs.v
+COQC backend/RTL.v
+[1]+  Running                 nohup make -j2 > /tmp/ccomp_build3.log 2>&1 &
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# sleep 55; tail -2 /tmp/ccomp_build3.log; jobs
+[?2004lCOQC backend/Asmgenproof0.v
+COQC x86/Asmgenproof1.v
+[1]+  Running                 nohup make -j2 > /tmp/ccomp_build3.log 2>&1 &
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# sleep 55; tail -2 /tmp/ccomp_build3.log; jobs
+[?2004l[1]+  Done                    nohup make -j2 > /tmp/ccomp_build3.log 2>&1
+make[2]: Leaving directory '/tmp/CompCert/runtime'
+make[1]: Leaving directory '/tmp/CompCert'
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# ls -l /tmp/CompCert/ccomp; /tmp/CompCert/ccomp --version 2>&1 | head -2
+[?2004l-rwxr-xr-x 1 root root 10872848 Jun  5 00:56 [0m[01;32m/tmp/CompCert/ccomp[0m
+The CompCert C verified compiler, version 3.13
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# printf '#include <stdio.h>\nint main(void){printf("hello from compcert\\n");return 0;}\n' > /tmp/test.c && /tmp/CompCert/ccomp -o /tmp/test /tmp/test.c && /tmp/test
+[?2004l/usr/bin/ld: cannot find -lcompcert: No such file or directory
+collect2: error: ld returned 1 exit status
+[1mccomp:[0m [31;1merror:[0m [1mlinker command failed with exit code 1 (use -v to see invocation)
+[0m
+1 error detected.
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# make install > /tmp/install.log 2>&1; tail -2 /tmp/install.log
+[?2004linstall -m 0644 include/float.h include/stdarg.h include/stdbool.h include/stddef.h include/varargs.h include/stdalign.h include/stdnoreturn.h /usr/local/lib/compcert/include
+make[1]: Leaving directory '/tmp/CompCert/runtime'
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# /tmp/CompCert/ccomp -o /tmp/test /tmp/test.c && /tmp/test
+[?2004l/usr/bin/ld: warning: /tmp/compcert4bc236.o: missing .note.GNU-stack section implies executable stack
+/usr/bin/ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+hello from compcert
+[?2004hroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/tmp/CompCert# 

@@ -1,0 +1,675 @@
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app# asciinema rec --stdin /logs/agent/recording.cast
+[?2004l[0;32masciinema: recording asciicast to /logs/agent/recording.cast[0m
+[0;32masciinema: press <ctrl-d> or type "exit" when you're done[0m
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app# clear
+[?2004l[H[J[3J[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app# git clone --depth 1 --branch 0.5.3 https://github.com/SPOCKnots/pyknotid.git /app/pyknotid
+[?2004lCloning into '/app/pyknotid'...
+remote: Enumerating objects: 168, done.[K
+remote: Counting objects:   0% (1/168)[Kremote: Counting objects:   1% (2/168)[Kremote: Counting objects:   2% (4/168)[Kremote: Counting objects:   3% (6/168)[Kremote: Counting objects:   4% (7/168)[Kremote: Counting objects:   5% (9/168)[Kremote: Counting objects:   6% (11/168)[Kremote: Counting objects:   7% (12/168)[Kremote: Counting objects:   8% (14/168)[Kremote: Counting objects:   9% (16/168)[Kremote: Counting objects:  10% (17/168)[Kremote: Counting objects:  11% (19/168)[Kremote: Counting objects:  12% (21/168)[Kremote: Counting objects:  13% (22/168)[Kremote: Counting objects:  14% (24/168)[Kremote: Counting objects:  15% (26/168)[Kremote: Counting objects:  16% (27/168)[Kremote: Counting objects:  17% (29/168)[Kremote: Counting objects:  18% (31/168)[Kremote: Counting objects:  19% (32/168)[Kremote: Counting objects:  20% (34/168)[Kremote: Counting objects:  21% (36/168)[Kremote: Counting objects:  22% (37/168)[Kremote: Counting objects:  23% (39/168)[Kremote: Counting objects:  24% (41/168)[Kremote: Counting objects:  25% (42/168)[Kremote: Counting objects:  26% (44/168)[Kremote: Counting objects:  27% (46/168)[Kremote: Counting objects:  28% (48/168)[Kremote: Counting objects:  29% (49/168)[Kremote: Counting objects:  30% (51/168)[Kremote: Counting objects:  31% (53/168)[Kremote: Counting objects:  32% (54/168)[Kremote: Counting objects:  33% (56/168)[Kremote: Counting objects:  34% (58/168)[Kremote: Counting objects:  35% (59/168)[Kremote: Counting objects:  36% (61/168)[Kremote: Counting objects:  37% (63/168)[Kremote: Counting objects:  38% (64/168)[Kremote: Counting objects:  39% (66/168)[Kremote: Counting objects:  40% (68/168)[Kremote: Counting objects:  41% (69/168)[Kremote: Counting objects:  42% (71/168)[Kremote: Counting objects:  43% (73/168)[Kremote: Counting objects:  44% (74/168)[Kremote: Counting objects:  45% (76/168)[Kremote: Counting objects:  46% (78/168)[Kremote: Counting objects:  47% (79/168)[Kremote: Counting objects:  48% (81/168)[Kremote: Counting objects:  49% (83/168)[Kremote: Counting objects:  50% (84/168)[Kremote: Counting objects:  51% (86/168)[Kremote: Counting objects:  52% (88/168)[Kremote: Counting objects:  53% (90/168)[Kremote: Counting objects:  54% (91/168)[Kremote: Counting objects:  55% (93/168)[Kremote: Counting objects:  56% (95/168)[Kremote: Counting objects:  57% (96/168)[Kremote: Counting objects:  58% (98/168)[Kremote: Counting objects:  59% (100/168)[Kremote: Counting objects:  60% (101/168)[Kremote: Counting objects:  61% (103/168)[Kremote: Counting objects:  62% (105/168)[Kremote: Counting objects:  63% (106/168)[Kremote: Counting objects:  64% (108/168)[Kremote: Counting objects:  65% (110/168)[Kremote: Counting objects:  66% (111/168)[Kremote: Counting objects:  67% (113/168)[Kremote: Counting objects:  68% (115/168)[Kremote: Counting objects:  69% (116/168)[Kremote: Counting objects:  70% (118/168)[Kremote: Counting objects:  71% (120/168)[Kremote: Counting objects:  72% (121/168)[Kremote: Counting objects:  73% (123/168)[Kremote: Counting objects:  74% (125/168)[Kremote: Counting objects:  75% (126/168)[Kremote: Counting objects:  76% (128/168)[Kremote: Counting objects:  77% (130/168)[Kremote: Counting objects:  78% (132/168)[Kremote: Counting objects:  79% (133/168)[Kremote: Counting objects:  80% (135/168)[Kremote: Counting objects:  81% (137/168)[Kremote: Counting objects:  82% (138/168)[Kremote: Counting objects:  83% (140/168)[Kremote: Counting objects:  84% (142/168)[Kremote: Counting objects:  85% (143/168)[Kremote: Counting objects:  86% (145/168)[Kremote: Counting objects:  87% (147/168)[Kremote: Counting objects:  88% (148/168)[Kremote: Counting objects:  89% (150/168)[Kremote: Counting objects:  90% (152/168)[Kremote: Counting objects:  91% (153/168)[Kremote: Counting objects:  92% (155/168)[Kremote: Counting objects:  93% (157/168)[Kremote: Counting objects:  94% (158/168)[Kremote: Counting objects:  95% (160/168)[Kremote: Counting objects:  96% (162/168)[Kremote: Counting objects:  97% (163/168)[Kremote: Counting objects:  98% (165/168)[Kremote: Counting objects:  99% (167/168)[Kremote: Counting objects: 100% (168/168)[Kremote: Counting objects: 100% (168/168), done.[K
+remote: Compressing objects:   0% (1/160)[Kremote: Compressing objects:   1% (2/160)[Kremote: Compressing objects:   2% (4/160)[Kremote: Compressing objects:   3% (5/160)[Kremote: Compressing objects:   4% (7/160)[Kremote: Compressing objects:   5% (8/160)[Kremote: Compressing objects:   6% (10/160)[Kremote: Compressing objects:   7% (12/160)[Kremote: Compressing objects:   8% (13/160)[Kremote: Compressing objects:   9% (15/160)[Kremote: Compressing objects:  10% (16/160)[Kremote: Compressing objects:  11% (18/160)[Kremote: Compressing objects:  12% (20/160)[Kremote: Compressing objects:  13% (21/160)[Kremote: Compressing objects:  14% (23/160)[Kremote: Compressing objects:  15% (24/160)[Kremote: Compressing objects:  16% (26/160)[Kremote: Compressing objects:  17% (28/160)[Kremote: Compressing objects:  18% (29/160)[Kremote: Compressing objects:  19% (31/160)[Kremote: Compressing objects:  20% (32/160)[Kremote: Compressing objects:  21% (34/160)[Kremote: Compressing objects:  22% (36/160)[Kremote: Compressing objects:  23% (37/160)[Kremote: Compressing objects:  24% (39/160)[Kremote: Compressing objects:  25% (40/160)[Kremote: Compressing objects:  26% (42/160)[Kremote: Compressing objects:  27% (44/160)[Kremote: Compressing objects:  28% (45/160)[Kremote: Compressing objects:  29% (47/160)[Kremote: Compressing objects:  30% (48/160)[Kremote: Compressing objects:  31% (50/160)[Kremote: Compressing objects:  32% (52/160)[Kremote: Compressing objects:  33% (53/160)[Kremote: Compressing objects:  34% (55/160)[Kremote: Compressing objects:  35% (56/160)[Kremote: Compressing objects:  36% (58/160)[Kremote: Compressing objects:  37% (60/160)[Kremote: Compressing objects:  38% (61/160)[Kremote: Compressing objects:  39% (63/160)[Kremote: Compressing objects:  40% (64/160)[Kremote: Compressing objects:  41% (66/160)[Kremote: Compressing objects:  42% (68/160)[Kremote: Compressing objects:  43% (69/160)[Kremote: Compressing objects:  44% (71/160)[Kremote: Compressing objects:  45% (72/160)[Kremote: Compressing objects:  46% (74/160)[Kremote: Compressing objects:  47% (76/160)[Kremote: Compressing objects:  48% (77/160)[Kremote: Compressing objects:  49% (79/160)[Kremote: Compressing objects:  50% (80/160)[Kremote: Compressing objects:  51% (82/160)[Kremote: Compressing objects:  52% (84/160)[Kremote: Compressing objects:  53% (85/160)[Kremote: Compressing objects:  54% (87/160)[Kremote: Compressing objects:  55% (88/160)[Kremote: Compressing objects:  56% (90/160)[Kremote: Compressing objects:  57% (92/160)[Kremote: Compressing objects:  58% (93/160)[Kremote: Compressing objects:  59% (95/160)[Kremote: Compressing objects:  60% (96/160)[Kremote: Compressing objects:  61% (98/160)[Kremote: Compressing objects:  62% (100/160)[Kremote: Compressing objects:  63% (101/160)[Kremote: Compressing objects:  64% (103/160)[Kremote: Compressing objects:  65% (104/160)[Kremote: Compressing objects:  66% (106/160)[Kremote: Compressing objects:  67% (108/160)[Kremote: Compressing objects:  68% (109/160)[Kremote: Compressing objects:  69% (111/160)[Kremote: Compressing objects:  70% (112/160)[Kremote: Compressing objects:  71% (114/160)[Kremote: Compressing objects:  72% (116/160)[Kremote: Compressing objects:  73% (117/160)[Kremote: Compressing objects:  74% (119/160)[Kremote: Compressing objects:  75% (120/160)[Kremote: Compressing objects:  76% (122/160)[Kremote: Compressing objects:  77% (124/160)[Kremote: Compressing objects:  78% (125/160)[Kremote: Compressing objects:  79% (127/160)[Kremote: Compressing objects:  80% (128/160)[Kremote: Compressing objects:  81% (130/160)[Kremote: Compressing objects:  82% (132/160)[Kremote: Compressing objects:  83% (133/160)[Kremote: Compressing objects:  84% (135/160)[Kremote: Compressing objects:  85% (136/160)[Kremote: Compressing objects:  86% (138/160)[Kremote: Compressing objects:  87% (140/160)[Kremote: Compressing objects:  88% (141/160)[Kremote: Compressing objects:  89% (143/160)[Kremote: Compressing objects:  90% (144/160)[Kremote: Compressing objects:  91% (146/160)[Kremote: Compressing objects:  92% (148/160)[Kremote: Compressing objects:  93% (149/160)[Kremote: Compressing objects:  94% (151/160)[Kremote: Compressing objects:  95% (152/160)[Kremote: Compressing objects:  96% (154/160)[Kremote: Compressing objects:  97% (156/160)[Kremote: Compressing objects:  98% (157/160)[Kremote: Compressing objects:  99% (159/160)[Kremote: Compressing objects: 100% (160/160)[Kremote: Compressing objects: 100% (160/160), done.[K
+Receiving objects:   0% (1/168)Receiving objects:   1% (2/168)Receiving objects:   2% (4/168)Receiving objects:   3% (6/168)Receiving objects:   4% (7/168)Receiving objects:   5% (9/168)Receiving objects:   6% (11/168)Receiving objects:   7% (12/168)Receiving objects:   8% (14/168)Receiving objects:   9% (16/168)Receiving objects:  10% (17/168)Receiving objects:  11% (19/168)Receiving objects:  12% (21/168)Receiving objects:  13% (22/168)Receiving objects:  14% (24/168)Receiving objects:  15% (26/168)Receiving objects:  16% (27/168)Receiving objects:  17% (29/168)Receiving objects:  18% (31/168)Receiving objects:  19% (32/168)Receiving objects:  20% (34/168)Receiving objects:  21% (36/168)Receiving objects:  22% (37/168)Receiving objects:  23% (39/168)Receiving objects:  24% (41/168)Receiving objects:  25% (42/168)Receiving objects:  26% (44/168)Receiving objects:  27% (46/168)Receiving objects:  28% (48/168)Receiving objects:  29% (49/168)Receiving objects:  30% (51/168)Receiving objects:  31% (53/168)Receiving objects:  32% (54/168)Receiving objects:  33% (56/168)Receiving objects:  34% (58/168)Receiving objects:  35% (59/168)Receiving objects:  36% (61/168)Receiving objects:  37% (63/168)Receiving objects:  38% (64/168)Receiving objects:  39% (66/168)Receiving objects:  40% (68/168)Receiving objects:  41% (69/168)Receiving objects:  42% (71/168)Receiving objects:  43% (73/168)Receiving objects:  44% (74/168)Receiving objects:  45% (76/168)Receiving objects:  46% (78/168)Receiving objects:  47% (79/168)Receiving objects:  48% (81/168)Receiving objects:  49% (83/168)Receiving objects:  50% (84/168)Receiving objects:  51% (86/168)Receiving objects:  52% (88/168)Receiving objects:  53% (90/168)Receiving objects:  54% (91/168)Receiving objects:  55% (93/168)Receiving objects:  56% (95/168)Receiving objects:  57% (96/168)Receiving objects:  58% (98/168)Receiving objects:  59% (100/168)Receiving objects:  60% (101/168)Receiving objects:  61% (103/168)Receiving objects:  62% (105/168)Receiving objects:  63% (106/168)Receiving objects:  64% (108/168)Receiving objects:  65% (110/168)Receiving objects:  66% (111/168)Receiving objects:  67% (113/168)Receiving objects:  68% (115/168)Receiving objects:  69% (116/168)Receiving objects:  70% (118/168)Receiving objects:  71% (120/168)Receiving objects:  72% (121/168)Receiving objects:  73% (123/168)Receiving objects:  74% (125/168)Receiving objects:  75% (126/168)Receiving objects:  76% (128/168)Receiving objects:  77% (130/168)Receiving objects:  78% (132/168)Receiving objects:  79% (133/168)Receiving objects:  80% (135/168)Receiving objects:  81% (137/168)Receiving objects:  82% (138/168)Receiving objects:  83% (140/168)Receiving objects:  84% (142/168)Receiving objects:  85% (143/168)Receiving objects:  86% (145/168)Receiving objects:  87% (147/168)Receiving objects:  88% (148/168)Receiving objects:  89% (150/168)Receiving objects:  90% (152/168)Receiving objects:  91% (153/168)Receiving objects:  92% (155/168)Receiving objects:  93% (157/168)Receiving objects:  94% (158/168)Receiving objects:  95% (160/168)remote: Total 168 (delta 2), reused 125 (delta 1), pack-reused 0 (from 0)[K
+Receiving objects:  96% (162/168)Receiving objects:  97% (163/168)Receiving objects:  98% (165/168)Receiving objects:  99% (167/168)Receiving objects: 100% (168/168)Receiving objects: 100% (168/168), 1.74 MiB | 12.20 MiB/s, done.
+Resolving deltas:   0% (0/2)Resolving deltas:  50% (1/2)Resolving deltas: 100% (2/2)Resolving deltas: 100% (2/2), done.
+Note: switching to '441c807dbec2ee32e1da572e24e58d52a4eb7afa'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app# python3 --version; pip show numpy cython 2>/dev/null | head -20
+[?2004lPython 3.13.7
+Name: numpy
+Version: 2.3.0
+Summary: Fundamental package for array computing in Python
+Home-page: https://numpy.org
+Author: Travis E. Oliphant et al.
+Author-email: 
+License: Copyright (c) 2005-2025, NumPy Developers.
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are
+ met:
+
+     * Redistributions of source code must retain the above copyright
+        notice, this list of conditions and the following disclaimer.
+
+     * Redistributions in binary form must reproduce the above
+        copyright notice, this list of conditions and the following
+        disclaimer in the documentation and/or other materials provided
+        with the distribution.
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app# ls /app/pyknotid; cat /app/pyknotid/setup.py
+[?2004lLICENSE.txt  README.rst  doc  pyknotid	setup.py  tests
+from setuptools import setup, find_packages
+from distutils.extension import Extension
+
+from os.path import join, sep, dirname
+from os import walk, environ
+import glob
+import re
+
+
+package_data = {}
+
+def recursively_include(results, directory, patterns):
+    for root, subfolders, files in walk(directory):
+        for fn in files:
+            if not any([glob.fnmatch.fnmatch(fn, pattern) for pattern in patterns]):
+                continue
+            filename = join(root, fn)
+            directory = 'pyknotid'
+            if directory not in results:
+                results[directory] = []
+            results[directory].append(join(*filename.split(sep)[1:]))
+
+recursively_include(package_data, 'pyknotid',
+                    ['*.tmpl', '*.pov', '*.pyx', '*.pxd',
+                     '*.py',
+                     ])
+
+# Build cython components if possible
+try:
+    from Cython.Build import cythonize
+    import numpy
+except ImportError:
+    print('Cython or numpy could not be imported, so cythonised calculation '
+          'functions will not be built. pyknotid will use Python-only '
+          'routines instead. These are slower, but will return the '
+          'same result.')
+    print('To build the cython components, install cython and numpy and rebuild '
+          'pyknotid.')
+    ext_modules = []
+    include_dirs = []
+else:
+    ext_modules = [
+            Extension("pyknotid.spacecurves.chelpers", ["pyknotid/spacecurves/chelpers.pyx"],
+                    libraries=["m"]),
+            Extension("pyknotid.spacecurves.ccomplexity", ["pyknotid/spacecurves/ccomplexity.pyx"],
+                    libraries=["m"]),
+            Extension("pyknotid.simplify.coctree", ["pyknotid/simplify/coctree.pyx"],
+                    libraries=["m"]),
+            Extension("pyknotid.cinvariants", ["pyknotid/cinvariants.pyx"],
+                    libraries=["m"]),
+            ]
+    ext_modules = cythonize(ext_modules)
+    include_dirs = [numpy.get_include()]
+
+pyknotid_init_filen = join(dirname(__file__), 'pyknotid', '__init__.py')
+version = None
+try:
+    with open(pyknotid_init_filen) as fileh:
+        lines = fileh.readlines()
+except IOError:
+    pass
+else:
+    for line in lines:
+        line = line.strip()
+        if line.startswith('__version__ = '):
+            matches = re.findall(r'["\'].+["\']', line)
+            if matches:
+                version = matches[0].strip("'").strip('"')
+                break
+if version is None:
+    raise Exception('Error: version could not be loaded from {}'.format(pyknotid_init_filen))
+
+if 'READTHEDOCS' in environ and environ['READTHEDOCS'] == 'True':
+    print('Installing for doc only')
+    install_requires=['numpy', 'peewee', 'vispy', 'sympy']
+else:
+    install_requires=['numpy', 'networkx', 'planarity',
+                      'peewee', 'vispy', 'sympy', 'appdirs',
+                      'requests', 'tqdm'],
+
+long_description = '''
+Pyknotid
+========
+
+Python (and optional Cython) modules for detecting and measuring
+knotting and linking. pyknotid can analyse space-curves, i.e. sets of
+points in three-dimensions, or can parse standard topological
+representations of knot diagrams.
+
+A graphical interface to some of these tools is available online at
+`Knot ID <http://inclem.net/knotidentifier>`__.
+
+pyknotid was developed as part of the Leverhulme Trust Research
+Programme Grant RP2013-K-009: Scientific Properties of Complex Knots
+(SPOCK), a collaboration between the University of Bristol and Durham
+University in the UK. For more information, see the `SPOCK homepage
+<http://www.maths.dur.ac.uk/spock/index.html/>`__.
+
+If you use pyknotid in your research, please `cite us
+<http://pyknotid.readthedocs.io/en/latest/sources/about.html#cite-us>`__.
+
+Questions or comments are welcome, please email alexander.taylor@bristol.ac.uk.
+
+Documentation
+-------------
+
+pyknotid is documented online at `readthedocs
+<http://pyknotid.readthedocs.io/en/latest/sources/overview.html>`__.
+'''
+
+setup(
+    name='pyknotid',
+    version=version,
+    description=('Tools for identifying and analysing knots, in space-curves '
+                 'or standard topological representations'),
+    long_description=long_description,
+    author='Alexander Taylor',
+    author_email='alexander.taylor@bristol.ac.uk',
+    install_requires=install_requires,
+    ext_modules=ext_modules,
+    include_dirs=include_dirs,
+    packages=find_packages(),
+    package_data=package_data,
+    entry_points={
+        'console_scripts': [
+            'analyse-knot-file = pyknotid.cli.analyse_knot_file:main',
+            'plot-knot = pyknotid.cli.plot_knot:main']
+        }
+)
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app# python3 -c "import Cython; print(Cython.__version__)" 2>&1; pip list 2>/dev/null | grep -i -E 'cython|sympy|networkx|peewee|planarity|vispy|appdirs|tqdm'
+[?2004lTraceback (most recent call last):
+  File [35m"<string>"[0m, line [35m1[0m, in [35m<module>[0m
+    [1;31mimport Cython[0m; print(Cython.__version__)
+    [1;31m^^^^^^^^^^^^^[0m
+[1;35mModuleNotFoundError[0m: [35mNo module named 'Cython'[0m
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app# cat /app/pyknotid/pyknotid/spacecurves/chelpers.pyx
+[?2004l'''
+Cython functions for space curve analysis.
+'''
+
+import numpy as n
+cimport numpy as n
+
+cimport cython
+
+from libc.math cimport abs, pow, sqrt as csqrt, floor
+
+cpdef find_crossings(double [:] v, double [:] dv,
+                     double [:, :] points,
+                     double [:] segment_lengths,
+                     long current_index,
+                     long comparison_index,
+                     double max_segment_length,
+                     long jump_mode=1
+                     ):
+    '''
+    Searches for crossings between the given vector and any other
+    vector in the
+    list of points, returning all of them as a list.
+                     
+    Parameters
+    ----------
+    v0 : ndarray
+        The current point, a 1D vector.
+    dv : ndarray
+        The vector connecting the current point to the next one
+    points : ndarray
+        The array or (x, y) values of all the other points
+    segment_lengths : ndarray
+        The length of each segment joining a point to the
+        next one.
+    current_index : long
+        The index of the point currently being tested.
+    comparison_index : long
+        The index of the first comparison point
+    jump_mode : int
+        1 to check every jump distance, 2 to jump based on
+        the maximum one, 3 to never jump and check the length
+        of every step.
+    '''
+
+    cdef list crossings = []
+    cdef double vx = v[0]
+    cdef double vy = v[1]
+    cdef double vz = v[2]
+    cdef double dvx = dv[0]
+    cdef double dvy = dv[1]
+    cdef double dvz = dv[2]
+
+    cdef double twice_max_segment_length = 2*max_segment_length
+
+    cdef int i = 0
+    cdef double distance, distance_travelled
+    cdef double [:] point
+    cdef double [:] next_point
+    cdef double jump_x, jump_y, jump_z
+    cdef double pz
+    cdef double dpz
+    cdef long intersect
+    cdef double intersect_i, intersect_j
+    cdef double crossing_sign
+    cdef double crossing_direction
+    cdef long jumps
+    cdef long num_jumps
+    cdef int already_jumped = 0
+
+    while i < len(points) - 1:
+        point = points[i]
+        distance = csqrt(pow(vx - point[0], 2) + pow(vy - point[1], 2))
+        if distance < twice_max_segment_length or already_jumped:
+            already_jumped = 0
+            next_point = points[i+1]
+            jump_x = next_point[0] - point[0]
+            jump_y = next_point[1] - point[1]
+            jump_z = next_point[2] - point[2]
+
+
+            intersect, intersect_i, intersect_j = do_vectors_intersect(
+                vx, vy, dvx, dvy, point[0], point[1],
+                jump_x, jump_y)
+
+            if intersect:
+                pz = point[2]
+                dpz = jump_z
+
+                crossing_sign = sign((vz + intersect_i * dvz) -
+                                     (pz + intersect_j * dpz))
+
+                crossing_direction = sign(cross_product(
+                    dvx, dvy, jump_x, jump_y))
+
+                crossings.append([<double>current_index + intersect_i,
+                                  (<double>comparison_index + intersect_j +
+                                   <double>i),
+                                  crossing_sign,
+                                  crossing_sign * crossing_direction])
+                crossings.append([(<double>comparison_index + intersect_j +
+                                   <double>i),
+                                  <double>current_index + intersect_i,
+                                  -1. * crossing_sign,
+                                  crossing_sign * crossing_direction])
+            i += 1
+
+        elif jump_mode == 3:
+            i += 1  # naive mode - check everything
+            already_jumped = 1
+        elif jump_mode == 2:
+            num_jumps = <long>(floor(distance / max_segment_length)) - 1
+            if num_jumps < 1:
+                num_jumps = 1
+            i += num_jumps
+            already_jumped = 1
+        else:  # Catch all other jump modes
+            distance_travelled = 0.
+            jumps = 0
+            while (distance_travelled < (distance - max_segment_length) and
+                   i < len(points)):
+                jumps += 1
+                distance_travelled += segment_lengths[i]
+                i += 1
+            if jumps > 1:
+                i -= 2
+            already_jumped = 1
+            # This keeps jumping until we might be close enough to intersect,
+            # without doing vector arithmetic at every step
+                                  
+    return crossings
+                                      
+
+
+
+cdef tuple do_vectors_intersect(double px, double py, double dpx, double dpy,
+                                double qx, double qy, double dqx, double dqy):
+    """Takes four vectors p, dp and q, dq, then tests whether they cross in
+    the dp/dq region. Returns this boolean, and the (fractional) point where
+    the crossing actually occurs.
+    """
+    cdef double t, u
+
+    if abs(cross_product(dpx, dpy, dqx, dqy)) < 0.000001:
+        return (0, 0., 0.)
+
+    t = cross_product(qx - px, qy - py, dqx, dqy) / cross_product(dpx, dpy,
+                                                                  dqx, dqy)
+    if t < 1.0 and t > 0.0:
+        u = cross_product(qx - px, qy - py, dpx, dpy) / cross_product(dpx, dpy,
+                                                                      dqx, dqy)
+        if u < 1.0 and u > 0.0:
+            return (1, t, u)
+    return (0, -1., -1.)
+        
+cpdef double cross_product(double px, double py, double qx, double qy):
+    '''Simple cython cross product for 2D vectors.'''
+    return px * qy - py * qx
+
+cpdef double sign(double a):
+    return (1. if a > 0. else (-1. if a < 0. else 0.))
+
+cpdef double mag_difference(double [:] a, double [:] b):
+    '''The magnitude of the vector joining a and b'''
+    return csqrt((b[0] - a[0])**2 + (b[1] - a[1])**2)
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app# pip install cython 2>&1 | tail -2
+[?2004l[notice] A new release of pip is available: 25.2 -> 26.1.2
+[notice] To update, run: pip install --upgrade pip
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app# cd /app/pyknotid && grep -rn -E 'np\.(float|int|bool|object|complex|str)[^a-zA-Z0-9_]|n\.(float|int|bool|object|complex|str)[^a-zA-Z0-9_]|alltrue|sometrue|\.ptp\(|row_stack|in1d|trapz|product\(' --include='*.py' --include='*.pyx' pyknotid tests | head -50
+[?2004lpyknotid/invariants.py:137:    dtype = n.complex if isinstance(variable, n.complex) else n.float
+pyknotid/invariants.py:177:    if not isinstance(poly_val, n.complex):
+pyknotid/make/periodic_knot.py:34:    end = n.zeros((30, 3), dtype=n.float)
+pyknotid/make/periodic_knot.py:41:    start = n.zeros((30, 3), dtype=n.float)
+pyknotid/representations/dtnotation.py:55:            dt.append(n.array([int(number) for number in numbers], dtype=n.int))
+pyknotid/representations/dtnotation.py:73:        arr = n.zeros((len(dt) * 2, 2), dtype=n.int)
+pyknotid/representations/gausscode.py:123:            keep = n.ones(len(row), dtype=n.bool)
+pyknotid/representations/representation.py:500:            start_node = nodes_by_height[n.int(n.round(line[0, 1]))]
+pyknotid/representations/representation.py:501:            end_node = nodes_by_height[n.int(n.round(line[-1, 1]))]
+pyknotid/simplify/octree.py:799:    keep = n.ones(len(points), dtype=n.bool)
+pyknotid/spacecurves/ccomplexity.pyx:16:    cdef long [:] indices = np.zeros(4, dtype=np.int)
+pyknotid/spacecurves/ccomplexity.pyx:44:    cdef long [:] indices = np.zeros(4, dtype=np.int)
+pyknotid/spacecurves/ccomplexity.pyx:75:    cdef long [:] indices = np.zeros(4, dtype=np.int)
+pyknotid/spacecurves/chelpers.pyx:93:                crossing_direction = sign(cross_product(
+pyknotid/spacecurves/chelpers.pyx:144:    if abs(cross_product(dpx, dpy, dqx, dqy)) < 0.000001:
+pyknotid/spacecurves/chelpers.pyx:147:    t = cross_product(qx - px, qy - py, dqx, dqy) / cross_product(dpx, dpy,
+pyknotid/spacecurves/chelpers.pyx:150:        u = cross_product(qx - px, qy - py, dpx, dpy) / cross_product(dpx, dpy,
+pyknotid/spacecurves/chelpers.pyx:156:cpdef double cross_product(double px, double py, double qx, double qy):
+pyknotid/spacecurves/helpers.py:80:                crossing_direction = sign(cross_product(
+pyknotid/spacecurves/helpers.py:127:    if abs(cross_product(dpx, dpy, dqx, dqy)) < 0.00001:
+pyknotid/spacecurves/helpers.py:130:    t = cross_product(qx - px, qy - py, dqx, dqy) / cross_product(dpx, dpy,
+pyknotid/spacecurves/helpers.py:133:        u = cross_product(qx - px, qy - py, dpx, dpy) / cross_product(dpx, dpy,
+pyknotid/spacecurves/helpers.py:140:def cross_product(px, py, qx, qy):
+pyknotid/spacecurves/knot.py:315:        indices = n.linspace(0, len(points), num_samples).astype(n.int)
+pyknotid/spacecurves/openknot.py:305:        alexs = n.round(polys[:, 2]).astype(n.int)
+pyknotid/spacecurves/openknot.py:480:        alexs = n.round(polys[:, 2]).astype(n.int)
+pyknotid/spacecurves/openknot.py:683:        self_linkings = n.round(self_linkings[:, 2]).astype(n.int)
+pyknotid/spacecurves/openknot.py:1127:            keeps = n.ones(len(cs), dtype=n.bool)
+pyknotid/spacecurves/openknot.py:1152:        alexs = n.round(polys[:, 2]).astype(n.int)
+pyknotid/spacecurves/openknot.py:1162:        self_linkings = n.round(self_linkings[:, 2]).astype(n.int)
+pyknotid/spacecurves/openknot.py:1214:            keeps = n.ones(len(cs), dtype=n.bool)
+pyknotid/spacecurves/openknot.py:1241:        return ck_fraction, pv_fraction, n.average(pv[:, -1].astype(n.bool) |
+pyknotid/spacecurves/openknot.py:1242:                                                   pk[:, -1].astype(n.bool))
+pyknotid/spacecurves/periodiccell.py:394:        steps_mins = np.floor((b2.mins - b1.maxs) / shape).astype(np.int) + 1
+pyknotid/spacecurves/periodiccell.py:395:        steps_maxs = np.floor((b2.maxs - b1.mins) / shape).astype(np.int)
+pyknotid/spacecurves/periodiccell.py:460:    line_closure = np.round(line_closure).astype(np.int)
+pyknotid/spacecurves/spacecurve.py:83:        self.points = n.array(points).astype(n.float)
+pyknotid/spacecurves/spacecurve.py:638:        z = np.array(z).astype(np.float)
+pyknotid/spacecurves/spacecurve.py:990:        new_points = n.zeros((len(indices), 3), dtype=n.float)
+pyknotid/spacecurves/spacecurve.py:1083:        keep_points = np.ones(len(points), dtype=np.bool)
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app/pyknotid# cat pyknotid/spacecurves/ccomplexity.pyx | head -60
+[?2004lfrom __future__ import print_function
+import sys
+
+import numpy as np
+cimport numpy as np
+
+cimport cython
+
+from libc.math cimport abs, pow, sqrt as csqrt, floor
+
+cpdef cython_higher_order_writhe(double [:, :] points,
+                        double [:, :] contributions,
+                        long [:] order):
+
+    cdef long i1, i2, i3, i4
+    cdef long [:] indices = np.zeros(4, dtype=np.int)
+
+    cdef double writhe = 0.0
+
+    for i1 in range(len(points) - 3):
+        print('\rcython i1', i1, len(points) - 4, end='')
+        sys.stdout.flush()
+        indices[0] = i1
+        for i2 in range(i1 + 1, len(points) - 1):
+            indices[1] = i2
+            for i3 in range(i2 + 1, len(points) - 1):
+                indices[2] = i3
+                for i4 in range(i3 + 1, len(points) - 1):
+                    indices[3] = i4
+
+                    writhe += (contributions[indices[order[0]],
+                                             indices[order[1]]] *
+                               contributions[indices[order[2]],
+                                             indices[order[3]]])
+    print()
+
+    return writhe 
+
+
+cpdef cython_second_order_writhes(double [:, :] points,
+                                  double [:, :] contributions):
+
+    cdef long i1, i2, i3, i4
+    cdef long [:] indices = np.zeros(4, dtype=np.int)
+
+    cdef double writhe_1 = 0.0
+    cdef double writhe_2 = 0.0
+    cdef double writhe_3 = 0.0
+
+    for i1 in range(len(points) - 3):
+        if i1 % 5 == 0:
+            print('\rcython i1', i1, len(points) - 4, end='')
+        sys.stdout.flush()
+        indices[0] = i1
+        for i2 in range(i1 + 1, len(points) - 1):
+            indices[1] = i2
+            for i3 in range(i2 + 1, len(points) - 1):
+                indices[2] = i3
+                for i4 in range(i3 + 1, len(points) - 1):
+                    indices[3] = i4
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app/pyknotid# cat pyknotid/cinvariants.pyx
+[?2004l
+import numpy as n
+cimport numpy as n
+cimport cython
+
+from pyknotid.utils import vprint
+
+cdef long crude_modulus(long val, long modulo):
+    if val < 0:
+        return val + modulo
+    return val
+    
+
+@cython.wraparound(False)
+@cython.boundscheck(False)
+cpdef vassiliev_degree_3(long [:, :] arrows):
+    cdef long num_arrows = len(arrows)
+    cdef long num_crossings = len(arrows) * 2
+
+    cdef long a1s, a1e, a2s, a2e, a3s, a3e
+    cdef long [:] arrow1, arrow2, arrow3
+    cdef long i1, i2, i3
+    cdef long sign1, sign2, sign3
+
+    cdef set used_sets = set()
+    cdef long representations_sum_1 = 0
+    cdef long representations_sum_2 = 0
+    cdef tuple ordered_indices
+    for i1 in range(num_arrows):
+        arrow1 = arrows[i1]
+        a1s = arrow1[0]
+        a1e = arrow1[1]
+        sign1 = arrow1[2]
+
+        a1e = crude_modulus(a1e - a1s, num_crossings)
+
+        for i2 in range(num_arrows):
+            arrow2 = arrows[i2]
+            a2s = arrow2[0]
+            a2e = arrow2[1]
+            sign2 = arrow2[2]
+
+            a2s = crude_modulus(a2s - a1s, num_crossings)
+            a2e = crude_modulus(a2e - a1s, num_crossings)
+
+            for i3 in range(num_arrows):
+                arrow3 = arrows[i3]
+                a3s = arrow3[0]
+                a3e = arrow3[1]
+                sign3 = arrow3[2]
+
+                a3s = crude_modulus(a3s - a1s, num_crossings)
+                a3e = crude_modulus(a3e - a1s, num_crossings)
+
+                ordered_indices = tuple(sorted((i1, i2, i3)))
+                if ordered_indices in used_sets:
+                    continue
+
+                if (a2s < a1e and a3e < a1e and a3e > a2s and
+                    a3s > a1e and a2e > a3s):
+                    representations_sum_1 += sign1 * sign2 * sign3
+                    used_sets.add(ordered_indices)
+                if (a2e < a1e and a3s < a1e and a3s > a2e and
+                    a2s > a1e and a3e > a2s):
+                    representations_sum_2 += sign1 * sign2 * sign3
+                    used_sets.add(ordered_indices)
+
+                    
+    return representations_sum_1 / 2. + representations_sum_2
+
+    
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app/pyknotid# cd /app/pyknotid && find pyknotid tests -name '*.py' -o -name '*.pyx' | xargs sed -i -E 's/\b(n|np)\.float\b/float/g; s/\b(n|np)\.int\b/int/g; s/\b(n|np)\.bool\b/bool/g; s/\b(n|np)\.complex\b/complex/g; s/\b(n|np)\.object\b/object/g; s/\b(n|np)\.str\b/str/g'
+[?2004l[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app/pyknotid# grep -rn -E '\b(n|np)\.(NaN|Inf|float_|unicode_|bool8|int0|uint0|string_|math|alltrue|sometrue)\b' --include='*.py' --include='*.pyx' pyknotid tests
+[?2004l[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app/pyknotid# grep -rn -E '\b(n|np)\.(float|int|bool|complex|object|str)\b' --include='*.py' --include='*.pyx' pyknotid tests | grep -v -E '(float|int|bool|complex|object|str)(64|32|16|8|128|_|ing)' | head
+[?2004l[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app/pyknotid# sed -i "s/'requests', 'tqdm'],/'requests', 'tqdm']/" setup.py && grep -n 'tqdm' setup.py
+[?2004l79:                      'requests', 'tqdm']
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app/pyknotid# pip list 2>/dev/null | grep -i -E 'networkx|peewee|planarity|vispy|sympy|appdirs|requests|tqdm|pytest|cython'
+[?2004lCython  3.2.5
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app/pyknotid# pip install --no-build-isolation . 2>&1 | tail -25
+[?2004l    return super().prepare_metadata_for_build_wheel(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        metadata_directory=metadata_directory,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        config_settings=cs,
+        ^^^^^^^^^^^^^^^^^^^
+        _allow_fallback=_allow_fallback,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/_impl.py", line 224, in prepare_metadata_for_build_wheel
+    return self._call_hook(
+           ~~~~~~~~~~~~~~~^
+        "prepare_metadata_for_build_wheel",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        },
+        ^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/_impl.py", line 402, in _call_hook
+    raise BackendUnavailable(
+    ...<4 lines>...
+    )
+pip._vendor.pyproject_hooks._impl.BackendUnavailable: Cannot import 'setuptools.build_meta'
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app/pyknotid# pip install setuptools wheel 2>&1 | tail -2
+[?2004l[notice] A new release of pip is available: 25.2 -> 26.1.2
+[notice] To update, run: pip install --upgrade pip
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app/pyknotid# pip install --no-build-isolation . 2>&1 | tail -30
+[?2004l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.3/6.3 MB 197.9 MB/s  0:00:00
+Downloading mpmath-1.3.0-py3-none-any.whl (536 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 536.2/536.2 kB 10.4 MB/s  0:00:00
+Downloading tqdm-4.67.3-py3-none-any.whl (78 kB)
+Downloading vispy-0.16.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (1.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.9/1.9 MB 170.1 MB/s  0:00:00
+Downloading freetype_py-2.5.1-py3-none-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.0/1.0 MB 12.4 MB/s  0:00:00
+Downloading hsluv-5.0.4-py2.py3-none-any.whl (5.3 kB)
+Downloading kiwisolver-1.5.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 63.7 MB/s  0:00:00
+Building wheels for collected packages: pyknotid, planarity
+  DEPRECATION: Building 'pyknotid' using the legacy setup.py bdist_wheel mechanism, which will be removed in a future version. pip 25.3 will enforce this behaviour change. A possible replacement is to use the standardized build interface by setting the `--use-pep517` option, (possibly combined with `--no-build-isolation`), or adding a `pyproject.toml` file to the source tree of 'pyknotid'. Discussion can be found at https://github.com/pypa/pip/issues/6334
+  Building wheel for pyknotid (setup.py): started
+  Building wheel for pyknotid (setup.py): finished with status 'done'
+  Created wheel for pyknotid: filename=pyknotid-0.5.3-cp313-cp313-linux_x86_64.whl size=2191055 sha256=5cb272dec15c25388b6299e3a6c1b23a7f3b30482eb3a57f8ce653cf3a80074a
+  Stored in directory: /tmp/pip-ephem-wheel-cache-alf9brr7/wheels/5e/f2/cb/b3080784954f43467934ff337ba823c57a3e1db3303f8227db
+  DEPRECATION: Building 'planarity' using the legacy setup.py bdist_wheel mechanism, which will be removed in a future version. pip 25.3 will enforce this behaviour change. A possible replacement is to use the standardized build interface by setting the `--use-pep517` option, (possibly combined with `--no-build-isolation`), or adding a `pyproject.toml` file to the source tree of 'planarity'. Discussion can be found at https://github.com/pypa/pip/issues/6334
+  Building wheel for planarity (setup.py): started
+  Building wheel for planarity (setup.py): finished with status 'done'
+  Created wheel for planarity: filename=planarity-0.6-cp313-cp313-linux_x86_64.whl size=446961 sha256=5142f098a4a98831280179aa883b856fe86b6fa51896f8b75061f3cea17b61e4
+  Stored in directory: /root/.cache/pip/wheels/ca/57/0a/2e6236ba43f4ffa5b75cb4dd1b22b2af872cfb3b11271209a9
+Successfully built pyknotid planarity
+Installing collected packages: planarity, peewee, mpmath, appdirs, urllib3, tqdm, sympy, networkx, kiwisolver, idna, hsluv, freetype-py, charset_normalizer, certifi, vispy, requests, pyknotid
+
+Successfully installed appdirs-1.4.4 certifi-2026.5.20 charset_normalizer-3.4.7 freetype-py-2.5.1 hsluv-5.0.4 idna-3.18 kiwisolver-1.5.0 mpmath-1.3.0 networkx-3.6.1 peewee-4.0.6 planarity-0.6 pyknotid-0.5.3 requests-2.34.2 sympy-1.14.0 tqdm-4.67.3 urllib3-2.7.0 vispy-0.16.2
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+
+[notice] A new release of pip is available: 25.2 -> 26.1.2
+[notice] To update, run: pip install --upgrade pip
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app/pyknotid# cd /tmp && python3 -c "
+[?2004l[?2004h> import pyknotid
+[?2004l[?2004h> from pyknotid.spacecurves import chelpers, ccomplexity
+[?2004l[?2004h> from pyknotid import cinvariants
+[?2004l[?2004h> import pyknotid.make as mk
+[?2004l[?2004h> import pyknotid.spacecurves as sp
+[?2004l[?2004h> k = sp.Knot(mk.three_twist(num_points=100))
+[?2004l[?2004h> out = k.alexander_polynomial(-1)
+[?2004l[?2004h> print('OK:', out)
+[?2004l[?2004h> print(chelpers.__file__)
+[?2004l[?2004h> print(ccomplexity.__file__)
+[?2004l[?2004h> print(cinvariants.__file__)
+[?2004l[?2004h> "
+[?2004lTraceback (most recent call last):
+  File [35m"<string>"[0m, line [35m5[0m, in [35m<module>[0m
+    import pyknotid.make as mk
+  File [35m"/usr/local/lib/python3.13/site-packages/pyknotid/make/__init__.py"[0m, line [35m13[0m, in [35m<module>[0m
+    from pyknotid.make.torus import torus_knot, torus_link
+  File [35m"/usr/local/lib/python3.13/site-packages/pyknotid/make/torus.py"[0m, line [35m14[0m, in [35m<module>[0m
+    from fractions import gcd
+[1;35mImportError[0m: [35mcannot import name 'gcd' from 'fractions' (/usr/local/lib/python3.13/fractions.py)[0m
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/tmp# cd /app/pyknotid && grep -rn 'fractions' pyknotid tests
+[?2004lpyknotid/make/torus.py:14:from fractions import gcd
+pyknotid/spacecurves/complexity.py:548:    cumulative_fractions = cumulative_lengths / total_length
+pyknotid/spacecurves/complexity.py:549:    assert np.max(cumulative_fractions) <= 1.000001
+pyknotid/spacecurves/complexity.py:558:            # difference = cumulative_fractions[i2] - cumulative_fractions[i1]
+pyknotid/spacecurves/complexity.py:604:    cumulative_fractions = cumulative_lengths / total_length
+pyknotid/spacecurves/complexity.py:605:    assert np.max(cumulative_fractions) <= 1.000001
+pyknotid/spacecurves/knot.py:310:            :meth:`pyknotid.spacecurves.openknot.OpenKnot.alexander_fractions.
+pyknotid/spacecurves/knot.py:330:                    alex = k.alexander_fractions(**kwargs)[-1][0]
+pyknotid/spacecurves/knot.py:737:    alexanders = k.alexander_fractions()
+pyknotid/spacecurves/openknot.py:299:    def alexander_fractions(self, number_of_samples=10, **kwargs):
+pyknotid/spacecurves/openknot.py:474:    def virtual_fractions(self, number_of_samples=10, **kwargs):
+pyknotid/spacecurves/openknot.py:677:    def self_linking_fractions(self, number_of_samples=10, **kwargs):
+pyknotid/spacecurves/openknot.py:886:    def multiroots_fractions(self, number_of_samples=10, **kwargs):
+pyknotid/spacecurves/openknot.py:902:        list_common_fractions = [[elem[0],elem[1]/float(number_of_samples)] for elem in list_common]
+pyknotid/spacecurves/openknot.py:903:        return list_common_fractions
+pyknotid/spacecurves/openknot.py:1147:    def _determinant_and_self_linking_fractions(self, number_of_samples=10,
+pyknotid/spacecurves/openknot.py:1232:    def _closure_and_projection_knotted_fractions(self, number_of_samples=10,
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app/pyknotid# grep -rln 'from fractions import gcd' pyknotid tests | xargs sed -i 's/from fractions import gcd/from math import gcd/' && grep -rn 'import gcd' pyknotid tests
+[?2004lpyknotid/make/torus.py:14:from math import gcd
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app/pyknotid# pip install --no-build-isolation --force-reinstall --no-deps . 2>&1 | tail -3
+[?2004l
+[notice] A new release of pip is available: 25.2 -> 26.1.2
+[notice] To update, run: pip install --upgrade pip
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app/pyknotid# cd /tmp && python3 -c "
+[?2004l[?2004h> import pyknotid
+[?2004l[?2004h> from pyknotid.spacecurves import chelpers, ccomplexity
+[?2004l[?2004h> from pyknotid import cinvariants
+[?2004l[?2004h> import pyknotid.make as mk
+[?2004l[?2004h> import pyknotid.spacecurves as sp
+[?2004l[?2004h> k = sp.Knot(mk.three_twist(num_points=100))
+[?2004l[?2004h> out = k.alexander_polynomial(-1)
+[?2004l[?2004h> print('OK:', out)
+[?2004l[?2004h> print(chelpers.__file__)
+[?2004l[?2004h> print(ccomplexity.__file__)
+[?2004l[?2004h> print(cinvariants.__file__)
+[?2004l[?2004h> "
+[?2004lFinding crossings
+i = 0 / 97
+7.0 crossings found
+
+Simplifying: initially 14 crossings
+-> 10 crossings after 1 runs-> 10 crossings after 2 runs
+OK: 6.999999999999998
+/usr/local/lib/python3.13/site-packages/pyknotid/spacecurves/chelpers.cpython-313-x86_64-linux-gnu.so
+/usr/local/lib/python3.13/site-packages/pyknotid/spacecurves/ccomplexity.cpython-313-x86_64-linux-gnu.so
+/usr/local/lib/python3.13/site-packages/pyknotid/cinvariants.cpython-313-x86_64-linux-gnu.so
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/tmp# pip install pytest 2>&1 | tail -1
+[?2004l[notice] To update, run: pip install --upgrade pip
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/tmp# cd /app/pyknotid && python3 -m pytest tests/ --ignore=tests/test_random_curves.py --ignore=tests/test_catalogue.py -q 2>&1 | tail -30
+[?2004l..................                                                       [100%]
+18 passed in 1.33s
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/app/pyknotid# cd /tmp && python3 -c "import numpy; print('numpy', numpy.__version__); import pyknotid; from pyknotid.spacecurves import chelpers, ccomplexity; from pyknotid import cinvariants; import pyknotid.make as mk; import pyknotid.spacecurves as sp; k = sp.Knot(mk.three_twist(num_points=100), verbose=False); print('alexander:', k.alexander_polynomial(-1))"
+[?2004lnumpy 2.3.0
+alexander: 6.999999999999998
+[?2004hroot@61b3f2a0-bdad-40e9-bccc-32ef28f2b8bf:/tmp# 

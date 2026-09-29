@@ -1,0 +1,5 @@
+{
+  "title": "Build and install POV-Ray 2.2",
+  "query": "Build POV-Ray 2.2 by finding and downloading the source archives, extracting them to /app/povray-2.2, and compiling and installing the binary to /usr/local/bin/povray. The build will be tested by rendering /app/deps/illum1.pov and comparing it against a reference image; /app/deps/illum1.pov must not be modified. As a sanity check, /usr/local/bin/povray +L/app/povray-2.2/povdoc/include +I/app/deps/illum1.pov +O/dev/null +P -V should complete successfully and show rendering statistics.",
+  "review_flags": []
+}

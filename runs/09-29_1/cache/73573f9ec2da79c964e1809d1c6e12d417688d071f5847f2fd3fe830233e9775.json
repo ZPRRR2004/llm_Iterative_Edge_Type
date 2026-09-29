@@ -1,0 +1,12 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_1_1",
+      "start_anchor": "New Terminal Output:\n\nroot@1df7dc8f-5994-41de-a1d4-c5a90e598522:/app# apt-get update -y >/tmp/apt.log 2>&1; tail -3 /tmp/apt.log\n"
+    },
+    {
+      "tool_call_id": "call_1_2",
+      "start_anchor": "root@1df7dc8f-5994-41de-a1d4-c5a90e598522:/app# apt-get install -y build-essential git wget unzip opam >/tmp/apt2.log 2>&1; tail -3 /tmp/apt2.log\n"
+    }
+  ]
+}

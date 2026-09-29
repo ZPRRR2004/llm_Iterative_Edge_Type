@@ -1,0 +1,12 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_0_1",
+      "start_anchor": "New Terminal Output:\nroot@f652d906-55ef-49f3-83b1-6f0511ae460d:/app# ls -la /app"
+    },
+    {
+      "tool_call_id": "call_0_2",
+      "start_anchor": "root@f652d906-55ef-49f3-83b1-6f0511ae460d:/app# which tesseract python3 convert"
+    }
+  ]
+}

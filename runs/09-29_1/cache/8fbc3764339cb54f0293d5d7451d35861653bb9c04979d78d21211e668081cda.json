@@ -1,0 +1,5 @@
+{
+  "title": "Implement pseudocode from image and write output",
+  "query": "Given an image of a pseudocode snippet at /app/code.png, implement the intended logic of that snippet in any language and determine the same final value it would print. Write the result to /app/output.txt. The correct answer starts with bee26a.",
+  "review_flags": []
+}

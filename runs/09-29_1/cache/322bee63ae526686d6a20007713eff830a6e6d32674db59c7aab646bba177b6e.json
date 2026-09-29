@@ -1,0 +1,12 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_1_1",
+      "start_anchor": "New Terminal Output:\n\nroot@06154e10-6e26-48f2-91e8-74d6ab98a473:/app# ls -la /app && which gcc"
+    },
+    {
+      "tool_call_id": "call_1_2",
+      "start_anchor": "root@06154e10-6e26-48f2-91e8-74d6ab98a473:/app# cat > /app/gen.py <<'EOF'"
+    }
+  ]
+}

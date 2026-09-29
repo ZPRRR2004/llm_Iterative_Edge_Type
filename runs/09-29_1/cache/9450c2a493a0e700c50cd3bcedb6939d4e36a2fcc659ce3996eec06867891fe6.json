@@ -1,0 +1,12 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_11_1",
+      "start_anchor": "New Terminal Output:\n\nroot@3a5b0e1a-7403-4ed0-86d8-1abed79c99a2:/app# python3 - << 'EOF'"
+    },
+    {
+      "tool_call_id": "call_11_2",
+      "start_anchor": "root@3a5b0e1a-7403-4ed0-86d8-1abed79c99a2:/app# printf 'U001U002B001200' > /app/src/INPUT.DAT; /root/runtest.sh t1; cp /root/INPUT.orig /app/src/INPUT.DAT; /roo"
+    }
+  ]
+}

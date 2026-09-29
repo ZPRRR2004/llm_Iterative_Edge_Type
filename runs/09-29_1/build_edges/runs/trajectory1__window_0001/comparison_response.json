@@ -1,0 +1,76 @@
+{
+  "stage": "comparison",
+  "window_file": "trajectory1__window_0001.json",
+  "prompt_version": "v0001",
+  "model": "deepseek-flash",
+  "succeeded": true,
+  "completed_at": "2026-09-29T05:31:00.008634+00:00",
+  "duration_seconds": 6.984,
+  "attempt_count": 1,
+  "attempts": [
+    {
+      "attempt": 1,
+      "started_at": "2026-09-29T05:31:00.007521+00:00",
+      "duration_seconds": 6.984,
+      "raw_response": {
+        "id": "7ae95607-1f16-48ed-9394-3a021c498bde",
+        "object": "chat.completion",
+        "created": 1790659858,
+        "model": "deepseek-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"existing\": [], \"new\": [{\"name\": \"ATTEMPTS_TO_REPAIR\", \"definition\": \"An observed execution failure caused by an unmet prerequisite (e.g., a missing interpreter, tool, or dependency) is followed by an agent action intended to supply or install that missing prerequisite so execution can succeed.\", \"source_description\": \"An earlier observed execution failure whose cause is an unavailable prerequisite in the environment.\", \"target_description\": \"A subsequent agent action that installs, provides, or otherwise restores the missing prerequisite.\"}, {\"name\": \"VERIFIES_PREVIOUSLY_PRODUCED_ARTIFACT\", \"definition\": \"A subsequent agent action executes, sources, or exercises an artifact created by an earlier action in order to determine whether that artifact behaves as intended (e.g., running a script or its declared test entry point).\", \"source_description\": \"An artifact produced by an earlier agent action (e.g., a written source or script file).\", \"target_description\": \"A subsequent agent action that loads or runs the artifact as a correctness check on it.\"}, {\"name\": \"DEFERS_BLOCKER_AND_CONTINUES_INDEPENDENT_WORK\", \"definition\": \"After observing that a required prerequisite is unavailable, the agent postpones resolving that blocker and instead performs work that does not depend on it, planning to address the blocker in a later round.\", \"source_description\": \"An observation that a required prerequisite for the end goal is unavailable in the current environment.\", \"target_description\": \"A subsequent agent action that produces deliverables independent of the missing prerequisite, taken before the blocker is resolved.\"}], \"uncertain\": []}",
+              "reasoning_content": "Registry is empty, so all candidates are new.\n\nNeed to classify each candidate. Registry empty → no EXISTING, no UNCERTAIN (no overlap). All three NEW.\n\nWait, but candidate 1 ATTEMPTS_TO_REPAIR matches the example given, and it's NEW since registry empty. All three: NEW.\n\nReturn JSON."
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 1752,
+          "completion_tokens": 413,
+          "total_tokens": 2165,
+          "prompt_tokens_details": {
+            "cached_tokens": 1152
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 70
+          },
+          "prompt_cache_hit_tokens": 1152,
+          "prompt_cache_miss_tokens": 600
+        },
+        "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+      },
+      "response_content": "{\"existing\": [], \"new\": [{\"name\": \"ATTEMPTS_TO_REPAIR\", \"definition\": \"An observed execution failure caused by an unmet prerequisite (e.g., a missing interpreter, tool, or dependency) is followed by an agent action intended to supply or install that missing prerequisite so execution can succeed.\", \"source_description\": \"An earlier observed execution failure whose cause is an unavailable prerequisite in the environment.\", \"target_description\": \"A subsequent agent action that installs, provides, or otherwise restores the missing prerequisite.\"}, {\"name\": \"VERIFIES_PREVIOUSLY_PRODUCED_ARTIFACT\", \"definition\": \"A subsequent agent action executes, sources, or exercises an artifact created by an earlier action in order to determine whether that artifact behaves as intended (e.g., running a script or its declared test entry point).\", \"source_description\": \"An artifact produced by an earlier agent action (e.g., a written source or script file).\", \"target_description\": \"A subsequent agent action that loads or runs the artifact as a correctness check on it.\"}, {\"name\": \"DEFERS_BLOCKER_AND_CONTINUES_INDEPENDENT_WORK\", \"definition\": \"After observing that a required prerequisite is unavailable, the agent postpones resolving that blocker and instead performs work that does not depend on it, planning to address the blocker in a later round.\", \"source_description\": \"An observation that a required prerequisite for the end goal is unavailable in the current environment.\", \"target_description\": \"A subsequent agent action that produces deliverables independent of the missing prerequisite, taken before the blocker is resolved.\"}], \"uncertain\": []}",
+      "error": null
+    }
+  ],
+  "parsed_response": {
+    "existing": [],
+    "new": [
+      {
+        "name": "ATTEMPTS_TO_REPAIR",
+        "definition": "An observed execution failure caused by an unmet prerequisite (e.g., a missing interpreter, tool, or dependency) is followed by an agent action intended to supply or install that missing prerequisite so execution can succeed.",
+        "source_description": "An earlier observed execution failure whose cause is an unavailable prerequisite in the environment.",
+        "target_description": "A subsequent agent action that installs, provides, or otherwise restores the missing prerequisite."
+      },
+      {
+        "name": "VERIFIES_PREVIOUSLY_PRODUCED_ARTIFACT",
+        "definition": "A subsequent agent action executes, sources, or exercises an artifact created by an earlier action in order to determine whether that artifact behaves as intended (e.g., running a script or its declared test entry point).",
+        "source_description": "An artifact produced by an earlier agent action (e.g., a written source or script file).",
+        "target_description": "A subsequent agent action that loads or runs the artifact as a correctness check on it."
+      },
+      {
+        "name": "DEFERS_BLOCKER_AND_CONTINUES_INDEPENDENT_WORK",
+        "definition": "After observing that a required prerequisite is unavailable, the agent postpones resolving that blocker and instead performs work that does not depend on it, planning to address the blocker in a later round.",
+        "source_description": "An observation that a required prerequisite for the end goal is unavailable in the current environment.",
+        "target_description": "A subsequent agent action that produces deliverables independent of the missing prerequisite, taken before the blocker is resolved."
+      }
+    ],
+    "uncertain": []
+  },
+  "previous_calls": []
+}

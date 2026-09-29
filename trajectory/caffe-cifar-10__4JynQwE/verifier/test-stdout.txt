@@ -1,0 +1,526 @@
+Hit:1 http://archive.ubuntu.com/ubuntu noble InRelease
+Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Hit:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+Fetched 126 kB in 3s (40.6 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+curl is already the newest version (8.5.0-2ubuntu10.9).
+0 upgraded, 0 newly installed, 0 to remove and 24 not upgraded.
+downloading uv 0.9.5 x86_64-unknown-linux-gnu
+no checksums to verify
+installing to /root/.local/bin
+  uv
+  uvx
+everything's installed!
+
+To add $HOME/.local/bin to your PATH, either restart your shell or run:
+
+    source $HOME/.local/bin/env (sh, bash, zsh)
+    source $HOME/.local/bin/env.fish (fish)
+Downloading cpython-3.13.9-linux-x86_64-gnu (download) (32.0MiB)
+ Downloading cpython-3.13.9-linux-x86_64-gnu (download)
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 6 packages in 200ms
+============================= test session starts ==============================
+platform linux -- Python 3.13.9, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 6 items
+
+../tests/test_outputs.py .F..FF                                          [100%]
+
+=================================== FAILURES ===================================
+__________________________ test_cifar10_model_exists ___________________________
+
+    def test_cifar10_model_exists():
+        """Test that CIFAR-10 model was actually trained, not just a dummy file"""
+        caffe_base = Path("/app/caffe")
+        model_path = caffe_base / "examples/cifar10/cifar10_quick_iter_500.caffemodel"
+>       assert model_path.exists(), f"File {model_path} does not exist"
+E       AssertionError: File /app/caffe/examples/cifar10/cifar10_quick_iter_500.caffemodel does not exist
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/app/caffe/examples/cifar10/cifar10_quick_iter_500.caffemodel').exists
+
+/tests/test_outputs.py:46: AssertionError
+____________________ test_training_completed_500_iterations ____________________
+
+    def test_training_completed_500_iterations():
+        """Test that training completed exactly 500 iterations with realistic output"""
+        caffe_base = Path("/app/caffe")
+        training_output_file = caffe_base / "training_output.txt"
+    
+        assert training_output_file.exists(), (
+            f"Training output file {training_output_file} does not exist"
+        )
+    
+        with open(training_output_file, "r") as f:
+            training_content = f.read()
+    
+        # Check that training reached iteration 500
+>       assert "Iteration 500" in training_content, (
+            "Training did not complete 500 iterations"
+        )
+E       AssertionError: Training did not complete 500 iterations
+E       assert 'Iteration 500' in 'nohup: ignoring input\nI20260605 00:02:24.755646  3516 caffe.cpp:211] Use CPU.\nI20260605 00:02:24.801218  3516 solve...: loss = 1.17883 (* 1 = 1.17883 loss)\nI20260605 00:46:12.222249  3516 sgd_solver.cpp:105] Iteration 400, lr = 0.001\n'
+
+/tests/test_outputs.py:130: AssertionError
+_______________________ test_model_accuracy_verification _______________________
+
+    def test_model_accuracy_verification():
+        """Test that model accuracy meets threshold and training output exists"""
+        caffe_base = Path("/app/caffe")
+        caffe_bin = _find_caffe_binary()
+        model_file = str(caffe_base / "examples/cifar10/cifar10_quick_train_test.prototxt")
+        weights_file = str(
+            caffe_base / "examples/cifar10/cifar10_quick_iter_500.caffemodel"
+        )
+        training_output_file = caffe_base / "training_output.txt"
+    
+        assert training_output_file.exists(), (
+            f"Training output file {training_output_file} does not exist"
+        )
+    
+        with open(training_output_file, "r") as f:
+            training_content = f.read()
+    
+        # Extract final accuracy from training (test net evaluation during training)
+        train_accuracy_matches = re.findall(
+            r"Test net output #0: accuracy = ([\d.]+)", training_content
+        )
+        assert train_accuracy_matches, (
+            "Could not find any accuracy measurements in training output"
+        )
+        final_training_accuracy = float(train_accuracy_matches[-1])  # Use final accuracy
+    
+        result = subprocess.run(
+            [
+                str(caffe_bin),
+                "test",
+                "-model",
+                model_file,
+                "-weights",
+                weights_file,
+                "-iterations",
+                "100",
+            ],
+            capture_output=True,
+            text=True,
+            cwd=str(caffe_base),
+        )
+    
+>       assert result.returncode == 0, f"Caffe test command failed: {result.stderr}"
+E       AssertionError: Caffe test command failed: I20260605 00:49:43.204881  5473 caffe.cpp:284] Use CPU.
+E         I20260605 00:49:43.209144  5473 net.cpp:294] The NetState phase (1) differed from the phase (0) specified by a rule in layer cifar
+E         I20260605 00:49:43.209177  5473 net.cpp:51] Initializing net from parameters: 
+E         name: "CIFAR10_quick"
+E         state {
+E           phase: TEST
+E           level: 0
+E           stage: ""
+E         }
+E         layer {
+E           name: "cifar"
+E           type: "Data"
+E           top: "data"
+E           top: "label"
+E           include {
+E             phase: TEST
+E           }
+E           transform_param {
+E             mean_file: "examples/cifar10/mean.binaryproto"
+E           }
+E           data_param {
+E             source: "examples/cifar10/cifar10_test_lmdb"
+E             batch_size: 100
+E             backend: LMDB
+E           }
+E         }
+E         layer {
+E           name: "conv1"
+E           type: "Convolution"
+E           bottom: "data"
+E           top: "conv1"
+E           param {
+E             lr_mult: 1
+E           }
+E           param {
+E             lr_mult: 2
+E           }
+E           convolution_param {
+E             num_output: 32
+E             pad: 2
+E             kernel_size: 5
+E             stride: 1
+E             weight_filler {
+E               type: "gaussian"
+E               std: 0.0001
+E             }
+E             bias_filler {
+E               type: "constant"
+E             }
+E           }
+E         }
+E         layer {
+E           name: "pool1"
+E           type: "Pooling"
+E           bottom: "conv1"
+E           top: "pool1"
+E           pooling_param {
+E             pool: MAX
+E             kernel_size: 3
+E             stride: 2
+E           }
+E         }
+E         layer {
+E           name: "relu1"
+E           type: "ReLU"
+E           bottom: "pool1"
+E           top: "pool1"
+E         }
+E         layer {
+E           name: "conv2"
+E           type: "Convolution"
+E           bottom: "pool1"
+E           top: "conv2"
+E           param {
+E             lr_mult: 1
+E           }
+E           param {
+E             lr_mult: 2
+E           }
+E           convolution_param {
+E             num_output: 32
+E             pad: 2
+E             kernel_size: 5
+E             stride: 1
+E             weight_filler {
+E               type: "gaussian"
+E               std: 0.01
+E             }
+E             bias_filler {
+E               type: "constant"
+E             }
+E           }
+E         }
+E         layer {
+E           name: "relu2"
+E           type: "ReLU"
+E           bottom: "conv2"
+E           top: "conv2"
+E         }
+E         layer {
+E           name: "pool2"
+E           type: "Pooling"
+E           bottom: "conv2"
+E           top: "pool2"
+E           pooling_param {
+E             pool: AVE
+E             kernel_size: 3
+E             stride: 2
+E           }
+E         }
+E         layer {
+E           name: "conv3"
+E           type: "Convolution"
+E           bottom: "pool2"
+E           top: "conv3"
+E           param {
+E             lr_mult: 1
+E           }
+E           param {
+E             lr_mult: 2
+E           }
+E           convolution_param {
+E             num_output: 64
+E             pad: 2
+E             kernel_size: 5
+E             stride: 1
+E             weight_filler {
+E               type: "gaussian"
+E               std: 0.01
+E             }
+E             bias_filler {
+E               type: "constant"
+E             }
+E           }
+E         }
+E         layer {
+E           name: "relu3"
+E           type: "ReLU"
+E           bottom: "conv3"
+E           top: "conv3"
+E         }
+E         layer {
+E           name: "pool3"
+E           type: "Pooling"
+E           bottom: "conv3"
+E           top: "pool3"
+E           pooling_param {
+E             pool: AVE
+E             kernel_size: 3
+E             stride: 2
+E           }
+E         }
+E         layer {
+E           name: "ip1"
+E           type: "InnerProduct"
+E           bottom: "pool3"
+E           top: "ip1"
+E           param {
+E             lr_mult: 1
+E           }
+E           param {
+E             lr_mult: 2
+E           }
+E           inner_product_param {
+E             num_output: 64
+E             weight_filler {
+E               type: "gaussian"
+E               std: 0.1
+E             }
+E             bias_filler {
+E               type: "constant"
+E             }
+E           }
+E         }
+E         layer {
+E           name: "ip2"
+E           type: "InnerProduct"
+E           bottom: "ip1"
+E           top: "ip2"
+E           param {
+E             lr_mult: 1
+E           }
+E           param {
+E             lr_mult: 2
+E           }
+E           inner_product_param {
+E             num_output: 10
+E             weight_filler {
+E               type: "gaussian"
+E               std: 0.1
+E             }
+E             bias_filler {
+E               type: "constant"
+E             }
+E           }
+E         }
+E         layer {
+E           name: "accuracy"
+E           type: "Accuracy"
+E           bottom: "ip2"
+E           bottom: "label"
+E           top: "accuracy"
+E           include {
+E             phase: TEST
+E           }
+E         }
+E         layer {
+E           name: "loss"
+E           type: "SoftmaxWithLoss"
+E           bottom: "ip2"
+E           bottom: "label"
+E           top: "loss"
+E         }
+E         I20260605 00:49:43.209317  5473 layer_factory.hpp:77] Creating layer cifar
+E         I20260605 00:49:43.209408  5473 db_lmdb.cpp:35] Opened lmdb examples/cifar10/cifar10_test_lmdb
+E         I20260605 00:49:43.209440  5473 net.cpp:84] Creating Layer cifar
+E         I20260605 00:49:43.209452  5473 net.cpp:380] cifar -> data
+E         I20260605 00:49:43.209488  5473 net.cpp:380] cifar -> label
+E         I20260605 00:49:43.209501  5473 data_transformer.cpp:25] Loading mean file from: examples/cifar10/mean.binaryproto
+E         I20260605 00:49:43.301338  5473 data_layer.cpp:45] output data size: 100,3,32,32
+E         I20260605 00:49:43.301625  5473 net.cpp:122] Setting up cifar
+E         I20260605 00:49:43.301640  5473 net.cpp:129] Top shape: 100 3 32 32 (307200)
+E         I20260605 00:49:43.301653  5473 net.cpp:129] Top shape: 100 (100)
+E         I20260605 00:49:43.301662  5473 net.cpp:137] Memory required for data: 1229200
+E         I20260605 00:49:43.301676  5473 layer_factory.hpp:77] Creating layer label_cifar_1_split
+E         I20260605 00:49:43.301690  5473 net.cpp:84] Creating Layer label_cifar_1_split
+E         I20260605 00:49:43.301702  5473 net.cpp:406] label_cifar_1_split <- label
+E         I20260605 00:49:43.301745  5473 net.cpp:380] label_cifar_1_split -> label_cifar_1_split_0
+E         I20260605 00:49:43.301759  5473 net.cpp:380] label_cifar_1_split -> label_cifar_1_split_1
+E         I20260605 00:49:43.301771  5473 net.cpp:122] Setting up label_cifar_1_split
+E         I20260605 00:49:43.301779  5473 net.cpp:129] Top shape: 100 (100)
+E         I20260605 00:49:43.301789  5473 net.cpp:129] Top shape: 100 (100)
+E         I20260605 00:49:43.301797  5473 net.cpp:137] Memory required for data: 1230000
+E         I20260605 00:49:43.301805  5473 layer_factory.hpp:77] Creating layer conv1
+E         I20260605 00:49:43.301826  5473 net.cpp:84] Creating Layer conv1
+E         I20260605 00:49:43.301834  5473 net.cpp:406] conv1 <- data
+E         I20260605 00:49:43.301844  5473 net.cpp:380] conv1 -> conv1
+E         I20260605 00:49:43.301952  5473 net.cpp:122] Setting up conv1
+E         I20260605 00:49:43.301962  5473 net.cpp:129] Top shape: 100 32 32 32 (3276800)
+E         I20260605 00:49:43.301975  5473 net.cpp:137] Memory required for data: 14337200
+E         I20260605 00:49:43.301990  5473 layer_factory.hpp:77] Creating layer pool1
+E         I20260605 00:49:43.302001  5473 net.cpp:84] Creating Layer pool1
+E         I20260605 00:49:43.302009  5473 net.cpp:406] pool1 <- conv1
+E         I20260605 00:49:43.302019  5473 net.cpp:380] pool1 -> pool1
+E         I20260605 00:49:43.302037  5473 net.cpp:122] Setting up pool1
+E         I20260605 00:49:43.302047  5473 net.cpp:129] Top shape: 100 32 16 16 (819200)
+E         I20260605 00:49:43.302055  5473 net.cpp:137] Memory required for data: 17614000
+E         I20260605 00:49:43.302064  5473 layer_factory.hpp:77] Creating layer relu1
+E         I20260605 00:49:43.302080  5473 net.cpp:84] Creating Layer relu1
+E         I20260605 00:49:43.302089  5473 net.cpp:406] relu1 <- pool1
+E         I20260605 00:49:43.302098  5473 net.cpp:367] relu1 -> pool1 (in-place)
+E         I20260605 00:49:43.302110  5473 net.cpp:122] Setting up relu1
+E         I20260605 00:49:43.302119  5473 net.cpp:129] Top shape: 100 32 16 16 (819200)
+E         I20260605 00:49:43.302129  5473 net.cpp:137] Memory required for data: 20890800
+E         I20260605 00:49:43.302137  5473 layer_factory.hpp:77] Creating layer conv2
+E         I20260605 00:49:43.302150  5473 net.cpp:84] Creating Layer conv2
+E         I20260605 00:49:43.302160  5473 net.cpp:406] conv2 <- pool1
+E         I20260605 00:49:43.302170  5473 net.cpp:380] conv2 -> conv2
+E         I20260605 00:49:43.302497  5473 net.cpp:122] Setting up conv2
+E         I20260605 00:49:43.302520  5473 net.cpp:129] Top shape: 100 32 16 16 (819200)
+E         I20260605 00:49:43.302538  5473 net.cpp:137] Memory required for data: 24167600
+E         I20260605 00:49:43.302558  5473 layer_factory.hpp:77] Creating layer relu2
+E         I20260605 00:49:43.302587  5473 net.cpp:84] Creating Layer relu2
+E         I20260605 00:49:43.302603  5473 net.cpp:406] relu2 <- conv2
+E         I20260605 00:49:43.302623  5473 net.cpp:367] relu2 -> conv2 (in-place)
+E         I20260605 00:49:43.302649  5473 net.cpp:122] Setting up relu2
+E         I20260605 00:49:43.302668  5473 net.cpp:129] Top shape: 100 32 16 16 (819200)
+E         I20260605 00:49:43.302686  5473 net.cpp:137] Memory required for data: 27444400
+E         I20260605 00:49:43.302703  5473 layer_factory.hpp:77] Creating layer pool2
+E         I20260605 00:49:43.302742  5473 net.cpp:84] Creating Layer pool2
+E         I20260605 00:49:43.302760  5473 net.cpp:406] pool2 <- conv2
+E         I20260605 00:49:43.302779  5473 net.cpp:380] pool2 -> pool2
+E         I20260605 00:49:43.302798  5473 net.cpp:122] Setting up pool2
+E         I20260605 00:49:43.302825  5473 net.cpp:129] Top shape: 100 32 8 8 (204800)
+E         I20260605 00:49:43.302842  5473 net.cpp:137] Memory required for data: 28263600
+E         I20260605 00:49:43.302858  5473 layer_factory.hpp:77] Creating layer conv3
+E         I20260605 00:49:43.302882  5473 net.cpp:84] Creating Layer conv3
+E         I20260605 00:49:43.302899  5473 net.cpp:406] conv3 <- pool2
+E         I20260605 00:49:43.302917  5473 net.cpp:380] conv3 -> conv3
+E         I20260605 00:49:43.303464  5473 net.cpp:122] Setting up conv3
+E         I20260605 00:49:43.303478  5473 net.cpp:129] Top shape: 100 64 8 8 (409600)
+E         I20260605 00:49:43.303489  5473 net.cpp:137] Memory required for data: 29902000
+E         I20260605 00:49:43.303499  5473 layer_factory.hpp:77] Creating layer relu3
+E         I20260605 00:49:43.303508  5473 net.cpp:84] Creating Layer relu3
+E         I20260605 00:49:43.303516  5473 net.cpp:406] relu3 <- conv3
+E         I20260605 00:49:43.303525  5473 net.cpp:367] relu3 -> conv3 (in-place)
+E         I20260605 00:49:43.303547  5473 net.cpp:122] Setting up relu3
+E         I20260605 00:49:43.303555  5473 net.cpp:129] Top shape: 100 64 8 8 (409600)
+E         I20260605 00:49:43.303563  5473 net.cpp:137] Memory required for data: 31540400
+E         I20260605 00:49:43.303571  5473 layer_factory.hpp:77] Creating layer pool3
+E         I20260605 00:49:43.303582  5473 net.cpp:84] Creating Layer pool3
+E         I20260605 00:49:43.303591  5473 net.cpp:406] pool3 <- conv3
+E         I20260605 00:49:43.303599  5473 net.cpp:380] pool3 -> pool3
+E         I20260605 00:49:43.303609  5473 net.cpp:122] Setting up pool3
+E         I20260605 00:49:43.303617  5473 net.cpp:129] Top shape: 100 64 4 4 (102400)
+E         I20260605 00:49:43.303625  5473 net.cpp:137] Memory required for data: 31950000
+E         I20260605 00:49:43.303633  5473 layer_factory.hpp:77] Creating layer ip1
+E         I20260605 00:49:43.303645  5473 net.cpp:84] Creating Layer ip1
+E         I20260605 00:49:43.303653  5473 net.cpp:406] ip1 <- pool3
+E         I20260605 00:49:43.303663  5473 net.cpp:380] ip1 -> ip1
+E         I20260605 00:49:43.304302  5473 net.cpp:122] Setting up ip1
+E         I20260605 00:49:43.304319  5473 net.cpp:129] Top shape: 100 64 (6400)
+E         I20260605 00:49:43.304328  5473 net.cpp:137] Memory required for data: 31975600
+E         I20260605 00:49:43.304339  5473 layer_factory.hpp:77] Creating layer ip2
+E         I20260605 00:49:43.304348  5473 net.cpp:84] Creating Layer ip2
+E         I20260605 00:49:43.304356  5473 net.cpp:406] ip2 <- ip1
+E         I20260605 00:49:43.304365  5473 net.cpp:380] ip2 -> ip2
+E         I20260605 00:49:43.304384  5473 net.cpp:122] Setting up ip2
+E         I20260605 00:49:43.304394  5473 net.cpp:129] Top shape: 100 10 (1000)
+E         I20260605 00:49:43.304401  5473 net.cpp:137] Memory required for data: 31979600
+E         I20260605 00:49:43.304411  5473 layer_factory.hpp:77] Creating layer ip2_ip2_0_split
+E         I20260605 00:49:43.304426  5473 net.cpp:84] Creating Layer ip2_ip2_0_split
+E         I20260605 00:49:43.304435  5473 net.cpp:406] ip2_ip2_0_split <- ip2
+E         I20260605 00:49:43.304442  5473 net.cpp:380] ip2_ip2_0_split -> ip2_ip2_0_split_0
+E         I20260605 00:49:43.304452  5473 net.cpp:380] ip2_ip2_0_split -> ip2_ip2_0_split_1
+E         I20260605 00:49:43.304462  5473 net.cpp:122] Setting up ip2_ip2_0_split
+E         I20260605 00:49:43.304471  5473 net.cpp:129] Top shape: 100 10 (1000)
+E         I20260605 00:49:43.304478  5473 net.cpp:129] Top shape: 100 10 (1000)
+E         I20260605 00:49:43.304486  5473 net.cpp:137] Memory required for data: 31987600
+E         I20260605 00:49:43.304494  5473 layer_factory.hpp:77] Creating layer accuracy
+E         I20260605 00:49:43.304505  5473 net.cpp:84] Creating Layer accuracy
+E         I20260605 00:49:43.304512  5473 net.cpp:406] accuracy <- ip2_ip2_0_split_0
+E         I20260605 00:49:43.304522  5473 net.cpp:406] accuracy <- label_cifar_1_split_0
+E         I20260605 00:49:43.304533  5473 net.cpp:380] accuracy -> accuracy
+E         I20260605 00:49:43.304543  5473 net.cpp:122] Setting up accuracy
+E         I20260605 00:49:43.304550  5473 net.cpp:129] Top shape: (1)
+E         I20260605 00:49:43.304558  5473 net.cpp:137] Memory required for data: 31987604
+E         I20260605 00:49:43.304566  5473 layer_factory.hpp:77] Creating layer loss
+E         I20260605 00:49:43.304575  5473 net.cpp:84] Creating Layer loss
+E         I20260605 00:49:43.304584  5473 net.cpp:406] loss <- ip2_ip2_0_split_1
+E         I20260605 00:49:43.304592  5473 net.cpp:406] loss <- label_cifar_1_split_1
+E         I20260605 00:49:43.304601  5473 net.cpp:380] loss -> loss
+E         I20260605 00:49:43.304615  5473 layer_factory.hpp:77] Creating layer loss
+E         I20260605 00:49:43.304641  5473 net.cpp:122] Setting up loss
+E         I20260605 00:49:43.304647  5473 net.cpp:129] Top shape: (1)
+E         I20260605 00:49:43.304656  5473 net.cpp:132]     with loss weight 1
+E         I20260605 00:49:43.304677  5473 net.cpp:137] Memory required for data: 31987608
+E         I20260605 00:49:43.304687  5473 net.cpp:198] loss needs backward computation.
+E         I20260605 00:49:43.304698  5473 net.cpp:200] accuracy does not need backward computation.
+E         I20260605 00:49:43.304708  5473 net.cpp:198] ip2_ip2_0_split needs backward computation.
+E         I20260605 00:49:43.304715  5473 net.cpp:198] ip2 needs backward computation.
+E         I20260605 00:49:43.304725  5473 net.cpp:198] ip1 needs backward computation.
+E         I20260605 00:49:43.304735  5473 net.cpp:198] pool3 needs backward computation.
+E         I20260605 00:49:43.304755  5473 net.cpp:198] relu3 needs backward computation.
+E         I20260605 00:49:43.304764  5473 net.cpp:198] conv3 needs backward computation.
+E         I20260605 00:49:43.304774  5473 net.cpp:198] pool2 needs backward computation.
+E         I20260605 00:49:43.304785  5473 net.cpp:198] relu2 needs backward computation.
+E         I20260605 00:49:43.304793  5473 net.cpp:198] conv2 needs backward computation.
+E         I20260605 00:49:43.304804  5473 net.cpp:198] relu1 needs backward computation.
+E         I20260605 00:49:43.304824  5473 net.cpp:198] pool1 needs backward computation.
+E         I20260605 00:49:43.304833  5473 net.cpp:198] conv1 needs backward computation.
+E         I20260605 00:49:43.304844  5473 net.cpp:200] label_cifar_1_split does not need backward computation.
+E         I20260605 00:49:43.304863  5473 net.cpp:200] cifar does not need backward computation.
+E         I20260605 00:49:43.304874  5473 net.cpp:242] This network produces output accuracy
+E         I20260605 00:49:43.304883  5473 net.cpp:242] This network produces output loss
+E         I20260605 00:49:43.304899  5473 net.cpp:255] Network initialization done.
+E         HDF5-DIAG: Error detected in HDF5 (1.10.10) thread 1:
+E           #000: ../../../src/H5F.c line 277 in H5Fis_hdf5(): unable to determine if file is accessible as HDF5
+E             major: File accessibility
+E             minor: Not an HDF5 file
+E           #001: ../../../src/H5Fint.c line 929 in H5F__is_hdf5(): unable to open file
+E             major: File accessibility
+E             minor: Unable to initialize object
+E           #002: ../../../src/H5FD.c line 722 in H5FD_open(): open failed
+E             major: Virtual File Layer
+E             minor: Unable to initialize object
+E           #003: ../../../src/H5FDsec2.c line 351 in H5FD__sec2_open(): unable to open file: name = '/app/caffe/examples/cifar10/cifar10_quick_iter_500.caffemodel', errno = 2, error message = 'No such file or directory', flags = 0, o_flags = 0
+E             major: File accessibility
+E             minor: Unable to open file
+E         HDF5-DIAG: Error detected in HDF5 (1.10.10) thread 1:
+E           #000: ../../../src/H5F.c line 412 in H5Fopen(): unable to open file
+E             major: File accessibility
+E             minor: Unable to open file
+E           #001: ../../../src/H5Fint.c line 1655 in H5F_open(): unable to open file: time = Fri Jun  5 00:49:43 2026
+E         , name = '/app/caffe/examples/cifar10/cifar10_quick_iter_500.caffemodel', tent_flags = 0
+E             major: File accessibility
+E             minor: Unable to open file
+E           #002: ../../../src/H5FD.c line 722 in H5FD_open(): open failed
+E             major: Virtual File Layer
+E             minor: Unable to initialize object
+E           #003: ../../../src/H5FDsec2.c line 351 in H5FD__sec2_open(): unable to open file: name = '/app/caffe/examples/cifar10/cifar10_quick_iter_500.caffemodel', errno = 2, error message = 'No such file or directory', flags = 0, o_flags = 0
+E             major: File accessibility
+E             minor: Unable to open file
+E         F20260605 00:49:43.404817  5473 net.cpp:791] Check failed: file_hid >= 0 (-1 vs. 0) Couldn't open /app/caffe/examples/cifar10/cifar10_quick_iter_500.caffemodel
+E         *** Check failure stack trace: ***
+E             @     0x7c27aadb5031  google::LogMessage::Fail()
+E             @     0x7c27aadbc463  google::LogMessage::SendToLog()
+E             @     0x7c27aadb4b78  google::LogMessage::Flush()
+E             @     0x7c27aadc166d  google::LogMessageFatal::~LogMessageFatal()
+E             @     0x7c27aafe9603  caffe::Net<>::CopyTrainedLayersFromHDF5()
+E             @     0x7c27aafeb994  caffe::Net<>::CopyTrainedLayersFrom()
+E             @     0x6177226d73f2  test()
+E             @     0x6177226d3c72  main
+E             @     0x7c27aa6021ca  (unknown)
+E             @     0x7c27aa60228b  __libc_start_main
+E             @     0x6177226d45e5  _start
+E         
+E       assert -6 == 0
+E        +  where -6 = CompletedProcess(args=['/app/caffe/.build_release/tools/caffe.bin', 'test', '-model', '/app/caffe/examples/cifar10/cif...n    @     0x7c27aa6021ca  (unknown)\n    @     0x7c27aa60228b  __libc_start_main\n    @     0x6177226d45e5  _start\n').returncode
+
+/tests/test_outputs.py:197: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED ../tests/test_outputs.py::test_caffe_version_and_source
+PASSED ../tests/test_outputs.py::test_prototxt_files_exist
+PASSED ../tests/test_outputs.py::test_cpu_only_training_configured
+FAILED ../tests/test_outputs.py::test_cifar10_model_exists - AssertionError: ...
+FAILED ../tests/test_outputs.py::test_training_completed_500_iterations - Ass...
+FAILED ../tests/test_outputs.py::test_model_accuracy_verification - Assertion...
+========================= 3 failed, 3 passed in 2.40s ==========================

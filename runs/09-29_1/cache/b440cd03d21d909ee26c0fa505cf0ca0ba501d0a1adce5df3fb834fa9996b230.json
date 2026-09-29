@@ -1,0 +1,28 @@
+{
+  "assignments": [
+    {
+      "tool_call_id": "call_2_1",
+      "start_anchor": "New Terminal Output:\n\nroot@add4014a-9539-42f3-b34e-07ddd25294e7:/app# useradd -m -s /bin/bash user\n"
+    },
+    {
+      "tool_call_id": "call_2_2",
+      "start_anchor": "root@add4014a-9539-42f3-b34e-07ddd25294e7:/app# mkdir -p /git/server /var/www/html && git init --bare /git/server\n"
+    },
+    {
+      "tool_call_id": "call_2_3",
+      "start_anchor": "root@add4014a-9539-42f3-b34e-07ddd25294e7:/app# cat > /git/server/hooks/post-receive << 'EOF'\n"
+    },
+    {
+      "tool_call_id": "call_2_4",
+      "start_anchor": "root@add4014a-9539-42f3-b34e-07ddd25294e7:/app# chmod +x /git/server/hooks/post-receive && chown -R user:user /git/server /var/www/html\n"
+    },
+    {
+      "tool_call_id": "call_2_5",
+      "start_anchor": "root@add4014a-9539-42f3-b34e-07ddd25294e7:/app# nohup python3 -m http.server 8080 --directory /var/www/html > /var/log/webserver.log 2>&1 &\n"
+    },
+    {
+      "tool_call_id": "call_2_6",
+      "start_anchor": "root@add4014a-9539-42f3-b34e-07ddd25294e7:/app# sleep 1; curl -s http://localhost:8080/ | head -5\n"
+    }
+  ]
+}

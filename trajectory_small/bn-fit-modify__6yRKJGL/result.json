@@ -1,0 +1,160 @@
+{
+  "id": "4777db96-1ac8-4be7-b494-4d9d094e1ee2",
+  "task_name": "terminal-bench/bn-fit-modify",
+  "trial_name": "bn-fit-modify__6yRKJGL",
+  "trial_uri": "file:///home/alex/.cursor/worktrees/harbor__SSH__tbench-gcp_/txv1/jobs/tbench-2-1-fable-5__high-fallback/bn-fit-modify__6yRKJGL",
+  "task_id": {
+    "org": "terminal-bench",
+    "name": "bn-fit-modify",
+    "ref": "sha256:b5f9644970c17ad9ddb46b7266f7bcd87c761d77d7e6f55d7cfe7284d5ff66e9"
+  },
+  "source": "terminal-bench/terminal-bench-2-1",
+  "task_checksum": "de87a0c253c75b7dfbc68a2fcf120d5bd77b1df632c7469e3d0a3b74321d26c2",
+  "config": {
+    "task": {
+      "path": null,
+      "git_url": null,
+      "git_commit_id": null,
+      "name": "terminal-bench/bn-fit-modify",
+      "ref": "sha256:b5f9644970c17ad9ddb46b7266f7bcd87c761d77d7e6f55d7cfe7284d5ff66e9",
+      "overwrite": false,
+      "download_dir": null,
+      "source": "terminal-bench/terminal-bench-2-1"
+    },
+    "trial_name": "bn-fit-modify__6yRKJGL",
+    "trials_dir": "jobs/tbench-2-1-fable-5__high-fallback",
+    "timeout_multiplier": 1.0,
+    "agent_timeout_multiplier": null,
+    "verifier_timeout_multiplier": null,
+    "agent_setup_timeout_multiplier": null,
+    "environment_build_timeout_multiplier": null,
+    "agent": {
+      "name": "terminus-2",
+      "import_path": null,
+      "model_name": "anthropic/claude-fable-5",
+      "skills": [],
+      "override_timeout_sec": null,
+      "override_setup_timeout_sec": null,
+      "max_timeout_sec": null,
+      "extra_allowed_hosts": [],
+      "kwargs": {
+        "model_info": {
+          "supports_adaptive_thinking": true,
+          "supports_reasoning": true,
+          "supports_max_reasoning_effort": true,
+          "supports_xhigh_reasoning_effort": true
+        },
+        "temperature": 1,
+        "llm_kwargs": {
+          "extra_headers": {
+            "anthropic-beta": "server-side-fallback-2026-06-02"
+          }
+        },
+        "llm_call_kwargs": {
+          "max_tokens": 128000,
+          "allowed_openai_params": [
+            "thinking",
+            "fallback"
+          ],
+          "thinking": {
+            "type": "adaptive"
+          },
+          "output_config": {
+            "effort": "high"
+          },
+          "fallback": [
+            {
+              "model": "claude-opus-4-8"
+            }
+          ]
+        },
+        "reasoning_effort": "high"
+      },
+      "env": {},
+      "mcp_servers": []
+    },
+    "environment": {
+      "type": "daytona",
+      "import_path": null,
+      "force_build": false,
+      "delete": true,
+      "cpu_enforcement_policy": "auto",
+      "memory_enforcement_policy": "auto",
+      "override_cpus": null,
+      "override_memory_mb": null,
+      "override_storage_mb": null,
+      "override_gpus": null,
+      "override_tpu": null,
+      "mounts": null,
+      "extra_docker_compose": [],
+      "env": {},
+      "kwargs": {},
+      "extra_allowed_hosts": []
+    },
+    "verifier": {
+      "override_timeout_sec": null,
+      "max_timeout_sec": null,
+      "env": {},
+      "disable": false
+    },
+    "artifacts": [],
+    "extra_instruction_paths": [],
+    "job_id": "17f04e4f-1a75-4204-9b75-d042ef0333ec"
+  },
+  "agent_info": {
+    "name": "terminus-2",
+    "version": "2.0.0",
+    "model_info": {
+      "name": "claude-fable-5",
+      "provider": "anthropic"
+    }
+  },
+  "agent_result": {
+    "n_input_tokens": 57596,
+    "n_cache_tokens": 44848,
+    "n_output_tokens": 8191,
+    "cost_usd": null,
+    "rollout_details": [],
+    "metadata": {
+      "n_episodes": 10,
+      "api_request_times_msec": [
+        8944.695949554443,
+        11257.022857666016,
+        8499.356508255005,
+        10564.755916595459,
+        10504.544734954834,
+        13991.376399993896,
+        42912.53852844238,
+        23227.629899978638,
+        10854.052305221558,
+        8973.337650299072
+      ],
+      "summarization_count": 0
+    }
+  },
+  "verifier_result": {
+    "rewards": {
+      "reward": 1.0
+    }
+  },
+  "exception_info": null,
+  "started_at": "2026-06-04T23:44:39.794527Z",
+  "finished_at": "2026-06-04T23:52:39.856495Z",
+  "environment_setup": {
+    "started_at": "2026-06-04T23:44:39.796520Z",
+    "finished_at": "2026-06-04T23:44:41.530723Z"
+  },
+  "agent_setup": {
+    "started_at": "2026-06-04T23:44:41.530757Z",
+    "finished_at": "2026-06-04T23:45:01.925019Z"
+  },
+  "agent_execution": {
+    "started_at": "2026-06-04T23:45:01.925144Z",
+    "finished_at": "2026-06-04T23:52:24.576160Z"
+  },
+  "verifier": {
+    "started_at": "2026-06-04T23:52:26.533825Z",
+    "finished_at": "2026-06-04T23:52:39.555694Z"
+  },
+  "step_results": null
+}

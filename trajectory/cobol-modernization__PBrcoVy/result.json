@@ -1,0 +1,168 @@
+{
+  "id": "56432cd2-e20b-4c99-9fac-f6cd90bab88c",
+  "task_name": "terminal-bench/cobol-modernization",
+  "trial_name": "cobol-modernization__PBrcoVy",
+  "trial_uri": "file:///home/alex/.cursor/worktrees/harbor__SSH__tbench-gcp_/txv1/jobs/tbench-2-1-fable-5__high-fallback/cobol-modernization__PBrcoVy",
+  "task_id": {
+    "org": "terminal-bench",
+    "name": "cobol-modernization",
+    "ref": "sha256:e03aa03965eee48c9f772d566ff9bcd741fceeac9693123f82a13fdd46be0d88"
+  },
+  "source": "terminal-bench/terminal-bench-2-1",
+  "task_checksum": "5e3806427eaaaa9f0f756a2a87d4f7f50ec1c8a0d329b26bab7dc09657b937cf",
+  "config": {
+    "task": {
+      "path": null,
+      "git_url": null,
+      "git_commit_id": null,
+      "name": "terminal-bench/cobol-modernization",
+      "ref": "sha256:e03aa03965eee48c9f772d566ff9bcd741fceeac9693123f82a13fdd46be0d88",
+      "overwrite": false,
+      "download_dir": null,
+      "source": "terminal-bench/terminal-bench-2-1"
+    },
+    "trial_name": "cobol-modernization__PBrcoVy",
+    "trials_dir": "jobs/tbench-2-1-fable-5__high-fallback",
+    "timeout_multiplier": 1.0,
+    "agent_timeout_multiplier": null,
+    "verifier_timeout_multiplier": null,
+    "agent_setup_timeout_multiplier": null,
+    "environment_build_timeout_multiplier": null,
+    "agent": {
+      "name": "terminus-2",
+      "import_path": null,
+      "model_name": "anthropic/claude-fable-5",
+      "skills": [],
+      "override_timeout_sec": null,
+      "override_setup_timeout_sec": null,
+      "max_timeout_sec": null,
+      "extra_allowed_hosts": [],
+      "kwargs": {
+        "model_info": {
+          "supports_adaptive_thinking": true,
+          "supports_reasoning": true,
+          "supports_max_reasoning_effort": true,
+          "supports_xhigh_reasoning_effort": true
+        },
+        "temperature": 1,
+        "llm_kwargs": {
+          "extra_headers": {
+            "anthropic-beta": "server-side-fallback-2026-06-02"
+          }
+        },
+        "llm_call_kwargs": {
+          "max_tokens": 128000,
+          "allowed_openai_params": [
+            "thinking",
+            "fallback"
+          ],
+          "thinking": {
+            "type": "adaptive"
+          },
+          "output_config": {
+            "effort": "high"
+          },
+          "fallback": [
+            {
+              "model": "claude-opus-4-8"
+            }
+          ]
+        },
+        "reasoning_effort": "high"
+      },
+      "env": {},
+      "mcp_servers": []
+    },
+    "environment": {
+      "type": "daytona",
+      "import_path": null,
+      "force_build": false,
+      "delete": true,
+      "cpu_enforcement_policy": "auto",
+      "memory_enforcement_policy": "auto",
+      "override_cpus": null,
+      "override_memory_mb": null,
+      "override_storage_mb": null,
+      "override_gpus": null,
+      "override_tpu": null,
+      "mounts": null,
+      "extra_docker_compose": [],
+      "env": {},
+      "kwargs": {},
+      "extra_allowed_hosts": []
+    },
+    "verifier": {
+      "override_timeout_sec": null,
+      "max_timeout_sec": null,
+      "env": {},
+      "disable": false
+    },
+    "artifacts": [],
+    "extra_instruction_paths": [],
+    "job_id": "17f04e4f-1a75-4204-9b75-d042ef0333ec"
+  },
+  "agent_info": {
+    "name": "terminus-2",
+    "version": "2.0.0",
+    "model_info": {
+      "name": "claude-fable-5",
+      "provider": "anthropic"
+    }
+  },
+  "agent_result": {
+    "n_input_tokens": 339179,
+    "n_cache_tokens": 303046,
+    "n_output_tokens": 50842,
+    "cost_usd": null,
+    "rollout_details": [],
+    "metadata": {
+      "n_episodes": 18,
+      "api_request_times_msec": [
+        18780.176162719727,
+        24604.00676727295,
+        7574.188709259033,
+        18458.251237869263,
+        25029.59895133972,
+        118140.8143043518,
+        16154.2329788208,
+        14815.189838409424,
+        116655.30729293823,
+        133063.98749351501,
+        21762.856006622314,
+        70493.78681182861,
+        13167.957544326782,
+        12637.240886688232,
+        54426.9437789917,
+        14991.064310073853,
+        8475.986242294312,
+        9287.201881408691
+      ],
+      "summarization_count": 0
+    }
+  },
+  "verifier_result": {
+    "rewards": {
+      "reward": 1.0
+    }
+  },
+  "exception_info": null,
+  "started_at": "2026-06-04T23:32:51.075213Z",
+  "finished_at": "2026-06-04T23:47:52.110246Z",
+  "environment_setup": {
+    "started_at": "2026-06-04T23:32:51.355881Z",
+    "finished_at": "2026-06-04T23:32:53.194504Z"
+  },
+  "agent_setup": {
+    "started_at": "2026-06-04T23:32:53.194542Z",
+    "finished_at": "2026-06-04T23:33:07.890969Z"
+  },
+  "agent_execution": {
+    "started_at": "2026-06-04T23:33:07.891104Z",
+    "finished_at": "2026-06-04T23:47:38.550367Z"
+  },
+  "verifier": {
+    "started_at": "2026-06-04T23:47:44.046178Z",
+    "finished_at": "2026-06-04T23:47:51.915829Z"
+  },
+  "step_results": null
+}

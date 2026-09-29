@@ -1,0 +1,7 @@
+{
+  "title": "Create concurrency-limited async task runner",
+  "query": "Create an async Python function `run_tasks(tasks: list[Callable[[], Awaitable[None]]], max_concurrent: int) -> None` where each task is an async job to run and `max_concurrent` is the maximum number of tasks that may run concurrently. Put the function in `/app/run.py` so it can be imported using `from run import run_tasks`. Use the system Python; packages may be installed if needed. Ensure that if a run is canceled via KeyboardInterrupt, the tasks' cleanup code still runs.",
+  "review_flags": [
+    "The task text writes `async run_tasks(...)` without the `def` keyword; this was interpreted as an async function definition."
+  ]
+}

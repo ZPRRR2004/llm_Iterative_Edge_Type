@@ -1,0 +1,463 @@
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# asciinema rec --stdin /logs/agent/recording.cast
+[?2004l[0;32masciinema: recording asciicast to /logs/agent/recording.cast[0m
+[0;32masciinema: press <ctrl-d> or type "exit" when you're done[0m
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# clear
+[?2004l[H[J[3J[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# ls -la
+[?2004ltotal 16
+drwxr-xr-x 1 root root   33 Apr  3 06:49 .
+drwxr-xr-x 1 root root  102 Jun  4 23:42 ..
+-rw-r--r-- 1 root root  475 Apr  1 00:29 antibody.fasta
+-rw-r--r-- 1 root root  100 Apr  1 00:29 pdb_ids.txt
+-rw-r--r-- 1 root root 6053 Apr  1 00:29 plasmid.gb
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# cat pdb_ids.txt
+[?2004l2IB5
+4KGE
+4Q7T
+1KFD
+5JZL
+6AA7
+3ADF
+5WJ2
+3M22
+2H5Q
+3MGF
+5Y01
+2VZX
+4CQH
+1YZW
+2CHA
+3KZY
+1AK4
+5P21
+1H6R
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# cat antibody.fasta
+[?2004l>heavy chain
+QVQLQQSAAELARPGASVKMSCKASGYSFTTYTIHWVKQRPGQGLEWIGYINPSSGYAAYNQNFKDETTLTADPSSSTAYMELNSLTSEDSAVYYCAREKFYGYDYWGQGATLTVSSASTTPPSVYPLAPGSAAQTNSMVTLGCLVKGYFPEPVTVTWNSGSLSSGVHTFPAVLQSDLYTLSSSVTVPSSTWPSQTVTCNVAHPASSTKVDKKIVPRAAAHHHHHHHH
+>light chain
+DVLMTQIPLSLPVSLGDQASISCRSSQSIVHRNGNTYLEWYLLKPGQSPKLLIYKVSNRFSGVPDRFSGSGSGTDFTLKISRVEAEDLGVYYCFQGSHVPYTFGGGTKLEIRRADAAPTVSIFPPSSEQLTSGGASVVCFLNNFYPKDINVKWKIDGSERQNGVLNSWTDQDSKDSTYSMSSTLTLTKDEYERHNSYTCEATHKTSTSPIVKSFNRNQC
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# cat plasmid.gb
+[?2004lLOCUS       DHFR_Control_Template   2727 bp    DNA     circular     30-DEC-2009
+DEFINITION  Control vector DHFR_Control_Template, complete sequence.
+ACCESSION
+VERSION
+KEYWORDS    .
+SOURCE      Control vector DHFR_Control_Template
+  ORGANISM  Control vector DHFR_Control_Template
+            other sequences; artificial sequences; vectors.
+REFERENCE   1  (bases 1 to 2727)
+  AUTHORS   Cantor,E.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (30-DEC-2009) Research Department, New England Biolabs,
+            240 County Road, Ipswich, MA 01938, USA
+FEATURES             Location/Qualifiers
+     source          1..2727
+                     /organism="Control vector DHFR_Control_Template"
+                     /mol_type="other DNA"
+     promoter        26..43
+                     /note="T7 promoter (transcript start 43 clockwise)"
+     gene            88..567
+                     /gene="folA"
+     CDS             88..567
+                     /gene="folA"
+                     /codon_start=1
+                     /product="dihydrofolate reductase (DHFR)"
+                     /translation="MISLIAALAVDRVIGMENAMPWNLPADLAWFKRNTLNKPVIMGR
+                     HTWESIGRPLPGRKNIILSSQPGTDDRVTWVKSVDEAIAACGDVPEIMVIGGGRVYEQ
+                     FLPKAQKLYLTHIDAEVEGDTHFPDYEPDDWESVFSEFHDADAQNSHSYCFEILERR"
+     terminator      663..785
+                     /note="T7 Tphi transcription terminator"
+     rep_origin      complement(984..1572)
+                     /note="pUC19 origin of replication (counter-clockwise)
+                     (RNAII -35 to RNA/DNA switch point)"
+     gene            complement(1744..2604)
+                     /gene="bla"
+     CDS             complement(1744..2604)
+                     /gene="bla"
+                     /note="ampR (confers resistance to ampicillin)"
+                     /codon_start=1
+                     /product="beta-lactamase"
+                     /translation="MSIQHFRVALIPFFAAFCLPVFAHPETLVKVKDAEDQLGARVGY
+                     IELDLNSGKILESFRPEERFPMMSTFKVLLCGAVLSRIDAGQEQLGRRIHYSQNDLVE
+                     YSPVTEKHLTDGMTVRELCSAAITMSDNTAANLLLTTIGGPKELTAFLHNMGDHVTRL
+                     DRWEPELNEAIPNDERDTTMPVAMATTLRKLLTGELLTLASRQQLIDWMEADKVAGPL
+                     LRSALPAGWFIADKSGAGERGSRGIIAALGPDGKPSRIVVIYTTGSQATMDERNRQIA
+                     EIGASLIKHW"
+     sig_peptide     complement(2536..2604)
+                     /gene="bla"
+                     /note="Required for secretion to the periplasm; cleaved
+                     off to form the mature beta-lactamase protein."
+BASE COUNT      694 a    671 c    694 g    668 t
+ORIGIN
+        1 gctagtggtg ctagccccgc gaaattaata cgactcacta tagggtctag aaataatttt
+       61 gtttaacttt aagaaggaga tatacatatg atcagtctga ttgcggcgtt agcggtagat
+      121 cgcgttatcg gcatggaaaa cgccatgccg tggaacctgc ctgccgatct cgcctggttt
+      181 aaacgcaaca ccttaaataa acccgtgatt atgggccgcc atacctggga atcaatcggt
+      241 cgtccgttgc caggacgcaa aaatattatc ctcagcagtc aaccgggtac ggacgatcgc
+      301 gtaacgtggg tgaagtcggt ggatgaagcc atcgcggcgt gtggtgacgt accagaaatc
+      361 atggtgattg gcggcggtcg cgtttatgaa cagttcttgc caaaagcgca aaaactgtat
+      421 ctgacgcata tcgacgcaga agtggaaggc gacacccatt tcccggatta cgagccggat
+      481 gactgggaat cggtattcag cgaattccac gatgctgatg cgcagaactc tcacagctat
+      541 tgctttgaga ttctggagcg gcggtaatga ggatcccggg aattctcgag taaggttaac
+      601 ctgcaggagg cctttaatta aggtggtgcg gccgcgctag cggtcccggg ggatcgatcc
+      661 ggctgctaac aaagcccgaa aggaagctga gttggctgct gccaccgctg agcaataact
+      721 agcataaccc cttggggcct ctaaacgggt cttgaggggt tttttgctga aaggaggaac
+      781 tatatccgga agcttggcac tggccgaccg gggtcgagca ctgactcgct gcgctcggtc
+      841 gttcggctgc ggcgagcggt atcagctcac tcaaaggcgg taatacggtt atccacagaa
+      901 tcaggggata acgcaggaaa gaacatgtga gcaaaaggcc agcaaaaggc caggaaccgt
+      961 aaaaaggccg cgttgctggc gtttttccat aggctccgcc cccctgacga gcatcacaaa
+     1021 aatcgacgct caagtcagag gtggcgaaac ccgacaggac tataaagata ccaggcgttt
+     1081 ccccctggaa gctccctcgt gcgctctcct gttccgaccc tgccgcttac cggatacctg
+     1141 tccgcctttc tcccttcggg aagcgtggcg ctttctcata gctcacgctg taggtatctc
+     1201 agttcggtgt aggtcgttcg ctccaagctg ggctgtgtgc acgaaccccc cgttcagccc
+     1261 gaccgctgcg ccttatccgg taactatcgt cttgagtcca acccgctaag acacgactta
+     1321 tcgccactgg cagcagccac tggtaacagg attagcagag cgaggtatgt aggcggtgct
+     1381 acagagttct tgaagtggtg gcctaactac ggctacacta gaagaacagt atttggtatc
+     1441 tgcgctctgc tgaagccagt taccttcgga aaaagagttg gtagctcttg atccggcaaa
+     1501 caaaccaccg ctggtagcgg tggttttttt gtttgcaagc agcagattac gcgcagaaaa
+     1561 aaaggatctc aagaagatcc tttgatcttt tctacggggt ctgacgctca gtggaacgaa
+     1621 aactcacaga tccgggattt tggtcatgag attatcaaaa aggatcttca cctagatcct
+     1681 tttaaattaa aaatgaagtt ttaaatcaat ctaaagtata tatgagtaaa cttggtctga
+     1741 cagttaccaa tgcttaatca gtgaggcacc tatctcagcg atctgtctat ttcgttcatc
+     1801 catagttgcc tgactccccg tcgtgtagat aactacgata cgggagggct taccatctgg
+     1861 ccccagtgct gcaatgatac cgcgggaccc acgctcaccg gctccagatt tatcagcaat
+     1921 aaaccagcca gccggaaggg ccgagcgcag aagtggtcct gcaactttat ccgcctccat
+     1981 ccagtctatt aattgttgcc gggaagctag agtaagtagt tcgccagtta atagtttgcg
+     2041 caacgttgtt gccattgcta caggcatcgt ggtgtcacgc tcgtcgtttg gtatggcttc
+     2101 attcagctcc ggttcccaac gatcaaggcg agttacatga tcccccatgt tgtgcaaaaa
+     2161 agcggttagc tccttcggtc ctccgatcgt tgtcagaagt aagttggccg cagtgttatc
+     2221 actcatggtt atggcagcac tgcataattc tcttactgtc atgccatccg taagatgctt
+     2281 ttctgtgact ggtgagtact caaccaagtc attctgagaa tagtgtatgc ggcgaccgag
+     2341 ttgctcttgc ccggcgtcaa tacgggataa taccgcgcca catagcagaa ctttaaaagt
+     2401 gctcatcatt ggaaaacgtt cttcggggcg aaaactctca aggatcttac cgctgttgag
+     2461 atccagttcg atgtaaccca ctcgtgcacc caactgatct tcagcatctt ttactttcac
+     2521 cagcgtttct gggtgagcaa aaacaggaag gcaaaatgcc gcaaaaaagg gaataagggc
+     2581 gacacggaaa tgttgaatac tcatactctt cctttttcaa tattattgaa gcatttatca
+     2641 gggttattgt ctcatgagcg gatacatatt tgaatgtatt tagaaaaata aacaaatagg
+     2701 ggttccgcgc acatttcccc gaaaagt
+//
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# which python3 curl wget; python3 --version
+[?2004l/usr/local/bin/python3
+Python 3.13.12
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# curl -s 'https://www.rcsb.org/fasta/entry/2IB5' | head
+[?2004lbash: curl: command not found
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# python3 -c "import urllib.request; print(urllib.request.urlopen('https://www.rcsb.org/fasta/entry/2IB5').read().decode())"
+[?2004l>2IB5_1|Chains A, B, C, D, E, F, G, H|Chromo protein|Cnidopus japonicus (58804)
+GSHMASKISDNVRIKLYMEGTVNNHHFMCEAEGEGKPYEGTQMENIKVTKGGPLPFSFDILTPNCXSVAITKYTSGIPDYFKQSFPEGFTWERTTIYEDGAYLTTQQETKLDGNCLVYNIKILGCNFPPNGPVMQKKTQGWEPCCEMRYTRDGVLCGQTLMALKCADGNHLTCHLRTTYRSKKAAKALQMPPFHFSDHRPEIVKVSENGTLFEQHESSVARYCQTCPSKLGHN
+
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# mkdir -p pdb_fasta; python3 -c "
+[?2004l[?2004h> import urllib.request
+[?2004l[?2004h> ids=open('pdb_ids.txt').read().split()
+[?2004l[?2004h> for i in ids:
+[?2004l[?2004h>     try:
+[?2004l[?2004h>         d=urllib.request.urlopen('https://www.rcsb.org/fasta/entry/'+i).read().decode()
+[?2004l[?2004h>         open('pdb_fasta/'+i+'.fasta','w').write(d)
+[?2004l[?2004h>         print('OK',i)
+[?2004l[?2004h>     except Exception as e:
+[?2004l[?2004h>         print('ERR',i,e)
+[?2004l[?2004h> "
+[?2004lOK 2IB5
+OK 4KGE
+OK 4Q7T
+OK 1KFD
+OK 5JZL
+OK 6AA7
+OK 3ADF
+OK 5WJ2
+OK 3M22
+OK 2H5Q
+OK 3MGF
+OK 5Y01
+OK 2VZX
+OK 4CQH
+OK 1YZW
+OK 2CHA
+OK 3KZY
+OK 1AK4
+OK 5P21
+OK 1H6R
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# grep -h '>' pdb_fasta/*.fasta
+[?2004l>1AK4_1|Chains A, B|CYCLOPHILIN A|Homo sapiens (9606)
+>1AK4_2|Chains C, D|HIV-1 CAPSID|Human immunodeficiency virus 1 (11676)
+>1H6R_1|Chains A, B, C|GREEN FLUORESCENT PROTEIN|AEQUOREA VICTORIA (6100)
+>1KFD_1|Chain A|DNA POLYMERASE I KLENOW FRAGMENT|Escherichia coli (562)
+>1YZW_1|Chains A, B, C, D|GFP-like non-fluorescent chromoprotein|Heteractis crispa (3122430)
+>2CHA_1|Chains A, D[auth E]|ALPHA-CHYMOTRYPSIN A|Bos taurus (9913)
+>2CHA_2|Chains B, E[auth F]|ALPHA-CHYMOTRYPSIN A|Bos taurus (9913)
+>2CHA_3|Chains C, F[auth G]|ALPHA-CHYMOTRYPSIN A|Bos taurus (9913)
+>2H5Q_1|Chain A|mCherry|Discosoma sp. (86600)
+>2IB5_1|Chains A, B, C, D, E, F, G, H|Chromo protein|Cnidopus japonicus (58804)
+>2VZX_1|Chains A, B, C, D, E, F, G, H|Green fluorescent protein|Dendronephthya sp. SSAL-2002 (191210)
+>3ADF_1|Chains A, B|Monomeric Azami Green|Galaxea fascicularis (46745)
+>3KZY_1|Chains A, B|Methylated-DNA--protein-cysteine methyltransferase|Homo sapiens (9606)
+>3M22_1|Chains A, B, C, D|TagRFP|synthetic construct (32630)
+>3MGF_1|Chains A, B, C, D|Fluorescent protein|Verrillofungia concinna (1911064)
+>4CQH_1|Chain A|BACTERIOPHYTOCHROME|DEINOCOCCUS RADIODURANS (1299)
+>4KGE_1|Chains A, B|TagRFP675, red fluorescent protein|synthetic construct (32630)
+>4Q7T_1|Chains A, B|PSmOrange|Discosoma sp. (86600)
+>5JZL_1|Chains A, B|Green fluorescent protein|Aequorea victoria (6100)
+>5P21_1|Chain A|C-H-RAS P21 PROTEIN|Homo sapiens (9606)
+>5WJ2_1|Chains A, B|Green fluorescent protein|Aequorea victoria (6100)
+>5Y01_1|Chain A|Green fluorescent protein|Olindias (264043)
+>6AA7_1|Chains A, B|Fluorescent protein|Acropora digitifera (70779)
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# python3 -c "import urllib.request; print(urllib.request.urlopen('https://www.fpbase.org/api/proteins/?default_state__ex_max=505&format=json').read().decode())"
+[?2004lTraceback (most recent call last):
+  File [35m"<string>"[0m, line [35m1[0m, in [35m<module>[0m
+    import urllib.request; print([31murllib.request.urlopen[0m[1;31m('https://www.fpbase.org/api/proteins/?default_state__ex_max=505&format=json')[0m.read().decode())
+                                 [31m~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  File [35m"/usr/local/lib/python3.13/urllib/request.py"[0m, line [35m189[0m, in [35murlopen[0m
+    return [31mopener.open[0m[1;31m(url, data, timeout)[0m
+           [31m~~~~~~~~~~~[0m[1;31m^^^^^^^^^^^^^^^^^^^^[0m
+  File [35m"/usr/local/lib/python3.13/urllib/request.py"[0m, line [35m495[0m, in [35mopen[0m
+    response = meth(req, response)
+  File [35m"/usr/local/lib/python3.13/urllib/request.py"[0m, line [35m604[0m, in [35mhttp_response[0m
+    response = self.parent.error(
+        'http', request, response, code, msg, hdrs)
+  File [35m"/usr/local/lib/python3.13/urllib/request.py"[0m, line [35m533[0m, in [35merror[0m
+    return [31mself._call_chain[0m[1;31m(*args)[0m
+           [31m~~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^[0m
+  File [35m"/usr/local/lib/python3.13/urllib/request.py"[0m, line [35m466[0m, in [35m_call_chain[0m
+    result = func(*args)
+  File [35m"/usr/local/lib/python3.13/urllib/request.py"[0m, line [35m613[0m, in [35mhttp_error_default[0m
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+[1;35murllib.error.HTTPError[0m: [35mHTTP Error 403: Forbidden[0m
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# python3 -c "import urllib.request as u; r=u.Request('https://www.fpbase.org/api/proteins/?default_state__ex_max=505&format=json',headers={'User-Agent':'Mozilla/5.0'}); print(u.urlopen(r).read().decode())"
+[?2004l[{"uuid":"UHFSE","name":"ccalGFP3","slug":"ccalgfp3","seq":"MSLSKQVVKQDMNMTYHMDGCVNGHSFTIEGEGRGNPFKGQQTLKLRVTKGGPLPFAFDILSATFTYGNRCFCDYPEDMPDYFKQSLPEGYSWERTMMYEDGGCGTASAHISLNKTGFVHKSTFHGVNFPANGPVMQRKTVNWEPSTEKITACDGTLKGDVTMFLLLGGGYQQKCQFQTTYRTDKTVKMPPNHIIEHRLVRSEDGDAVQIQEHAVAKYFTV","ipg_id":"6067037","genbank":"ABI58282","uniprot":"Q09HR5","pdb":[],"agg":"t","switch_type":"b","states":[{"slug":"ccalgfp3_default","name":"default","ex_max":505,"em_max":517,"ext_coeff":144000,"qy":0.48,"pka":null,"maturation":null,"lifetime":null,"brightness":69.12}],"transitions":[],"doi":"10.1007/s10126-007-9072-7"},{"uuid":"4Z641","name":"Clover","slug":"clover","seq":"MVSKGEELFTGVVPILVELDGDVNGHKFSVRGEGEGDATNGKLTLKFICTTGKLPVPWPTLVTTFGYGVACFSRYPDHMKQHDFFKSAMPEGYVQERTISFKDDGTYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNFNSHNVYITADKQKNGIKANFKIRHNVEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSHQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK","ipg_id":"30275454","genbank":"AFR60231","uniprot":null,"pdb":["5WJ2"],"agg":"wd","switch_type":"b","states":[{"slug":"clover_default","name":"default","ex_max":505,"em_max":515,"ext_coeff":111000,"qy":0.76,"pka":6.2,"maturation":30.0,"lifetime":3.2,"brightness":84.36}],"transitions":[],"doi":"10.1038/nmeth.2171"},{"uuid":"P2PV8","name":"dfGFP","slug":"dfgfp","seq":"MASGRALFQYPMTSKIELNGEINGKKFKVAGEGFTPNSGRFNMHAYCTTGDLPMSWVVIASPLQYGFHMFAHYPEDITHFFQECFPGSYTLDRTLRMEGDGTLTTHHEYSLKDGCVTSKTTLNASGFDPKGATMTKSFVEQLPNQVEIFAEGNGIRLLSHVPYLKKDGTIQIGYQDCIVKPVGGKKVTQPKYHFLHTQIIQKKDPNDTRDHIVQTELAVAGNPWHEPSASAV","ipg_id":null,"genbank":"BBC28143","uniprot":null,"pdb":[],"agg":"d","switch_type":"b","states":[{"slug":"dfgfp_default","name":"default","ex_max":505,"em_max":524,"ext_coeff":null,"qy":null,"pka":3.8,"maturation":null,"lifetime":null,"brightness":null}],"transitions":[],"doi":"10.1016/j.chembiol.2017.12.005"},{"uuid":"C5EUY","name":"FOLD6","slug":"fold6","seq":"MVSKGEELFTGVVPILVELDGDVNGHKFSVRGEGEGDATNGKLTLKFISTTGKLPVPWPTLVTTLGYGLAVFARYPDHMKQHDFFKSAMPEGYVQERTISFEDDGYYKTRAEVKFEGDTLVNRIVLKGIDFKEDGNILGHKLEYNFNPHNVYITADKQKNGIKANFKTRHNVEDGGVQLADHYQQNTPIGDGPVLLPDNHYLSHQSVLSKDPNEKRDHMVLLEFVTAAGITHDMNELYK","ipg_id":null,"genbank":null,"uniprot":null,"pdb":["7UGT"],"agg":"wd","switch_type":"b","states":[{"slug":"fold6_default","name":"default","ex_max":505,"em_max":515,"ext_coeff":118200,"qy":0.73,"pka":5.9,"maturation":25.0,"lifetime":null,"brightness":86.29}],"transitions":[],"doi":"10.1038/s41592-022-01660-7"},{"uuid":"AW33C","name":"Gamillus0.1","slug":"gamillus01","seq":"MASGRALFQYPMTSKIELNGEINGKKFKVAGEGFTPNSGRFNMHAYCTTGDLPMSWVVIASPLQYGFHMFAHYPEDITHFFQECFPGSYTLDRTLRMEGDGTLTTHHEYSLKDGCVTSKTTLNASGFDPKGATMTKSFVEQLPNQVEITAEGNGIRLTSTVPYLKKDGTIQIGRQDCIVKPVGGKKVTQPKAHFLHTQIIQKKDPNDTRDHIVQTELAVAGNPWHEPSASAV","ipg_id":null,"genbank":null,"uniprot":null,"pdb":[],"agg":"m","switch_type":"b","states":[{"slug":"gamillus01_default","name":"default","ex_max":505,"em_max":524,"ext_coeff":20000,"qy":0.84,"pka":4.0,"maturation":null,"lifetime":null,"brightness":16.8}],"transitions":[],"doi":"10.1016/j.chembiol.2017.12.005"},{"uuid":"WLNHW","name":"Gamillus0.2","slug":"gamillus02","seq":"MASGRALFQYPMTSKIELNGEINGKKFKVAGEGFTPNSGRFNMHAYCTTGDLPMSWVVIASPLQYGFHMFAHYPEDITHFFQECFPGSYTLDRTLRMEGDGTLTTHHEYSLKDGCVTSKTTLNASGFDPKGATMTKSFVEQLPNQVEITAEGNGIRLTSTVLYLKKDGTIQIGRQDCIVKPVGGKKVTQPKAHFLHTQIIQKKDPNDTRDHIVQTELAVAGNPWHEPSASAV","ipg_id":null,"genbank":null,"uniprot":null,"pdb":[],"agg":"d","switch_type":"b","states":[{"slug":"gamillus02_default","name":"default","ex_max":505,"em_max":524,"ext_coeff":55000,"qy":0.94,"pka":4.0,"maturation":null,"lifetime":null,"brightness":51.7}],"transitions":[],"doi":"10.1016/j.chembiol.2017.12.005"},{"uuid":"LQXJ6","name":"Gamillus0.3","slug":"gamillus03","seq":"MASGRALFQYPMTSKIELNGEINGKKFKVAGEGFTPNSGRFNMHAYCTTGDLPMSWVVIASPLQYGFHMFAHYPEDITHFFQECFPGSYTLDRTLRMEGDGTLTTHHEYSLKDGCVTSKTTLNASGFDPKGATMTKSFVEQLPNQVEITAEGNGIRLTSTVLYLKKDGTIQIGTQDCIVKPVGGKKVTQPKAHFLHTQIIQKKDPNDTRDHIVQTELAVAGNPWHEPSASAV","ipg_id":null,"genbank":null,"uniprot":null,"pdb":[],"agg":"m","switch_type":"b","states":[{"slug":"gamillus03_default","name":"default","ex_max":505,"em_max":524,"ext_coeff":51000,"qy":0.88,"pka":4.0,"maturation":null,"lifetime":null,"brightness":44.88}],"transitions":[],"doi":"10.1016/j.chembiol.2017.12.005"},{"uuid":"JVUSZ","name":"Gamillus0.4","slug":"gamillus04","seq":"MASGRALFQYPMTSKIELNGEINGKKFKVAGEGFTPSSGRFNMHAYCTTGDLPMSWVVIASPLQYGFHMFAHYPEDITHFFQECFPGSYTLDRTLRMEGDGTLTTHHEYSLEDGCVTSKTTLNASGFDPKGATMTKSFVEQLPNQVKITAEGNGIRLTSTVLYLKKDGTIQIGTQDCIVKPVGGRKVTQPKAHFLHTQIIQKKDPNDTRDHIVQTELAVAGNLWHEPSASAV","ipg_id":null,"genbank":null,"uniprot":null,"pdb":[],"agg":"m","switch_type":"b","states":[{"slug":"gamillus04_default","name":"default","ex_max":505,"em_max":524,"ext_coeff":75000,"qy":0.89,"pka":4.0,"maturation":null,"lifetime":null,"brightness":66.75}],"transitions":[],"doi":"10.1016/j.chembiol.2017.12.005"},{"uuid":"N2LZL","name":"mc2","slug":"mc2","seq":"MSVIKPDMKIKLRMEGAVNGHKFVIEGDGKGKPFEGTQSMDLTVKEGAPLPFAYDILTTVFDYGNRVFAKYPQDIPDYFKQTFPEGYSWERSMTYEDQGICVATNDITLMKGVDDCFVYKIRFDGVNFPANGPVMQKKTLKWEPSTEKMYVRDGVLKGDVNMALLLEGGGHYRCDFKTTYKAKKFVQLPDYHFVDHRIEILSHDKDYNKVKLYEHAEAHSGLPRQAK","ipg_id":"756354","genbank":"AAO61599","uniprot":"Q7Z0W8","pdb":[],"agg":"","switch_type":"b","states":[{"slug":"mc2_default","name":"default","ex_max":505,"em_max":515,"ext_coeff":null,"qy":null,"pka":null,"maturation":null,"lifetime":null,"brightness":null}],"transitions":[],"doi":"10.1093/molbev/msg130"},{"uuid":"9PWLU","name":"mc3","slug":"mc3","seq":"MTSVAQEKGVIKPDMKMKLRMEGAVNGHKFVIEGDGKGKPFDGTQTMDLTVIEGAPLPFAYDILTTVFDYGNRVFAKYPEDIADYFKQTFPEGYFWERSMTYEDQGICIATNDITMMKGVDDCFVYKIRFDGVNFPANGPVMQRKTLKWEPSTEIMYVRDGVLKGDVNMALLLEGGGHYRCDFKTTYKAKKVVRLPDYHFVDHRIEIVSHDKDYNKVKLHEHAEARHGLSRKAK","ipg_id":"1678569","genbank":"AAO61600","uniprot":"Q7Z0W7","pdb":[],"agg":"","switch_type":"b","states":[{"slug":"mc3_default","name":"default","ex_max":505,"em_max":515,"ext_coeff":null,"qy":null,"pka":null,"maturation":null,"lifetime":null,"brightness":null}],"transitions":[],"doi":"10.1093/molbev/msg130"},{"uuid":"Q7SKD","name":"mc4","slug":"mc4","seq":"MSVIKPDMKIKLRMEGAVNGHKFVIEGDGKGKPFEGKQTMDLTVIEGAPLPFAYDILTTVFDYGNRVFAKYPKDIPDYFKQTFPEGYSWERSMTYEDQGICIATNDITMMKGVDDCFLYKIRFDGVNFPANGPVMQRKTLKWEPSTEKMYVRDGVLKGDVNMALLLEGGGHYRCDFKTTYKAKKVVQLPDYHFVDHRIEIVSHDKDYNKVKLYEHAEAHSGLPRQAK","ipg_id":"1678543","genbank":"AAO61601","uniprot":"Q7Z0W6","pdb":[],"agg":"","switch_type":"b","states":[{"slug":"mc4_default","name":"default","ex_max":505,"em_max":515,"ext_coeff":null,"qy":null,"pka":null,"maturation":null,"lifetime":null,"brightness":null}],"transitions":[],"doi":"10.1093/molbev/msg130"},{"uuid":"73GT1","name":"mEos3.1","slug":"meos31","seq":"MSAIKPDMKIKLRMEGNVNGHHFVIDGDGTGKPFEGKQSMDLEVKEGGPLPFAFDILTTAFHYGNRVFAKYPDNIQDYFKQSFPKGYSWERSLTFEDGGICNARNDITMEGDTFYNKVRFYGTNFPANGPVMQKKTLKWEPSTEKMYVRDGVLTGDVEMALLLEGNAHYRCDFRTTYKAKEKGVKLPGAHFVDHCIEILSHDKDYNKVKLYEHAVAHSGLPDNARR","ipg_id":null,"genbank":null,"uniprot":null,"pdb":[],"agg":"m","switch_type":"pc","states":[{"slug":"meos31_green","name":"Green","ex_max":505,"em_max":513,"ext_coeff":88400,"qy":0.83,"pka":5.2,"maturation":null,"lifetime":null,"brightness":73.37},{"slug":"meos31_red","name":"Red","ex_max":570,"em_max":580,"ext_coeff":33500,"qy":0.62,"pka":6.0,"maturation":null,"lifetime":null,"brightness":20.77}],"transitions":[{"from_state":"meos31_green","to_state":"meos31_red","trans_wave":405}],"doi":"10.1038/nmeth.2021"},{"uuid":"VVNZ5","name":"mGeos-C","slug":"mgeos-c","seq":"MSAIKPDMKIKLRMEGNVNGHHFVIDGDGTGKPFEGKQSMDLEVKEGGPLPFAFDILTTAFCYGNRVFAKYPDNIQDYFKQSFPKGYSWERSLTFEDGGICIARNDITMEGDTFYNKVRFYGTNFPANGPVMQKKTLKWEPSTEKMYVRDGVLTGDIHMALLLEGNAHYRCDFRTTYKAKEKGVKLPGYHFVDHCIEILSHDKDYNKVKLYEHAVAHSGLPDNARR","ipg_id":null,"genbank":null,"uniprot":null,"pdb":[],"agg":"m","switch_type":"ps","states":[{"slug":"mgeos-c_on","name":"On","ex_max":505,"em_max":516,"ext_coeff":76967,"qy":0.81,"pka":6.0,"maturation":null,"lifetime":null,"brightness":62.34},{"slug":"mgeos-c_off","name":"Off","ex_max":null,"em_max":null,"ext_coeff":null,"qy":null,"pka":null,"maturation":null,"lifetime":null,"brightness":null}],"transitions":[{"from_state":"mgeos-c_off","to_state":"mgeos-c_on","trans_wave":405},{"from_state":"mgeos-c_on","to_state":"mgeos-c_off","trans_wave":488}],"doi":"10.1073/pnas.1113770109"},{"uuid":"RHTPG","name":"mKikGR","slug":"mkikgr","seq":"MSVITSEMKIELRMEGSVNGHKFVITGKGSGRPYEGTQTVDLTVIEGGPLPFAFDILTTAFHYGNRVFVEYPEEIVDYFKQSFPEGYSWERSMSYEDGGICLATNNITMKKDGSNTFVNEIRFDGTNFPANGPVMQRKTVKWEPSTEKMYVRDGVLKGDVEMALLLEGGGHYRCDFRTTYKAKKVVQLPDYHYVDHQMEITSHDKDYNKVKAYEHAKAYSGTYRGAKYEFEA","ipg_id":null,"genbank":null,"uniprot":null,"pdb":[],"agg":"m","switch_type":"pc","states":[{"slug":"mkikgr_red","name":"Red","ex_max":580,"em_max":591,"ext_coeff":28000,"qy":0.63,"pka":5.2,"maturation":null,"lifetime":null,"brightness":17.64},{"slug":"mkikgr_green","name":"Green","ex_max":505,"em_max":515,"ext_coeff":49000,"qy":0.69,"pka":6.6,"maturation":null,"lifetime":null,"brightness":33.81}],"transitions":[{"from_state":"mkikgr_green","to_state":"mkikgr_red","trans_wave":390}],"doi":"10.1371/journal.pone.0003944"},{"uuid":"GSCT9","name":"moxNeonGreen","slug":"moxneongreen","seq":"MVSKGEEDNMASLPATHELHIFGSINGVDFDMVGQGTGNPNDGYEELNLKSTKGDLQFSPWILVPHIGYGFHQYLPYPDGMSPFQAAMVDGSGYQVHRTMQFEDGASLTVNYRYTYEGSHIKGEAQVKGTGFPADGPVMTNSLTAADWSRSKKTYPNDKTIISTFKWSYTTGNGKRYRSTARTTYTFAKPMAANYLKNQPMYVFRKTELKHSKTELNFKEWQKAFTDVMGMDELYK","ipg_id":null,"genbank":null,"uniprot":null,"pdb":[],"agg":"m","switch_type":"b","states":[{"slug":"moxneongreen_default","name":"default","ex_max":505,"em_max":520,"ext_coeff":111000,"qy":0.74,"pka":null,"maturation":null,"lifetime":null,"brightness":82.14}],"transitions":[],"doi":"10.1038/ncomms8670"},{"uuid":"FM4GO","name":"Padron0.9","slug":"padron09","seq":"MSVIKPDMKIKLRMEGAVNGHPFAIEGVGLGKPFEGKQSMDLKVKEGGPLPFAYDILTMAFCYGNRVFAKYPENIVDYFKQSFPEGYSWERSMIYEDGGICNATNDITLDGDCYICEIRFDGVNFPANGPVMQKRTVKWELSTEKLYVRDGVLKSDGNYALSLEGGGHYRCDFKTTYKAKKVVQLPDYHSVDHHIEIISHDKDYSNVNLHEHAEAHSELPRQAK","ipg_id":null,"genbank":null,"uniprot":null,"pdb":["3ZUL"],"agg":"m","switch_type":"ps","states":[{"slug":"padron09_on","name":"On","ex_max":505,"em_max":522,"ext_coeff":36000,"qy":0.61,"pka":null,"maturation":null,"lifetime":null,"brightness":21.96},{"slug":"padron09_off","name":"Off","ex_max":null,"em_max":null,"ext_coeff":null,"qy":null,"pka":null,"maturation":null,"lifetime":null,"brightness":null}],"transitions":[{"from_state":"padron09_off","to_state":"padron09_on","trans_wave":488},{"from_state":"padron09_on","to_state":"padron09_off","trans_wave":405}],"doi":"10.1074/jbc.m109.086314"}]
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# python3 -c "import urllib.request as u,json; r=u.Request('https://www.fpbase.org/api/proteins/?default_state__em_max=610&format=json',headers={'User-Agent':'Mozilla/5.0'}); d=json.loads(u.urlopen(r).read().decode()); [print(p['name'],p['pdb'],[(s['ex_max'],s['em_max']) for s in p['states']]) for p in d]"
+[?2004lJred [] [(584, 610)]
+KillerRed ['2WIQ', '3GB3'] [(585, 610)]
+LSSmCherry1 [] [(450, 610)]
+mCherry ['2H5Q'] [(587, 610)]
+mCherry2 [] [(589, 610)]
+rsCherry [] [(572, 610), (None, None)]
+SuperNova2 [] [(579, 610)]
+SuperNova Red [] [(579, 610)]
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# python3 << 'EOF'
+[?2004l[?2004h> import urllib.request as u, json
+[?2004l[?2004h> seq="QVQLQQSAAELARPGASVKMSCKASGYSFTTYTIHWVKQRPGQGLEWIGYINPSSGYAAYNQNFKDETTLTADPSSSTAYMELNSLTSEDSAVYYCAREKFYGYDYWGQGATLTVSS"
+[?2004l[?2004h> q={"query":{"type":"terminal","service":"sequence","parameters":{"evalue_cutoff":1,"identity_cutoff":0.9,"sequence_type":"protein","value":seq}},"return_type":"polymer_entity","request_options":{"paginate":{"start":0,"rows":20}}}
+[?2004l[?2004h> url='https://search.rcsb.org/rcsbsearch/v2/query?json='+urllib.parse.quote(json.dumps(q))
+[?2004l[?2004h> r=u.Request(url,headers={'User-Agent':'Mozilla/5.0'})
+[?2004l[?2004h> print(u.urlopen(r).read().decode())
+[?2004l[?2004h> EOF
+[?2004lTraceback (most recent call last):
+  File [35m"<stdin>"[0m, line [35m4[0m, in [35m<module>[0m
+[1;35mNameError[0m: [35mname 'urllib' is not defined. Did you forget to import 'urllib'?[0m
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# python3 << 'EOF'
+[?2004l[?2004h> import urllib.request as u, urllib.parse, json
+[?2004l[?2004h> seq="QVQLQQSAAELARPGASVKMSCKASGYSFTTYTIHWVKQRPGQGLEWIGYINPSSGYAAYNQNFKDETTLTADPSSSTAYMELNSLTSEDSAVYYCAREKFYGYDYWGQGATLTVSS"
+[?2004l[?2004h> q={"query":{"type":"terminal","service":"sequence","parameters":{"evalue_cutoff":1,"identity_cutoff":0.9,"sequence_type":"protein","value":seq}},"return_type":"polymer_entity","request_options":{"paginate":{"start":0,"rows":20}}}
+[?2004l[?2004h> url='https://search.rcsb.org/rcsbsearch/v2/query?json='+urllib.parse.quote(json.dumps(q))
+[?2004l[?2004h> r=u.Request(url,headers={'User-Agent':'Mozilla/5.0'})
+[?2004l[?2004h> print(u.urlopen(r).read().decode())
+[?2004l[?2004h> EOF
+[?2004l{
+  "query_id" : "ea2673ac-36c7-4555-a982-403c63d53407",
+  "result_type" : "polymer_entity",
+  "total_count" : 2,
+  "result_set" : [ {
+    "identifier" : "7BG1_1",
+    "score" : 1.0
+  }, {
+    "identifier" : "8RMO_2",
+    "score" : 1.0
+  } ]
+}
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# python3 -c "import urllib.request as u; [print(u.urlopen(u.Request('https://www.rcsb.org/fasta/entry/'+i,headers={'User-Agent':'M'})).read().decode()) for i in ['7BG1','8RMO']]"
+[?2004l>7BG1_1|Chain A[auth H]|anti-FLAG M2 heavy chain|Mus musculus (10090)
+HVSQVQLQQSAAELARPGASVKMSCKASGYSFTTYTIHWVKQRPGQGLEWIGYINPSSGYAAYNQNFKDETTLTADPSSSTAYMELNSLTSEDSAVYYCAREKFYGYDYWGQGATLTVSSAKTTPPSVYPLAPGSAAQTNSMVTLGCLVKGYFPEPVTVTWNSGSLSSGVHTFPAVLQSDLYTLSSSVTVPSSTWPSQTVTCNVAHPASSTKVDKKIVPRDC
+>7BG1_2|Chain B[auth L]|anti-FLAG M2 light chain|Mus musculus (10090)
+SDVLMTQIPLSLPVSLGDQASISCRSSQSIVHRNGNTYLEWYLLKPGQSPKLLIYKVSNRFSGVPDRFSGSGSGTDFTLKISRVEAEDLGVYYCFQGSHVPYTFGGGTKLEIRRADAAPTVSIFPPSSEQLTSGGASVVCFLNNFYPKDINVKWKIDGSERQNGVLNSWTDQDSKDSTYSMSSTLTLTKDEYERHNSYTCEATHKTSTSPIVKSFNRNQC
+
+>8RMO_1|Chain A[auth F]|FLAG-tag|synthetic construct (32630)
+DYKDDDDK
+>8RMO_2|Chain B[auth H]|anti-FLAG M2 heavy chain|Mus musculus (10090)
+QVQLQQSAAELARPGASVKMSCKASGYSFTTYTIHWVKQRPGQGLEWIGYINPSSGYAAYNQNFKDETTLTADPSSSTAYMELNSLTSEDSAVYYCAREKFYGYDYWGQGATLTVSSASTTPPSVYPLAPGSAAQTNSMVTLGCLVKGYFPEPVTVTWNSGSLSSGVHTFPAVLQSDLYTLSSSVTVPSSTWPSQTVTCNVAHPASSTKVDKKIVPRAAAHHHHHHHH
+>8RMO_3|Chain C[auth L]|anti-FLAG M2 light chain|Mus musculus (10090)
+DVLMTQIPLSLPVSLGDQASISCRSSQSIVHRNGNTYLEWYLLKPGQSPKLLIYKVSNRFSGVPDRFSGSGSGTDFTLKISRVEAEDLGVYYCFQGSHVPYTFGGGTKLEIRRADAAPTVSIFPPSSEQLTSGGASVVCFLNNFYPKDINVKWKIDGSERQNGVLNSWTDQDSKDSTYSMSSTLTLTKDEYERHNSYTCEATHKTSTSPIVKSFNRNQC
+
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# cat pdb_fasta/5WJ2.fasta pdb_fasta/2H5Q.fasta pdb_fasta/3KZY.fasta
+[?2004l>5WJ2_1|Chains A, B|Green fluorescent protein|Aequorea victoria (6100)
+MGSSHHHHHHSSGENLYFQGHMVSKGEELFTGVVPILVELDGDVNGHKFSVRGEGEGDATNGKLTLKFICTTGKLPVPWPTLVTTFXVACFSRYPDHMKQHDFFKSAMPEGYVQERTISFKDDGTYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNFNSHNVYITADKQKNGIKANFKIRHNVEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSHQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK
+>2H5Q_1|Chain A|mCherry|Discosoma sp. (86600)
+MVSKGEEDNMAIIKEFMRFKVHMEGSVNGHEFEIEGEGEGRPYEGTQTAKLKVTKGGPLPFAWDILSPQFXSKAYVKHPADIPDYLKLSFPEGFKWERVMNFEDGGVVTVTQDSSLQDGEFIYKVKLRGTNFPSDGPVMQKKTMGWEASSERMYPEDGALKGEIKQRLKLKDGGHYDAEVKTTYKAKKPVQLPGAYNVNIKLDITSHNEDYTIVEQYERAEGRHSTGGMDELYK
+>3KZY_1|Chains A, B|Methylated-DNA--protein-cysteine methyltransferase|Homo sapiens (9606)
+GPGSDKDCEMKRTTLDSPLGKLELSGCEQGLHEIIFLGKGTSAADAVEVPAPAAVLGGPEPLMQATAWLNAYFHQPEAIEEFPVPALHHPVFQQESFTRQVLWKLLKVVKFGEVISYSHLAALAGNPAATAAVKTALSGNPVPILIPCHRVVQGDLDVGGYEGGLAVKEWLLAHEGHRLGKR
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# python3 -c "import urllib.request as u,json; r=u.Request('https://www.fpbase.org/api/proteins/?name__iexact=mCherry&format=json',headers={'User-Agent':'M'}); d=json.loads(u.urlopen(r).read().decode()); print(d[0]['seq'])"
+[?2004lMVSKGEEDNMAIIKEFMRFKVHMEGSVNGHEFEIEGEGEGRPYEGTQTAKLKVTKGGPLPFAWDILSPQFMYGSKAYVKHPADIPDYLKLSFPEGFKWERVMNFEDGGVVTVTQDSSLQDGEFIYKVKLRGTNFPSDGPVMQKKTMGWEASSERMYPEDGALKGEIKQRLKLKDGGHYDAEVKTTYKAKKPVQLPGAYNVNIKLDITSHNEDYTIVEQYERAEGRHSTGGMDELYK
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# cat > build.py << 'PYEOF'
+[?2004l[?2004h> import re
+[?2004l[?2004h> 
+[?2004l[?2004h> def readseq(f):
+[?2004l[?2004h>     s=open(f).read().split('\n')
+[?2004l[?2004h>     seq=''.join(l for l in s if not l.startswith('>'))
+[?2004l[?2004h>     return seq.strip()
+[?2004l[?2004h> 
+[?2004l[?2004h> # DHFR from plasmid translation
+[?2004l[?2004h> dhfr="MISLIAALAVDRVIGMENAMPWNLPADLAWFKRNTLNKPVIMGRHTWESIGRPLPGRKNIILSSQPGTDDRVTWVKSVDEAIAACGDVPEIMVIGGGRVYEQFLPKAQKLYLTHIDAEVEGDTHFPDYEPDDWESVFSEFHDADAQNSHSYCFEILERR"
+[?2004l[?2004h> 
+[?2004l[?2004h> donor=readseq('pdb_fasta/5WJ2.fasta')
+[?2004l[?2004h> acceptor=readseq('pdb_fasta/2H5Q.fasta')
+[?2004l[?2004h> molbind=readseq('pdb_fasta/3KZY.fasta')
+[?2004l[?2004h> flag="DYKDDDDK"
+[?2004l[?2004h> 
+[?2004l[?2004h> print('donor raw',donor)
+[?2004l[?2004h> print('acceptor raw',acceptor)
+[?2004l[?2004h> print('molbind raw',molbind)
+[?2004l[?2004h> print('Xcount donor',donor.count('X'),'acc',acceptor.count('X'),'mol',molbind.count('X'))
+[?2004l[?2004h> 
+[?2004l[?2004h> # expand chromophore X
+[?2004l[?2004h> donor=donor.replace('X','GYG')
+[?2004l[?2004h> acceptor=acceptor.replace('X','MYG')
+[?2004l[?2004h> 
+[?2004l[?2004h> def rmM(s):
+[?2004l[?2004h>     return s[1:] if s.startswith('M') else s
+[?2004l[?2004h> 
+[?2004l[?2004h> donor=rmM(donor)
+[?2004l[?2004h> acceptor=rmM(acceptor)
+[?2004l[?2004h> molbind=rmM(molbind)
+[?2004l[?2004h> dhfr=rmM(dhfr)
+[?2004l[?2004h> flag=rmM(flag)
+[?2004l[?2004h> 
+[?2004l[?2004h> for n,s in [('flag',flag),('donor',donor),('dhfr',dhfr),('acceptor',acceptor),('molbind',molbind)]:
+[?2004l[?2004h>     print(n,len(s),s[:15],'...',s[-10:])
+[?2004l[?2004h> 
+[?2004l[?2004h> linker='GSGSGSGSGS'  # 10 aa
+[?2004l[?2004h> parts=[flag,donor,dhfr,acceptor,molbind]
+[?2004l[?2004h> protein=linker.join(parts)
+[?2004l[?2004h> print('total protein len',len(protein))
+[?2004l[?2004h> print('approx nt',len(protein)*3)
+[?2004l[?2004h> open('protein.txt','w').write(protein)
+[?2004l[?2004h> PYEOF
+[?2004l[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# python3 build.py
+[?2004ldonor raw MGSSHHHHHHSSGENLYFQGHMVSKGEELFTGVVPILVELDGDVNGHKFSVRGEGEGDATNGKLTLKFICTTGKLPVPWPTLVTTFXVACFSRYPDHMKQHDFFKSAMPEGYVQERTISFKDDGTYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNFNSHNVYITADKQKNGIKANFKIRHNVEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSHQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK
+acceptor raw MVSKGEEDNMAIIKEFMRFKVHMEGSVNGHEFEIEGEGEGRPYEGTQTAKLKVTKGGPLPFAWDILSPQFXSKAYVKHPADIPDYLKLSFPEGFKWERVMNFEDGGVVTVTQDSSLQDGEFIYKVKLRGTNFPSDGPVMQKKTMGWEASSERMYPEDGALKGEIKQRLKLKDGGHYDAEVKTTYKAKKPVQLPGAYNVNIKLDITSHNEDYTIVEQYERAEGRHSTGGMDELYK
+molbind raw GPGSDKDCEMKRTTLDSPLGKLELSGCEQGLHEIIFLGKGTSAADAVEVPAPAAVLGGPEPLMQATAWLNAYFHQPEAIEEFPVPALHHPVFQQESFTRQVLWKLLKVVKFGEVISYSHLAALAGNPAATAAVKTALSGNPVPILIPCHRVVQGDLDVGGYEGGLAVKEWLLAHEGHRLGKR
+Xcount donor 1 acc 1 mol 0
+flag 8 DYKDDDDK ... DYKDDDDK
+donor 259 GSSHHHHHHSSGENL ... ITHGMDELYK
+dhfr 158 ISLIAALAVDRVIGM ... SYCFEILERR
+acceptor 235 VSKGEEDNMAIIKEF ... STGGMDELYK
+molbind 182 GPGSDKDCEMKRTTL ... AHEGHRLGKR
+total protein len 882
+approx nt 2646
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# cat > optimize.py << 'PYEOF'
+[?2004l[?2004h> import random
+[?2004l[?2004h> random.seed(42)
+[?2004l[?2004h> 
+[?2004l[?2004h> protein=open('protein.txt').read().strip()
+[?2004l[?2004h> 
+[?2004l[?2004h> codons={
+[?2004l[?2004h> 'F':['TTT','TTC'],'L':['TTA','TTG','CTT','CTC','CTA','CTG'],
+[?2004l[?2004h> 'I':['ATT','ATC','ATA'],'M':['ATG'],'V':['GTT','GTC','GTA','GTG'],
+[?2004l[?2004h> 'S':['TCT','TCC','TCA','TCG','AGT','AGC'],'P':['CCT','CCC','CCA','CCG'],
+[?2004l[?2004h> 'T':['ACT','ACC','ACA','ACG'],'A':['GCT','GCC','GCA','GCG'],
+[?2004l[?2004h> 'Y':['TAT','TAC'],'H':['CAT','CAC'],'Q':['CAA','CAG'],'N':['AAT','AAC'],
+[?2004l[?2004h> 'K':['AAA','AAG'],'D':['GAT','GAC'],'E':['GAA','GAG'],'C':['TGT','TGC'],
+[?2004l[?2004h> 'W':['TGG'],'R':['CGT','CGC','CGA','CGG','AGA','AGG'],'G':['GGT','GGC','GGA','GGG']}
+[?2004l[?2004h> 
+[?2004l[?2004h> def gc(s):
+[?2004l[?2004h>     return sum(1 for c in s if c in 'GC')
+[?2004l[?2004h> 
+[?2004l[?2004h> def build():
+[?2004l[?2004h>     seq=[]
+[?2004l[?2004h>     nt=''
+[?2004l[?2004h>     for aa in protein:
+[?2004l[?2004h>         opts=codons[aa][:]
+[?2004l[?2004h>         random.shuffle(opts)
+[?2004l[?2004h>         best=None;bestd=99
+[?2004l[?2004h>         for c in opts:
+[?2004l[?2004h>             w=(nt+c)[-50:]
+[?2004l[?2004h>             frac=gc(w)/len(w)
+[?2004l[?2004h>             d=abs(frac-0.5)
+[?2004l[?2004h>             if d<bestd:
+[?2004l[?2004h>                 bestd=d;best=c
+[?2004l[?2004h>         seq.append(best);nt+=best
+[?2004l[?2004h>     return nt
+[?2004l[?2004h> 
+[?2004l[?2004h> def validate(nt):
+[?2004l[?2004h>     for i in range(0,len(nt)-49):
+[?2004l[?2004h>         w=nt[i:i+50]
+[?2004l[?2004h>         g=gc(w)
+[?2004l[?2004h>         if g<15 or g>35:
+[?2004l[?2004h>             return False,i,g
+[?2004l[?2004h>     return True,None,None
+[?2004l[?2004h> 
+[?2004l[?2004h> best=None
+[?2004l[?2004h> for attempt in range(200):
+[?2004l[?2004h>     random.seed(attempt)
+[?2004l[?2004h>     nt=build()
+[?2004l[?2004h>     ok,i,g=validate(nt)
+[?2004l[?2004h>     if ok:
+[?2004l[?2004h>         best=nt
+[?2004l[?2004h>         print('success attempt',attempt)
+[?2004l[?2004h>         break
+[?2004l[?2004h> if best is None:
+[?2004l[?2004h>     print('FAILED')
+[?2004l[?2004h> else:
+[?2004l[?2004h>     print('len',len(best))
+[?2004l[?2004h>     # overall gc
+[?2004l[?2004h>     print('overall gc',gc(best)/len(best))
+[?2004l[?2004h>     open('gblock.txt','w').write(best)
+[?2004l[?2004h> PYEOF
+[?2004l[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# python3 optimize.py
+[?2004lsuccess attempt 0
+len 2646
+overall gc 0.5
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# cat > verify.py << 'PYEOF'
+[?2004ltein:',prot==expected)
+# GC windows
+def gc(s):return sum(c in 'GC' for c in s)
+bad=0
+mn=100;mx=0
+for i in range(len(nt)-49):
+    g=gc(nt[i:i+50])
+    mn=min(mn,g);mx=max(mx,g)
+    if g<15 or g>35:bad+=1
+print('bad windows',bad,'min%',mn*2,'max%',mx*2)
+PYEOF
+python3 verify.py
+[?2004h> table = {
+[?2004l[?2004h> 'TTT':'F','TTC':'F','TTA':'L','TTG':'L','CTT':'L','CTC':'L','CTA':'L','CTG':'L',
+[?2004l[?2004h> 'ATT':'I','ATC':'I','ATA':'I','ATG':'M','GTT':'V','GTC':'V','GTA':'V','GTG':'V',
+[?2004l[?2004h> 'TCT':'S','TCC':'S','TCA':'S','TCG':'S','AGT':'S','AGC':'S','CCT':'P','CCC':'P','CCA':'P','CCG':'P',
+[?2004l[?2004h> 'ACT':'T','ACC':'T','ACA':'T','ACG':'T','GCT':'A','GCC':'A','GCA':'A','GCG':'A',
+[?2004l[?2004h> 'TAT':'Y','TAC':'Y','TAA':'*','TAG':'*','CAT':'H','CAC':'H','CAA':'Q','CAG':'Q',
+[?2004l[?2004h> 'AAT':'N','AAC':'N','AAA':'K','AAG':'K','GAT':'D','GAC':'D','GAA':'E','GAG':'E',
+[?2004l[?2004h> 'TGT':'C','TGC':'C','TGA':'*','TGG':'W','CGT':'R','CGC':'R','CGA':'R','CGG':'R','AGA':'R','AGG':'R',
+[?2004l[?2004h> 'GGT':'G','GGC':'G','GGA':'G','GGG':'G'}
+[?2004l[?2004h> nt=open('gblock.txt').read()
+[?2004l[?2004h> print('has newline?', nt!=nt.strip(), 'rawlen',len(nt))
+[?2004l[?2004h> nt=nt.strip()
+[?2004l[?2004h> print('len',len(nt),'<=3000:',len(nt)<=3000)
+[?2004l[?2004h> print('div3',len(nt)%3==0)
+[?2004l[?2004h> prot=''.join(table[nt[i:i+3]] for i in range(0,len(nt),3))
+[?2004l[?2004h> print('stop codons:',prot.count('*'))
+[?2004l[?2004h> expected=open('protein.txt').read().strip()
+[?2004l[?2004h> print('matches expected protein:',prot==expected)
+[?2004l[?2004h> # GC windows
+[?2004l[?2004h> def gc(s):return sum(c in 'GC' for c in s)
+[?2004l[?2004h> bad=0
+[?2004l[?2004h> mn=100;mx=0
+[?2004l[?2004h> for i in range(len(nt)-49):
+[?2004l[?2004h>     g=gc(nt[i:i+50])
+[?2004l[?2004h>     mn=min(mn,g);mx=max(mx,g)
+[?2004l[?2004h>     if g<15 or g>35:bad+=1
+[?2004l[?2004h> print('bad windows',bad,'min%',mn*2,'max%',mx*2)
+[?2004l[?2004h> PYEOF
+[?2004l[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# python3 verify.py
+[?2004lhas newline? False rawlen 2646
+len 2646 <=3000: True
+div3 True
+stop codons: 0
+matches expected protein: True
+bad windows 0 min% 40 max% 60
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# python3 -c "p=open('protein.txt').read().strip(); print('starts FLAG:',p.startswith('DYKDDDDK')); print('linker count:',p.count('GSGSGSGSGS')); print('ends molbind R:',p.endswith('AHEGHRLGKR')); print('len',len(p))"; echo '---'; head -c 80 gblock.txt; echo; echo '...'; tail -c 80 gblock.txt; echo
+[?2004lstarts FLAG: True
+linker count: 4
+ends molbind R: True
+len 882
+---
+GACTACAAGGACGATGACGATAAGGGCTCTGGTAGTGGTTCTGGTTCAGGAAGTGGTAGTAGCCATCACCATCATCACCA
+...
+TTGACGTGGGTGGATATGAAGGTGGACTCGCTGTTAAGGAATGGCTTCTGGCACATGAGGGACATAGATTGGGTAAGCGC
+[?2004hroot@979b2f2f-944a-4f19-b2c3-46febda074e7:/app# 

@@ -1,0 +1,111 @@
+{
+  "revisions": [
+    {
+      "original_name": "ATTEMPTS_TO_REPAIR",
+      "operation": "MERGE",
+      "merge_into": "SATISFIES_PREREQUISITE_FOR_SUBSEQUENT_ACTION"
+    },
+    {
+      "original_name": "USES_PREVIOUS_RESULT_AS_INPUT",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "USES_PREVIOUS_RESULT_AS_INPUT",
+        "definition": "A subsequent agent action, reasoning step, or produced artifact consumes a result, artifact, resource, reference, or observed format/constraint obtained from an earlier execution step as an input, dependency, conformance target, or basis for resolving an ambiguous value.",
+        "source_description": "A result, artifact, resource, reference, or observed format/constraint obtained or produced by an earlier execution step.",
+        "target_description": "A subsequent agent action, reasoning step, or produced artifact that uses that earlier result, artifact, resource, reference, or observed format as an input, dependency, conformance target, or basis for resolving an ambiguous value."
+      }
+    },
+    {
+      "original_name": "PROBES_ENVIRONMENT_TO_INFORM_ACTION",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "VERIFIES_PREVIOUS_RESULT",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "TRIGGERS_TASK_COMPLETION",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "PRESERVES_STATE_BEFORE_MUTATION",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "VALIDATES_CANDIDATES_AGAINST_EXPECTED_OUTCOME",
+      "operation": "MERGE",
+      "merge_into": "EVALUATES_ALTERNATIVES_TO_SELECT_BEST"
+    },
+    {
+      "original_name": "SATISFIES_PREREQUISITE_FOR_SUBSEQUENT_ACTION",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "RESOLVES_BLOCKING_CONDITION",
+        "definition": "An earlier observed blocking condition, such as a failure, error, missing prerequisite, or incomplete setup, is followed by a subsequent agent action that attempts to resolve, satisfy, or remedy that condition to enable or proceed with the task.",
+        "source_description": "An earlier observed blocking condition, such as a failure, error, defect, missing prerequisite, or incomplete setup.",
+        "target_description": "A subsequent agent action intended to resolve, satisfy, or remedy that blocking condition."
+      }
+    },
+    {
+      "original_name": "INVESTIGATES_FAILURE_CAUSE",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "INVESTIGATES_ISSUE_OR_UNCERTAINTY",
+        "definition": "A subsequent agent action or reasoning step inspects, searches, or reasons over diagnostic output, raw evidence, or related environment/state evidence produced by or associated with an earlier observed problem, such as a failure, error, discrepancy, blocked verification, or ambiguity/uncertainty, in order to determine its underlying cause or resolve the uncertainty.",
+        "source_description": "An earlier observed problem, such as a failure, error, discrepancy, blocked verification, or ambiguity/uncertainty, whose diagnostic output or related environment/state evidence is available.",
+        "target_description": "A subsequent agent diagnostic action or reasoning step that examines the problem's diagnostic output, raw evidence, or related environment state to identify its cause, missing prerequisite, or resolution of the uncertainty."
+      }
+    },
+    {
+      "original_name": "IMPLEMENTS_PLANNED_ACTION",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "ACTION_TRIGGERS_CONFIRMATION_REQUEST",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "RESPONDS_TO_CONFIRMATION_REQUEST",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "DERIVES_INFORMATION_FROM_OBSERVED_CONTENT",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "DERIVES_INFORMATION_FROM_OBSERVED_CONTENT",
+        "definition": "An agent derives semantic or structured information, such as a category label, a field value, a selected value among conflicting candidates, or specific code locations/constructs requiring modification, from the content of an item observed in an earlier reading, extraction, diagnostic search, static-analysis, or codebase-scanning step.",
+        "source_description": "An observation or diagnostic output containing the content of an item, multiple conflicting candidate values, or search/analysis results from an earlier reading, extraction, or scanning step.",
+        "target_description": "The category label, structured attribute value, selected value, or specific code locations/constructs derived by the agent from that observed content or diagnostic output."
+      }
+    },
+    {
+      "original_name": "CLEANS_UP_OR_RESTORES_STATE",
+      "operation": "KEEP"
+    },
+    {
+      "original_name": "RESOLVES_AMBIGUOUS_VALUE_USING_REFERENCE",
+      "operation": "MERGE",
+      "merge_into": "USES_PREVIOUS_RESULT_AS_INPUT"
+    },
+    {
+      "original_name": "INVESTIGATES_TO_RESOLVE_AMBIGUITY",
+      "operation": "MERGE",
+      "merge_into": "INVESTIGATES_FAILURE_CAUSE"
+    },
+    {
+      "original_name": "EVALUATES_ALTERNATIVES_TO_SELECT_BEST",
+      "operation": "REVISE",
+      "revised_edge_type": {
+        "name": "EVALUATES_CANDIDATES_AGAINST_CRITERIA",
+        "definition": "A subsequent agent action evaluates candidate alternatives or interpretations against a quantitative criterion or a known expected outcome/success constraint, and selects the satisfying or best-scoring candidate to carry forward or produce the required output artifact.",
+        "source_description": "A known expected result, success criterion, or evaluation step that constrains or scores a set of candidate alternatives.",
+        "target_description": "The satisfying or best-scoring candidate alternative or the agent action that selects it and produces the required output artifact."
+      }
+    },
+    {
+      "original_name": "IDENTIFIES_CODE_REQUIRING_MODIFICATION",
+      "operation": "MERGE",
+      "merge_into": "DERIVES_INFORMATION_FROM_OBSERVED_CONTENT"
+    }
+  ]
+}

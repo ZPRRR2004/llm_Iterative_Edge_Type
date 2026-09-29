@@ -1,0 +1,74 @@
+{
+  "window_file": "trajectory1__window_0002.json",
+  "trajectory_id": "trajectory1",
+  "window_id": "window_0002",
+  "global_index": 1,
+  "prompt_version": "v0001",
+  "registry_snapshot": [
+    {
+      "name": "ATTEMPTS_TO_REPAIR",
+      "definition": "A subsequent agent action attempts to resolve a failure or blocker identified during an earlier execution step, for example by installing a missing prerequisite, correcting a defect, or otherwise addressing the cause of the failure.",
+      "source_description": "An earlier observed execution failure or blocker (e.g., a reported error or missing prerequisite).",
+      "target_description": "A subsequent agent action intended to resolve that failure or blocker."
+    },
+    {
+      "name": "VERIFIES_PREVIOUSLY_PRODUCED_ARTIFACT",
+      "definition": "A subsequent agent action loads, executes, sources, or otherwise exercises an artifact produced by an earlier agent action in order to determine whether that artifact behaves as intended.",
+      "source_description": "An artifact produced by an earlier agent action (e.g., a written source, script, or configuration file).",
+      "target_description": "A subsequent agent action that loads or runs the artifact as a correctness check on it."
+    },
+    {
+      "name": "DEFERS_BLOCKER_AND_CONTINUES_INDEPENDENT_WORK",
+      "definition": "After observing that a prerequisite required for the end goal is unavailable, the agent postpones resolving that blocker and instead performs work that does not depend on the missing prerequisite, intending to address the blocker in a later step.",
+      "source_description": "An observation that a required prerequisite for the end goal is unavailable in the current environment.",
+      "target_description": "A subsequent agent action that produces deliverables independent of the missing prerequisite, taken before the blocker is resolved."
+    }
+  ],
+  "completed_stages": [
+    "discovery",
+    "comparison",
+    "review"
+  ],
+  "accepted_edge_types": [
+    {
+      "name": "RETRIES_AFTER_REMEDIATION",
+      "definition": "A previously failed operation is re-executed after the cause of its failure has been remediated, so that the operation can run again under the corrected conditions.",
+      "source_description": "A completed remediation action whose success removes the cause of an earlier observed failure.",
+      "target_description": "A re-execution of the operation that had previously failed."
+    },
+    {
+      "name": "USES_PREVIOUS_RESULT_AS_INPUT",
+      "definition": "A subsequent agent action consumes a result or artifact produced by an earlier execution step as an input to that action.",
+      "source_description": "A result or artifact produced by an earlier execution step.",
+      "target_description": "A subsequent agent action that takes that earlier result or artifact as an input."
+    },
+    {
+      "name": "PROBES_ENVIRONMENT_TO_INFORM_ACTION",
+      "definition": "The agent inspects the execution environment, and the outcome of that inspection determines the selection or configuration of a subsequent action.",
+      "source_description": "An environment inspection or probe whose outcome reveals contextual state.",
+      "target_description": "A subsequent action selected or configured on the basis of the probe's outcome."
+    },
+    {
+      "name": "VERIFIES_PREVIOUS_RESULT",
+      "definition": "A subsequent agent action independently checks whether a result or artifact claimed by an earlier execution step is actually present or matches the expectation asserted for it.",
+      "source_description": "A result or claim reported by an earlier execution step.",
+      "target_description": "A subsequent independent check that confirms or refutes that reported result or claim."
+    },
+    {
+      "name": "TRIGGERS_TASK_COMPLETION",
+      "definition": "A verified satisfactory execution outcome leads the agent to conclude that the task is complete and to mark it as finished.",
+      "source_description": "A verified positive execution outcome, such as all checks passing and required deliverables being confirmed present.",
+      "target_description": "The agent's decision to mark the task as complete."
+    }
+  ],
+  "revised_existing_edge_types": [],
+  "accepted_edge_type_count": 5,
+  "revised_existing_edge_type_count": 0,
+  "status": "completed",
+  "created_at": "2026-09-29T05:31:23.645012+00:00",
+  "updated_at": "2026-09-29T05:33:10.934392+00:00",
+  "failed_stage": null,
+  "error": null,
+  "registry_size_after": 8,
+  "completed_at": "2026-09-29T05:33:10.934392+00:00"
+}

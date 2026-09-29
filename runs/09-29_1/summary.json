@@ -1,0 +1,138 @@
+{
+  "total": 20,
+  "succeeded": 19,
+  "failed": 1,
+  "cases": [
+    {
+      "case": "adaptive-rejection-sampler__yPngRa6",
+      "input": "trajectory/adaptive-rejection-sampler__yPngRa6/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory1.json"
+    },
+    {
+      "case": "bn-fit-modify__6yRKJGL",
+      "input": "trajectory/bn-fit-modify__6yRKJGL/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory2.json"
+    },
+    {
+      "case": "break-filter-js-from-html__uMZWSCx",
+      "input": "trajectory/break-filter-js-from-html__uMZWSCx/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory3.json"
+    },
+    {
+      "case": "build-cython-ext__FFaGgtD",
+      "input": "trajectory/build-cython-ext__FFaGgtD/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory4.json"
+    },
+    {
+      "case": "build-pmars__kc8Q9mF",
+      "input": "trajectory/build-pmars__kc8Q9mF/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory5.json"
+    },
+    {
+      "case": "build-pov-ray__rxrPXjc",
+      "input": "trajectory/build-pov-ray__rxrPXjc/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory6.json"
+    },
+    {
+      "case": "caffe-cifar-10__4JynQwE",
+      "input": "trajectory/caffe-cifar-10__4JynQwE/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory7.json"
+    },
+    {
+      "case": "cancel-async-tasks__kg6ThvL",
+      "input": "trajectory/cancel-async-tasks__kg6ThvL/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory8.json"
+    },
+    {
+      "case": "chess-best-move__tgbzjPf",
+      "input": "trajectory/chess-best-move__tgbzjPf/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory9.json"
+    },
+    {
+      "case": "circuit-fibsqrt__GjA8iH4",
+      "input": "trajectory/circuit-fibsqrt__GjA8iH4/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory10.json"
+    },
+    {
+      "case": "cobol-modernization__PBrcoVy",
+      "input": "trajectory/cobol-modernization__PBrcoVy/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory11.json"
+    },
+    {
+      "case": "code-from-image__6i5qtmh",
+      "input": "trajectory/code-from-image__6i5qtmh/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory12.json"
+    },
+    {
+      "case": "compile-compcert__Ux6zL9q",
+      "input": "trajectory/compile-compcert__Ux6zL9q/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory13.json"
+    },
+    {
+      "case": "configure-git-webserver__Dt74p8h",
+      "input": "trajectory/configure-git-webserver__Dt74p8h/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory14.json"
+    },
+    {
+      "case": "constraints-scheduling__tYJGUrJ",
+      "input": "trajectory/constraints-scheduling__tYJGUrJ/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory15.json"
+    },
+    {
+      "case": "count-dataset-tokens__svuQgSG",
+      "input": "trajectory/count-dataset-tokens__svuQgSG/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory16.json"
+    },
+    {
+      "case": "financial-document-processor__Nvjaeaa",
+      "input": "trajectory/financial-document-processor__Nvjaeaa/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory17.json"
+    },
+    {
+      "case": "protein-assembly__EvjPGqy",
+      "input": "trajectory/protein-assembly__EvjPGqy/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory18.json"
+    },
+    {
+      "case": "raman-fitting__f6MGAsA",
+      "input": "trajectory/raman-fitting__f6MGAsA/agent/trajectory.json",
+      "status": "succeeded",
+      "output": "processed_trajectory/trajectory19.json"
+    },
+    {
+      "case": "sanitize-git-repo__GStu74n",
+      "input": "trajectory/sanitize-git-repo__GStu74n/agent/trajectory.json",
+      "status": "failed",
+      "error": "split-4: 共请求 3 次后仍未通过校验: call_2_3: start_anchor not found exactly in source; closest exact prefix begins at source character 9686; first difference at source character 9846: expected source '\\n', got anchor 'i'; copy whitespace and line breaks exactly; anchor=\"root@72492682-b776-4262-bbd7-1133d4bb9315:/app/dclm# grep -rEn 'gho_[A-Za-z0-9]{...\""
+    }
+  ],
+  "split": {
+    "output": "split_windows",
+    "windows": 44,
+    "empty_trajectories": 0,
+    "failed": 1
+  },
+  "build_edges": {
+    "output": "build_edges",
+    "status": "running",
+    "exit_code": null
+  }
+}
